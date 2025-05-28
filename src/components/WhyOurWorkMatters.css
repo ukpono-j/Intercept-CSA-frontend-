@@ -1,0 +1,86 @@
+/* Gradient background and spacing */
+section {
+    position: relative;
+    z-index: 1;
+  }
+  
+  /* Custom animations */
+  @keyframes slide-in {
+    0% {
+      opacity: 0;
+      transform: translateY(40px);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes card-in {
+    0% {
+      opacity: 0;
+      transform: translateY(60px) scale(0.95);
+    }
+    100% {
+      opacity: 1;
+      transform: translateY(0) scale(1);
+    }
+  }
+  
+  .animate-slide-in {
+    animation: slide-in 0.8s ease-out forwards;
+  }
+  
+  .delay-100 {
+    animation-delay: 0.1s;
+  }
+  
+  .animate-card-in {
+    animation: card-in 0.8s ease-out forwards;
+  }
+  
+  .delay-0 {
+    animation-delay: 0s;
+  }
+  
+  .delay-200 {
+    animation-delay: 0.2s;
+  }
+  
+  .delay-400 {
+    animation-delay: 0.4s;
+  }
+  
+  /* Card hover effects */
+  .shadow-3xl {
+    box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  }
+  
+  /* Responsive adjustments */
+  @media (max-width: 768px) {
+    section h2 {
+      font-size: 2.5rem;
+    }
+  
+    section p {
+      font-size: 1.25rem;
+    }
+  
+    .grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  @media (max-width: 640px) {
+    section h2 {
+      font-size: 2rem;
+    }
+  
+    section p {
+      font-size: 1rem;
+    }
+  
+    section .p-8 {
+      padding: 1.5rem;
+    }
+  }
