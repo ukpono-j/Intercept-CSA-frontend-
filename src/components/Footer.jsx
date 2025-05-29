@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import { colors } from '../utils/colors';
-// import logo from '../assets/logo.png';
+import Logo from '../assets/logo.jpg';
+
 
 function Footer() {
   const navLinks = [
@@ -23,11 +24,17 @@ function Footer() {
       <div className="container mx-auto px-4 grid grid-cols-1 md:grid-cols-3 gap-8">
         {/* Logo & Description */}
         <div>
-          <Link to="/" className="flex items-center mb-4">
-            {/* <img src={logo} alt="Intercept CSA Logo" className="h-12 mr-2" /> */}
-            <span className="text-xl font-bold">Intercept CSA</span>
+          <Link to="/" className="flex items-center gap-2 sm:gap-2 text-black hover:opacity-80 transition-opacity duration-200">
+            <img
+              src={Logo}
+              alt="Intercept CSA Logo"
+              className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 object-contain rounded-full shadow-sm"
+            />
+            <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight">
+              Intercept CSA
+            </span>
           </Link>
-          <p className="text-sm">
+          <p className="text-sm mt-2">
             Preventing, confronting, and healing child sexual abuse through education, advocacy, and
             survivor support.
           </p>
