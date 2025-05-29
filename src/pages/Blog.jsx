@@ -1,9 +1,8 @@
 import { useState, useEffect } from 'react';
-import { colors } from '@/utils/colors.js';
 import axios from 'axios';
 
-const STATIC_BASE_URL = import.meta.env.VITE_STATIC_BASE_URL || 'http://localhost:3000';
-const API_URL = import.meta.env.VITE_API_URL || 'http://localhost:3000/api';
+const STATIC_BASE_URL = import.meta.env.VITE_STATIC_BASE_URL || 'https://intercept-csa-backend.onrender.com';
+const API_URL = import.meta.env.VITE_API_URL || 'https://intercept-csa-backend.onrender.com/api';
 
 function Blog() {
   const [posts, setPosts] = useState([]);
@@ -15,6 +14,7 @@ function Blog() {
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
+        console.log('Fetching blogs from:', `${API_URL}/blogs?status=published`);
         const response = await axios.get(`${API_URL}/blogs?status=published`, {
           headers: {
             'Content-Type': 'application/json',
@@ -23,7 +23,12 @@ function Blog() {
         console.log('Fetched posts:', response.data.map(p => ({ id: p._id, image: p.image })));
         setPosts(response.data);
       } catch (err) {
-        console.error('Error fetching blogs:', err);
+        console.error('Error fetching blogs:', {
+          message: err.message,
+          status: err.response?.status,
+          data: err.response?.data,
+          url: `${API_URL}/blogs?status=published`,
+        });
         if (err.response?.status === 401) {
           localStorage.removeItem('token');
           try {
@@ -35,10 +40,11 @@ function Blog() {
             console.log('Retry posts:', retryResponse.data.map(p => ({ id: p._id, image: p.image })));
             setPosts(retryResponse.data);
           } catch (retryErr) {
-            setError('Failed to load blogs. Please try again later.');
+            setError('Failed to load blogs. Our team is working on it.');
+            console.error('Retry error:', retryErr);
           }
         } else {
-          setError('Failed to load blogs. Please try again later.');
+          setError('Failed to load blogs. Our team is working on it.');
         }
       } finally {
         setIsLoading(false);
@@ -200,6 +206,12 @@ function Blog() {
               </svg>
             </div>
             <p className="text-xl text-slate-600 font-medium">{error}</p>
+            <button
+              onClick={() => window.location.reload()}
+              className="mt-6 px-6 py-3 text-base font-semibold text-white bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-xl hover:shadow-orange-500/25 transition-all duration-300"
+            >
+              Try Again
+            </button>
           </div>
         ) : posts.length === 0 ? (
           <div className="text-center py-20">
@@ -221,8 +233,8 @@ function Blog() {
                 <div className="relative group max-w-4xl mx-auto">
                   <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"></div>
                   <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
-                  <div className="flex flex-col sm:flex-row gap-6 min-h-[300px]">
-                  <div className="relative sm:w-1/2 overflow-hidden">
+                    <div className="flex flex-col sm:flex-row gap-6 min-h-[300px]">
+                      <div className="relative sm:w-1/2 overflow-hidden">
                         <img
                           src={getImageUrl(posts[0].image)}
                           alt={posts[0].title}
