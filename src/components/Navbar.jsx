@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import { colors } from '../utils/colors';
+import Logo from '../assets/logo.jpg';
+
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -19,9 +21,17 @@ function Navbar() {
     <nav className="fixed top-0 left-0 w-full z-50 bg-white shadow-md">
       <div className="max-w-[1200px] mx-auto px-4 py-5 flex justify-between items-center">
         {/* Logo */}
-        <Link to="/" className="text-xl sm:text-2xl font-bold text-black">
-          Intercept CSA
+        <Link to="/" className="flex items-center gap-2 sm:gap-2 text-black hover:opacity-80 transition-opacity duration-200">
+          <img 
+            src={Logo} 
+            alt="Intercept CSA Logo" 
+            className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 object-contain rounded-full shadow-sm"
+          />
+          <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight">
+            Intercept CSA
+          </span>
         </Link>
+        
 
         {/* Mobile Menu Toggle */}
         <button
