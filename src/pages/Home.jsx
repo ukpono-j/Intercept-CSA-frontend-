@@ -10,9 +10,10 @@ import StayConnected from '../assets/vision-image.jpg';
 import portraitImmigrants from '../assets/portrait-immigrants-migration-crisis.jpg';
 import PartnerLogo from '../assets/partner_logo.png';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
+import { Autoplay, Pagination } from 'swiper/modules';
 import 'swiper/css';
 import 'swiper/css/autoplay';
+import 'swiper/css/pagination';
 import WhyOurWorkMatters from '../components/WhyOurWorkMatters';
 import { useEffect, useRef } from 'react';
 
@@ -46,19 +47,33 @@ function Home() {
     };
   }, []);
 
-
   const heroContent = {
-    headline: 'Intercept CSA: Protecting Children, Healing Lives',
+    headline: 'Protecting Children, Healing Lives',
     subheadline: 'A Nigerian initiative dedicated to preventing child sexual abuse, empowering survivors, and transforming communities.',
     buttons: [
       { label: 'Learn More', to: '/about', primary: true },
       { label: 'Get Involved', to: '/get-involved', primary: false },
-      { label: 'Report Abuse', to: '/report-abuse', primary: false },
+      // { label: 'Report Abuse', to: '/report-abuse', primary: false },
     ],
   };
 
+  const stories = [
+    {
+      quote: "“Through Intercept CSA’s programs, I found a safe space to heal and the courage to speak out. Now, I’m helping others do the same.”",
+      author: "A Survivor",
+    },
+    {
+      quote: "“The workshops gave me the tools to recognize and prevent abuse in my community. I feel empowered to make a difference.”",
+      author: "A Community Leader",
+    },
+    {
+      quote: "“Intercept CSA’s support helped my child regain confidence. We’re forever grateful for their care.”",
+      author: "A Parent",
+    },
+  ];
+
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen mt-14 bg-white">
       {/* Hero Section */}
       <section
         className="relative overflow-hidden bg-gradient-to-br from-black via-slate-950 to-black"
@@ -69,7 +84,7 @@ function Home() {
           <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-tr from-yellow-400 to-orange-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"></div>
         </div>
         <div
-          className="absolute inset-0 opacity-5"
+          className="absolute inset-0 opacity-90"
           style={{
             backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4v2v-4h4v2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
           }}
@@ -77,14 +92,14 @@ function Home() {
         <img
           src={portraitImmigrants}
           alt="People uniting for child safety"
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
+          className="absolute inset-0 w-full h-full object-cover opacity-9"
           loading="eager"
           decoding="async"
         />
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg-py-32">
           <div className="text-center">
             <div className="mb-6">
-              <span className="inline-block px-4 mt-10 py-2 rounded-full text-sm font-medium bg-white/10 text-white backdrop-blur-sm border border-white/20">
+              <span className="inline-block px-4 mt-10 py-2 rounded-full text-sm font-medium  text-white backdrop-blur-sm border border-white/20">
               Child Safety First
             </span>
             </div>
@@ -99,8 +114,8 @@ function Home() {
                 <Link
                   key={btn}
                   to={btn.to}
-                  
-                className="transform group transition-transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-[#FECB0A]/50">
+                  className="transform group transition-transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-[#FECB0A]/50"
+                >
                   <Button
                     className={btn === heroContent.buttons[0] ? 'bg-gradient-to-r from-yellow-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/25' : 'bg-white/10 text-[white] border-2 border-white/30 hover:bg-white/20 hover:border-white/50 backdrop-blur-sm'}
                     aria-label={btn.label}
@@ -147,11 +162,30 @@ function Home() {
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
               A <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Story of Hope</span>
             </h2>
-            <p className="text-lg text-slate-600 mb-8 italic">
-              “Through Intercept CSA’s programs, I found a safe space to heal and the courage to speak out. Now, I’m helping others do the same.” – A Survivor
-            </p>
+            <Swiper
+              modules={[Autoplay, Pagination]}
+              slidesPerView={1}
+              spaceBetween={30}
+              autoplay={{ delay: 5000, disableOnInteraction: false }}
+              pagination={{ clickable: true }}
+              loop={true}
+              className="story-carousel"
+            >
+              {stories.map((story, index) => (
+                <SwiperSlide key={index}>
+                  <div className="px-4">
+                    <p className="text-lg text-slate-600 mb-6 italic">
+                      {story.quote}
+                    </p>
+                    <p className="text-md text-slate-500 font-medium">
+                      – {story.author}
+                    </p>
+                  </div>
+                </SwiperSlide>
+              ))}
+            </Swiper>
             <Link to="/blog">
-              <Button className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:shadow-lg hover:shadow-orange-500/25">
+              <Button className="bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:shadow-lg hover:shadow-orange-500/25 mt-6">
                 Read More Stories
               </Button>
             </Link>
@@ -221,11 +255,6 @@ function Home() {
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-bl from-white/20 to-transparent rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
         </div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
-          <div className="mb-6">
-            <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/60 text-slate-900 backdrop-blur-sm border border-white/80">
-              Make a Difference
-            </span>
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight animate-cta-title">
             Be a <span className="block bg-gradient-to-r from-white to-slate-200 bg-clip-text text-transparent">Part of the Solution</span>
           </h2>
@@ -246,11 +275,11 @@ function Home() {
                 </svg>
               </Button>
             </Link>
-            <Link to="/get-involved">
+            {/* <Link to="/get-involved">
               <Button className="bg-white/10 text-white border-2 border-white/30 hover:bg-white/20 hover:border-white/50 backdrop-blur-sm transition-all duration-300">
                 Donate Today
               </Button>
-            </Link>
+            </Link> */}
           </div>
         </div>
       </section>

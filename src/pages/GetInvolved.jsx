@@ -5,8 +5,6 @@ import Button from '../components/Button';
 import './GetInvolved.css';
 import SupportGroup from "../assets/people-meeting-support-group.jpg";
 
-
-
 function GetInvolved() {
   const [volunteerForm, setVolunteerForm] = useState({
     name: '',
@@ -92,7 +90,7 @@ function GetInvolved() {
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg:py-32">
           <div className="text-center">
             <div className="mb-6 mt-10">
-              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white backdrop-blur-sm border border-white/20">
+              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-white backdrop-blur-sm border border-white/20">
                 Make a Difference
               </span>
             </div>
@@ -118,7 +116,7 @@ function GetInvolved() {
                 </svg>
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </a>
-              <a
+              {/* <a
                 href="#partner"
                 className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
               >
@@ -131,7 +129,7 @@ function GetInvolved() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
-              </a>
+              </a> */}
             </div>
           </div>
         </div>
@@ -143,15 +141,25 @@ function GetInvolved() {
         className="relative py-16 md:py-24 opacity-0"
         ref={(el) => (sectionsRef.current[1] = el)}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-          <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6 text-center">
+        {/* <div className="absolute inset-0 opacity-10">
+          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
+          <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-tr from-yellow-300 to-orange-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"></div>
+        </div> */}
+        <div
+          className="absolute inset-0 opacity-5"
+          style={{
+            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
+          }}
+        ></div>
+        <div className="container  mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
+          <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6 text-center">
             Volunteer With Us
           </h2>
-          <p className="text-slate-600 text-lg leading-relaxed mb-8 text-center">
+          <p className="text-black text-lg leading-relaxed mb-8 text-center">
             Your time and skills can help protect children and support survivors. Fill out the form to join our mission.
           </p>
-          <div className="relative bg-white rounded-2xl shadow-2xl p-8 sm:p-10">
-            <div className="absolute -inset-1 bg-gradient-to-r from-yellow-400 to-orange-500 rounded-2xl blur opacity-25 transition duration-1000"></div>
+          <div className="relative bg-gradient-to-br from-slate-900 text-white via-slate-800 to-slate-900  rounded-2xl shadow-2xl p-8 sm:p-10">
             <form onSubmit={handleVolunteerSubmit} className="relative z-10 space-y-6">
               <div className="relative">
                 <FormInput
@@ -162,8 +170,8 @@ function GetInvolved() {
                   onChange={handleInputChange}
                   required
                   className={`w-full border-b-2 ${
-                    errors.name ? 'border-red-500' : 'border-slate-200'
-                  } focus:border-${colors.primary} transition-all duration-300 animate-input`}
+                    errors.name ? 'border-red-500' : 'border-white'
+                  } focus:border-white text-white bg-transparent placeholder-white/50 transition-all duration-300 animate-input`}
                   style={{ animationDelay: '0s' }}
                 />
                 {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
@@ -177,8 +185,8 @@ function GetInvolved() {
                   onChange={handleInputChange}
                   required
                   className={`w-full border-b-2 ${
-                    errors.email ? 'border-red-500' : 'border-slate-200'
-                  } focus:border-${colors.primary} transition-all duration-300 animate-input`}
+                    errors.email ? 'border-red-500' : 'border-white'
+                  } focus:border-white text-white bg-transparent placeholder-white/50 transition-all duration-300 animate-input`}
                   style={{ animationDelay: '0.1s' }}
                 />
                 {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
@@ -190,13 +198,13 @@ function GetInvolved() {
                   name="message"
                   value={volunteerForm.message}
                   onChange={handleInputChange}
-                  className={`w-full border-b-2 border-slate-200 focus:border-${colors.primary} transition-all duration-300 animate-input break-words`}
+                  className={`w-full border-b-2 border-white focus:border-white text-white bg-transparent placeholder-white/50 transition-all duration-300 animate-input break-words`}
                   style={{ animationDelay: '0.2s' }}
                 />
               </div>
               <Button
                 type="submit"
-                className={`w-full bg-gradient-to-r from-${colors.primary} to-${colors.secondary} text-white hover:shadow-xl hover:shadow-${colors.primary}/25 transition-all duration-300 rounded-full py-3 text-lg font-semibold transform hover:-translate-y-0.5 animate-pulse-button`}
+                className={`w-full bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1 text-white hover:shadow-xl hover:shadow-${colors.primary}/25 transition-all duration-300 rounded-full py-3 text-lg font-semibold transform hover:-translate-y-0.5 animate-pulse-button`}
                 aria-label="Submit volunteer form"
               >
                 Submit
@@ -299,7 +307,7 @@ function GetInvolved() {
               </svg>
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
-            <a
+            {/* <a
               href="/resources"
               className="inline-flex items-center px-8 py-4 text-lg font-semibold text-slate-700 bg-white rounded-full border-2 border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
             >
@@ -317,7 +325,7 @@ function GetInvolved() {
                   d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                 />
               </svg>
-            </a>
+            </a> */}
           </div>
         </div>
       </section>

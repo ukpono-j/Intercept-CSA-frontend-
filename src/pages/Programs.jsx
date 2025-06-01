@@ -3,9 +3,9 @@ import { colors } from '../utils/colors';
 import './Programs.css';
 import Education from "../assets/education.jpg";
 import Outreach from "../assets/outreach.jpg";
-import Faith from "../assets/faith.jpg";
+import Faith from "../assets/close-up-women-holding-hands.jpg";
 import Training from "../assets/training.jpg";
-import Healing from "../assets/healing.jpg";
+import Healing from "../assets/siblings-having-fun-together.jpg";
 import Resources from "../assets/resources.jpg";
 
 function Programs() {
@@ -104,7 +104,7 @@ function Programs() {
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg:py-32">
           <div className="text-center">
             <div className="mb-6 mt-10">
-              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white backdrop-blur-sm border border-white/20">
+              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-white backdrop-blur-sm border border-white/20">
                 Our Initiatives
               </span>
             </div>
@@ -116,10 +116,10 @@ function Programs() {
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
-                href="/get-involved"
+             href="#programs"
                 className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
               >
-                <span className="relative z-10">Get Involved</span>
+                <span className="relative z-10"> Explore Programs</span>
                 <svg
                   className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
                   fill="none"
@@ -130,7 +130,7 @@ function Programs() {
                 </svg>
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </a>
-              <a
+              {/* <a
                 href="#programs"
                 className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
               >
@@ -143,7 +143,7 @@ function Programs() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
-              </a>
+              </a> */}
             </div>
           </div>
         </div>
@@ -244,7 +244,7 @@ function Programs() {
               </svg>
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
-            <a
+            {/* <a
               href="/donate"
               className="inline-flex items-center px-8 py-4 text-lg font-semibold text-slate-700 bg-white rounded-full border-2 border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
             >
@@ -262,7 +262,7 @@ function Programs() {
                   d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                 />
               </svg>
-            </a>
+            </a> */}
           </div>
         </div>
       </section>

@@ -68,7 +68,7 @@ function About() {
           <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg:py-32">
             <div className="text-center">
               <div className="mb-6 mt-10">
-                <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white backdrop-blur-sm border border-white/20">
+                <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-white backdrop-blur-sm border border-white/20">
                   Who We Are
                 </span>
               </div>
@@ -94,7 +94,7 @@ function About() {
                   </svg>
                   <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                <a
+                {/* <a
                   href="#mission"
                   className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
                 >
@@ -107,7 +107,7 @@ function About() {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                   </svg>
-                </a>
+                </a> */}
               </div>
             </div>
           </div>
@@ -223,7 +223,7 @@ function About() {
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 text-center mb-12">
               Our <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Objectives</span>
             </h2>
-            <div className="relative h-64 sm:h-80 overflow-hidden rounded-2xl mb-12">
+            {/* <div className="relative h-64 sm:h-80 overflow-hidden rounded-2xl mb-12">
               <img
                 src={ObjectivesImage}
                 alt="Nigerian advocates working together for child safety"
@@ -232,7 +232,7 @@ function About() {
                 decoding="async"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
-            </div>
+            </div> */}
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 { title: 'Empower Communities', desc: 'Equip communities with tools to prevent abuse and support survivors.' },
@@ -297,7 +297,7 @@ function About() {
                 </svg>
                 <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </a>
-              <a
+              {/* <a
                 href="/donate"
                 className="inline-flex items-center px-8 py-4 text-lg font-semibold text-slate-700 bg-white rounded-full border-2 border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
               >
@@ -315,7 +315,7 @@ function About() {
                     d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                   />
                 </svg>
-              </a>
+              </a> */}
             </div>
           </div>
         </section>

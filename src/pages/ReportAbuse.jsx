@@ -129,12 +129,12 @@ function ReportAbuse() {
         ref={(el) => (sectionsRef.current[1] = el)}
       >
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-          <div className="relative bg-white rounded-2xl shadow-xl p-8 sm:p-12 border border-slate-100">
-            <div className="absolute -inset-1 bg-gradient-to-r from-yellow-300 to-orange-300 rounded-2xl blur opacity-20 transition duration-1000"></div>
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4 text-center">
+          <div className="relative bg-gradient-to-br from-slate-900 text-white via-slate-800 to-slate-900 rounded-2xl shadow-xl p-8 sm:p-12 border border-slate-100">
+            {/* <div className="absolute -inset-1 bg-gradient-to-br from-slate-900 text-white via-slate-800 to-slate-900  rounded-2xl blur opacity-20 transition duration-1000"></div> */}
+            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
               Submit Your Report
             </h2>
-            <p className="text-slate-600 text-lg leading-relaxed mb-8 text-center">
+            <p className="text-white text-lg leading-relaxed mb-8 text-center">
               All reports are handled with care and confidentiality. Provide as much detail as possible to help us take action.
             </p>
             {error && (
@@ -175,7 +175,7 @@ function ReportAbuse() {
             )}
             <form onSubmit={handleSubmit} className="space-y-8">
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">
+                <label className="block text-sm font-semibold text-white">
                   Your Name (Optional)
                 </label>
                 <FormInput
@@ -184,14 +184,14 @@ function ReportAbuse() {
                   value={formData.name}
                   onChange={handleInputChange}
                   disabled={formData.isAnonymous}
-                  className={`w-full px-4 py-3 border border-slate-200 rounded-lg focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-300 animate-input ${
+                  className={`w-full px-4 py-3 border border-slate-200 rounded-lg text-[black] focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-300 animate-input ${
                     formData.isAnonymous ? 'bg-slate-50' : 'bg-white'
                   }`}
                   style={{ animationDelay: '0s' }}
                 />
               </div>
-              <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">
+              {/* <div className="space-y-2">
+                <label className="block text-sm font-semibold text-white">
                   Your Email (Optional)
                 </label>
                 <FormInput
@@ -200,14 +200,14 @@ function ReportAbuse() {
                   value={formData.email}
                   onChange={handleInputChange}
                   disabled={formData.isAnonymous}
-                  className={`w-full px-4 py-3 border border-slate-200 rounded-lg focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-300 animate-input ${
+                  className={`w-full px-4 py-3 text-black border border-slate-200 rounded-lg focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-300 animate-input ${
                     formData.isAnonymous ? 'bg-slate-50' : 'bg-white'
                   }`}
                   style={{ animationDelay: '0.1s' }}
                 />
-              </div>
+              </div> */}
               <div className="space-y-2">
-                <label className="block text-sm font-semibold text-slate-700">
+                <label className="block text-sm font-semibold text-white">
                   Details of the Report
                 </label>
                 <FormInput
@@ -216,12 +216,12 @@ function ReportAbuse() {
                   value={formData.message}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-slate-200 rounded-lg focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-300 bg-white min-h-[150px] resize-y animate-input"
+                  className="w-full px-4 py-3 border border-slate-200 rounded-lg text-[black] focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-300 bg-white min-h-[150px] resize-y animate-input"
                   style={{ animationDelay: '0.2s' }}
                 />
               </div>
               <div className="flex items-center">
-                <label className="flex items-center text-slate-600 text-sm font-medium cursor-pointer">
+                <label className="flex items-center text-white text-sm font-medium cursor-pointer">
                   <input
                     type="checkbox"
                     name="isAnonymous"
@@ -290,7 +290,7 @@ function ReportAbuse() {
               </svg>
               <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </a>
-            <a
+            {/* <a
               href="/resources"
               className="inline-flex items-center px-8 py-4 text-lg font-semibold text-slate-700 bg-white rounded-full border-2 border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
             >
@@ -308,7 +308,7 @@ function ReportAbuse() {
                   d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
                 />
               </svg>
-            </a>
+            </a> */}
           </div>
         </div>
       </section>

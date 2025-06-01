@@ -154,6 +154,32 @@ h1, h2, h3, p {
   padding: 0;
 }
 
+/* Story carousel */
+.story-carousel {
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+.story-carousel .swiper-pagination {
+  position: relative;
+  bottom: 0;
+  margin-top: 1rem;
+}
+
+.story-carousel .swiper-pagination-bullet {
+  background: #64748b; /* slate-500 */
+  opacity: 0.5;
+  width: 10px;
+  height: 10px;
+  transition: all 0.3s ease;
+}
+
+.story-carousel .swiper-pagination-bullet-active {
+  background: #f97316; /* orange-500 */
+  opacity: 1;
+  transform: scale(1.2);
+}
+
 /* Hover effects */
 .transform:hover {
   will-change: transform;
