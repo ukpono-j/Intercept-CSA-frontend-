@@ -104,9 +104,9 @@ function Programs() {
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg:py-32">
           <div className="text-center">
             <div className="mb-6 mt-10">
-              <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-white backdrop-blur-sm border border-white/20">
+              {/* <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-white backdrop-blur-sm border border-white/20">
                 Our Initiatives
-              </span>
+              </span> */}
             </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight animate-hero-title">
               Our <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Programs</span>
@@ -218,9 +218,9 @@ function Programs() {
         </div>
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
           <div className="mb-6">
-            <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/60 text-slate-700 backdrop-blur-sm border border-slate-200">
+            {/* <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/60 text-slate-700 backdrop-blur-sm border border-slate-200">
               Join Our Mission
-            </span>
+            </span> */}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight animate-cta-title">
             Support Our <span className="block bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Programs</span>
