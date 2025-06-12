@@ -38,7 +38,7 @@ function GetInvolved() {
       setErrors(formErrors);
       return;
     }
-    console.log('Volunteer form submitted:', volunteerForm);
+    // console.log('Volunteer form submitted:', volunteerForm);
     alert('Thank you for your interest! We will contact you soon.');
     setVolunteerForm({ name: '', email: '', message: '' });
   };
@@ -77,9 +77,18 @@ function GetInvolved() {
         ref={(el) => (sectionsRef.current[0] = el)}
       >
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-tr from-yellow-300 to-orange-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"></div>
+          <div 
+            className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
+            style={{ backgroundColor: colors.primary }}
+          ></div>
+          <div 
+            className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"
+            style={{ backgroundColor: colors.secondary }}
+          ></div>
+          <div 
+            className="absolute bottom-0 left-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"
+            style={{ backgroundColor: colors.accent }}
+          ></div>
         </div>
         <div
           className="absolute inset-0 opacity-5"
@@ -95,7 +104,14 @@ function GetInvolved() {
               </span> */}
             </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight animate-hero-title">
-              Get <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Involved</span>
+              Get <span 
+                className="block bg-clip-text text-transparent"
+                style={{ 
+                  background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
+                  WebkitBackgroundClip: 'text',
+                  WebkitTextFillColor: 'transparent'
+                }}
+              >Involved</span>
             </h1>
             <p className="text-xl sm:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-10 font-light animate-hero-text">
               Join Intercept CSA to prevent child sexual abuse, empower survivors, and build safer Nigerian communities.
@@ -103,7 +119,17 @@ function GetInvolved() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
                 href="#volunteer"
-                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
+                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                style={{ 
+                  background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
+                  boxShadow: '0 0 30px rgba(42, 142, 157, 0.25)'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.boxShadow = `0 0 40px rgba(42, 142, 157, 0.4)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.boxShadow = '0 0 30px rgba(42, 142, 157, 0.25)';
+                }}
               >
                 <span className="relative z-10">Volunteer Now</span>
                 <svg
@@ -114,22 +140,11 @@ function GetInvolved() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div 
+                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: `linear-gradient(to right, ${colors.primaryDark}, ${colors.secondaryDark})` }}
+                ></div>
               </a>
-              {/* <a
-                href="#partner"
-                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
-              >
-                Partner With Us
-                <svg
-                  className="ml-2 w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </a> */}
             </div>
           </div>
         </div>
@@ -141,11 +156,6 @@ function GetInvolved() {
         className="relative py-16 md:py-24 opacity-0"
         ref={(el) => (sectionsRef.current[1] = el)}
       >
-        {/* <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-tr from-yellow-300 to-orange-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"></div>
-        </div> */}
         <div
           className="absolute inset-0 opacity-5"
           style={{
@@ -204,7 +214,19 @@ function GetInvolved() {
               </div>
               <Button
                 type="submit"
-                className={`w-full bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1 text-white hover:shadow-xl hover:shadow-${colors.primary}/25 transition-all duration-300 rounded-full py-3 text-lg font-semibold transform hover:-translate-y-0.5 animate-pulse-button`}
+                className="w-full rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 text-white py-3 text-lg font-semibold animate-pulse-button"
+                style={{ 
+                  background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
+                  boxShadow: `0 0 30px ${colors.primary}25`
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.background = `linear-gradient(to right, ${colors.primaryDark}, ${colors.secondaryDark})`;
+                  e.target.style.boxShadow = `0 0 40px ${colors.primary}40`;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`;
+                  e.target.style.boxShadow = `0 0 30px ${colors.primary}25`;
+                }}
                 aria-label="Submit volunteer form"
               >
                 Submit
@@ -240,7 +262,17 @@ function GetInvolved() {
               </p>
               <a
                 href="/contact"
-                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
+                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                style={{ 
+                  background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
+                  boxShadow: '0 0 30px rgba(42, 142, 157, 0.25)'
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.boxShadow = `0 0 40px rgba(42, 142, 157, 0.4)`;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.boxShadow = '0 0 30px rgba(42, 142, 157, 0.25)';
+                }}
                 aria-label="Contact us to discuss partnership opportunities"
               >
                 <span className="relative z-10">Contact Us</span>
@@ -252,7 +284,10 @@ function GetInvolved() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div 
+                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: `linear-gradient(to right, ${colors.primaryDark}, ${colors.secondaryDark})` }}
+                ></div>
               </a>
             </div>
             <div className="md:w-1/2">
@@ -276,8 +311,14 @@ function GetInvolved() {
         ref={(el) => (sectionsRef.current[3] = el)}
       >
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
+          <div 
+            className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
+            style={{ backgroundColor: colors.accent }}
+          ></div>
+          <div 
+            className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
+            style={{ backgroundColor: colors.primary }}
+          ></div>
         </div>
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
           <div className="mb-6">
@@ -286,7 +327,14 @@ function GetInvolved() {
             </span> */}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-            Donate to <span className="block bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Protect Children</span>
+            Donate to <span 
+              className="block bg-clip-text text-transparent"
+              style={{ 
+                background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}
+            >Protect Children</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10">
             Your donations help us provide resources, support survivors, and educate communities. Donation options coming soon!
@@ -294,7 +342,17 @@ function GetInvolved() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href="/contact"
-              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
+              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+              style={{ 
+                background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
+                boxShadow: '0 0 30px rgba(42, 142, 157, 0.25)'
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.boxShadow = `0 0 40px rgba(42, 142, 157, 0.4)`;
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.boxShadow = '0 0 30px rgba(42, 142, 157, 0.25)';
+              }}
             >
               <span className="relative z-10">Stay Updated</span>
               <svg
@@ -305,27 +363,11 @@ function GetInvolved() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div 
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: `linear-gradient(to right, ${colors.primaryDark}, ${colors.secondaryDark})` }}
+              ></div>
             </a>
-            {/* <a
-              href="/resources"
-              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-slate-700 bg-white rounded-full border-2 border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
-            >
-              View Resources
-              <svg
-                className="ml-2 w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </a> */}
           </div>
         </div>
       </section>

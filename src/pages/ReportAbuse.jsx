@@ -78,9 +78,12 @@ function ReportAbuse() {
         ref={(el) => (sectionsRef.current[0] = el)}
       >
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-yellow-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-tr from-yellow-300 to-yellow-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"></div>
+          <div className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
+               style={{ background: `linear-gradient(to bottom right, ${colors.accent}, ${colors.secondary})` }}></div>
+          <div className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"
+               style={{ background: `linear-gradient(to bottom left, ${colors.accent}, ${colors.secondary})` }}></div>
+          <div className="absolute bottom-0 left-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"
+               style={{ background: `linear-gradient(to top right, ${colors.primary}, ${colors.accent})` }}></div>
         </div>
         <div
           className="absolute inset-0 opacity-5"
@@ -96,7 +99,8 @@ function ReportAbuse() {
               </span> */}
             </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight animate-hero-title">
-              Report <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Abuse</span>
+              Report <span className="block bg-clip-text text-transparent"
+                          style={{ backgroundImage: `linear-gradient(to right, ${colors.accent}, ${colors.secondary})` }}>Abuse</span>
             </h1>
             <p className="text-xl sm:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-10 font-light animate-hero-text">
               Your voice can make a difference. Report suspicious behavior or known abuse with confidence and confidentiality.
@@ -104,7 +108,17 @@ function ReportAbuse() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
                 href="#report-form"
-                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
+                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+                style={{ 
+                  background: `linear-gradient(to right, ${colors.secondary}, ${colors.accent})`,
+                  boxShadow: `0 0 0 0 ${colors.secondary}25`
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.boxShadow = `0 25px 50px -12px ${colors.secondary}25`;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.boxShadow = `0 0 0 0 ${colors.secondary}25`;
+                }}
               >
                 <span className="relative z-10">Submit a Report</span>
                 <svg
@@ -115,7 +129,8 @@ function ReportAbuse() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                     style={{ background: `linear-gradient(to right, ${colors.secondaryDark}, ${colors.secondary})` }}></div>
               </a>
             </div>
           </div>
@@ -184,10 +199,22 @@ function ReportAbuse() {
                   value={formData.name}
                   onChange={handleInputChange}
                   disabled={formData.isAnonymous}
-                  className={`w-full px-4 py-3 border border-slate-200 rounded-lg text-[black] focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-300 animate-input ${
+                  className={`w-full px-4 py-3 border border-slate-200 rounded-lg text-[black] transition-all duration-300 animate-input ${
                     formData.isAnonymous ? 'bg-slate-50' : 'bg-white'
                   }`}
-                  style={{ animationDelay: '0s' }}
+                  style={{ 
+                    animationDelay: '0s',
+                    borderColor: 'focus' ? colors.primary : '',
+                    boxShadow: 'focus' ? `0 0 0 2px ${colors.primary}20` : ''
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = colors.primary;
+                    e.target.style.boxShadow = `0 0 0 2px ${colors.primary}20`;
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = '#e2e8f0';
+                    e.target.style.boxShadow = 'none';
+                  }}
                 />
               </div>
               {/* <div className="space-y-2">
@@ -200,7 +227,7 @@ function ReportAbuse() {
                   value={formData.email}
                   onChange={handleInputChange}
                   disabled={formData.isAnonymous}
-                  className={`w-full px-4 py-3 text-black border border-slate-200 rounded-lg focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-300 animate-input ${
+                  className={`w-full px-4 py-3 text-black border border-slate-200 rounded-lg transition-all duration-300 animate-input ${
                     formData.isAnonymous ? 'bg-slate-50' : 'bg-white'
                   }`}
                   style={{ animationDelay: '0.1s' }}
@@ -216,8 +243,16 @@ function ReportAbuse() {
                   value={formData.message}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-slate-200 rounded-lg text-[black] focus:border-yellow-500 focus:ring-2 focus:ring-yellow-500/20 transition-all duration-300 bg-white min-h-[150px] resize-y animate-input"
+                  className="w-full px-4 py-3 border border-slate-200 rounded-lg text-[black] transition-all duration-300 bg-white min-h-[150px] resize-y animate-input"
                   style={{ animationDelay: '0.2s' }}
+                  onFocus={(e) => {
+                    e.target.style.borderColor = colors.primary;
+                    e.target.style.boxShadow = `0 0 0 2px ${colors.primary}20`;
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.borderColor = '#e2e8f0';
+                    e.target.style.boxShadow = 'none';
+                  }}
                 />
               </div>
               <div className="flex items-center">
@@ -227,14 +262,29 @@ function ReportAbuse() {
                     name="isAnonymous"
                     checked={formData.isAnonymous}
                     onChange={handleInputChange}
-                    className="mr-2 w-4 h-4 text-yellow-500 border-slate-300 focus:ring-yellow-500 rounded"
+                    className="mr-2 w-4 h-4 border-slate-300 rounded"
+                    style={{
+                      accentColor: colors.primary
+                    }}
                   />
                   Submit Anonymously
                 </label>
               </div>
               <Button
                 type="submit"
-                className="w-full bg-gradient-to-r from-yellow-500 to-orange-500 text-white hover:shadow-lg hover:shadow-orange-500/25 transition-all duration-300 rounded-full py-3 text-lg font-semibold"
+                className="w-full text-white transition-all duration-300 rounded-full py-3 text-lg font-semibold"
+                style={{ 
+                  background: `linear-gradient(to right, ${colors.secondary}, ${colors.accent})`,
+                  boxShadow: `0 4px 6px -1px ${colors.secondary}25`
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.boxShadow = `0 10px 15px -3px ${colors.secondary}25`;
+                  e.target.style.transform = 'translateY(-1px)';
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.boxShadow = `0 4px 6px -1px ${colors.secondary}25`;
+                  e.target.style.transform = 'translateY(0)';
+                }}
                 aria-label="Submit report form"
               >
                 Submit Report
@@ -259,8 +309,10 @@ function ReportAbuse() {
         ref={(el) => (sectionsRef.current[2] = el)}
       >
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
+          <div className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
+               style={{ background: `linear-gradient(to bottom left, ${colors.accent}, ${colors.secondary})` }}></div>
+          <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
+               style={{ background: `linear-gradient(to top right, ${colors.secondary}, ${colors.accent})` }}></div>
         </div>
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
           <div className="mb-6">
@@ -269,7 +321,8 @@ function ReportAbuse() {
             </span> */}
           </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-            Be Part of the <span className="block bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Change</span>
+            Be Part of the <span className="block bg-clip-text text-transparent"
+                                style={{ backgroundImage: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})` }}>Change</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10">
             Your report is a step toward protecting children and empowering communities. Explore more ways to get involved.
@@ -277,7 +330,17 @@ function ReportAbuse() {
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href="/get-involved"
-              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
+              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+              style={{ 
+                background: `linear-gradient(to right, ${colors.secondary}, ${colors.accent})`,
+                boxShadow: `0 0 0 0 ${colors.secondary}25`
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.boxShadow = `0 25px 50px -12px ${colors.secondary}25`;
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.boxShadow = `0 0 0 0 ${colors.secondary}25`;
+              }}
             >
               <span className="relative z-10">Get Involved</span>
               <svg
@@ -288,7 +351,8 @@ function ReportAbuse() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+              <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                   style={{ background: `linear-gradient(to right, ${colors.secondaryDark}, ${colors.secondary})` }}></div>
             </a>
             {/* <a
               href="/resources"

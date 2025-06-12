@@ -2,42 +2,43 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 import path from 'path';
 
-
 export default defineConfig({
   plugins: [react()],
   resolve: {
-    extensions: ['.js', '.jsx', '.ts', '.tsx'], // Add .ts, .tsx for future-proofing
+    extensions: ['.js', '.jsx', '.ts', '.tsx'],
     alias: {
       '@': path.resolve(__dirname, './src'),
     },
   },
   server: {
     port: 5173,
-    open: true, // Open browser on start
+    open: true,
     cors: {
       origin: [
-        'http://localhost:3000', // Local backend
-        'https://intercept-csa-backend.onrender.com', // Production backend for local testing
+        'http://localhost:3000',
+        'https://intercept-csa-backend.onrender.com',
       ],
       methods: ['GET', 'POST', 'PUT', 'DELETE'],
       credentials: true,
     },
     fs: {
-      allow: ['.'], // Allow access to project root
+      allow: ['.'],
     },
   },
-  publicDir: 'public', // Serve static assets from public/
-  base: '/', // Default base path
+  publicDir: 'public',
+  base: '/',
   build: {
-    outDir: 'dist', // Ensure output directory
-    sourcemap: false, // Disable sourcemaps in production for smaller builds
-    minify: 'esbuild', // Use esbuild for faster, smaller bundles
+    outDir: 'dist',
+    sourcemap: false,
+    minify: 'esbuild',
     rollupOptions: {
       output: {
         manualChunks: {
-          vendor: ['react', 'react-dom', 'react-router-dom'], // Split vendor code
+          vendor: ['react', 'react-dom', 'react-router-dom'],
         },
       },
     },
+    // Ensure all files in public directory are copied to dist
+    copyPublicDir: true,
   },
 });

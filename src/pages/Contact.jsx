@@ -88,7 +88,7 @@ function Contact() {
       setError('Please fill in all required fields.');
       return;
     }
-    console.log('Form submitted:', formData);
+    // console.log('Form submitted:', formData);
     setSuccess('Message sent! We’ll get back to you soon, sharp sharp!');
     setError('');
     setFormData({ name: '', email: '', message: '' });
@@ -159,7 +159,7 @@ function Contact() {
         <section className="pt-32 pb-12 px-4">
           <div className="container mx-auto max-w-5xl">
             <div className={`text-center transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <h1 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-[#FECB0A] to-[#F97316] bg-clip-text text-transparent mb-4">
+              <h1 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-[#2A8E9D] to-[#F97316] bg-clip-text text-transparent mb-4">
                 Connect with Us
               </h1>
               <p className="text-lg sm:text-xl text-[#1F2937] max-w-2xl mx-auto leading-relaxed">
@@ -189,7 +189,7 @@ function Contact() {
                   >
                     <div className="absolute inset-0 border-2 border-transparent group-hover:border-gradient-to-r group-hover:from-[#FECB0A] group-hover:to-[#F97316] rounded-xl transition-all duration-300"></div>
                     <div className="relative z-10">
-                      <div className="w-12 h-12 bg-gradient-to-br from-[#FECB0A] to-[#F97316] rounded-lg flex items-center justify-center mb-4">
+                      <div className="w-12 h-12 bg-gradient-to-br from-[#2A8E9D] to-[#2A8E9D] rounded-lg flex items-center justify-center mb-4">
                         <Icon className="w-6 h-6 text-white" />
                       </div>
                       <h3 className="text-lg font-bold text-[#1F2937] mb-1">{info.title}</h3>
@@ -197,7 +197,7 @@ function Contact() {
                       {info.href ? (
                         <a
                           href={info.href}
-                          className="text-[#FECB0A] hover:text-[#F97316] font-semibold text-sm transition-colors duration-300"
+                          className="text-[#F97316] hover:text-[#F97316] font-semibold text-sm transition-colors duration-300"
                         >
                           {info.content}
                         </a>
@@ -219,7 +219,7 @@ function Contact() {
               {/* Contact Form */}
               <div className="relative">
                 <div className="bg-white rounded-2xl p-8 shadow-lg transform -rotate-2 hover:rotate-0 transition-transform duration-500">
-                  <h2 className="text-2xl font-extrabold text-[#F97316] mb-4 text-center">
+                  <h2 className="text-2xl font-extrabold text-[#2A8E9D] mb-4 text-center">
                     Send a Message
                   </h2>
                   <p className="text-[#1F2937] text-center mb-6 text-sm">
@@ -251,7 +251,7 @@ function Contact() {
                         name="name"
                         value={formData.name}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-white border-2 border-[#FECB0A] rounded-xl focus:border-[#F97316] focus:ring-0 focus:scale-105 transition-all duration-300 shadow-sm group-hover:shadow-md"
+                        className="w-full px-4 py-3 bg-white border-2 border-[#2A8E9D] rounded-xl focus:border-[#F97316] focus:ring-0 focus:scale-105 transition-all duration-300 shadow-sm group-hover:shadow-md"
                         placeholder="Your name"
                       />
                     </div>
@@ -264,7 +264,7 @@ function Contact() {
                         name="email"
                         value={formData.email}
                         onChange={handleInputChange}
-                        className="w-full px-4 py-3 bg-white border-2 border-[#FECB0A] rounded-xl focus:border-[#F97316] focus:ring-0 focus:scale-105 transition-all duration-300 shadow-sm group-hover:shadow-md"
+                        className="w-full px-4 py-3 bg-white border-2 border-[#2A8E9D] rounded-xl focus:border-[#F97316] focus:ring-0 focus:scale-105 transition-all duration-300 shadow-sm group-hover:shadow-md"
                         placeholder="Your email"
                       />
                     </div>
@@ -277,13 +277,13 @@ function Contact() {
                         value={formData.message}
                         onChange={handleInputChange}
                         rows="4"
-                        className="w-full px-4 py-3 bg-white border-2 border-[#FECB0A] rounded-xl focus:border-[#F97316] focus:ring-0 focus:scale-100 transition-all duration-300 shadow-sm min-h-[120px] resize-y group-hover:shadow-md"
+                        className="w-full px-4 py-3 bg-white border-2 border-[#2A8E9D] rounded-xl focus:border-[#F97316] focus:ring-0 focus:scale-100 transition-all duration-300 shadow-sm min-h-[120px] resize-y group-hover:shadow-md"
                         placeholder="What’s on your mind?"
                       ></textarea>
                     </div>
                     <button
                       type="submit"
-                      className="w-full bg-gradient-to-r from-[#FECB0A] to-[#F97316] text-white font-semibold py-3 rounded-full hover:shadow-xl hover:shadow-orange-400/30 transition-all duration-300 flex items-center justify-center gap-2 text-sm"
+                      className="w-full bg-gradient-to-r from-[#2A8E9D] to-[#2A8E9D] text-white font-semibold py-3 rounded-full hover:shadow-xl hover:shadow-orange-400/30 transition-all duration-300 flex items-center justify-center gap-2 text-sm"
                     >
                       <Send className="w-4 h-4" />
                       Send It!
@@ -295,7 +295,7 @@ function Contact() {
               {/* Map Placeholder */}
               <div className="relative">
                 <div className="bg-white rounded-2xl p-8 shadow-lg transform rotate-2 hover:rotate-0 transition-transform duration-500">
-                  <h2 className="text-2xl font-extrabold text-[#F97316] mb-4 rounded-full">
+                  <h2 className="text-2xl font-extrabold text-[#2A8E9D] mb-4 rounded-full">
                     Find Us
                   </h2>
                   <p className="text-[#1F2937] mb-6 text-sm">
@@ -311,7 +311,7 @@ function Contact() {
                           href="https://maps.google.com/?q=Lagos,Nigeria"
                           target="_blank"
                           rel="noopener noreferrer"
-                          className="inline-block mt-2 px-3 py-1 bg-[#FECB0A] text-[#1F2937] rounded-lg text-xs hover:bg-[#F97316] hover:text-white transition-colors duration-300"
+                          className="inline-block mt-2 px-3 py-1 bg-[#2A8E9D] text-[#fff] rounded-lg text-xs hover:bg-[#F97316] hover:text-white transition-colors duration-300"
                         >
                           Open in Maps
                         </a>
@@ -337,7 +337,7 @@ function Contact() {
         {/* Social Media Section */}
         <section className="py-12 px-4">
           <div className="container mx-auto max-w-5xl text-center">
-            <h2 className="text-2xl font-extrabold text-[#F97316] mb-4">
+            <h2 className="text-2xl font-extrabold text-[#2A8E9D] mb-4">
               Follow Our Vibes
             </h2>
             <p className="text-lg text-[#1F2937] mb-8">
@@ -352,7 +352,7 @@ function Contact() {
                     href={social.href}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className={`group relative w-10 h-10 bg-gradient-to-r ${social.color} rounded-lg flex items-center justify-center hover:shadow-md transition-all duration-300`}
+                    className={`group relative w-10 h-10 bg-[#2A8E9D] ${social.color} rounded-lg flex items-center justify-center hover:shadow-md transition-all duration-300`}
                   >
                     <Icon className="w-5 h-5 text-white" />
                     <div className="absolute -bottom-6 bg-[#F97316] text-white px-2 py-1 rounded text-xs opacity-0 group-hover:opacity-100 transition-opacity duration-300">
@@ -368,17 +368,17 @@ function Contact() {
         {/* Call to Action */}
         <section className="py-12 px-4">
           <div className="container mx-auto max-w-5xl text-center">
-            <div className="bg-gradient-to-r from-[#FECB0A] to-[#F97316] rounded-2xl p-8 text-white">
+            <div className="bg-gradient-to-r from-[#2A8E9D] to-[#2A8E9D] rounded-2xl p-8 text-white">
               <h2 className="text-2xl sm:text-3xl font-extrabold mb-3">
                 Ready to Make Impact?
               </h2>
               <p className="text-base leading-relaxed mb-6">
                 Join us to create safer spaces for our kids. Let’s do this!
               </p>
-              <div className="flex flex-col sm:flex-row gap-3 justify-center">
+              <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
                 <a
                   href="/get-involved"
-                  className="px-6 py-3 bg-white text-[#F97316] font-semibold rounded-full hover:bg-[#F3F4F6] hover:shadow-md transition-all duration-300"
+                  className="px-6 py-3  bg-white text-[#000] font-semibold rounded-full hover:bg-[#F3F4F6] hover:shadow-md transition-all duration-300"
                 >
                   Get Involved
                 </a>

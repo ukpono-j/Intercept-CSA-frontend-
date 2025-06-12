@@ -91,9 +91,18 @@ function Programs() {
         ref={(el) => (sectionsRef.current[0] = el)}
       >
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-tr from-yellow-300 to-orange-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"></div>
+          <div 
+            className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
+            style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})` }}
+          ></div>
+          <div 
+            className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"
+            style={{ background: `linear-gradient(135deg, ${colors.secondary}, ${colors.accent})` }}
+          ></div>
+          <div 
+            className="absolute bottom-0 left-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"
+            style={{ background: `linear-gradient(135deg, ${colors.accent}, ${colors.primary})` }}
+          ></div>
         </div>
         <div
           className="absolute inset-0 opacity-5"
@@ -109,17 +118,33 @@ function Programs() {
               </span> */}
             </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight animate-hero-title">
-              Our <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Programs</span>
+              Our{' '}
+              <span 
+                className="block bg-clip-text text-transparent"
+                style={{ backgroundImage: `linear-gradient(to right, ${colors.primary}, ${colors.accent})` }}
+              >
+                Programs
+              </span>
             </h1>
             <p className="text-xl sm:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-10 font-light animate-hero-text">
               Empowering Nigerian communities through prevention, education, and healing to combat child sexual abuse.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a
-             href="#programs"
-                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
+              <button
+                onClick={() => document.getElementById('programs')?.scrollIntoView({ behavior: 'smooth' })}
+                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1"
+                style={{ 
+                  background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
+                  boxShadow: `0 20px 40px ${colors.primary}25`
+                }}
+                onMouseEnter={(e) => {
+                  e.target.style.boxShadow = `0 25px 50px ${colors.primary}40`;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.boxShadow = `0 20px 40px ${colors.primary}25`;
+                }}
               >
-                <span className="relative z-10"> Explore Programs</span>
+                <span className="relative z-10">Explore Programs</span>
                 <svg
                   className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
                   fill="none"
@@ -128,22 +153,11 @@ function Programs() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-              </a>
-              {/* <a
-                href="#programs"
-                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
-              >
-                Explore Programs
-                <svg
-                  className="ml-2 w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                </svg>
-              </a> */}
+                <div 
+                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  style={{ background: `linear-gradient(to right, ${colors.primaryDark}, ${colors.secondaryDark})` }}
+                ></div>
+              </button>
             </div>
           </div>
         </div>
@@ -155,7 +169,7 @@ function Programs() {
         className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-16 md:py-24 opacity-0"
         ref={(el) => (sectionsRef.current[1] = el)}
       >
-        <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-12 text-center">
+        <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center" style={{ color: colors.text }}>
           Our Initiatives
         </h2>
         <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
@@ -174,21 +188,39 @@ function Programs() {
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 <div className="absolute top-4 left-4">
-                  <span className="inline-block px-3 py-1 text-xs font-bold text-white bg-black/20 backdrop-blur-sm rounded-full border border-white/20">
+                  <span 
+                    className="inline-block px-3 py-1 text-xs font-bold text-white backdrop-blur-sm rounded-full border border-white/20"
+                    style={{ backgroundColor: `${colors.primary}40` }}
+                  >
                     Program {index + 1}
                   </span>
                 </div>
               </div>
               <div className="p-6 flex flex-col min-h-[250px]">
-                <h3 className="text-xl font-bold text-slate-900 mb-3 leading-tight line-clamp-2 group-hover:text-slate-800 transition-colors">
+                <h3 className="text-xl font-bold mb-3 leading-tight line-clamp-2 group-hover:transition-colors" style={{ color: colors.text }}>
                   {program.title}
                 </h3>
                 <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3 flex-grow">
                   {program.description}
                 </p>
-                <a
-                  href={`/programs/${program.title.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`}
-                  className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white bg-gradient-to-r from-slate-900 to-slate-800 rounded-lg hover:shadow-lg hover:shadow-slate-900/25 transition-all duration-300 transform hover:-translate-y-0.5 w-fit group/btn mt-auto"
+                <button
+                  onClick={() => {
+                    // Handle navigation to program details
+                    window.location.href = `/programs/${program.title.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`;
+                  }}
+                  className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 w-fit group/btn mt-auto"
+                  style={{ 
+                    background: `linear-gradient(to right, ${colors.primary}, ${colors.primaryDark})`,
+                    boxShadow: `0 4px 15px ${colors.primary}25`
+                  }}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = `linear-gradient(to right, ${colors.primaryDark}, ${colors.primary})`;
+                    e.target.style.boxShadow = `0 8px 25px ${colors.primary}40`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = `linear-gradient(to right, ${colors.primary}, ${colors.primaryDark})`;
+                    e.target.style.boxShadow = `0 4px 15px ${colors.primary}25`;
+                  }}
                   aria-label={`Learn more about ${program.title}`}
                 >
                   Learn More
@@ -200,7 +232,7 @@ function Programs() {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </a>
+                </button>
               </div>
             </article>
           ))}
@@ -213,8 +245,14 @@ function Programs() {
         ref={(el) => (sectionsRef.current[2] = el)}
       >
         <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
+          <div 
+            className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
+            style={{ background: `linear-gradient(135deg, ${colors.accent}, ${colors.secondary})` }}
+          ></div>
+          <div 
+            className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
+            style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.accent})` }}
+          ></div>
         </div>
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
           <div className="mb-6">
@@ -222,16 +260,35 @@ function Programs() {
               Join Our Mission
             </span> */}
           </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight animate-cta-title">
-            Support Our <span className="block bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Programs</span>
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight animate-cta-title" style={{ color: colors.text }}>
+            Support Our{' '}
+            <span 
+              className="block bg-clip-text text-transparent"
+              style={{ backgroundImage: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})` }}
+            >
+              Programs
+            </span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10 animate-cta-text">
             Get involved or donate to help us protect children and empower communities across Nigeria.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="/get-involved"
-              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
+            <button
+              onClick={() => {
+                // Handle navigation to get involved page
+                window.location.href = '/get-involved';
+              }}
+              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1"
+              style={{ 
+                background: `linear-gradient(to right, ${colors.secondary}, ${colors.accent})`,
+                boxShadow: `0 20px 40px ${colors.secondary}25`
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.boxShadow = `0 25px 50px ${colors.secondary}40`;
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.boxShadow = `0 20px 40px ${colors.secondary}25`;
+              }}
             >
               <span className="relative z-10">Get Involved</span>
               <svg
@@ -242,27 +299,11 @@ function Programs() {
               >
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
               </svg>
-              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </a>
-            {/* <a
-              href="/donate"
-              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-slate-700 bg-white rounded-full border-2 border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
-            >
-              Donate Now
-              <svg
-                className="ml-2 w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </a> */}
+              <div 
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: `linear-gradient(to right, ${colors.secondaryDark}, ${colors.primary})` }}
+              ></div>
+            </button>
           </div>
         </div>
       </section>

@@ -37,6 +37,27 @@ function About() {
     };
   }, []);
 
+  // Create dynamic gradient styles using brand colors
+  const gradientStyle = {
+    background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`
+  };
+
+  const textGradientStyle = {
+    background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
+    WebkitBackgroundClip: 'text',
+    WebkitTextFillColor: 'transparent',
+    backgroundClip: 'text'
+  };
+
+  const buttonStyle = {
+    background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
+    color: 'white'
+  };
+
+  const buttonHoverStyle = {
+    background: `linear-gradient(to right, ${colors.primaryDark}, ${colors.secondaryDark})`
+  };
+
   return (
     <>
       {/* Preload critical image */}
@@ -48,9 +69,18 @@ function About() {
           ref={(el) => (sectionsRef.current[0] = el)}
         >
           <div className="absolute inset-0 opacity-10">
-            <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
-            <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-tr from-yellow-300 to-orange-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"></div>
+            <div 
+              className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
+              style={{ background: colors.primary }}
+            ></div>
+            <div 
+              className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"
+              style={{ background: colors.secondary }}
+            ></div>
+            <div 
+              className="absolute bottom-0 left-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"
+              style={{ background: colors.accent }}
+            ></div>
           </div>
           <div
             className="absolute inset-0 opacity-5"
@@ -73,7 +103,7 @@ function About() {
                 </span> */}
               </div>
               <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight animate-hero-title">
-                About <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Intercept CSA</span>
+                About <span className="block" style={textGradientStyle}>Intercept CSA</span>
               </h1>
               <p className="text-xl sm:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-10 font-light animate-hero-text">
                 A Nigerian movement to prevent child sexual abuse, empower survivors, and transform communities through bold action and compassion.
@@ -81,7 +111,16 @@ function About() {
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <a
                   href="/get-involved"
-                  className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
+                  className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1"
+                  style={buttonStyle}
+                  onMouseEnter={(e) => {
+                    e.target.style.background = buttonHoverStyle.background;
+                    e.target.style.boxShadow = `0 25px 50px -12px ${colors.primary}40`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.target.style.background = buttonStyle.background;
+                    e.target.style.boxShadow = 'none';
+                  }}
                 >
                   <span className="relative z-10">Join the Movement</span>
                   <svg
@@ -92,22 +131,7 @@ function About() {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                  <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                 </a>
-                {/* <a
-                  href="#mission"
-                  className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm"
-                >
-                  Learn More
-                  <svg
-                    className="ml-2 w-5 h-5"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-                  </svg>
-                </a> */}
               </div>
             </div>
           </div>
@@ -135,7 +159,7 @@ function About() {
               </div>
               <div className="md:w-1/2">
                 <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                  Our <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Mission</span>
+                  Our <span style={textGradientStyle}>Mission</span>
                 </h2>
                 <p className="text-slate-600 text-lg leading-relaxed">
                   To prevent child sexual abuse, intervene in at-risk lives, and break trauma cycles through education, advocacy, and survivor-centered support, empowering Nigerian communities for lasting change.
@@ -166,7 +190,7 @@ function About() {
               </div>
               <div className="md:w-1/2">
                 <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                  Our <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Vision</span>
+                  Our <span style={textGradientStyle}>Vision</span>
                 </h2>
                 <p className="text-slate-600 text-lg leading-relaxed">
                   A Nigeria where child sexual abuse is stopped before it starts, interrupted where it occurs, and survivors are empowered to heal, with safety, justice, and restoration for all.
@@ -183,7 +207,7 @@ function About() {
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 text-center mb-12">
-              Our <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Story</span>
+              Our <span style={textGradientStyle}>Story</span>
             </h2>
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-12">
               {[
@@ -195,8 +219,28 @@ function About() {
                 <div
                   key={index}
                   className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-100 hover:border-slate-200 transform hover:-translate-y-2 p-6"
+                  style={{
+                    '--hover-shadow': `0 25px 50px -12px ${colors.primary}20`
+                  }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = `0 25px 50px -12px ${colors.primary}20`;
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = '';
+                  }}
                 >
-                  <h3 className="text-xl font-bold text-slate-900 mb-2 group-hover:text-slate-800 transition-colors">{item.year}</h3>
+                  <h3 
+                    className="text-xl font-bold mb-2 group-hover:transition-colors"
+                    style={{ color: colors.text }}
+                    onMouseEnter={(e) => {
+                      e.target.style.color = colors.primary;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.color = colors.text;
+                    }}
+                  >
+                    {item.year}
+                  </h3>
                   <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
                 </div>
               ))}
@@ -221,18 +265,8 @@ function About() {
         >
           <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
             <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 text-center mb-12">
-              Our <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Objectives</span>
+              Our <span style={textGradientStyle}>Objectives</span>
             </h2>
-            {/* <div className="relative h-64 sm:h-80 overflow-hidden rounded-2xl mb-12">
-              <img
-                src={ObjectivesImage}
-                alt="Nigerian advocates working together for child safety"
-                className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
-            </div> */}
             <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
               {[
                 { title: 'Empower Communities', desc: 'Equip communities with tools to prevent abuse and support survivors.' },
@@ -244,8 +278,27 @@ function About() {
                 <div
                   key={index}
                   className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-100 hover:border-slate-200 transform hover:-translate-y-2 p-6"
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.boxShadow = `0 25px 50px -12px ${colors.primary}20`;
+                    e.currentTarget.style.borderColor = colors.primary + '40';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.boxShadow = '';
+                    e.currentTarget.style.borderColor = '';
+                  }}
                 >
-                  <h3 className="text-lg font-bold text-slate-900 mb-2 group-hover:text-slate-800 transition-colors">{obj.title}</h3>
+                  <h3 
+                    className="text-lg font-bold mb-2 group-hover:transition-colors"
+                    style={{ color: colors.text }}
+                    onMouseEnter={(e) => {
+                      e.target.style.color = colors.primary;
+                    }}
+                    onMouseLeave={(e) => {
+                      e.target.style.color = colors.text;
+                    }}
+                  >
+                    {obj.title}
+                  </h3>
                   <p className="text-slate-600 text-sm leading-relaxed">{obj.desc}</p>
                 </div>
               ))}
@@ -259,8 +312,14 @@ function About() {
           ref={(el) => (sectionsRef.current[5] = el)}
         >
           <div className="absolute inset-0 opacity-5">
-            <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
-            <div className="absolute bottom-0 left-0 w-96 h-96 bg-gradient-to-tr from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl"></div>
+            <div 
+              className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
+              style={{ background: colors.primary }}
+            ></div>
+            <div 
+              className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
+              style={{ background: colors.secondary }}
+            ></div>
           </div>
           <img
             src={CtaImage}
@@ -270,13 +329,8 @@ function About() {
             decoding="async"
           />
           <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
-            <div className="mb-6">
-              {/* <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/60 text-slate-700 backdrop-blur-sm border border-slate-200">
-                Join Our Mission
-              </span> */}
-            </div>
             <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight animate-cta-title">
-              Stand <span className="block bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">With Us</span>
+              Stand <span className="block" style={textGradientStyle}>With Us</span>
             </h2>
             <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10 animate-cta-text">
               Protect children, empower survivors, and transform Nigeria. Your support fuels our mission.
@@ -284,7 +338,16 @@ function About() {
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
                 href="/get-involved"
-                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white bg-gradient-to-r from-yellow-500 to-orange-500 rounded-full hover:shadow-2xl hover:shadow-orange-500/25 transition-all duration-300 transform hover:-translate-y-1"
+                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1"
+                style={buttonStyle}
+                onMouseEnter={(e) => {
+                  e.target.style.background = buttonHoverStyle.background;
+                  e.target.style.boxShadow = `0 25px 50px -12px ${colors.primary}40`;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.background = buttonStyle.background;
+                  e.target.style.boxShadow = 'none';
+                }}
               >
                 <span className="relative z-10">Get Involved</span>
                 <svg
@@ -295,27 +358,7 @@ function About() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                <div className="absolute inset-0 rounded-full bg-gradient-to-r from-yellow-600 to-orange-600 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
               </a>
-              {/* <a
-                href="/donate"
-                className="inline-flex items-center px-8 py-4 text-lg font-semibold text-slate-700 bg-white rounded-full border-2 border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
-              >
-                Donate Now
-                <svg
-                  className="ml-2 w-5 h-5"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                  />
-                </svg>
-              </a> */}
             </div>
           </div>
         </section>

@@ -1,5 +1,4 @@
 import { Link } from 'react-router-dom';
-import { colors } from '../utils/colors';
 import Button from './Button';
 import './Hero.css';
 
@@ -16,16 +15,14 @@ function Hero({ headline, subheadline, buttons = [] }) {
         <div className="flex flex-col sm:flex-row justify-center gap-6">
           {buttons.map((btn, index) => (
             <Link
-              key={index}
+              key={btn.label}
               to={btn.to}
-              className="transform transition-transform hover:scale-105 focus:outline-none focus:ring-4 focus:ring-offset-2 focus:ring-yellow-500/50"
+              className="transform transition-transform hover:scale-105 focus:outline-none"
             >
               <Button
-                className={`hero-button ${btn.primary
-                    ? 'bg-gradient-to-r from-yellow-500 to-orange-600 text-white hover:shadow-lg hover:shadow-orange-500/25'
-                    : 'bg-white/10 text-white border-2 border-white/30 hover:bg-white/20 hover:border-white/50 backdrop-blur-sm'
-                  }`}
+                className="hero-button"
                 aria-label={btn.label}
+                variant={btn.variant || (btn.primary ? 'primary' : 'secondary')}
               >
                 {btn.label}
                 {btn.primary && (
