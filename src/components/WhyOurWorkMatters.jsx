@@ -1,98 +1,111 @@
 import { colors } from '../utils/colors';
 import './WhyOurWorkMatters.css';
-import Shield from "../assets/secure.png";
-import Unity from "../assets/unity.png";
-import Like from "../assets/like.png";
+import Shield from '../assets/secure.png';
+import Unity from '../assets/unity.png';
+import Like from '../assets/like.png';
 
 function WhyOurWorkMatters() {
   return (
-    <section className="py-20 bg-gradient-to-b from-gray-100 to-gray-200 relative overflow-hidden">
-      <div className="container mx-auto px-4 text-center">
-        {/* Decorative Background Element */}
-        <div className="absolute inset-0 opacity-10 z-0">
-          <svg className="w-full h-full" viewBox="0 0 1440 320" preserveAspectRatio="none">
-            <path
-              fill={colors.secondary}
-              d="M0,160L48,176C96,192,192,224,288,213.3C384,203,480,149,576,128C672,107,768,117,864,138.7C960,160,1056,192,1152,197.3C1248,203,1344,181,1392,170.7L1440,160L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"
-            />
-          </svg>
-        </div>
-
-        {/* Heading and Subheading */}
+    <section className="why-matters-section py-16 sm:py-24 bg-gradient-to-b from-gray-50 to-white relative overflow-hidden">
+      <div className="absolute inset-0 opacity-10 z-0">
+        <div
+          className="gradient-circle top-0 left-0"
+          style={{ background: `radial-gradient(circle, ${colors.primary}30, transparent 70%)` }}
+        ></div>
+        <div
+          className="gradient-circle bottom-0 right-0"
+          style={{ background: `radial-gradient(circle, ${colors.secondary}30, transparent 70%)` }}
+        ></div>
+      </div>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-6xl text-center relative z-10">
         <h2
-          className="text-4xl md:text-6xl font-extrabold mb-6 animate-slide-in tracking-tight"
-          style={{ color: colors.primary }}
+          className="section-title text-3xl sm:text-4xl lg:text-5xl font-extrabold mb-4 animate-slide-in"
+          style={{ color: colors.text }}
         >
-          Why Our Work Matters
+          Why Our Work <span className="gradient-text">Matters</span>
         </h2>
         <p
-          className="text-xl md:text-3xl mb-16 max-w-4xl mx-auto text-gray-800 animate-slide-in delay-100 leading-relaxed"
+          className="section-text text-lg sm:text-xl text-gray-600 mb-12 max-w-3xl mx-auto animate-slide-in delay-100"
         >
-          Child sexual abuse is a silent crisis in Nigeria. We're breaking the silence with education, prevention, and healing to protect and empower our children.
+          Child sexual abuse is a silent crisis in Nigeria. We’re breaking the silence with education, prevention, and healing to protect and empower our children.
         </p>
-
-        {/* Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 z-10 relative">
-          <div
-            className="bg-white p-8 rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-500 hover:shadow-3xl animate-card-in delay-0"
-          >
-            <div className="w-16 h-16 mx-auto mb-4">
+        <div className="cards-grid grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
+          <div className="card bg-white rounded-2xl shadow-lg hover:shadow-2xl animate-card-in delay-0">
+            <div className="icon-wrapper w-16 h-16 mx-auto mb-4">
               <img
-                src={Shield}
+                src={Shield || '/assets/placeholder.png'}
                 alt="Shield icon representing prevention"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain icon-pulse"
+                loading="lazy"
               />
             </div>
             <h3
-              className="text-2xl font-bold mb-4"
-              style={{ color: colors.secondary }}
+              className="card-title text-xl sm:text-2xl font-bold mb-3"
+              style={{ color: colors.primary }}
             >
               Prevention Saves Lives
             </h3>
-            <p className="text-gray-600 leading-relaxed">
-              By equipping communities with the tools to recognize and stop abuse early, we shield children from the lasting scars of trauma.
+            <p className="card-text text-gray-600 leading-relaxed">
+              Equipping communities with tools to recognize and stop abuse early shields children from lasting trauma.
             </p>
           </div>
-          <div
-            className="bg-white p-8 rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-500 hover:shadow-3xl animate-card-in delay-200"
-          >
-            <div className="w-16 h-16 mx-auto mb-4">
+          <div className="card bg-white rounded-2xl shadow-lg hover:shadow-2xl animate-card-in delay-200">
+            <div className="icon-wrapper w-16 h-16 mx-auto mb-4">
               <img
-                src={Like}
+                src={Like || '/assets/placeholder.png'}
                 alt="Heart icon representing healing"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain icon-pulse"
+                loading="lazy"
               />
             </div>
             <h3
-              className="text-2xl font-bold mb-4"
-              style={{ color: colors.secondary }}
+              className="card-title text-xl sm:text-2xl font-bold mb-3"
+              style={{ color: colors.primary }}
             >
               Healing Restores Hope
             </h3>
-            <p className="text-gray-600 leading-relaxed">
-              Our safe spaces and creative programs empower survivors to heal, rebuild their confidence, and embrace a brighter future.
+            <p className="card-text text-gray-600 leading-relaxed">
+              Safe spaces and creative programs empower survivors to heal, rebuild confidence, and embrace a brighter future.
             </p>
           </div>
-          <div
-            className="bg-white p-8 rounded-xl shadow-2xl transform hover:scale-105 transition-all duration-500 hover:shadow-3xl animate-card-in delay-400"
-          >
-            <div className="w-16 h-16 mx-auto mb-4">
+          <div className="card bg-white rounded-2xl shadow-lg hover:shadow-2xl animate-card-in delay-400">
+            <div className="icon-wrapper w-16 h-16 mx-auto mb-4">
               <img
-                src={Unity}
+                src={Unity || '/assets/placeholder.png'}
                 alt="Unity icon representing community action"
-                className="w-full h-full object-contain"
+                className="w-full h-full object-contain icon-pulse"
+                loading="lazy"
               />
             </div>
             <h3
-              className="text-2xl font-bold mb-4"
-              style={{ color: colors.secondary }}
+              className="card-title text-xl sm:text-2xl font-bold mb-3"
+              style={{ color: colors.primary }}
             >
               Change Starts Together
             </h3>
-            <p className="text-gray-600 leading-relaxed">
+            <p className="card-text text-gray-600 leading-relaxed">
               Uniting families, schools, and faith communities creates a powerful network to prevent abuse and protect children.
             </p>
           </div>
+        </div>
+        <div className="mt-12">
+          <a
+            href="/get-involved"
+            className="btn-primary inline-flex items-center px-6 py-3 text-base font-semibold text-white rounded-full transition-all duration-300"
+            style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})` }}
+            aria-label="Get involved to support our mission"
+          >
+            Get Involved
+            <svg
+              className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              aria-hidden="true"
+            >
+              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+            </svg>
+          </a>
         </div>
       </div>
     </section>

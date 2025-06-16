@@ -22,43 +22,54 @@ function Blog() {
   const [selectedPost, setSelectedPost] = useState(null);
 
   useEffect(() => {
-    const fetchBlogs = async () => {
-      try {
-        // console.log('Fetching blogs from:', `${API_URL}/blogs?status=published`);
-        const response = await axios.get(`${API_URL}/blogs?status=published`, {
-          headers: {
-            'Content-Type': 'application/json',
-          },
-        });
-        // console.log('Fetched posts:', response.data.map(p => ({ id: p._id, image: p.image })));
-        setPosts(response.data);
-      } catch (err) {
-        console.error('Error fetching blogs:', {
-          message: err.message,
-          status: err.response?.status,
-          data: err.response?.data,
-          url: `${API_URL}/blogs?status=published`,
-        });
-        if (err.response?.status === 401) {
-          localStorage.removeItem('token');
-          try {
-            const retryResponse = await axios.get(`${API_URL}/blogs?status=published`, {
-              headers: {
-                'Content-Type': 'application/json',
-              },
-            });
-            // console.log('Retry posts:', retryResponse.data.map(p => ({ id: p._id, image: p.image })));
-            setPosts(retryResponse.data);
-          } catch (retryErr) {
-            setError('Failed to load blogs. Our team is working on it.');
-            console.error('Retry error:', retryErr);
+    const fetchBlogs = async (retries = 3, delay = 1000) => {
+      setIsLoading(true);
+      setError(null);
+
+      for (let attempt = 1; attempt <= retries; attempt++) {
+        try {
+          const response = await axios.get(`${API_URL}/blogs?status=published`, {
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            timeout: 10000, // 10s timeout
+          });
+          setPosts(response.data);
+          return; // Success, exit loop
+        } catch (err) {
+          console.error(`Attempt ${attempt} failed:`, {
+            message: err.message,
+            status: err.response?.status,
+            data: err.response?.data,
+            url: `${API_URL}/blogs?status=published`,
+          });
+
+          if (err.response?.status === 401) {
+            localStorage.removeItem('token');
+            try {
+              const retryResponse = await axios.get(`${API_URL}/blogs?status=published`, {
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                timeout: 10000,
+              });
+              setPosts(retryResponse.data);
+              return;
+            } catch (retryErr) {
+              console.error('Retry error:', retryErr);
+            }
           }
-        } else {
-          setError('Failed to load blogs. Our team is working on it.');
+
+          if (attempt < retries) {
+            await new Promise(resolve => setTimeout(resolve, delay * attempt)); // Exponential backoff
+            continue;
+          }
+
+          // All retries failed
+          setError('Unable to load blogs right now. Please try again later.');
         }
-      } finally {
-        setIsLoading(false);
       }
+      setIsLoading(false);
     };
     fetchBlogs();
   }, []);
@@ -70,28 +81,15 @@ function Blog() {
     }
 
     try {
-      // Handle different image path formats
       let imagePath = image;
-
-      // If it's already a full URL, return as is (but check for double http)
       if (imagePath.startsWith('http')) {
-        // Fix double h issue if present
         imagePath = imagePath.replace(/^h+ttps?:\/\//, 'https://');
         return imagePath;
       }
-
-      // Ensure base URL is clean
-      const baseUrl = 'https://intercept-csa-backend.onrender.com';
-
-      // Clean the image path
-      const cleanPath = imagePath.replace(/^\/+/, ''); // Remove leading slashes only
-
-      // Construct URL
+      const baseUrl = STATIC_BASE_URL.replace(/\/+$/, ''); // Remove trailing slashes
+      const cleanPath = imagePath.replace(/^\/+/, ''); // Remove leading slashes
       const finalUrl = `${baseUrl}/${cleanPath}`;
-
-      // console.log('Constructed image URL:', finalUrl, 'Original image path:', image);
       return finalUrl;
-
     } catch (error) {
       console.error('Error constructing image URL:', error);
       return '/assets/placeholder.jpg';
@@ -214,11 +212,6 @@ function Blog() {
         }}></div>
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg:py-32">
           <div className="text-center">
-            <div className="mb-6 mt-10">
-              {/* <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white backdrop-blur-sm border border-white/20">
-                Knowledge Hub
-              </span> */}
-            </div>
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
               Blog & <span
                 className="block bg-clip-text text-transparent"
@@ -502,11 +495,6 @@ function Blog() {
           ></div>
         </div>
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
-          <div className="mb-6">
-            {/* <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/60 text-slate-700 backdrop-blur-sm border border-slate-200">
-              Join Our Community
-            </span> */}
-          </div>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight" style={{ color: colors.text }}>
             Be Part of the <span
               className="block bg-clip-text text-transparent"
@@ -541,12 +529,6 @@ function Blog() {
               <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{ background: `linear-gradient(to right, ${colors.secondaryDark}, ${colors.secondary})` }}></div>
             </a>
-            {/* <a href="/resources" className="inline-flex items-center px-8 py-4 text-lg font-semibold text-slate-700 bg-white rounded-full border-2 border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300 backdrop-blur-sm">
-              View Resources
-              <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-              </svg>
-            </a> */}
           </div>
         </div>
       </section>

@@ -22,16 +22,18 @@ function Navbar() {
       <div className="max-w-[1200px] mx-auto px-4 py-5 flex justify-between items-center">
         {/* Logo */}
         <Link to="/" className="flex items-center gap-2 sm:gap-2 text-black hover:opacity-80 transition-opacity duration-200">
-          <img 
-            src={Logo} 
-            alt="Intercept CSA Logo" 
+          <img
+            src={Logo}
+            alt="Intercept CSA Logo"
             className="h-8 w-8 sm:h-10 sm:w-10 md:h-12 md:w-12 lg:h-14 lg:w-14 object-contain rounded-full shadow-sm"
           />
-          <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight">
-            Intercept CSA
-          </span>
+          <div className=''>
+            <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight">
+              Intercept <br/> CSA
+            </span>
+          </div>
         </Link>
-        
+
 
         {/* Mobile Menu Toggle */}
         <button
@@ -65,10 +67,9 @@ function Navbar() {
               <NavLink
                 to={link.to}
                 className={({ isActive }) =>
-                  `text-sm font-medium px-2 py-1 transition-colors duration-200 ${
-                    isActive
-                      ? `text-[${colors.primary}] border-b-2 border-[${colors.primary}]`
-                      : `text-gray-700 hover:text-[${colors.primaryDark}]`
+                  `text-sm font-medium px-2 py-1 transition-colors duration-200 ${isActive
+                    ? `text-[${colors.primary}] border-b-2 border-[${colors.primary}]`
+                    : `text-gray-700 hover:text-[${colors.primaryDark}]`
                   }`
                 }
               >
@@ -80,9 +81,8 @@ function Navbar() {
 
         {/* Mobile Sidebar Menu */}
         <div
-          className={`fixed top-0 right-0 h-full w-64 bg-white transform ${
-            isOpen ? 'translate-x-0' : 'translate-x-full'
-          } transition-transform duration-300 ease-in-out lg:hidden shadow-lg z-40`}
+          className={`fixed top-0 right-0 h-full w-64 bg-white transform ${isOpen ? 'translate-x-0' : 'translate-x-full'
+            } transition-transform duration-300 ease-in-out lg:hidden shadow-lg z-40`}
         >
           <div className="p-6">
             <ul className="flex flex-col space-y-6">
@@ -91,10 +91,9 @@ function Navbar() {
                   <NavLink
                     to={link.to}
                     className={({ isActive }) =>
-                      `block text-base font-medium ${
-                        isActive
-                          ? `text-[${colors.primary}] border-b-2 border-[${colors.primary}]`
-                          : `text-gray-800 hover:text-[${colors.primaryDark}]`
+                      `block text-base font-medium ${isActive
+                        ? `text-[${colors.primary}] border-b-2 border-[${colors.primary}]`
+                        : `text-gray-800 hover:text-[${colors.primaryDark}]`
                       }`
                     }
                     onClick={() => setIsOpen(false)}
