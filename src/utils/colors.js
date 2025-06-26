@@ -10,4 +10,6 @@ export const colors = {
   secondaryDark: '#E04339', // Slightly darker coral red
   accent: '#FFC938',        // Mustard Yellow
   text: '#374050',          // Charcoal
+  warm50: '#FFF7ED',       // Light warm background
+  warm100: '#FEEBC8',      // Slightly darker warm background
 };

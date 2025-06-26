@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import Button from './Button';
 import './Hero.css';
-import portraitImmigrants from '../assets/close-up-parent-preparing-his-child-school.jpg';
+import portraitImmigrants from '../assets/landing.png';
 
 function Hero() {
   const heroContent = {
@@ -21,6 +21,7 @@ function Hero() {
           alt="People uniting for child safety"
           className="hero-background-image"
           loading="eager"
+          fetchPriority="high" // Added for prioritized loading
           decoding="async"
         />
         <div className="hero-overlay"></div>
