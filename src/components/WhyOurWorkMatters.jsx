@@ -3,6 +3,7 @@ import './WhyOurWorkMatters.css';
 import Shield from '../assets/secure.png';
 import Unity from '../assets/unity.png';
 import Like from '../assets/like.png';
+import { Link } from 'react-router-dom';
 
 function WhyOurWorkMatters() {
   return (
@@ -27,7 +28,7 @@ function WhyOurWorkMatters() {
         <p
           className="section-text text-lg sm:text-xl text-gray-600 mb-12 max-w-3xl mx-auto animate-slide-in delay-100"
         >
-          Child sexual abuse is a silent crisis in Nigeria. We’re breaking the silence with education, prevention, and healing to protect and empower our children.
+          Child sexual abuse is a silent crisis in Nigeria. We're breaking the silence with education, prevention, and healing to protect and empower our children.
         </p>
         <div className="cards-grid grid grid-cols-1 md:grid-cols-3 gap-6 sm:gap-8">
           <div className="card bg-white rounded-2xl shadow-lg hover:shadow-2xl animate-card-in delay-0">
@@ -89,8 +90,8 @@ function WhyOurWorkMatters() {
           </div>
         </div>
         <div className="mt-12">
-          <a
-            href="/get-involved"
+          <Link
+            to="/get-involved"
             className="btn-primary inline-flex items-center px-6 py-3 text-base font-semibold text-white rounded-full transition-all duration-300"
             style={{ background: `linear-gradient(135deg, ${colors.primary}, ${colors.secondary})` }}
             aria-label="Get involved to support our mission"
@@ -105,7 +106,7 @@ function WhyOurWorkMatters() {
             >
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
             </svg>
-          </a>
+          </Link>
         </div>
       </div>
     </section>

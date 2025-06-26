@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom'; // Import Link
 import { colors } from '../utils/colors';
 import './Programs.css';
 import Education from "../assets/education.jpg";
@@ -203,11 +204,8 @@ function Programs() {
                 <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3 flex-grow">
                   {program.description}
                 </p>
-                <button
-                  onClick={() => {
-                    // Handle navigation to program details
-                    window.location.href = `/programs/${program.title.toLowerCase().replace(/ & /g, '-').replace(/ /g, '-')}`;
-                  }}
+                <Link
+                  to="/resources"
                   className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white rounded-lg transition-all duration-300 transform hover:-translate-y-0.5 w-fit group/btn mt-auto"
                   style={{ 
                     background: `linear-gradient(to right, ${colors.primary}, ${colors.primaryDark})`,
@@ -223,7 +221,7 @@ function Programs() {
                   }}
                   aria-label={`Learn more about ${program.title}`}
                 >
-                  Learn More
+                  <span className="relative z-10">Learn More</span>
                   <svg
                     className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform"
                     fill="none"
@@ -232,7 +230,7 @@ function Programs() {
                   >
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
-                </button>
+                </Link>
               </div>
             </article>
           ))}
@@ -273,11 +271,8 @@ function Programs() {
             Get involved or donate to help us protect children and empower communities across Nigeria.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <button
-              onClick={() => {
-                // Handle navigation to get involved page
-                window.location.href = '/get-involved';
-              }}
+            <Link
+              to="/get-involved"
               className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1"
               style={{ 
                 background: `linear-gradient(to right, ${colors.secondary}, ${colors.accent})`,
@@ -303,7 +298,7 @@ function Programs() {
                 className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                 style={{ background: `linear-gradient(to right, ${colors.secondaryDark}, ${colors.primary})` }}
               ></div>
-            </button>
+            </Link>
           </div>
         </div>
       </section>

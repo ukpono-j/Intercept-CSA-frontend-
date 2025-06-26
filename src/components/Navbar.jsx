@@ -15,6 +15,7 @@ function Navbar() {
     { to: '/report-abuse', label: 'Report Abuse' },
     { to: '/blog', label: 'Blog' },
     { to: '/contact', label: 'Contact' },
+    // { to: '/resources', label: 'Resources' },
   ];
 
   return (
@@ -29,7 +30,7 @@ function Navbar() {
           />
           <div className=''>
             <span className="text-base sm:text-lg md:text-xl lg:text-2xl font-bold tracking-tight">
-              Intercept <br/> CSA
+              InterceptCSA
             </span>
           </div>
         </Link>

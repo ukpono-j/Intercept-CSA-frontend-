@@ -14,7 +14,12 @@ import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/pagination';
 import WhyOurWorkMatters from '../components/WhyOurWorkMatters';
+import Hero from '../components/Hero';
 import { useEffect, useRef } from 'react';
+import StoryOfHope from '../components/StoryOfHope';
+import NewsletterSubscription from '../components/NewsletterSubscription';
+import { colors } from '../utils/colors';
+
 
 function Home() {
   const sectionsRef = useRef([]);
@@ -45,15 +50,6 @@ function Home() {
     };
   }, []);
 
-  const heroContent = {
-    headline: 'Protecting Children, Healing Lives',
-    subheadline: 'A Nigerian initiative dedicated to preventing child sexual abuse, empowering survivors, and transforming communities.',
-    buttons: [
-      { label: 'Learn More', to: '/about', primary: true, variant: 'primary' },
-      { label: 'Get Involved', to: '/get-involved', primary: false, variant: 'secondary' },
-    ],
-  };
-
   const stories = [
     {
       quote: "“Through Intercept CSA’s programs, I found a safe space to heal and the courage to speak out. Now, I’m helping others do the same.”",
@@ -71,100 +67,13 @@ function Home() {
 
   return (
     <div className="min-h-screen mt-14 bg-white">
-      <section className="relative overflow-hidden bg-gradient-to-br from-black via-slate-950 to-black">
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-          <div className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
-          <div className="absolute bottom-0 left-1/2 w-96 h-96 bg-gradient-to-tr from-yellow-400 to-orange-400 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"></div>
-        </div>
-        <img
-          src={portraitImmigrants}
-          alt="People uniting for child safety"
-          className="absolute inset-0 w-full h-full object-cover opacity-50"
-          loading="eager"
-          decoding="async"
-        />
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg-py-32">
-          <div className="text-center">
-            <div className="md:mb-20 mb-10"></div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight animate-hero-title">
-              {heroContent.headline}
-            </h1>
-            <p className="text-xl sm:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-10 font-light animate-hero-text">
-              {heroContent.subheadline}
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              {heroContent.buttons.map((btn, index) => (
-                <Link
-                  key={btn.label}
-                  to={btn.to}
-                  className="transform group transition-transform hover:scale-105 focus:outline-none"
-                >
-                  <Button
-                    variant={btn.variant}
-                    aria-label={btn.label}
-                  >
-                    {btn.label}
-                    {btn.primary && (
-                      <svg
-                        className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    )}
-                  </Button>
-                </Link>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <Hero />
 
       <WhyOurWorkMatters />
 
-      <section className="relative py-20 md:py-24 opacity-0 animate-section" ref={(el) => (sectionsRef.current[1] = el)}>
-        <div className="relative h-80 sm:h-96 overflow-hidden">
-          <img
-            src={Smiling}
-            alt="A child smiling after receiving support"
-            className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
-            loading="lazy"
-            decoding="async"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-        </div>
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl text-center relative -mt-20">
-          <div className="bg-white rounded-2xl shadow-2xl p-8 max-w-3xl mx-auto">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-6">
-              A <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Story of Hope</span>
-            </h2>
-            <Swiper
-              modules={[Autoplay, Pagination]}
-              slidesPerView={1}
-              spaceBetween={30}
-              autoplay={{ delay: 5000, disableOnInteraction: false }}
-              pagination={{ clickable: true }}
-              loop={true}
-              className="story-carousel"
-            >
-              {stories.map((story, index) => (
-                <SwiperSlide key={index}>
-                  <div className="px-4">
-                    <p className="text-lg text-slate-600 mb-6 italic">{story.quote}</p>
-                    <p className="text-md text-slate-500 font-medium">– {story.author}</p>
-                  </div>
-                </SwiperSlide>
-              ))}
-            </Swiper>
-            <Link to="/blog">
-              <Button variant="primary">Read More Stories</Button>
-            </Link>
-          </div>
-        </div>
-      </section>
+      {/* Story of Hope section */}
+      <StoryOfHope />
+
 
       <section className="py-16 md:py-24 bg-slate-50 opacity-0 animate-section" ref={(el) => (sectionsRef.current[2] = el)}>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
@@ -196,17 +105,24 @@ function Home() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Link to="/what-we-do">
+            <Link to="/programs">
               <Button variant="primary">Discover All Programs</Button>
             </Link>
           </div>
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-[#237985] opacity-0 animate-section" ref={(el) => (sectionsRef.current[3] = el)}>
+      <section
+        className="relative overflow-hidden bg-[#237985] opacity-0 animate-section"
+        ref={(el) => (sectionsRef.current[3] = el)}
+      >
         <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-white/20 to-transparent rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-bl from-white/20 to-transparent rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
+          <div
+            className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-white/20 to-transparent rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
+          ></div>
+          <div
+            className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-bl from-white/20 to-transparent rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"
+          ></div>
         </div>
         <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight animate-cta-title">
@@ -216,18 +132,61 @@ function Home() {
             Your support can change lives. Join us to protect children and empower survivors across Nigeria.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link to="/get-involved">
-              <Button variant="accent" className="group">
-                Volunteer Now
-                <svg
-                  className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Button>
+            <Link
+              to="/get-involved"
+              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1"
+              style={{
+                background: `linear-gradient(to right, ${colors.secondary}, ${colors.accent})`,
+                boxShadow: `0 20px 40px ${colors.secondary}25`
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.boxShadow = `0 25px 50px ${colors.secondary}40`;
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.boxShadow = `0 20px 40px ${colors.secondary}25`;
+              }}
+            >
+              <span className="relative z-10">Volunteer Now</span>
+              <svg
+                className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+              <div
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: `linear-gradient(to right, ${colors.secondaryDark}, ${colors.accent})` }}
+              ></div>
+            </Link>
+            <Link
+              to="/resources"
+              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1"
+              style={{
+                background: `linear-gradient(to right, ${colors.primary}, ${colors.primaryDark})`,
+                boxShadow: `0 20px 40px ${colors.primary}25`
+              }}
+              onMouseEnter={(e) => {
+                e.target.style.boxShadow = `0 25px 50px ${colors.primary}40`;
+              }}
+              onMouseLeave={(e) => {
+                e.target.style.boxShadow = `0 20px 40px ${colors.primary}25`;
+              }}
+            >
+              <span className="relative z-10">Explore Resources</span>
+              <svg
+                className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+              <div
+                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                style={{ background: `linear-gradient(to right, ${colors.primaryDark}, ${colors.primary})` }}
+              ></div>
             </Link>
           </div>
         </div>
@@ -307,7 +266,7 @@ function Home() {
         </div>
       </section>
 
-      <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 opacity-0 animate-section" ref={(el) => (sectionsRef.current[6] = el)}>
+      {/* <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 opacity-0 animate-section" ref={(el) => (sectionsRef.current[6] = el)}>
         <div className="absolute inset-0 opacity-10">
           <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
           <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
@@ -339,7 +298,8 @@ function Home() {
             </Button>
           </div>
         </div>
-      </section>
+      </section> */}
+      <NewsletterSubscription />
     </div>
   );
 }

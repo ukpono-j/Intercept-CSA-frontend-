@@ -97,7 +97,7 @@ function About() {
           />
           <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg:py-32">
             <div className="text-center">
-              <div className="mb-6 mt-10">
+              <div className="mb-6 mt-20">
                 {/* <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-white backdrop-blur-sm border border-white/20">
                   Who We Are
                 </span> */}
@@ -108,7 +108,7 @@ function About() {
               <p className="text-xl sm:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-10 font-light animate-hero-text">
                 A Nigerian movement to prevent child sexual abuse, empower survivors, and transform communities through bold action and compassion.
               </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+              {/* <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <a
                   href="/get-involved"
                   className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1"
@@ -132,7 +132,7 @@ function About() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                   </svg>
                 </a>
-              </div>
+              </div> */}
             </div>
           </div>
         </section>
@@ -335,7 +335,7 @@ function About() {
             <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10 animate-cta-text">
               Protect children, empower survivors, and transform Nigeria. Your support fuels our mission.
             </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            {/* <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
                 href="/get-involved"
                 className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1"
@@ -359,7 +359,7 @@ function About() {
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
               </a>
-            </div>
+            </div> */}
           </div>
         </section>
       </div>
