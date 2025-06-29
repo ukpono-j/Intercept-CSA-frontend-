@@ -31,20 +31,16 @@ function Navbar() {
   const navItems = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About Us' },
+    { to: '/programs', label: 'What We Do' },
     // {
-    //   label: 'Our Work',
+    //   label: 'Get Help',
     //   dropdown: [
-    //     { to: '/programs', label: 'What We Do' },
+    //     { to: '/get-involved', label: 'Get Involved' },
+    //     { to: '/report-abuse', label: 'Report Abuse' },
     //   ]
     // },
-    { to: '/programs', label: 'What We Do' },
-    {
-      label: 'Get Help',
-      dropdown: [
-        { to: '/get-involved', label: 'Get Involved' },
-        { to: '/report-abuse', label: 'Report Abuse' },
-      ]
-    },
+    { to: '/get-involved', label: 'Get Involved' },
+    { to: '/report-abuse', label: 'Report Abuse' },
     { to: '/resources', label: 'Resources' },
     { to: '/blog', label: 'Blog' },
     { to: '/contact', label: 'Contact' },
@@ -59,10 +55,15 @@ function Navbar() {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
 
+  // Fixed function to handle dropdown item clicks
+  const handleDropdownClick = () => {
+    setActiveDropdown(null);
+    setIsMobileMenuOpen(false);
+  };
+
   return (
     <>
       <nav className="fixed top-0 left-0 w-full z-[100] bg-white/95 backdrop-blur-md shadow-lg">
-        {/* Animated Background Effects */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
             className="absolute w-96 h-96 rounded-full opacity-5 blur-3xl transition-all duration-1000"
@@ -90,7 +91,6 @@ function Navbar() {
 
         <div className="relative z-10 max-w-7xl mx-auto px-6 py-6">
           <div className="flex items-center justify-between">
-            {/* Logo */}
             <Link
               to="/"
               className="flex items-center space-x-3 hover:opacity-90 transition-opacity duration-300"
@@ -111,8 +111,7 @@ function Navbar() {
               </span>
             </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-3" ref={dropdownRef}>
+            <div className="hidden lg:flex items-center" ref={dropdownRef}>
               {navItems.map((item, index) => (
                 <div key={index} className="relative">
                   {item.dropdown ? (
@@ -124,8 +123,7 @@ function Navbar() {
                       >
                         <span>{item.label}</span>
                         <ChevronDown
-                          className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === index ? 'rotate-180' : ''
-                            }`}
+                          className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === index ? 'rotate-180' : ''}`}
                         />
                       </button>
 
@@ -135,7 +133,7 @@ function Navbar() {
                             <NavLink
                               key={dropdownItem.to}
                               to={dropdownItem.to}
-                              onClick={() => setActiveDropdown(null)}
+                              onClick={handleDropdownClick}
                               className={({ isActive }) =>
                                 `block px-6 py-3 text-sm font-medium transition-all duration-200 ${isActive
                                   ? 'font-semibold'
@@ -181,7 +179,6 @@ function Navbar() {
               ))}
             </div>
 
-            {/* Mobile Menu Button */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
@@ -197,44 +194,38 @@ function Navbar() {
         </div>
       </nav>
 
-      {/* Mobile Menu Overlay */}
       {isMobileMenuOpen && (
         <>
-          {/* Backdrop */}
           <div
             className="fixed inset-0 bg-black/50 z-[200] lg:hidden"
             onClick={closeMobileMenu}
           />
 
-          {/* Mobile Sidebar */}
-          <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-[250] lg:hidden">
+          <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-white to-gray-50 shadow-2xl z-[250] lg:hidden transform transition-transform duration-300 ease-in-out translate-x-0">
             <div className="flex flex-col h-full">
-              {/* Mobile Header */}
-              <div className="flex items-center justify-between p-6 border-b border-gray-100">
-                <span className="text-lg font-semibold text-gray-800">Menu</span>
+              <div className="flex items-center justify-between p-6 border-b border-gray-200">
+                <span className="text-xl font-semibold text-gray-800 tracking-wide">Menu</span>
                 <button
                   onClick={closeMobileMenu}
-                  className="p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+                  className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
                 >
                   <X className="w-5 h-5 text-gray-600" />
                 </button>
               </div>
 
-              {/* Mobile Navigation */}
               <div className="flex-1 overflow-y-auto py-6">
-                <div className="space-y-2 px-6">
+                <div className="space-y-3 px-6">
                   {navItems.map((item, index) => (
                     <div key={index}>
                       {item.dropdown ? (
                         <>
                           <button
                             onClick={() => toggleDropdown(index)}
-                            className="flex items-center justify-between w-full px-4 py-3 text-left text-base font-medium text-gray-800 hover:bg-gray-50 rounded-lg transition-colors duration-200"
+                            className="flex items-center justify-between w-full px-4 py-3 text-left text-base font-medium text-gray-800 hover:bg-gray-100 rounded-lg transition-all duration-200 shadow-sm"
                           >
                             <span>{item.label}</span>
                             <ChevronDown
-                              className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === index ? 'rotate-180' : ''
-                                }`}
+                              className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === index ? 'rotate-180' : ''}`}
                             />
                           </button>
 
@@ -244,17 +235,8 @@ function Navbar() {
                                 <NavLink
                                   key={dropdownItem.to}
                                   to={dropdownItem.to}
-                                  onClick={closeMobileMenu}
-                                  className={({ isActive }) =>
-                                    `block px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${isActive
-                                      ? 'font-semibold'
-                                      : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
-                                    }`
-                                  }
-                                  style={({ isActive }) => ({
-                                    color: isActive ? colors.primary : undefined,
-                                    backgroundColor: isActive ? `${colors.primary}10` : undefined
-                                  })}
+                                  onClick={handleDropdownClick}
+                                  className="block px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 shadow-sm text-gray-600 hover:text-gray-800 hover:bg-gray-100"
                                 >
                                   {dropdownItem.label}
                                 </NavLink>
@@ -267,9 +249,9 @@ function Navbar() {
                           to={item.to}
                           onClick={closeMobileMenu}
                           className={({ isActive }) =>
-                            `block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${isActive
-                              ? 'font-semibold'
-                              : 'text-gray-800 hover:bg-gray-50'
+                            `block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 shadow-sm ${isActive
+                              ? 'font-semibold bg-gray-100'
+                              : 'text-gray-800 hover:bg-gray-100'
                             }`
                           }
                           style={({ isActive }) => ({
@@ -288,9 +270,6 @@ function Navbar() {
           </div>
         </>
       )}
-
-      {/* Spacer for fixed navbar */}
-      {/* <div className="h-20" /> */}
 
       <style jsx>{`
         @keyframes float {

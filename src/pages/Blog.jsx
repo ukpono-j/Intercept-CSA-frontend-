@@ -90,7 +90,7 @@ function Blog() {
 
     return (
       <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-        <div className="relative bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
+        <div className="relative bg-white rounded-2xl max-w-4xl w-full max-h-[90vh]  overflow-y-auto shadow-2xl">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-2 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-800 transition-all duration-200 z-10"
@@ -216,7 +216,7 @@ function Blog() {
   );
 
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen pt-20 bg-white">
       {/* Hero Section */}
       <header className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <div className="absolute inset-0 opacity-10">
