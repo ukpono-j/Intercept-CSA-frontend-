@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Sparkles, ArrowRight, Quote } from 'lucide-react';
+import { Quote, ArrowRight, Sparkles, ChevronDown } from 'lucide-react';
 import HoldingHands from '../assets/close-up-people-holding-hands.jpg';
 import { colors } from '../utils/colors';
 
@@ -44,9 +44,17 @@ const Voices = () => {
   const [scrollY, setScrollY] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
+      if (sectionRef.current) {
+        const rect = sectionRef.current.getBoundingClientRect();
+        setIsVisible(rect.top < window.innerHeight * 0.8);
+      }
+    };
+
     const handleMouseMove = (e) => {
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
@@ -56,10 +64,10 @@ const Voices = () => {
         });
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('mousemove', handleMouseMove);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('mousemove', handleMouseMove);
@@ -75,7 +83,6 @@ const Voices = () => {
     >
       {/* Dynamic Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Animated Gradient Orbs */}
         <div 
           className="absolute w-96 h-96 rounded-full opacity-20 blur-3xl transition-all duration-1000"
           style={{
@@ -92,8 +99,6 @@ const Voices = () => {
             bottom: `${20 + Math.cos(scrollY * 0.004) * 10}%`,
           }}
         />
-
-        {/* Interactive Mouse Effect */}
         <div 
           className="absolute w-64 h-64 rounded-full opacity-10 pointer-events-none transition-all duration-500"
           style={{
@@ -103,8 +108,6 @@ const Voices = () => {
             transform: `scale(${isHovered ? 1.5 : 1})`
           }}
         />
-
-        {/* Floating Elements */}
         {[...Array(6)].map((_, i) => (
           <div
             key={i}
@@ -125,36 +128,71 @@ const Voices = () => {
         ))}
       </div>
 
-      {/* Image Section */}
-      <div className="relative h-64 sm:h-80 overflow-hidden">
-        <img
-          src={HoldingHands}
-          alt="Community members uniting for child protection"
-          className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
-          loading="lazy"
-          decoding="async"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
-      </div>
-
-      {/* Content Section */}
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl text-center relative -mt-16">
-        <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 max-w-3xl mx-auto border border-gray-200/50">
-          <div className="inline-flex items-center gap-3 bg-gray-100/50 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200/50">
+      {/* Content Container */}
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
+        {/* Header Section */}
+        <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="inline-flex items-center gap-3 bg-white/50 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200/50">
             <Quote className="w-5 h-5 text-yellow-500" />
             <span className="text-gray-800 font-semibold">Voices of Impact</span>
           </div>
-          <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-6">
-            Voices of <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Change</span>
+          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
+            Voices of{' '}
+            <span 
+              className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent"
+              style={{
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 3s ease-in-out infinite'
+              }}
+            >
+              Change
+            </span>
           </h2>
-          <p className="text-lg text-gray-700 mb-8 italic">
-            “Intercept CSA’s training transformed our school. We now know how to protect our students and support those who need help.” – A Teacher
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            Hear the stories of those whose lives have been transformed through our work, creating a ripple effect of hope and protection.
           </p>
-          <Link to="/blog">
-            <Button variant="primary">Hear More Voices</Button>
-          </Link>
+        </div>
+
+        {/* Image and Quote Section */}
+        <div className="grid md:grid-cols-2 gap-8 items-center mb-12">
+          <div className="relative h-80 md:h-96 overflow-hidden rounded-2xl shadow-lg">
+            <img
+              src={HoldingHands}
+              alt="Community members uniting for child protection"
+              className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
+              loading="lazy"
+              decoding="async"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent" />
+          </div>
+          <div className="bg-white/90 backdrop-blur-sm rounded-2xl shadow-2xl p-8 border border-gray-200/50">
+            <Quote className="w-8 h-8 text-yellow-500 mb-4 mx-auto" />
+            <p className="text-lg text-gray-700 mb-6 italic leading-relaxed">
+              “Intercept CSA’s training transformed our school. We now know how to protect our students and support those who need help.” – A Teacher
+            </p>
+            <div className="flex items-center justify-center gap-4">
+              <Link to="/blog">
+                <Button variant="primary">Hear More Voices</Button>
+              </Link>
+              <Link to="/stories" className="text-gray-600 hover:text-gray-900 font-semibold transition-colors duration-300 flex items-center gap-2">
+                <Sparkles className="w-4 h-4" />
+                More Stories
+              </Link>
+            </div>
+          </div>
         </div>
       </div>
+
+      <style jsx>{`
+        @keyframes gradient-shift {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+      `}</style>
     </section>
   );
 };

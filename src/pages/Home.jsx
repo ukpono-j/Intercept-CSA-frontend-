@@ -77,7 +77,7 @@ function Home() {
 
       {/* Story of Hope section */}
       <StoryOfHope />
-
+      {/* in this impactful programs use it to write why we are dealing with child sexual abuse */}
       <ImpactfulPrograms />
 
       <Solution />

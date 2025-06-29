@@ -12,7 +12,7 @@ function Navbar() {
 
   useEffect(() => {
     const handleScroll = () => setScrollY(window.scrollY);
-    
+
     const handleClickOutside = (event) => {
       if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
         setActiveDropdown(null);
@@ -21,7 +21,7 @@ function Navbar() {
 
     window.addEventListener('scroll', handleScroll);
     document.addEventListener('mousedown', handleClickOutside);
-    
+
     return () => {
       window.removeEventListener('scroll', handleScroll);
       document.removeEventListener('mousedown', handleClickOutside);
@@ -31,13 +31,13 @@ function Navbar() {
   const navItems = [
     { to: '/', label: 'Home' },
     { to: '/about', label: 'About Us' },
-    {
-      label: 'Our Work',
-      dropdown: [
-        { to: '/programs', label: 'What We Do' },
-        { to: '/resources', label: 'Resources' },
-      ]
-    },
+    // {
+    //   label: 'Our Work',
+    //   dropdown: [
+    //     { to: '/programs', label: 'What We Do' },
+    //   ]
+    // },
+    { to: '/programs', label: 'What We Do' },
     {
       label: 'Get Help',
       dropdown: [
@@ -45,6 +45,7 @@ function Navbar() {
         { to: '/report-abuse', label: 'Report Abuse' },
       ]
     },
+    { to: '/resources', label: 'Resources' },
     { to: '/blog', label: 'Blog' },
     { to: '/contact', label: 'Contact' },
   ];
@@ -63,7 +64,7 @@ function Navbar() {
       <nav className="fixed top-0 left-0 w-full z-[100] bg-white/95 backdrop-blur-md shadow-lg">
         {/* Animated Background Effects */}
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
-          <div 
+          <div
             className="absolute w-96 h-96 rounded-full opacity-5 blur-3xl transition-all duration-1000"
             style={{
               background: `radial-gradient(circle, ${colors.primary}, transparent 70%)`,
@@ -100,7 +101,7 @@ function Navbar() {
                 className="h-14 w-14 object-contain rounded-full shadow-lg border-2 border-white"
                 onError={(e) => { e.currentTarget.src = Logo; }}
               />
-              <span 
+              <span
                 className="text-2xl font-bold tracking-tight bg-clip-text text-transparent"
                 style={{
                   backgroundImage: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryDark})`
@@ -111,7 +112,7 @@ function Navbar() {
             </Link>
 
             {/* Desktop Navigation */}
-            <div className="hidden lg:flex items-center space-x-8" ref={dropdownRef}>
+            <div className="hidden lg:flex items-center space-x-3" ref={dropdownRef}>
               {navItems.map((item, index) => (
                 <div key={index} className="relative">
                   {item.dropdown ? (
@@ -122,13 +123,12 @@ function Navbar() {
                         style={{ color: colors.text }}
                       >
                         <span>{item.label}</span>
-                        <ChevronDown 
-                          className={`w-4 h-4 transition-transform duration-200 ${
-                            activeDropdown === index ? 'rotate-180' : ''
-                          }`} 
+                        <ChevronDown
+                          className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === index ? 'rotate-180' : ''
+                            }`}
                         />
                       </button>
-                      
+
                       {activeDropdown === index && (
                         <div className="absolute top-full left-0 mt-2 w-56 bg-white rounded-xl shadow-xl border border-gray-100 overflow-hidden z-[110]">
                           {item.dropdown.map((dropdownItem, dropIndex) => (
@@ -137,10 +137,9 @@ function Navbar() {
                               to={dropdownItem.to}
                               onClick={() => setActiveDropdown(null)}
                               className={({ isActive }) =>
-                                `block px-6 py-3 text-sm font-medium transition-all duration-200 ${
-                                  isActive 
-                                    ? 'font-semibold' 
-                                    : 'text-gray-700 hover:bg-gray-50'
+                                `block px-6 py-3 text-sm font-medium transition-all duration-200 ${isActive
+                                  ? 'font-semibold'
+                                  : 'text-gray-700 hover:bg-gray-50'
                                 }`
                               }
                               style={({ isActive }) => ({
@@ -162,14 +161,14 @@ function Navbar() {
                     >
                       {({ isActive }) => (
                         <>
-                          <span 
+                          <span
                             className={isActive ? 'font-semibold' : ''}
                             style={{ color: isActive ? colors.primary : colors.text }}
                           >
                             {item.label}
                           </span>
                           {isActive && (
-                            <div 
+                            <div
                               className="absolute bottom-0 left-1/2 transform -translate-x-1/2 w-6 h-0.5 rounded-full"
                               style={{ backgroundColor: colors.primary }}
                             />
@@ -202,11 +201,11 @@ function Navbar() {
       {isMobileMenuOpen && (
         <>
           {/* Backdrop */}
-          <div 
+          <div
             className="fixed inset-0 bg-black/50 z-[200] lg:hidden"
             onClick={closeMobileMenu}
           />
-          
+
           {/* Mobile Sidebar */}
           <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-2xl z-[250] lg:hidden">
             <div className="flex flex-col h-full">
@@ -233,13 +232,12 @@ function Navbar() {
                             className="flex items-center justify-between w-full px-4 py-3 text-left text-base font-medium text-gray-800 hover:bg-gray-50 rounded-lg transition-colors duration-200"
                           >
                             <span>{item.label}</span>
-                            <ChevronDown 
-                              className={`w-4 h-4 transition-transform duration-200 ${
-                                activeDropdown === index ? 'rotate-180' : ''
-                              }`} 
+                            <ChevronDown
+                              className={`w-4 h-4 transition-transform duration-200 ${activeDropdown === index ? 'rotate-180' : ''
+                                }`}
                             />
                           </button>
-                          
+
                           {activeDropdown === index && (
                             <div className="mt-2 ml-4 space-y-1">
                               {item.dropdown.map((dropdownItem) => (
@@ -248,10 +246,9 @@ function Navbar() {
                                   to={dropdownItem.to}
                                   onClick={closeMobileMenu}
                                   className={({ isActive }) =>
-                                    `block px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${
-                                      isActive 
-                                        ? 'font-semibold' 
-                                        : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
+                                    `block px-4 py-2 text-sm font-medium rounded-lg transition-all duration-200 ${isActive
+                                      ? 'font-semibold'
+                                      : 'text-gray-600 hover:text-gray-800 hover:bg-gray-50'
                                     }`
                                   }
                                   style={({ isActive }) => ({
@@ -270,10 +267,9 @@ function Navbar() {
                           to={item.to}
                           onClick={closeMobileMenu}
                           className={({ isActive }) =>
-                            `block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${
-                              isActive 
-                                ? 'font-semibold' 
-                                : 'text-gray-800 hover:bg-gray-50'
+                            `block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 ${isActive
+                              ? 'font-semibold'
+                              : 'text-gray-800 hover:bg-gray-50'
                             }`
                           }
                           style={({ isActive }) => ({

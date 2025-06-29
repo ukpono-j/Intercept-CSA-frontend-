@@ -1,11 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { Swiper, SwiperSlide } from 'swiper/react';
-import { Autoplay } from 'swiper/modules';
-import { Sparkles, ArrowRight, Shield } from 'lucide-react';
+import { Shield, ArrowRight, Sparkles, ChevronDown, Users } from 'lucide-react';
 import PartnerLogo from '../assets/partner_logo.png';
 import { colors } from '../utils/colors';
-import 'swiper/css';
 
 const Button = ({ variant, children }) => {
   const baseStyles = 'relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1';
@@ -45,139 +42,220 @@ const Button = ({ variant, children }) => {
 const Partners = () => {
   const sectionRef = useRef(null);
   const [scrollY, setScrollY] = useState(0);
-  const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
-  const [isHovered, setIsHovered] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
+  const [activePartner, setActivePartner] = useState(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    const handleMouseMove = (e) => {
+    const handleScroll = () => {
+      setScrollY(window.scrollY);
       if (sectionRef.current) {
         const rect = sectionRef.current.getBoundingClientRect();
-        setMousePosition({
-          x: e.clientX - rect.left,
-          y: e.clientY - rect.top
-        });
+        setIsVisible(rect.top < window.innerHeight * 0.8);
       }
     };
-    
+
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('mousemove', handleMouseMove);
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('mousemove', handleMouseMove);
-    };
+
+    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  const partners = [
+    {
+      id: 'partner1',
+      name: 'SafeFuture Foundation',
+      description: 'Pioneering child safety education with innovative programs.',
+      logo: PartnerLogo,
+      gradient: 'from-yellow-400 to-orange-600',
+      impact: '100+ Schools Reached',
+      story: 'Trained 500+ educators in 2024, reducing incidents by 30%.'
+    },
+    {
+      id: 'partner2',
+      name: 'ProtectKids Network',
+      description: 'Creating safe spaces and resources for vulnerable children.',
+      logo: PartnerLogo,
+      gradient: 'from-teal-400 to-cyan-600',
+      impact: '50+ Communities Served',
+      story: 'Supported 1,000+ families through community hubs in 2023.'
+    },
+    {
+      id: 'partner3',
+      name: 'Hope Alliance',
+      description: 'Driving change through prevention and survivor support.',
+      logo: PartnerLogo,
+      gradient: 'from-rose-400 to-red-600',
+      impact: '200+ Lives Impacted',
+      story: 'Helped 200+ survivors rebuild confidence with healing programs.'
+    }
+  ];
 
   return (
     <section
       ref={sectionRef}
-      className="relative overflow-hidden bg-slate-50 py-12 md:py-16"
-      onMouseEnter={() => setIsHovered(true)}
-      onMouseLeave={() => setIsHovered(false)}
+      className="relative overflow-hidden py-16 md:py-24"
+      style={{ 
+        background: `linear-gradient(135deg, ${colors.darkTeal} 0%, ${colors.primary} 50%, ${colors.mediumTeal} 100%)` 
+      }}
     >
-      {/* Dynamic Background Effects */}
-      <div className="absolute inset-0 pointer-events-none">
-        {/* Animated Gradient Orbs */}
+      {/* Background Effects */}
+      <div className="absolute inset-0 bg-[#237985] pointer-events-none">
         <div 
-          className="absolute w-96 h-96 rounded-full opacity-20 blur-3xl transition-all duration-1000"
+          className="absolute w-96  h-96 rounded-full opacity-10 blur-3xl transition-all duration-1000"
           style={{
-            background: `radial-gradient(circle, ${colors.primary}60, transparent 70%)`,
-            left: `${20 + Math.sin(scrollY * 0.005) * 10}%`,
-            top: `${10 + Math.cos(scrollY * 0.003) * 15}%`,
+            // background: `radial-gradient(circle, ${colors.primary}30, transparent 70%)`,
+            left: `${15 + Math.sin(scrollY * 0.004) * 10}%`,
+            top: `${20 + Math.cos(scrollY * 0.002) * 15}%`,
+            transform: `translateY(${scrollY * 0.05}px)`
           }}
         />
         <div 
-          className="absolute w-80 h-80 rounded-full opacity-15 blur-3xl transition-all duration-1000"
+          className="absolute w-80 h-80 rounded-full opacity-10 blur-3xl transition-all duration-1000"
           style={{
-            background: `radial-gradient(circle, ${colors.accent}50, transparent 70%)`,
-            right: `${10 + Math.sin(scrollY * 0.007) * 15}%`,
-            bottom: `${20 + Math.cos(scrollY * 0.004) * 10}%`,
+            background: `radial-gradient(circle, ${colors.accent}20, transparent 70%)`,
+            right: `${15 + Math.sin(scrollY * 0.006) * 10}%`,
+            bottom: `${20 + Math.cos(scrollY * 0.003) * 10}%`,
+            transform: `translateY(${-scrollY * 0.05}px)`
           }}
         />
-
-        {/* Interactive Mouse Effect */}
         <div 
-          className="absolute w-64 h-64 rounded-full opacity-10 pointer-events-none transition-all duration-500"
+          className="absolute w-64 h-64 rounded-full opacity-08 blur-3xl transition-all duration-1000"
           style={{
-            background: `radial-gradient(circle, ${colors.secondary}40, transparent 70%)`,
-            left: mousePosition.x - 128,
-            top: mousePosition.y - 128,
-            transform: `scale(${isHovered ? 1.5 : 1})`
+            background: `radial-gradient(circle, ${colors.secondary}25, transparent 70%)`,
+            right: `${30 + Math.cos(scrollY * 0.005) * 15}%`,
+            top: `${25 + Math.sin(scrollY * 0.003) * 10}%`,
+            transform: `translateY(${scrollY * 0.04}px)`
           }}
         />
-
-        {/* Floating Elements */}
-        {[...Array(6)].map((_, i) => (
+        {[...Array(14)].map((_, i) => (
           <div
             key={i}
-            className="absolute opacity-20 animate-bounce"
+            className="absolute opacity-15 animate-float"
             style={{
-              left: `${Math.random() * 100}%`,
+              left: i % 2 === 0 ? `${Math.random() * 40}%` : `${60 + Math.random() * 40}%`,
               top: `${Math.random() * 100}%`,
-              animationDelay: `${Math.random() * 3}s`,
-              animationDuration: `${3 + Math.random() * 2}s`
+              animationDelay: `${Math.random() * 4}s`,
+              animationDuration: `${4 + Math.random() * 3}s`
             }}
           >
             {i % 2 === 0 ? (
-              <div className="w-3 h-3 bg-gray-400 rounded-full" />
+              <div className="w-4 h-4 bg-white/20 rounded-full" />
             ) : (
-              <Sparkles className="w-4 h-4 text-gray-500" />
+              <Sparkles className="w-5 h-5 text-white/30" />
             )}
           </div>
         ))}
       </div>
 
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl text-center relative z-10">
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 bg-white/95 backdrop-blur-sm rounded-3xl py-12">
         {/* Header Section */}
-        {/* <div className="inline-flex items-center gap-3 bg-white/50 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-gray-200/50">
-          <Shield className="w-5 h-5 text-orange-500" />
-          <span className="text-gray-800 font-semibold">Our Partners</span>
-        </div> */}
-        <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 mb-12">
-          Our <span className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent">Partners in Protection</span>
-        </h2>
-
-        {/* Carousel */}
-        <Swiper
-          modules={[Autoplay]}
-          slidesPerView={2}
-          spaceBetween={30}
-          autoplay={{ delay: 2500, disableOnInteraction: false }}
-          breakpoints={{
-            640: { slidesPerView: 2 },
-            768: { slidesPerView: 3 },
-            1024: { slidesPerView: 4 },
-          }}
-          loop={true}
-          className="partner-carousel"
-        >
-          {[...Array(6)].map((_, index) => (
-            <SwiperSlide key={index}>
-              <div className="relative group">
-                <img
-                  src={PartnerLogo}
-                  alt={`Partner logo ${index + 1}`}
-                  className="h-24 w-full object-contain mx-auto filter grayscale hover:grayscale-0 transition-all duration-300 rounded-lg"
-                  onError={(e) => {
-                    e.currentTarget.src = PartnerLogo;
-                  }}
-                  loading="lazy"
-                  decoding="async"
-                />
-                <div className="absolute inset-0 bg-gradient-to-br from-white/20 to-transparent rounded-lg opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-
-        {/* Call to Action */}
-        <div className="mt-12">
-          <Link to="/get-involved">
-            <Button variant="primary">Partner With Us</Button>
-          </Link>
+        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-gray-100 shadow-sm">
+            <Shield className="w-6 h-6 text-orange-500" />
+            <span className="text-gray-800 font-semibold text-lg">Our Partners</span>
+          </div>
+          <h2 className="text-4xl md:text-6xl font-bold text-gray-900 mb-6 leading-tight">
+            United for{' '}
+            <span 
+              className="bg-gradient-to-r from-yellow-600 to-orange-600 bg-clip-text text-transparent"
+              style={{
+                backgroundSize: '200% 200%',
+                animation: 'gradient-shift 3s ease-in-out infinite'
+              }}
+            >
+              Child Safety
+            </span>
+          </h2>
+          <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            Our partners are the cornerstone of our mission, uniting expertise and passion to protect children and empower communities.
+          </p>
         </div>
+
+        {/* Partners Horizontal Row */}
+        <div className="mb-20">
+          <div className="flex flex-col md:flex-row gap-8 justify-center">
+            {partners.map((partner, index) => (
+              <div
+                key={partner.id}
+                className={`group relative max-w-sm w-full transition-all duration-700 ${
+                  activePartner === partner.id ? 'scale-105 z-20' : 'hover:scale-102'
+                }`}
+                style={{
+                  animationDelay: `${index * 200}ms`,
+                  animation: isVisible ? 'slideInUp 0.8s ease-out forwards' : 'none'
+                }}
+                onMouseEnter={() => setActivePartner(partner.id)}
+                onMouseLeave={() => setActivePartner(null)}
+              >
+                {/* Card Glow Effect */}
+                <div 
+                  className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-xl`}
+                  style={{ background: `linear-gradient(to right, ${colors.secondary}, ${colors.accent})` }}
+                />
+                
+                {/* Main Card */}
+                <div className="relative bg-white/95 backdrop-blur-sm border border-gray-100 rounded-2xl p-8 shadow-xl group-hover:shadow-2xl transition-all duration-500">
+                  <div className="flex items-center justify-between mb-4">
+                    <div className={`inline-flex p-3 rounded-lg bg-gradient-to-r ${partner.gradient}`}>
+                      <Shield className="w-6 h-6 text-white" />
+                    </div>
+                    <img
+                      src={partner.logo}
+                      alt={`${partner.name} logo`}
+                      className="h-12 object-contain filter grayscale group-hover:grayscale-0 transition-all duration-300"
+                      loading="lazy"
+                      decoding="async"
+                    />
+                  </div>
+                  <h3 className="text-2xl font-bold text-gray-900 mb-2">{partner.name}</h3>
+                  <p className={`text-lg font-medium bg-gradient-to-r ${partner.gradient} bg-clip-text text-transparent`}>
+                    {partner.impact}
+                  </p>
+                  <p className="text-gray-600 text-base leading-relaxed mt-3 mb-4">{partner.description}</p>
+                  <div className="bg-gray-50 rounded-lg p-4">
+                    <p className="text-sm text-gray-700 italic">"{partner.story}"</p>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+
       </div>
+
+      <style jsx>{`
+        @keyframes gradient-shift {
+          0%, 100% {
+            background-position: 0% 50%;
+          }
+          50% {
+            background-position: 100% 50%;
+          }
+        }
+
+        @keyframes slideInUp {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0);
+          }
+          50% {
+            transform: translateY(-12px);
+          }
+        }
+
+        .animate-float {
+          animation: float 4s ease-in-out infinite;
+        }
+      `}</style>
     </section>
   );
 };

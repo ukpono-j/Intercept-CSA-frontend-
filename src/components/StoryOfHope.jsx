@@ -281,7 +281,7 @@ const StoryOfHope = () => {
           </div>
 
           {/* Play/Pause Control */}
-          <div className="flex justify-center mt-8">
+          {/* <div className="flex justify-center mt-8">
             <button
               onClick={() => setIsPlaying(!isPlaying)}
               className="flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-gray-200/50 hover:scale-105 transition-all duration-300"
@@ -291,7 +291,7 @@ const StoryOfHope = () => {
                 {isPlaying ? 'Auto-playing' : 'Paused'}
               </span>
             </button>
-          </div>
+          </div> */}
         </div>
 
         {/* Call to Action */}

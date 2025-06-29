@@ -140,25 +140,25 @@
 .hero-button-primary {
   background-color: #f97316; /* Orange-500 */
   color: #ffffff;
-  border-color: #f97316;
+  /* border-color: #f97316; */
 }
 
 .hero-button-primary:hover {
   background-color: #ea580c; /* Orange-600 */
-  border-color: #ea580c;
+  /* border-color: #ea580c; */
   box-shadow: 0 8px 16px rgba(249, 115, 22, 0.3);
 }
 
 .hero-button-secondary {
   background-color: transparent;
   color: #f97316; /* Orange-500 */
-  border-color: #f97316;
+  /* border-color: #f97316; */
 }
 
 .hero-button-secondary:hover {
   background-color: rgba(249, 115, 22, 0.1);
   color: #ea580c; /* Orange-600 */
-  border-color: #ea580c;
+  /* border-color: #ea580c; */
   box-shadow: 0 8px 16px rgba(249, 115, 22, 0.2);
 }
 

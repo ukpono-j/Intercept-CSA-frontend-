@@ -1,9 +1,23 @@
 import { useState, useEffect, useRef } from 'react';
+import { Link } from 'react-router-dom';
 import { colors } from '../utils/colors';
 import FormInput from '../components/FormInput';
 import Button from '../components/Button';
 import './GetInvolved.css';
 import SupportGroup from "../assets/people-meeting-support-group.jpg";
+
+// Optimized color palette matching Programs component
+const themeColors = {
+  primary: '#0f766e',
+  primaryLight: '#14b8a6',
+  primaryDark: '#134e4a',
+  accent: '#f59e0b',
+  text: '#1f2937',
+  textLight: '#6b7280',
+  white: '#ffffff',
+  gray50: '#f9fafb',
+  teal50: '#f0fdfa',
+};
 
 function GetInvolved() {
   const [volunteerForm, setVolunteerForm] = useState({
@@ -38,7 +52,6 @@ function GetInvolved() {
       setErrors(formErrors);
       return;
     }
-    // console.log('Volunteer form submitted:', volunteerForm);
     alert('Thank you for your interest! We will contact you soon.');
     setVolunteerForm({ name: '', email: '', message: '' });
   };
@@ -49,9 +62,8 @@ function GetInvolved() {
         entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
             setTimeout(() => {
-              entry.target.classList.add('animate-section');
-            }, index * 250);
-            observer.unobserve(entry.target);
+              entry.target.classList.add('animate-in');
+            }, index * 150);
           }
         });
       },
@@ -62,220 +74,370 @@ function GetInvolved() {
       if (section) observer.observe(section);
     });
 
-    return () => {
-      sectionsRef.current.forEach((section) => {
-        if (section) observer.unobserve(section);
-      });
-    };
+    return () => observer.disconnect();
   }, []);
+
+  const ways = [
+    {
+      title: 'Volunteer',
+      description: 'Join our team of dedicated volunteers helping to protect children and support survivors.',
+      icon: '🤝',
+      action: 'Start Here',
+      link: '#volunteer',
+      stats: '800+ volunteers',
+      category: 'Direct Impact'
+    },
+    {
+      title: 'Partner',
+      description: 'Collaborate with us to create safe environments in your community or organization.',
+      icon: '🤝',
+      action: 'Partner Now',
+      link: '/contact',
+      stats: '150+ partners',
+      category: 'Collaboration'
+    },
+    {
+      title: 'Donate',
+      description: 'Support our mission with financial contributions to fund programs and resources.',
+      icon: '💝',
+      action: 'Coming Soon',
+      link: '/contact',
+      stats: 'Every ₦ counts',
+      category: 'Support'
+    }
+  ];
+
+  const impact = [
+    { number: '1,000+', label: 'Volunteers Trained', icon: '👥' },
+    { number: '150+', label: 'Organizations Partnered', icon: '🤝' },
+    { number: '5,000+', label: 'People Educated', icon: '📚' },
+    { number: '500+', label: 'Survivors Supported', icon: '💝' }
+  ];
 
   return (
     <div className="min-h-screen bg-white">
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-in {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .section-opacity {
+          opacity: 0;
+        }
+
+        .gradient-bg {
+          background: linear-gradient(135deg, ${themeColors.primary} 0%, ${themeColors.primaryLight} 100%);
+        }
+
+        .text-gradient {
+          background: linear-gradient(135deg, ${themeColors.primary}, ${themeColors.primaryLight});
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hover-lift {
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-lift:hover {
+          transform: translateY(-8px) scale(1.02);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .way-card {
+          background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
+          border: 1px solid rgba(15, 118, 110, 0.1);
+          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .way-card:hover {
+          background: rgba(255,255,255,0.95);
+          border-color: ${themeColors.primaryLight};
+        }
+
+        .category-badge {
+          background: linear-gradient(135deg, ${themeColors.primary}20, ${themeColors.primaryLight}20);
+          color: ${themeColors.primary};
+          border: 1px solid ${themeColors.primary}30;
+        }
+
+        .floating-element {
+          animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+
+        .form-card {
+          background: linear-gradient(145deg, rgba(15, 118, 110, 0.95), rgba(20, 184, 166, 0.9));
+          backdrop-filter: blur(10px);
+        }
+
+        @media (max-width: 768px) {
+          .hero-title { font-size: 2.5rem !important; }
+          .section-title { font-size: 2rem !important; }
+        }
+      `}</style>
+
       {/* Hero Section */}
-      <section
-        className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 opacity-0"
+      <section 
+        className="relative min-h-screen flex pt-36 pb-24 items-center justify-center text-white section-opacity"
         ref={(el) => (sectionsRef.current[0] = el)}
       >
-        <div className="absolute inset-0 opacity-10">
-          <div 
-            className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
-            style={{ backgroundColor: colors.primary }}
-          ></div>
-          <div 
-            className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"
-            style={{ backgroundColor: colors.secondary }}
-          ></div>
-          <div 
-            className="absolute bottom-0 left-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"
-            style={{ backgroundColor: colors.accent }}
-          ></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-black/50 z-10"></div>
+        <img 
+          src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1200&h=800&fit=crop" 
+          alt="Get Involved" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        
+        {/* Floating background elements */}
+        <div className="absolute inset-0 z-5">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-teal-400/10 rounded-full blur-xl floating-element"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-amber-400/10 rounded-full blur-xl floating-element" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-teal-300/10 rounded-full blur-xl floating-element" style={{animationDelay: '4s'}}></div>
         </div>
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        ></div>
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg:py-32">
-          <div className="text-center">
-            <div className="mb-6 mt-10">
-              {/* <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-white backdrop-blur-sm border border-white/20">
-                Make a Difference
-              </span> */}
-            </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight animate-hero-title">
-              Get <span 
-                className="block bg-clip-text text-transparent"
-                style={{ 
-                  background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent'
-                }}
-              >Involved</span>
-            </h1>
-            <p className="text-xl sm:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-10 font-light animate-hero-text">
-              Join Intercept CSA to prevent child sexual abuse, empower survivors, and build safer Nigerian communities.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a
-                href="#volunteer"
-                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                style={{ 
-                  background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
-                  boxShadow: '0 0 30px rgba(42, 142, 157, 0.25)'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.boxShadow = `0 0 40px rgba(42, 142, 157, 0.4)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.boxShadow = '0 0 30px rgba(42, 142, 157, 0.25)';
-                }}
-              >
-                <span className="relative z-10">Volunteer Now</span>
-                <svg
-                  className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-                <div 
-                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: `linear-gradient(to right, ${colors.primaryDark}, ${colors.secondaryDark})` }}
-                ></div>
-              </a>
-            </div>
+        
+        <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
+          <div className="inline-block px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-8 border border-white/30">
+            Make a Difference
+          </div>
+          <h1 className="hero-title text-5xl md:text-7xl font-bold mb-8 leading-tight">
+            Get <span className="block text-teal-300 mt-2">Involved</span>
+          </h1>
+          <p className="text-xl md:text-2xl mb-12 text-gray-200 leading-relaxed max-w-4xl mx-auto">
+            Join Intercept CSA to prevent child sexual abuse, empower survivors, and build safer Nigerian communities.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <button 
+              onClick={() => document.getElementById('ways')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-10 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+            >
+              Explore Ways
+            </button>
+            <button 
+              onClick={() => document.getElementById('volunteer')?.scrollIntoView({ behavior: 'smooth' })}
+              className="px-10 py-4 border-2 border-white text-white hover:bg-white hover:text-teal-800 font-semibold rounded-full transition-all duration-300"
+            >
+              Volunteer Now
+            </button>
           </div>
         </div>
       </section>
 
-      {/* Volunteer Section */}
-      <section
-        id="volunteer"
-        className="relative py-16 md:py-24 opacity-0"
+      {/* Impact Stats */}
+      <section 
+        className="py-16 gradient-bg section-opacity"
         ref={(el) => (sectionsRef.current[1] = el)}
       >
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        ></div>
-        <div className="container  mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-          <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6 text-center">
-            Volunteer With Us
-          </h2>
-          <p className="text-black text-lg leading-relaxed mb-8 text-center">
-            Your time and skills can help protect children and support survivors. Fill out the form to join our mission.
-          </p>
-          <div className="relative bg-gradient-to-br from-slate-900 text-white via-slate-800 to-slate-900  rounded-2xl shadow-2xl p-8 sm:p-10">
-            <form onSubmit={handleVolunteerSubmit} className="relative z-10 space-y-6">
-              <div className="relative">
-                <FormInput
-                  label="Full Name"
-                  type="text"
-                  name="name"
-                  value={volunteerForm.name}
-                  onChange={handleInputChange}
-                  required
-                  className={`w-full border-b-2 ${
-                    errors.name ? 'border-red-500' : 'border-white'
-                  } focus:border-white text-white bg-transparent placeholder-white/50 transition-all duration-300 animate-input`}
-                  style={{ animationDelay: '0s' }}
-                />
-                {errors.name && <p className="text-red-500 text-sm mt-1">{errors.name}</p>}
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {impact.map((stat, index) => (
+              <div key={index} className="text-center text-white">
+                <div className="text-4xl mb-4">{stat.icon}</div>
+                <div className="text-4xl md:text-5xl font-bold mb-2 text-teal-200">{stat.number}</div>
+                <div className="text-lg text-teal-100">{stat.label}</div>
               </div>
-              <div className="relative">
-                <FormInput
-                  label="Email Address"
-                  type="email"
-                  name="email"
-                  value={volunteerForm.email}
-                  onChange={handleInputChange}
-                  required
-                  className={`w-full border-b-2 ${
-                    errors.email ? 'border-red-500' : 'border-white'
-                  } focus:border-white text-white bg-transparent placeholder-white/50 transition-all duration-300 animate-input`}
-                  style={{ animationDelay: '0.1s' }}
-                />
-                {errors.email && <p className="text-red-500 text-sm mt-1">{errors.email}</p>}
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Ways to Get Involved */}
+      <section
+        id="ways"
+        className="py-20 bg-gray-50 section-opacity"
+        ref={(el) => (sectionsRef.current[2] = el)}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
+              Ways to Help
+            </div>
+            <h2 className="section-title text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              Ways to <span className="text-gradient">Get Involved</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              Choose how you'd like to make a difference in protecting children and supporting survivors.
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-3">
+            {ways.map((way, index) => (
+              <article
+                key={index}
+                className="way-card rounded-2xl p-8 hover-lift shadow-lg text-center"
+              >
+                <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-6">
+                  {way.icon}
+                </div>
+                
+                <div className="mb-4">
+                  <span className="category-badge inline-block px-3 py-1 text-xs font-bold rounded-full backdrop-blur-sm mb-2">
+                    {way.category}
+                  </span>
+                  <div className="text-sm text-amber-600 font-semibold">{way.stats}</div>
+                </div>
+
+                <h3 className="text-2xl font-bold mb-4 text-gray-800">{way.title}</h3>
+                <p className="text-gray-600 mb-8 leading-relaxed">{way.description}</p>
+                
+                <a
+                  href={way.link}
+                  className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
+                >
+                  <span className="relative z-10">{way.action}</span>
+                  <svg
+                    className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                  </svg>
+                </a>
+              </article>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Volunteer Form */}
+      <section
+        id="volunteer"
+        className="py-20 bg-white section-opacity"
+        ref={(el) => (sectionsRef.current[3] = el)}
+      >
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              Volunteer <span className="text-gradient">Application</span>
+            </h2>
+            <p className="text-xl text-gray-600 leading-relaxed">
+              Join our team of dedicated volunteers making a real difference in children's lives.
+            </p>
+          </div>
+          
+          <div className="form-card rounded-2xl shadow-2xl p-8 sm:p-12 text-white">
+            <form onSubmit={handleVolunteerSubmit} className="space-y-8">
+              <div className="grid md:grid-cols-2 gap-6">
+                <div>
+                  <FormInput
+                    label="Full Name"
+                    type="text"
+                    name="name"
+                    value={volunteerForm.name}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full border-b-2 ${
+                      errors.name ? 'border-red-400' : 'border-white/50'
+                    } focus:border-white text-white bg-transparent placeholder-white/70 pb-2`}
+                  />
+                  {errors.name && <p className="text-red-300 text-sm mt-2">{errors.name}</p>}
+                </div>
+                
+                <div>
+                  <FormInput
+                    label="Email Address"
+                    type="email"
+                    name="email"
+                    value={volunteerForm.email}
+                    onChange={handleInputChange}
+                    required
+                    className={`w-full border-b-2 ${
+                      errors.email ? 'border-red-400' : 'border-white/50'
+                    } focus:border-white text-white bg-transparent placeholder-white/70 pb-2`}
+                  />
+                  {errors.email && <p className="text-red-300 text-sm mt-2">{errors.email}</p>}
+                </div>
               </div>
-              <div className="relative">
+              
+              <div>
                 <FormInput
-                  label="Why do you want to volunteer?"
+                  label="Why do you want to volunteer with us?"
                   type="textarea"
                   name="message"
                   value={volunteerForm.message}
                   onChange={handleInputChange}
-                  className={`w-full border-b-2 border-white focus:border-white text-white bg-transparent placeholder-white/50 transition-all duration-300 animate-input break-words`}
-                  style={{ animationDelay: '0.2s' }}
+                  className="w-full border-b-2 border-white/50 focus:border-white text-white bg-transparent placeholder-white/70 pb-2 min-h-24"
                 />
               </div>
+              
               <Button
                 type="submit"
-                className="w-full rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1 text-white py-3 text-lg font-semibold animate-pulse-button"
-                style={{ 
-                  background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
-                  boxShadow: `0 0 30px ${colors.primary}25`
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.background = `linear-gradient(to right, ${colors.primaryDark}, ${colors.secondaryDark})`;
-                  e.target.style.boxShadow = `0 0 40px ${colors.primary}40`;
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`;
-                  e.target.style.boxShadow = `0 0 30px ${colors.primary}25`;
-                }}
-                aria-label="Submit volunteer form"
+                className="w-full bg-white text-teal-700 hover:bg-gray-100 font-bold py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
-                Submit
+                Submit Application
               </Button>
             </form>
           </div>
         </div>
-        <svg
-          className="absolute bottom-0 w-full h-24 text-slate-100 opacity-50"
-          viewBox="0 0 1440 80"
-        >
-          <path
-            fill="currentColor"
-            d="M0,40C48,60,96,20,144,40C192,60,240,20,288,40C336,60,384,20,432,40C480,60,528,20,576,40C624,60,672,20,720,40C768,60,816,20,864,40C912,60,960,20,1008,40C1056,60,1104,20,1152,40C1200,60,1248,20,1296,40C1344,60,1392,20,1440,40V80H0Z"
-          />
-        </svg>
       </section>
 
-      {/* Partner Section */}
+      {/* Partnership Section */}
       <section
-        id="partner"
-        className="relative py-16 md:py-24 opacity-0"
-        ref={(el) => (sectionsRef.current[2] = el)}
+        className="py-20 bg-gray-50 section-opacity"
+        ref={(el) => (sectionsRef.current[4] = el)}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-          <div className="flex flex-col md:flex-row items-center gap-8">
-            <div className="md:w-1/2">
-              <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                Partner With Us
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-teal-600 rounded-2xl transform rotate-3 opacity-20"></div>
+              <img
+                src={SupportGroup}
+                alt="Partnership"
+                className="relative rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            
+            <div>
+              <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
+                Partnership
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                Partner <span className="text-gradient">With Us</span>
               </h2>
-              <p className="text-slate-600 text-lg leading-relaxed mb-6">
-                We collaborate with churches, schools, and organizations to create safe environments and promote child protection. Reach out to discuss partnership opportunities.
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                We collaborate with churches, schools, and organizations to create safe environments and promote child protection.
               </p>
-              <a
-                href="/contact"
-                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                style={{ 
-                  background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
-                  boxShadow: '0 0 30px rgba(42, 142, 157, 0.25)'
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.boxShadow = `0 0 40px rgba(42, 142, 157, 0.4)`;
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.boxShadow = '0 0 30px rgba(42, 142, 157, 0.25)';
-                }}
-                aria-label="Contact us to discuss partnership opportunities"
+              
+              <div className="space-y-4 mb-8">
+                {[
+                  'Training and capacity building',
+                  'Resource development and sharing',
+                  'Joint advocacy and awareness campaigns',
+                  'Safe environment consultations'
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center">
+                    <div className="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-700">{item}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
               >
-                <span className="relative z-10">Contact Us</span>
+                <span className="relative z-10">Start Partnership</span>
                 <svg
                   className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
                   fill="none"
@@ -284,90 +446,39 @@ function GetInvolved() {
                 >
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                 </svg>
-                <div 
-                  className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  style={{ background: `linear-gradient(to right, ${colors.primaryDark}, ${colors.secondaryDark})` }}
-                ></div>
-              </a>
-            </div>
-            <div className="md:w-1/2">
-              <div className="relative h-64 sm:h-80 overflow-hidden rounded-2xl">
-                <img
-                  src={SupportGroup}
-                  alt="Partnership"
-                  className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Donate Section */}
+      {/* CTA Section */}
       <section
-        className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 opacity-0"
-        ref={(el) => (sectionsRef.current[3] = el)}
+        className="py-20 gradient-bg section-opacity"
+        ref={(el) => (sectionsRef.current[5] = el)}
       >
-        <div className="absolute inset-0 opacity-5">
-          <div 
-            className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
-            style={{ backgroundColor: colors.accent }}
-          ></div>
-          <div 
-            className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
-            style={{ backgroundColor: colors.primary }}
-          ></div>
-        </div>
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
-          <div className="mb-6">
-            {/* <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/60 text-slate-700 backdrop-blur-sm border border-slate-200">
-              Support Our Mission
-            </span> */}
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-            Donate to <span 
-              className="block bg-clip-text text-transparent"
-              style={{ 
-                background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
-                WebkitBackgroundClip: 'text',
-                WebkitTextFillColor: 'transparent'
-              }}
-            >Protect Children</span>
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10">
-            Your donations help us provide resources, support survivors, and educate communities. Donation options coming soon!
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="/contact"
-              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-              style={{ 
-                background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
-                boxShadow: '0 0 30px rgba(42, 142, 157, 0.25)'
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.boxShadow = `0 0 40px rgba(42, 142, 157, 0.4)`;
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.boxShadow = '0 0 30px rgba(42, 142, 157, 0.25)';
-              }}
-            >
-              <span className="relative z-10">Stay Updated</span>
-              <svg
-                className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="glass-card rounded-2xl p-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+              Ready to Make a <span className="text-teal-700">Difference?</span>
+            </h2>
+            <p className="text-xl text-black mb-10 leading-relaxed max-w-3xl mx-auto">
+              Join thousands of Nigerians working together to protect children and support survivors. Your involvement matters.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <button 
+                onClick={() => document.getElementById('volunteer')?.scrollIntoView({ behavior: 'smooth' })}
+                className="px-10 py-4 bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-              <div 
-                className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                style={{ background: `linear-gradient(to right, ${colors.primaryDark}, ${colors.secondaryDark})` }}
-              ></div>
-            </a>
+                Volunteer Today
+              </button>
+              <Link
+                to="/contact"
+                className="px-10 py-4 border-2 border-teal-700 text-black hover:bg-white hover:text-teal-600 font-semibold rounded-full transition-all duration-300 inline-block"
+              >
+                Get in Touch
+              </Link>
+            </div>
           </div>
         </div>
       </section>

@@ -1,9 +1,21 @@
 import { useState, useEffect, useRef } from 'react';
-import { colors } from '../utils/colors';
+import { Link } from 'react-router-dom';
 import FormInput from '../components/FormInput';
 import Button from '../components/Button';
 import { api } from '../utils/api';
-import './ReportAbuse.css';
+
+// Optimized color palette matching Programs component
+const colors = {
+  primary: '#0f766e',      // Teal-700
+  primaryLight: '#14b8a6', // Teal-500
+  primaryDark: '#134e4a',  // Teal-800
+  accent: '#f59e0b',       // Amber-500
+  text: '#1f2937',         // Gray-800
+  textLight: '#6b7280',    // Gray-500
+  white: '#ffffff',
+  gray50: '#f9fafb',
+  teal50: '#f0fdfa',
+};
 
 function ReportAbuse() {
   const [formData, setFormData] = useState({
@@ -18,7 +30,7 @@ function ReportAbuse() {
 
   const handleInputChange = (e) => {
     const { name, value, type, checked } = e.target;
-    setFormData((prev) => ({
+    setFormData(prev => ({
       ...prev,
       [name]: type === 'checkbox' ? checked : value,
     }));
@@ -50,9 +62,8 @@ function ReportAbuse() {
         entries.forEach((entry, index) => {
           if (entry.isIntersecting) {
             setTimeout(() => {
-              entry.target.classList.add('animate-section');
-            }, index * 250);
-            observer.unobserve(entry.target);
+              entry.target.classList.add('animate-in');
+            }, index * 150);
           }
         });
       },
@@ -63,76 +74,130 @@ function ReportAbuse() {
       if (section) observer.observe(section);
     });
 
-    return () => {
-      sectionsRef.current.forEach((section) => {
-        if (section) observer.unobserve(section);
-      });
-    };
+    return () => observer.disconnect();
   }, []);
+
+  const supportInfo = [
+    { icon: '🔒', title: 'Confidential', desc: 'All reports are handled with complete confidentiality' },
+    { icon: '⚡', title: 'Swift Action', desc: 'We respond to reports within 24 hours' },
+    { icon: '💝', title: 'Compassionate Care', desc: 'Professional support throughout the process' },
+    { icon: '🛡️', title: 'Safe Environment', desc: 'Your safety and privacy are our top priorities' }
+  ];
 
   return (
     <div className="min-h-screen bg-white">
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(40px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .animate-in {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .section-opacity {
+          opacity: 0;
+        }
+
+        .gradient-bg {
+          background: linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryLight} 100%);
+        }
+
+        .text-gradient {
+          background: linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight});
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .glass-card {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .floating-element {
+          animation: float 6s ease-in-out infinite;
+        }
+
+        @keyframes float {
+          0%, 100% { transform: translateY(0px); }
+          50% { transform: translateY(-10px); }
+        }
+
+        .form-card {
+          background: linear-gradient(145deg, rgba(15, 118, 110, 0.95), rgba(20, 184, 166, 0.9));
+          backdrop-filter: blur(10px);
+        }
+
+        .hover-lift {
+          transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        .hover-lift:hover {
+          transform: translateY(-2px);
+          box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        @media (max-width: 768px) {
+          .hero-title { font-size: 2.5rem !important; }
+        }
+      `}</style>
+
       {/* Hero Section */}
-      <section
-        className="relative overflow-hidden bg-gradient-to-br from-black via-slate-950 to-black opacity-0"
+      <section 
+        className="relative min-h-screen flex pt-40 pb-32 items-center justify-center text-white section-opacity"
         ref={(el) => (sectionsRef.current[0] = el)}
       >
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
-               style={{ background: `linear-gradient(to bottom right, ${colors.accent}, ${colors.secondary})` }}></div>
-          <div className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"
-               style={{ background: `linear-gradient(to bottom left, ${colors.accent}, ${colors.secondary})` }}></div>
-          <div className="absolute bottom-0 left-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"
-               style={{ background: `linear-gradient(to top right, ${colors.primary}, ${colors.accent})` }}></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-black/80 to-black/60 z-10"></div>
+        <img 
+          src="https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&h=800&fit=crop" 
+          alt="Report Abuse - Break the Silence" 
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+        
+        {/* Floating background elements */}
+        <div className="absolute inset-0 z-5">
+          <div className="absolute top-20 left-10 w-32 h-32 bg-teal-400/10 rounded-full blur-xl floating-element"></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-amber-400/10 rounded-full blur-xl floating-element" style={{animationDelay: '2s'}}></div>
+          <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-teal-300/10 rounded-full blur-xl floating-element" style={{animationDelay: '4s'}}></div>
         </div>
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-          }}
-        ></div>
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg:py-32">
-          <div className="text-center">
-            <div className="mb-6 mt-10">
-              {/* <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/10 text-white backdrop-blur-sm border border-white/20">
-                Break the Silence
-              </span> */}
-            </div>
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight animate-hero-title">
-              Report <span className="block bg-clip-text text-transparent"
-                          style={{ backgroundImage: `linear-gradient(to right, ${colors.accent}, ${colors.secondary})` }}>Abuse</span>
-            </h1>
-            <p className="text-xl sm:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-10 font-light animate-hero-text">
-              Your voice can make a difference. Report suspicious behavior or known abuse with confidence and confidentiality.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a
-                href="#report-form"
-                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                style={{ 
-                  background: `linear-gradient(to right, ${colors.secondary}, ${colors.accent})`,
-                  boxShadow: `0 0 0 0 ${colors.secondary}25`
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.boxShadow = `0 25px 50px -12px ${colors.secondary}25`;
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.boxShadow = `0 0 0 0 ${colors.secondary}25`;
-                }}
-              >
-                <span className="relative z-10">Submit a Report</span>
-                <svg
-                  className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-                <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                     style={{ background: `linear-gradient(to right, ${colors.secondaryDark}, ${colors.secondary})` }}></div>
-              </a>
-            </div>
+        
+        <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
+          <div className="inline-block px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-8 border border-white/30">
+            Break the Silence
+          </div>
+          <h1 className="hero-title text-5xl md:text-7xl font-bold mb-8 leading-tight">
+            Report 
+            <span className="block text-teal-300 mt-2">Abuse</span>
+          </h1>
+          <p className="text-xl md:text-2xl mb-12 text-gray-200 leading-relaxed max-w-4xl mx-auto">
+            Your voice can make a difference. Report suspicious behavior or known abuse with confidence and confidentiality.
+          </p>
+          <button 
+            onClick={() => document.getElementById('report-form')?.scrollIntoView({ behavior: 'smooth' })}
+            className="px-10 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+          >
+            Submit a Report
+          </button>
+        </div>
+      </section>
+
+      {/* Support Info */}
+      <section 
+        className="py-16 gradient-bg section-opacity"
+        ref={(el) => (sectionsRef.current[1] = el)}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {supportInfo.map((info, index) => (
+              <div key={index} className="text-center text-white">
+                <div className="text-4xl mb-4">{info.icon}</div>
+                <h3 className="text-xl font-bold mb-2 text-teal-200">{info.title}</h3>
+                <p className="text-teal-100">{info.desc}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>
@@ -140,55 +205,42 @@ function ReportAbuse() {
       {/* Report Form Section */}
       <section
         id="report-form"
-        className="relative py-16 md:py-24 opacity-0"
-        ref={(el) => (sectionsRef.current[1] = el)}
+        className="py-20 bg-gray-50 section-opacity"
+        ref={(el) => (sectionsRef.current[2] = el)}
       >
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl">
-          <div className="relative bg-gradient-to-br from-slate-900 text-white via-slate-800 to-slate-900 rounded-2xl shadow-xl p-8 sm:p-12 border border-slate-100">
-            {/* <div className="absolute -inset-1 bg-gradient-to-br from-slate-900 text-white via-slate-800 to-slate-900  rounded-2xl blur opacity-20 transition duration-1000"></div> */}
-            <h2 className="text-3xl sm:text-4xl font-bold text-white mb-4 text-center">
-              Submit Your Report
+        <div className="max-w-4xl mx-auto px-6">
+          <div className="text-center mb-12">
+            <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
+              Confidential Reporting
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              Submit Your <span className="text-gradient">Report</span>
             </h2>
-            <p className="text-white text-lg leading-relaxed mb-8 text-center">
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
               All reports are handled with care and confidentiality. Provide as much detail as possible to help us take action.
             </p>
+          </div>
+
+          <div className="form-card rounded-2xl shadow-2xl p-8 sm:p-12">
             {error && (
               <div className="flex items-center bg-red-50 border border-red-200 rounded-lg p-4 mb-6">
-                <svg
-                  className="w-6 h-6 text-red-600 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
+                <svg className="w-6 h-6 text-red-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
                 <p className="text-red-600 text-sm">{error}</p>
               </div>
             )}
+            
             {success && (
               <div className="flex items-center bg-green-50 border border-green-200 rounded-lg p-4 mb-6">
-                <svg
-                  className="w-6 h-6 text-green-600 mr-2 flex-shrink-0"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={2}
-                    d="M5 13l4 4L19 7"
-                  />
+                <svg className="w-6 h-6 text-green-600 mr-2 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                 </svg>
                 <p className="text-green-600 text-sm">{success}</p>
               </div>
             )}
-            <form onSubmit={handleSubmit} className="space-y-8">
+
+            <form onSubmit={handleSubmit} className="space-y-6">
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-white">
                   Your Name (Optional)
@@ -199,40 +251,12 @@ function ReportAbuse() {
                   value={formData.name}
                   onChange={handleInputChange}
                   disabled={formData.isAnonymous}
-                  className={`w-full px-4 py-3 border border-slate-200 rounded-lg text-[black] transition-all duration-300 animate-input ${
-                    formData.isAnonymous ? 'bg-slate-50' : 'bg-white'
+                  className={`w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 transition-all duration-300 ${
+                    formData.isAnonymous ? 'bg-gray-100' : 'bg-white hover-lift'
                   }`}
-                  style={{ 
-                    animationDelay: '0s',
-                    borderColor: 'focus' ? colors.primary : '',
-                    boxShadow: 'focus' ? `0 0 0 2px ${colors.primary}20` : ''
-                  }}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = colors.primary;
-                    e.target.style.boxShadow = `0 0 0 2px ${colors.primary}20`;
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = '#e2e8f0';
-                    e.target.style.boxShadow = 'none';
-                  }}
                 />
               </div>
-              {/* <div className="space-y-2">
-                <label className="block text-sm font-semibold text-white">
-                  Your Email (Optional)
-                </label>
-                <FormInput
-                  type="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleInputChange}
-                  disabled={formData.isAnonymous}
-                  className={`w-full px-4 py-3 text-black border border-slate-200 rounded-lg transition-all duration-300 animate-input ${
-                    formData.isAnonymous ? 'bg-slate-50' : 'bg-white'
-                  }`}
-                  style={{ animationDelay: '0.1s' }}
-                />
-              </div> */}
+
               <div className="space-y-2">
                 <label className="block text-sm font-semibold text-white">
                   Details of the Report
@@ -243,18 +267,10 @@ function ReportAbuse() {
                   value={formData.message}
                   onChange={handleInputChange}
                   required
-                  className="w-full px-4 py-3 border border-slate-200 rounded-lg text-[black] transition-all duration-300 bg-white min-h-[150px] resize-y animate-input"
-                  style={{ animationDelay: '0.2s' }}
-                  onFocus={(e) => {
-                    e.target.style.borderColor = colors.primary;
-                    e.target.style.boxShadow = `0 0 0 2px ${colors.primary}20`;
-                  }}
-                  onBlur={(e) => {
-                    e.target.style.borderColor = '#e2e8f0';
-                    e.target.style.boxShadow = 'none';
-                  }}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-lg text-gray-900 transition-all duration-300 bg-white min-h-[150px] resize-y hover-lift"
                 />
               </div>
+
               <div className="flex items-center">
                 <label className="flex items-center text-white text-sm font-medium cursor-pointer">
                   <input
@@ -262,117 +278,53 @@ function ReportAbuse() {
                     name="isAnonymous"
                     checked={formData.isAnonymous}
                     onChange={handleInputChange}
-                    className="mr-2 w-4 h-4 border-slate-300 rounded"
-                    style={{
-                      accentColor: colors.primary
-                    }}
+                    className="mr-3 w-4 h-4 text-teal-600 border-gray-300 rounded focus:ring-teal-500"
                   />
                   Submit Anonymously
                 </label>
               </div>
+
               <Button
                 type="submit"
-                className="w-full text-white transition-all duration-300 rounded-full py-3 text-lg font-semibold"
-                style={{ 
-                  background: `linear-gradient(to right, ${colors.secondary}, ${colors.accent})`,
-                  boxShadow: `0 4px 6px -1px ${colors.secondary}25`
-                }}
-                onMouseEnter={(e) => {
-                  e.target.style.boxShadow = `0 10px 15px -3px ${colors.secondary}25`;
-                  e.target.style.transform = 'translateY(-1px)';
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.boxShadow = `0 4px 6px -1px ${colors.secondary}25`;
-                  e.target.style.transform = 'translateY(0)';
-                }}
-                aria-label="Submit report form"
+                className="w-full bg-white text-teal-700 hover:bg-gray-100 font-semibold py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Submit Report
               </Button>
             </form>
           </div>
         </div>
-        <svg
-          className="absolute bottom-0 w-full h-24 text-slate-100 opacity-50"
-          viewBox="0 0 1440 80"
-        >
-          <path
-            fill="currentColor"
-            d="M0,40C48,60,96,20,144,40C192,60,240,20,288,40C336,60,384,20,432,40C480,60,528,20,576,40C624,60,672,20,720,40C768,60,816,20,864,40C912,60,960,20,1008,40C1056,60,1104,20,1152,40C1200,60,1248,20,1296,40C1344,60,1392,20,1440,40V80H0Z"
-          />
-        </svg>
       </section>
 
-      {/* Call to Action Section */}
+      {/* CTA Section */}
       <section
-        className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 opacity-0"
-        ref={(el) => (sectionsRef.current[2] = el)}
+        className="py-20 gradient-bg"
+        ref={(el) => (sectionsRef.current[3] = el)}
       >
-        <div className="absolute inset-0 opacity-5">
-          <div className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
-               style={{ background: `linear-gradient(to bottom left, ${colors.accent}, ${colors.secondary})` }}></div>
-          <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
-               style={{ background: `linear-gradient(to top right, ${colors.secondary}, ${colors.accent})` }}></div>
-        </div>
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
-          <div className="mb-6">
-            {/* <span className="inline-block px-4 py-2 rounded-full text-sm font-medium bg-white/60 text-slate-700 backdrop-blur-sm border border-slate-200">
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="glass-card rounded-2xl p-12">
+            <div className="inline-block px-4 py-2 bg-white/30 backdrop-blur-sm rounded-full text-sm font-medium text-black mb-6">
               Join Our Mission
-            </span> */}
-          </div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-            Be Part of the <span className="block bg-clip-text text-transparent"
-                                style={{ backgroundImage: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})` }}>Change</span>
-          </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10">
-            Your report is a step toward protecting children and empowering communities. Explore more ways to get involved.
-          </p>
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a
-              href="/get-involved"
-              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-              style={{ 
-                background: `linear-gradient(to right, ${colors.secondary}, ${colors.accent})`,
-                boxShadow: `0 0 0 0 ${colors.secondary}25`
-              }}
-              onMouseEnter={(e) => {
-                e.target.style.boxShadow = `0 25px 50px -12px ${colors.secondary}25`;
-              }}
-              onMouseLeave={(e) => {
-                e.target.style.boxShadow = `0 0 0 0 ${colors.secondary}25`;
-              }}
-            >
-              <span className="relative z-10">Get Involved</span>
-              <svg
-                className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+            </div>
+            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
+              Be Part of the <span className="text-teal-700">Change</span>
+            </h2>
+            <p className="text-xl text-black mb-10 leading-relaxed max-w-3xl mx-auto">
+              Your report is a step toward protecting children and empowering communities. Explore more ways to get involved.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-6 justify-center">
+              <Link
+                to="/get-involved"
+                className="px-10 py-4 bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl inline-block"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-              </svg>
-              <div className="absolute inset-0 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                   style={{ background: `linear-gradient(to right, ${colors.secondaryDark}, ${colors.secondary})` }}></div>
-            </a>
-            {/* <a
-              href="/resources"
-              className="inline-flex items-center px-8 py-4 text-lg font-semibold text-slate-700 bg-white rounded-full border-2 border-slate-200 hover:border-slate-300 hover:shadow-lg transition-all duration-300 backdrop-blur-sm"
-            >
-              View Resources
-              <svg
-                className="ml-2 w-5 h-5"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
+                Get Involved
+              </Link>
+              <Link
+                to="/resources"
+                className="px-10 py-4 border-2 border-teal-700 text-black hover:bg-white hover:text-teal-600 font-semibold rounded-full transition-all duration-300 inline-block"
               >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"
-                />
-              </svg>
-            </a> */}
+                View Resources
+              </Link>
+            </div>
           </div>
         </div>
       </section>

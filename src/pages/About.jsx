@@ -1,12 +1,27 @@
 import { useEffect, useRef } from 'react';
-import { colors } from '../utils/colors';
-import './About.css';
-import AboutHero from '../assets/close-up-team-hand-shake.jpg';
-import MissionImage from '../assets/mission-image.jpg';
-import VisionImage from '../assets/vision-image.jpg';
-import StoryImage from '../assets/story-image.jpg';
-import ObjectivesImage from '../assets/objectives-image.jpg';
-import CtaImage from '../assets/cta-image.jpg';
+import { Link } from 'react-router-dom';
+
+
+// Optimized color palette focused on teal and white
+const colors = {
+  primary: '#0f766e',      // Teal-700
+  primaryLight: '#14b8a6', // Teal-500
+  primaryDark: '#134e4a',  // Teal-800
+  accent: '#f59e0b',       // Amber-500
+  text: '#1f2937',         // Gray-800
+  textLight: '#6b7280',    // Gray-500
+  white: '#ffffff',
+  gray50: '#f9fafb',
+  teal50: '#f0fdfa',
+};
+
+// Dummy images - replace with your actual images
+const images = {
+  hero: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&h=800&fit=crop',
+  mission: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&h=400&fit=crop',
+  vision: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=400&fit=crop',
+  community: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=600&fit=crop'
+};
 
 function About() {
   const sectionsRef = useRef([]);
@@ -14,12 +29,9 @@ function About() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry, index) => {
+        entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            setTimeout(() => {
-              entry.target.classList.add('animate-section');
-            }, index * 250);
-            observer.unobserve(entry.target);
+            entry.target.classList.add('animate-in');
           }
         });
       },
@@ -30,340 +42,258 @@ function About() {
       if (section) observer.observe(section);
     });
 
-    return () => {
-      sectionsRef.current.forEach((section) => {
-        if (section) observer.unobserve(section);
-      });
-    };
+    return () => observer.disconnect();
   }, []);
 
-  // Create dynamic gradient styles using brand colors
-  const gradientStyle = {
-    background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`
-  };
+  const objectives = [
+    { title: 'Prevent Abuse', desc: 'Education and awareness programs to stop abuse before it happens', icon: '🛡️' },
+    { title: 'Support Survivors', desc: 'Comprehensive care and resources for healing and recovery', icon: '💝' },
+    { title: 'Empower Communities', desc: 'Building strong, protective networks across Nigeria', icon: '🤝' },
+    { title: 'Drive Change', desc: 'Advocating for policies and systems that protect children', icon: '⚖️' }
+  ];
 
-  const textGradientStyle = {
-    background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
-    WebkitBackgroundClip: 'text',
-    WebkitTextFillColor: 'transparent',
-    backgroundClip: 'text'
-  };
-
-  const buttonStyle = {
-    background: `linear-gradient(to right, ${colors.primary}, ${colors.secondary})`,
-    color: 'white'
-  };
-
-  const buttonHoverStyle = {
-    background: `linear-gradient(to right, ${colors.primaryDark}, ${colors.secondaryDark})`
-  };
+  const timeline = [
+    { year: '2018', event: 'Foundation established', desc: 'Started our mission to protect Nigerian children' },
+    { year: '2021', event: 'Community programs launched', desc: 'Reached 1,000+ families with education' },
+    { year: '2024', event: 'Survivor support expanded', desc: 'Comprehensive care for 500+ individuals' },
+    { year: '2025', event: 'National impact', desc: 'Targeting 10,000+ lives across Nigeria' }
+  ];
 
   return (
-    <>
-      {/* Preload critical image */}
-      <link rel="preload" href={AboutHero} as="image" fetchpriority="high" />
-      <div className="min-h-screen bg-white">
-        {/* Hero Section */}
-        <section
-          className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 opacity-0"
-          ref={(el) => (sectionsRef.current[0] = el)}
-        >
-          <div className="absolute inset-0 opacity-10">
-            <div 
-              className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
-              style={{ background: colors.primary }}
-            ></div>
-            <div 
-              className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"
-              style={{ background: colors.secondary }}
-            ></div>
-            <div 
-              className="absolute bottom-0 left-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"
-              style={{ background: colors.accent }}
-            ></div>
+    <div className="min-h-screen bg-white">
+      <style jsx>{`
+        @keyframes fadeInUp {
+          from { opacity: 0; transform: translateY(30px); }
+          to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
+        }
+
+        .animate-in {
+          animation: fadeInUp 0.8s ease-out forwards;
+        }
+
+        .fade-in {
+          animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        .glass-card {
+          background: rgba(255, 255, 255, 0.95);
+          backdrop-filter: blur(10px);
+          border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .hover-lift {
+          transition: all 0.3s ease;
+        }
+
+        .hover-lift:hover {
+          transform: translateY(-8px);
+          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .gradient-bg {
+          background: linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryLight} 100%);
+        }
+
+        .text-gradient {
+          background: linear-gradient(135deg, ${colors.primary}, ${colors.primaryLight});
+          -webkit-background-clip: text;
+          background-clip: text;
+          -webkit-text-fill-color: transparent;
+        }
+
+        .section-opacity {
+          opacity: 0;
+        }
+
+        @media (max-width: 768px) {
+          .hero-title { font-size: 2.5rem !important; }
+          .section-title { font-size: 2rem !important; }
+        }
+      `}</style>
+
+      {/* Hero Section */}
+      <section
+        className="relative min-h-screen flex items-center justify-center text-white section-opacity"
+        ref={(el) => (sectionsRef.current[0] = el)}
+      >
+        <div className="absolute inset-0 bg-gradient-to-br from-black/60 to-black/40 z-10"></div>
+        <img
+          src={images.hero}
+          alt="Community unity"
+          className="absolute inset-0 w-full h-full object-cover"
+        />
+
+        <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
+          <div className="inline-block px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
+            Who We Are
           </div>
-          <div
-            className="absolute inset-0 opacity-5"
-            style={{
-              backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`,
-            }}
-          ></div>
-          <img
-            src={AboutHero}
-            alt="Team handshake symbolizing unity"
-            className="absolute inset-0 w-full h-full object-cover opacity-20"
-            fetchpriority="high"
-            decoding="async"
-          />
-          <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg:py-32">
-            <div className="text-center">
-              <div className="mb-6 mt-20">
-                {/* <span className="inline-block px-4 py-2 rounded-full text-sm font-medium text-white backdrop-blur-sm border border-white/20">
-                  Who We Are
-                </span> */}
+          <h1 className="hero-title text-5xl md:text-6xl font-bold mb-6 leading-tight">
+            About <span className="text-teal-300">Intercept CSA</span>
+          </h1>
+          <p className="text-xl md:text-2xl mb-10 text-gray-200 leading-relaxed">
+            Protecting Nigerian children, empowering survivors, and transforming communities through prevention and healing.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <Link
+              to="/get-involved"
+              className="px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105">
+              Join Our Mission
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* Mission & Vision */}
+      <section
+        className="py-20 gradient-bg section-opacity"
+        ref={(el) => (sectionsRef.current[1] = el)}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Mission */}
+            <div className="text-white">
+              <div className="inline-block px-4 py-2 bg-white/20 rounded-full text-sm font-medium mb-6">
+                Our Mission
               </div>
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight animate-hero-title">
-                About <span className="block" style={textGradientStyle}>Intercept CSA</span>
-              </h1>
-              <p className="text-xl sm:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-10 font-light animate-hero-text">
-                A Nigerian movement to prevent child sexual abuse, empower survivors, and transform communities through bold action and compassion.
+              <h2 className="text-4xl md:text-5xl font-bold mb-6">
+                Preventing Abuse, <span className="text-teal-200">Empowering Lives</span>
+              </h2>
+              <p className="text-xl text-teal-50 mb-8 leading-relaxed">
+                To prevent child sexual abuse through education, support survivors with compassion,
+                and create lasting change in Nigerian communities.
               </p>
-              {/* <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <a
-                  href="/get-involved"
-                  className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1"
-                  style={buttonStyle}
-                  onMouseEnter={(e) => {
-                    e.target.style.background = buttonHoverStyle.background;
-                    e.target.style.boxShadow = `0 25px 50px -12px ${colors.primary}40`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.target.style.background = buttonStyle.background;
-                    e.target.style.boxShadow = 'none';
-                  }}
-                >
-                  <span className="relative z-10">Join the Movement</span>
-                  <svg
-                    className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </a>
-              </div> */}
+              <div className="space-y-4">
+                {['Prevention Education', 'Survivor Support', 'Community Empowerment'].map((item, i) => (
+                  <div key={i} className="flex items-center">
+                    <div className="w-3 h-3 bg-teal-300 rounded-full mr-4"></div>
+                    <span className="text-teal-50">{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-          </div>
-        </section>
 
-        {/* Mission Section */}
-        <section
-          id="mission"
-          className="py-16 md:py-24 opacity-0"
-          ref={(el) => (sectionsRef.current[1] = el)}
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-            <div className="flex flex-col md:flex-row items-center gap-8">
-              <div className="md:w-1/2">
-                <div className="relative h-80 sm:h-96 overflow-hidden rounded-2xl">
-                  <img
-                    src={MissionImage}
-                    alt="Nigerian community members in a workshop on child protection"
-                    className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
+            {/* Vision */}
+            <div className="bg-white/10 backdrop-blur-sm rounded-2xl p-8">
+              <div className="inline-block px-4 py-2 bg-amber-500 text-white rounded-full text-sm font-medium mb-6">
+                Our Vision
+              </div>
+              <h3 className="text-3xl font-bold text-white mb-6">
+                A Safe Nigeria for Every Child
+              </h3>
+              <p className="text-teal-50 text-lg leading-relaxed mb-6">
+                A Nigeria where child sexual abuse is prevented, survivors are empowered to heal,
+                and every child grows up safe, protected, and free to thrive.
+              </p>
+              <div className="grid grid-cols-2 gap-4">
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-teal-300">10K+</div>
+                  <div className="text-sm text-teal-100">Lives Impacted</div>
+                </div>
+                <div className="text-center">
+                  <div className="text-3xl font-bold text-teal-300">500+</div>
+                  <div className="text-sm text-teal-100">Survivors Supported</div>
                 </div>
               </div>
-              <div className="md:w-1/2">
-                <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                  Our <span style={textGradientStyle}>Mission</span>
-                </h2>
-                <p className="text-slate-600 text-lg leading-relaxed">
-                  To prevent child sexual abuse, intervene in at-risk lives, and break trauma cycles through education, advocacy, and survivor-centered support, empowering Nigerian communities for lasting change.
-                </p>
-              </div>
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* Vision Section */}
-        <section
-          className="py-16 md:py-24 bg-slate-50 opacity-0"
-          ref={(el) => (sectionsRef.current[2] = el)}
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-            <div className="flex flex-col md:flex-row-reverse items-center gap-8">
-              <div className="md:w-1/2">
-                <div className="relative h-80 sm:h-96 overflow-hidden rounded-2xl">
-                  <img
-                    src={VisionImage}
-                    alt="Happy Nigerian children playing in a safe environment"
-                    className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
-                    loading="lazy"
-                    decoding="async"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
-              </div>
-              <div className="md:w-1/2">
-                <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 mb-4">
-                  Our <span style={textGradientStyle}>Vision</span>
-                </h2>
-                <p className="text-slate-600 text-lg leading-relaxed">
-                  A Nigeria where child sexual abuse is stopped before it starts, interrupted where it occurs, and survivors are empowered to heal, with safety, justice, and restoration for all.
-                </p>
-              </div>
+      {/* Our Story Timeline */}
+      <section
+        className="py-20 bg-gray-50 section-opacity"
+        ref={(el) => (sectionsRef.current[2] = el)}
+      >
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
+              Our Journey
             </div>
-          </div>
-        </section>
-
-        {/* Our Story Section */}
-        <section
-          className="py-16 md:py-24 opacity-0"
-          ref={(el) => (sectionsRef.current[3] = el)}
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 text-center mb-12">
-              Our <span style={textGradientStyle}>Story</span>
+            <h2 className="section-title text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              Our <span className="text-gradient">Story</span>
             </h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-4 mb-12">
-              {[
-                { year: '2018', desc: 'Founded to combat the silent epidemic of child sexual abuse in Nigeria.' },
-                { year: '2020', desc: 'Launched community education, reaching 5,000+ families.' },
-                { year: '2023', desc: 'Expanded survivor support for 500+ individuals.' },
-                { year: '2025', desc: 'Targeting 10,000+ lives with prevention initiatives.' },
-              ].map((item, index) => (
-                <div
-                  key={index}
-                  className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-100 hover:border-slate-200 transform hover:-translate-y-2 p-6"
-                  style={{
-                    '--hover-shadow': `0 25px 50px -12px ${colors.primary}20`
-                  }}
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = `0 25px 50px -12px ${colors.primary}20`;
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = '';
-                  }}
-                >
-                  <h3 
-                    className="text-xl font-bold mb-2 group-hover:transition-colors"
-                    style={{ color: colors.text }}
-                    onMouseEnter={(e) => {
-                      e.target.style.color = colors.primary;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.color = colors.text;
-                    }}
-                  >
-                    {item.year}
-                  </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{item.desc}</p>
-                </div>
-              ))}
-            </div>
-            <div className="relative h-64 sm:h-80 overflow-hidden rounded-2xl">
-              <img
-                src={StoryImage}
-                alt="Nigerian community rally for child protection"
-                className="w-full h-full object-cover transform hover:scale-110 transition-transform duration-700"
-                loading="lazy"
-                decoding="async"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-500"></div>
-            </div>
-          </div>
-        </section>
-
-        {/* Objectives Section */}
-        <section
-          className="py-16 md:py-24 bg-slate-50 opacity-0"
-          ref={(el) => (sectionsRef.current[4] = el)}
-        >
-          <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
-            <h2 className="text-3xl sm:text-4xl font-bold text-slate-900 text-center mb-12">
-              Our <span style={textGradientStyle}>Objectives</span>
-            </h2>
-            <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {[
-                { title: 'Empower Communities', desc: 'Equip communities with tools to prevent abuse and support survivors.' },
-                { title: 'Support Survivors', desc: 'Provide holistic support, addressing stigmas and promoting healing.' },
-                { title: 'Create Safe Spaces', desc: 'Foster environments where survivors feel valued and empowered.' },
-                { title: 'Engage Allies', desc: 'Empower caregivers and leaders to build a united network.' },
-                { title: 'Drive Systemic Change', desc: 'Address root causes of CSA for lasting prevention.' },
-              ].map((obj, index) => (
-                <div
-                  key={index}
-                  className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-100 hover:border-slate-200 transform hover:-translate-y-2 p-6"
-                  onMouseEnter={(e) => {
-                    e.currentTarget.style.boxShadow = `0 25px 50px -12px ${colors.primary}20`;
-                    e.currentTarget.style.borderColor = colors.primary + '40';
-                  }}
-                  onMouseLeave={(e) => {
-                    e.currentTarget.style.boxShadow = '';
-                    e.currentTarget.style.borderColor = '';
-                  }}
-                >
-                  <h3 
-                    className="text-lg font-bold mb-2 group-hover:transition-colors"
-                    style={{ color: colors.text }}
-                    onMouseEnter={(e) => {
-                      e.target.style.color = colors.primary;
-                    }}
-                    onMouseLeave={(e) => {
-                      e.target.style.color = colors.text;
-                    }}
-                  >
-                    {obj.title}
-                  </h3>
-                  <p className="text-slate-600 text-sm leading-relaxed">{obj.desc}</p>
-                </div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* Call to Action Section */}
-        <section
-          className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100 opacity-0"
-          ref={(el) => (sectionsRef.current[5] = el)}
-        >
-          <div className="absolute inset-0 opacity-5">
-            <div 
-              className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
-              style={{ background: colors.primary }}
-            ></div>
-            <div 
-              className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
-              style={{ background: colors.secondary }}
-            ></div>
-          </div>
-          <img
-            src={CtaImage}
-            alt="Nigerian community united in support of child protection"
-            className="absolute inset-0 w-full h-full object-cover opacity-10"
-            loading="lazy"
-            decoding="async"
-          />
-          <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
-            <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight animate-cta-title">
-              Stand <span className="block" style={textGradientStyle}>With Us</span>
-            </h2>
-            <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10 animate-cta-text">
-              Protect children, empower survivors, and transform Nigeria. Your support fuels our mission.
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              From humble beginnings to transforming communities across Nigeria
             </p>
-            {/* <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <a
-                href="/get-involved"
-                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full transition-all duration-300 transform hover:-translate-y-1"
-                style={buttonStyle}
-                onMouseEnter={(e) => {
-                  e.target.style.background = buttonHoverStyle.background;
-                  e.target.style.boxShadow = `0 25px 50px -12px ${colors.primary}40`;
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.background = buttonStyle.background;
-                  e.target.style.boxShadow = 'none';
-                }}
-              >
-                <span className="relative z-10">Get Involved</span>
-                <svg
-                  className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </a>
-            </div> */}
           </div>
-        </section>
-      </div>
-    </>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {timeline.map((item, index) => (
+              <div key={index} className="text-center hover-lift">
+                <div className="w-20 h-20 bg-teal-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
+                  {item.year}
+                </div>
+                <h3 className="text-xl font-bold text-gray-800 mb-3">{item.event}</h3>
+                <p className="text-gray-600">{item.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Objectives */}
+      <section
+        className="py-20 bg-white section-opacity"
+        ref={(el) => (sectionsRef.current[3] = el)}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
+              Our Focus
+            </div>
+            <h2 className="section-title text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              Our <span className="text-gradient">Objectives</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+              Strategic goals driving our mission to protect Nigerian children
+            </p>
+          </div>
+
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+            {objectives.map((obj, index) => (
+              <div key={index} className="bg-white rounded-2xl p-8 shadow-lg hover-lift border border-gray-100">
+                <div className="text-4xl mb-6">{obj.icon}</div>
+                <h3 className="text-xl font-bold text-gray-800 mb-4">{obj.title}</h3>
+                <p className="text-gray-600 leading-relaxed">{obj.desc}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Call to Action */}
+      <section
+        className="py-20 gradient-bg section-opacity"
+        ref={(el) => (sectionsRef.current[4] = el)}
+      >
+        <div className="max-w-4xl mx-auto px-6 text-center">
+          <div className="glass-card rounded-2xl p-12">
+            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              Join Our <span className="text-gradient">Movement</span>
+            </h2>
+            <p className="text-xl text-gray-600 mb-10 leading-relaxed">
+              Together, we can protect children, empower survivors, and create a safer Nigeria.
+              Your support makes the difference.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/get-involved"
+                className="px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105">
+                Get Involved
+              </Link>
+              {/* <button className="px-8 py-4 border-2 border-teal-600 text-teal-600 hover:bg-teal-600 hover:text-white font-semibold rounded-full transition-all duration-300">
+                Donate Now
+              </button> */}
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
   );
 }
 
