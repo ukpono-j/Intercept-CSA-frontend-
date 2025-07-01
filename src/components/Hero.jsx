@@ -52,7 +52,7 @@ function Hero() {
                   variant={btn.variant}
                 >
                   {btn.label}
-                  {btn.primary && (
+                  {/* {btn.primary && (
                     <svg
                       className="hero-button-icon"
                       fill="none"
@@ -67,7 +67,7 @@ function Hero() {
                         d="M17 8l4 4m0 0l-4 4m4-4H3"
                       />
                     </svg>
-                  )}
+                  )} */}
                 </Button>
               </Link>
             ))}

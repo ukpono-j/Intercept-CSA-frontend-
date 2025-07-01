@@ -56,7 +56,6 @@ function Navbar() {
     setActiveDropdown(activeDropdown === index ? null : index);
   };
 
-  // Fixed function to handle dropdown item clicks
   const handleDropdownClick = () => {
     setActiveDropdown(null);
     setIsMobileMenuOpen(false);
@@ -90,7 +89,7 @@ function Navbar() {
           ))}
         </div>
 
-        <div className="relative z-10 max-w-7xl mx-auto px-6 py-6">
+        <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
           <div className="flex items-center justify-between">
             <Link
               to="/"
@@ -99,11 +98,11 @@ function Navbar() {
               <img
                 src={Logo}
                 alt="InterceptCSA Logo"
-                className="h-14 w-14 object-contain rounded-full shadow-lg border-2 border-white"
+                className="h-12 w-12 sm:h-14 sm:w-14 object-contain rounded-full shadow-lg border-2 border-white"
                 onError={(e) => { e.currentTarget.src = Logo; }}
               />
               <span
-                className="text-2xl font-bold tracking-tight bg-clip-text text-transparent"
+                className="text-xl sm:text-2xl font-bold tracking-tight bg-clip-text text-transparent"
                 style={{
                   backgroundImage: `linear-gradient(135deg, ${colors.primary}, ${colors.primaryDark})`
                 }}
@@ -112,14 +111,14 @@ function Navbar() {
               </span>
             </Link>
 
-            <div className="hidden lg:flex items-center" ref={dropdownRef}>
+            <div className="hidden xl:flex items-center gap-2" ref={dropdownRef}>
               {navItems.map((item, index) => (
                 <div key={index} className="relative">
                   {item.dropdown ? (
                     <>
                       <button
                         onClick={() => toggleDropdown(index)}
-                        className="flex items-center space-x-1 px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200"
+                        className="flex items-center space-x-1 px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-colors duration-200"
                         style={{ color: colors.text }}
                       >
                         <span>{item.label}</span>
@@ -136,9 +135,8 @@ function Navbar() {
                               to={dropdownItem.to}
                               onClick={handleDropdownClick}
                               className={({ isActive }) =>
-                                `block px-6 py-3 text-sm font-medium transition-all duration-200 ${isActive
-                                  ? 'font-semibold'
-                                  : 'text-gray-700 hover:bg-gray-50'
+                                `block px-6 py-3 text-sm font-medium transition-all duration-200 ${
+                                  isActive ? 'font-semibold' : 'text-gray-700 hover:bg-gray-50'
                                 }`
                               }
                               style={({ isActive }) => ({
@@ -155,7 +153,7 @@ function Navbar() {
                   ) : (
                     <NavLink
                       to={item.to}
-                      className="relative px-4 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-all duration-200"
+                      className="relative px-3 py-2 text-sm font-medium text-gray-700 hover:text-gray-900 transition-all duration-200"
                       style={{ color: colors.text }}
                     >
                       {({ isActive }) => (
@@ -182,7 +180,7 @@ function Navbar() {
 
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
+              className="xl:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors duration-200"
               aria-label="Toggle mobile menu"
             >
               {isMobileMenuOpen ? (
@@ -198,14 +196,14 @@ function Navbar() {
       {isMobileMenuOpen && (
         <>
           <div
-            className="fixed inset-0 bg-black/50 z-[200] lg:hidden"
+            className="fixed inset-0 bg-black/50 z-[200] xl:hidden"
             onClick={closeMobileMenu}
           />
 
-          <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-gradient-to-b from-white to-gray-50 shadow-2xl z-[250] lg:hidden transform transition-transform duration-300 ease-in-out translate-x-0">
+          <div className="fixed top-0 right-0 h-full w-80 max-w-[85vw] sm:max-w-[70vw] bg-gradient-to-b from-white to-gray-50 shadow-2xl z-[250] xl:hidden transform transition-transform duration-300 ease-in-out translate-x-0">
             <div className="flex flex-col h-full">
-              <div className="flex items-center justify-between p-6 border-b border-gray-200">
-                <span className="text-xl font-semibold text-gray-800 tracking-wide">Menu</span>
+              <div className="flex items-center justify-between p-4 sm:p-6 border-b border-gray-200">
+                <span className="text-lg sm:text-xl font-semibold text-gray-800 tracking-wide">Menu</span>
                 <button
                   onClick={closeMobileMenu}
                   className="p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors duration-200"
@@ -214,8 +212,8 @@ function Navbar() {
                 </button>
               </div>
 
-              <div className="flex-1 overflow-y-auto py-6">
-                <div className="space-y-3 px-6">
+              <div className="flex-1 overflow-y-auto py-4 sm:py-6">
+                <div className="space-y-2 px-4 sm:px-6">
                   {navItems.map((item, index) => (
                     <div key={index}>
                       {item.dropdown ? (
@@ -231,7 +229,7 @@ function Navbar() {
                           </button>
 
                           {activeDropdown === index && (
-                            <div className="mt-2 ml-4 space-y-1">
+                            <div className="mt-1 ml-4 space-y-1">
                               {item.dropdown.map((dropdownItem) => (
                                 <NavLink
                                   key={dropdownItem.to}
@@ -250,9 +248,8 @@ function Navbar() {
                           to={item.to}
                           onClick={closeMobileMenu}
                           className={({ isActive }) =>
-                            `block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 shadow-sm ${isActive
-                              ? 'font-semibold bg-gray-100'
-                              : 'text-gray-800 hover:bg-gray-100'
+                            `block px-4 py-3 text-base font-medium rounded-lg transition-all duration-200 shadow-sm ${
+                              isActive ? 'font-semibold bg-gray-100' : 'text-gray-800 hover:bg-gray-100'
                             }`
                           }
                           style={({ isActive }) => ({
