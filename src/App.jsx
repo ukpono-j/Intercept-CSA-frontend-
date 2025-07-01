@@ -11,6 +11,7 @@ import Contact from './pages/Contact';
 import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Resources from './pages/Resources';
+import Podcast from './pages/Podcast';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
             <Route path="/get-involved" element={<GetInvolved />} />
             <Route path="/report-abuse" element={<ReportAbuse />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/podcast" element={<Podcast />} />
             <Route path="/contact" element={<Contact />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/login" element={<Login />} />

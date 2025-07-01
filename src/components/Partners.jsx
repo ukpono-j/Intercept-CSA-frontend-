@@ -97,12 +97,10 @@ const Partners = () => {
         background: `linear-gradient(135deg, ${colors.darkTeal} 0%, ${colors.primary} 50%, ${colors.mediumTeal} 100%)` 
       }}
     >
-      {/* Background Effects */}
       <div className="absolute inset-0 bg-[#237985] pointer-events-none">
         <div 
           className="absolute w-96  h-96 rounded-full opacity-10 blur-3xl transition-all duration-1000"
           style={{
-            // background: `radial-gradient(circle, ${colors.primary}30, transparent 70%)`,
             left: `${15 + Math.sin(scrollY * 0.004) * 10}%`,
             top: `${20 + Math.cos(scrollY * 0.002) * 15}%`,
             transform: `translateY(${scrollY * 0.05}px)`
@@ -147,7 +145,6 @@ const Partners = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10 bg-white/95 backdrop-blur-sm rounded-3xl py-12">
-        {/* Header Section */}
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-gray-100 shadow-sm">
             <Shield className="w-6 h-6 text-orange-500" />
@@ -170,7 +167,6 @@ const Partners = () => {
           </p>
         </div>
 
-        {/* Partners Horizontal Row */}
         <div className="mb-20">
           <div className="flex flex-col md:flex-row gap-8 justify-center">
             {partners.map((partner, index) => (
@@ -186,13 +182,11 @@ const Partners = () => {
                 onMouseEnter={() => setActivePartner(partner.id)}
                 onMouseLeave={() => setActivePartner(null)}
               >
-                {/* Card Glow Effect */}
                 <div 
                   className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-30 transition-opacity duration-500 blur-xl`}
                   style={{ background: `linear-gradient(to right, ${colors.secondary}, ${colors.accent})` }}
                 />
                 
-                {/* Main Card */}
                 <div className="relative bg-white/95 backdrop-blur-sm border border-gray-100 rounded-2xl p-8 shadow-xl group-hover:shadow-2xl transition-all duration-500">
                   <div className="flex items-center justify-between mb-4">
                     <div className={`inline-flex p-3 rounded-lg bg-gradient-to-r ${partner.gradient}`}>
@@ -207,13 +201,13 @@ const Partners = () => {
                     />
                   </div>
                   <h3 className="text-2xl font-bold text-gray-900 mb-2">{partner.name}</h3>
-                  <p className={`text-lg font-medium bg-gradient-to-r ${partner.gradient} bg-clip-text text-transparent`}>
+                  {/* <p className={`text-lg font-medium bg-gradient-to-r ${partner.gradient} bg-clip-text text-transparent`}>
                     {partner.impact}
-                  </p>
+                  </p> */}
                   <p className="text-gray-600 text-base leading-relaxed mt-3 mb-4">{partner.description}</p>
-                  <div className="bg-gray-50 rounded-lg p-4">
+                  {/* <div className="bg-gray-50 rounded-lg p-4">
                     <p className="text-sm text-gray-700 italic">"{partner.story}"</p>
-                  </div>
+                  </div> */}
                 </div>
               </div>
             ))}

@@ -81,7 +81,6 @@ const Voices = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Dynamic Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
         <div 
           className="absolute w-96 h-96 rounded-full opacity-20 blur-3xl transition-all duration-1000"
@@ -128,9 +127,7 @@ const Voices = () => {
         ))}
       </div>
 
-      {/* Content Container */}
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
-        {/* Header Section */}
         <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="inline-flex items-center gap-3 bg-white/50 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200/50">
             <Quote className="w-5 h-5 text-yellow-500" />
@@ -153,7 +150,6 @@ const Voices = () => {
           </p>
         </div>
 
-        {/* Image and Quote Section */}
         <div className="grid md:grid-cols-2 gap-8 items-center mb-12">
           <div className="relative h-80 md:h-96 overflow-hidden rounded-2xl shadow-lg">
             <img

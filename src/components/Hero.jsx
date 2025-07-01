@@ -5,10 +5,10 @@ import portraitImmigrants from '../assets/landing.png';
 
 function Hero() {
   const heroContent = {
-    headline: 'Protecting Children, Healing Lives',
-    subheadline: 'A Nigerian initiative dedicated to preventing child sexual abuse, empowering survivors, and transforming communities.',
+    headline: 'Protecting Children. Restoring Safety. Reclaiming Voices.',
+    subheadline: '',
     buttons: [
-      { label: 'Learn More', to: '/about', primary: true, variant: 'primary' },
+      { label: 'Learn About Our Work', to: '/about', primary: true, variant: 'primary' },
       { label: 'Get Involved', to: '/get-involved', primary: false, variant: 'secondary' },
     ],
   };
@@ -18,10 +18,10 @@ function Hero() {
       <div className="hero-background">
         <img
           src={portraitImmigrants}
-          alt="People uniting for child safety"
+          alt="Adult and child in safe conversation"
           className="hero-background-image"
           loading="eager"
-          fetchPriority="high" // Added for prioritized loading
+          fetchPriority="high"
           decoding="async"
         />
         <div className="hero-overlay"></div>
@@ -38,9 +38,11 @@ function Hero() {
             {heroContent.headline}
           </h1>
           
-          <p className="hero-subtitle animate-hero-text">
-            {heroContent.subheadline}
-          </p>
+          {heroContent.subheadline && (
+            <p className="hero-subtitle animate-hero-text">
+              {heroContent.subheadline}
+            </p>
+          )}
           
           <div className="hero-buttons animate-hero-buttons">
             {heroContent.buttons.map((btn, index) => (

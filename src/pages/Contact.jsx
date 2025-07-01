@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { colors } from '../utils/colors';
 
 // Custom SVG Icons (unchanged)
 const Mail = ({ className }) => (
   <svg className={className} fill="none" stroke="currentColor" viewBox="0 0 24 24">
-    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 7.89a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 0 00-2 2v10a2 0 002 2z" />
+    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 7.89a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 0 00-2-2H5a2 0 00-2 2v10a2 0 002 2z" />
   </svg>
 );
 
@@ -57,6 +58,12 @@ const Globe = ({ className }) => (
     <circle cx={12} cy={12} r={10} />
     <line x1={2} y1={12} x2={22} y2={12} />
     <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+  </svg>
+);
+
+const WhatsApp = ({ className }) => (
+  <svg className={className} fill="currentColor" viewBox="0 0 24 24">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.134.297-.347.446-.52.149-.174.297-.372.297-.595 0-.223-.074-.445-.223-.595-.149-.149-.595-.669-1.291-.669-.694 0-1.041.074-1.34.223-.297.149-1.14.669-1.14 1.635 0 .966.694 1.933.992 2.132.297.199 1.785 2.707 4.335 3.803 1.487.645 2.677.694 3.596.595.992-.099 3.174-1.29 3.621-2.536.446-1.246-.074-2.29-.67-2.536zM12.116 2c5.468 0 9.892 4.424 9.892 9.892 0 5.467-4.424 9.891-9.892 9.891-1.736 0-3.416-.446-4.902-1.29l-.372-.149-3.621.992.992-3.621-.149-.372c-.844-1.487-1.29-3.167-1.29-4.902 0-5.468 4.424-9.892 9.892-9.892z"/>
   </svg>
 );
 
@@ -138,6 +145,31 @@ function Contact() {
       label: 'Facebook',
       color: 'from-[#FECB0A] to-[#F97316]',
     },
+  ];
+
+  const contactOptions = [
+    {
+      icon: Mail,
+      title: 'Email',
+      content: 'interceptcsa@gmail.com',
+      href: 'mailto:interceptcsa@gmail.com',
+    },
+    {
+      icon: WhatsApp,
+      title: 'WhatsApp',
+      content: '0810 335 0098',
+      href: 'https://wa.me/+2348103350098',
+    },
+  ];
+
+  const navLinks = [
+    { title: 'Home', href: '/' },
+    { title: 'About', href: '/about' },
+    { title: 'Programs', href: '/programs' },
+    { title: 'Podcast', href: '/podcast' },
+    { title: 'Blog', href: '/blog' },
+    { title: 'Get Involved', href: '/get-involved' },
+    { title: 'Contact', href: '/contact' },
   ];
 
   return (
@@ -223,7 +255,7 @@ function Contact() {
                     Send a Message
                   </h2>
                   <p className="text-[#1F2937] text-center mb-6 text-sm">
-                    We’re here for you. Drop your message, and we’ll holla back quick!
+                    Invite us to speak. Ask a question. Or just say hi.
                   </p>
                   {error && (
                     <div className="flex items-center bg-red-50 border border-red-200 rounded-lg p-3 mb-4">
@@ -334,6 +366,40 @@ function Contact() {
           </div>
         </section>
 
+        {/* Contact Options Section */}
+        <section className="py-12 px-4">
+          <div className="container mx-auto max-w-5xl">
+            <h2 className="text-2xl font-extrabold text-[#2A8E9D] mb-6 text-center">
+              Other Ways to Reach Us
+            </h2>
+            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              {contactOptions.map((option, index) => {
+                const Icon = option.icon;
+                return (
+                  <a
+                    key={index}
+                    href={option.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group relative bg-white rounded-xl p-6 shadow-sm hover:shadow-md transition-all duration-300 transform hover:-translate-y-1"
+                  >
+                    <div className="absolute inset-0 border-2 border-transparent group-hover:border-gradient-to-r group-hover:from-[#FECB0A] group-hover:to-[#F97316] rounded-xl transition-all duration-300"></div>
+                    <div className="relative z-10 flex items-center gap-4">
+                      <div className="w-10 h-10 bg-gradient-to-br from-[#2A8E9D] to-[#2A8E9D] rounded-lg flex items-center justify-center">
+                        <Icon className="w-5 h-5 text-white" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-bold text-[#1F2937]">{option.title}</h3>
+                        <p className="text-sm text-[#F97316] font-semibold">{option.content}</p>
+                      </div>
+                    </div>
+                  </a>
+                );
+              })}
+            </div>
+          </div>
+        </section>
+
         {/* Social Media Section */}
         <section className="py-12 px-4">
           <div className="container mx-auto max-w-5xl text-center">
@@ -378,7 +444,7 @@ function Contact() {
               <div className="flex flex-col sm:flex-row gap-3 items-center justify-center">
                 <a
                   href="/get-involved"
-                  className="px-6 py-3  bg-white text-[#000] font-semibold rounded-full hover:bg-[#F3F4F6] hover:shadow-md transition-all duration-300"
+                  className="px-6 py-3 bg-white text-[#000] font-semibold rounded-full hover:bg-[#F3F4F6] hover:shadow-md transition-all duration-300"
                 >
                   Get Involved
                 </a>

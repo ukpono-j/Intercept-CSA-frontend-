@@ -77,36 +77,6 @@ function GetInvolved() {
     return () => observer.disconnect();
   }, []);
 
-  const ways = [
-    {
-      title: 'Volunteer',
-      description: 'Join our team of dedicated volunteers helping to protect children and support survivors.',
-      icon: '🤝',
-      action: 'Start Here',
-      link: '#volunteer',
-      stats: '800+ volunteers',
-      category: 'Direct Impact'
-    },
-    {
-      title: 'Partner',
-      description: 'Collaborate with us to create safe environments in your community or organization.',
-      icon: '🤝',
-      action: 'Partner Now',
-      link: '/contact',
-      stats: '150+ partners',
-      category: 'Collaboration'
-    },
-    {
-      title: 'Donate',
-      description: 'Support our mission with financial contributions to fund programs and resources.',
-      icon: '💝',
-      action: 'Coming Soon',
-      link: '/contact',
-      stats: 'Every ₦ counts',
-      category: 'Support'
-    }
-  ];
-
   const impact = [
     { number: '1,000+', label: 'Volunteers Trained', icon: '👥' },
     { number: '150+', label: 'Organizations Partnered', icon: '🤝' },
@@ -224,7 +194,7 @@ function GetInvolved() {
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button 
-              onClick={() => document.getElementById('ways')?.scrollIntoView({ behavior: 'smooth' })}
+              onClick={() => document.getElementById('become-a-first-listener')?.scrollIntoView({ behavior: 'smooth' })}
               className="px-10 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
             >
               Explore Ways
@@ -240,7 +210,7 @@ function GetInvolved() {
       </section>
 
       {/* Impact Stats */}
-      <section 
+      {/* <section 
         className="py-16 gradient-bg section-opacity"
         ref={(el) => (sectionsRef.current[1] = el)}
       >
@@ -255,63 +225,203 @@ function GetInvolved() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
-      {/* Ways to Get Involved */}
+      {/* Become a First Listener */}
       <section
-        id="ways"
+        id="become-a-first-listener"
         className="py-20 bg-gray-50 section-opacity"
         ref={(el) => (sectionsRef.current[2] = el)}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
-              Ways to Help
+              Become a First Listener
             </div>
             <h2 className="section-title text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              Ways to <span className="text-gradient">Get Involved</span>
+              Become a <span className="text-gradient">First Listener</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Choose how you'd like to make a difference in protecting children and supporting survivors.
+              Be the first to listen, support, and guide children and survivors toward safety and healing through our training programs or by offering your space.
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-3">
-            {ways.map((way, index) => (
-              <article
-                key={index}
-                className="way-card rounded-2xl p-8 hover-lift shadow-lg text-center"
+          <div className="grid gap-8 md:grid-cols-2">
+            <article className="way-card rounded-2xl p-8 hover-lift shadow-lg text-center">
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-6">
+                👥
+              </div>
+              <div className="mb-4">
+                <span className="category-badge inline-block px-3 py-1 text-xs font-bold rounded-full backdrop-blur-sm mb-2">
+                  Training
+                </span>
+                <div className="text-sm text-amber-600 font-semibold">Join our community</div>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-800">Join a Training</h3>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Participate in our First Listener training to learn how to support children and survivors effectively.
+              </p>
+              <button
+                onClick={() => document.getElementById('volunteer')?.scrollIntoView({ behavior: 'smooth' })}
+                className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
               >
-                <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-6">
-                  {way.icon}
-                </div>
-                
-                <div className="mb-4">
-                  <span className="category-badge inline-block px-3 py-1 text-xs font-bold rounded-full backdrop-blur-sm mb-2">
-                    {way.category}
-                  </span>
-                  <div className="text-sm text-amber-600 font-semibold">{way.stats}</div>
-                </div>
-
-                <h3 className="text-2xl font-bold mb-4 text-gray-800">{way.title}</h3>
-                <p className="text-gray-600 mb-8 leading-relaxed">{way.description}</p>
-                
-                <a
-                  href={way.link}
-                  className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
+                <span className="relative z-10">Join Now</span>
+                <svg
+                  className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
                 >
-                  <span className="relative z-10">{way.action}</span>
-                  <svg
-                    className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                  >
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                  </svg>
-                </a>
-              </article>
-            ))}
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </button>
+            </article>
+            <article className="way-card rounded-2xl p-8 hover-lift shadow-lg text-center">
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-6">
+                🏛️
+              </div>
+              <div className="mb-4">
+                <span className="category-badge inline-block px-3 py-1 text-xs font-bold rounded-full backdrop-blur-sm mb-2">
+                  Venue Support
+                </span>
+                <div className="text-sm text-amber-600 font-semibold">Offer your space</div>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-800">Volunteer Your Space</h3>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Provide a venue for our training sessions or community events to help us reach more people.
+              </p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
+              >
+                <span className="relative z-10">Offer a Space</span>
+                <svg
+                  className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* Partner With Us */}
+      <section
+        id="partner-with-us"
+        className="py-20 bg-white section-opacity"
+        ref={(el) => (sectionsRef.current[3] = el)}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            <div className="relative">
+              <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-teal-600 rounded-2xl transform rotate-3 opacity-20"></div>
+              <img
+                src={SupportGroup}
+                alt="Partnership"
+                className="relative rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+              />
+            </div>
+            
+            <div>
+              <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
+                Partnership
+              </div>
+              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+                Partner <span className="text-gradient">With Us</span>
+              </h2>
+              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+                We collaborate with schools, churches, and other NGOs to create safe environments and promote child protection.
+              </p>
+              
+              <div className="space-y-4 mb-8">
+                {[
+                  'Schools: Implement child safety programs and training.',
+                  'Churches: Foster safe communities through education and advocacy.',
+                  'NGOs: Partner for joint initiatives and resource sharing.'
+                ].map((item, i) => (
+                  <div key={i} className="flex items-center">
+                    <div className="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center mr-3">
+                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <span className="text-gray-700">{item}</span>
+                  </div>
+                ))}
+              </div>
+              
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
+              >
+                <span className="relative z-10">Start Partnership</span>
+                <svg
+                  className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Support Our Work */}
+      <section
+        id="support-our-work"
+        className="py-20 bg-gray-50 section-opacity"
+        ref={(el) => (sectionsRef.current[4] = el)}
+      >
+        <div className="max-w-7xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
+              Support Our Work
+            </div>
+            <h2 className="section-title text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              Support <span className="text-gradient">Our Work</span>
+            </h2>
+            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+              We’re building a funding model rooted in impact and care. Until then, email us if you’d like to support.
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-1">
+            <article className="way-card rounded-2xl p-8 hover-lift shadow-lg text-center">
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-6">
+                💝
+              </div>
+              <div className="mb-4">
+                <span className="category-badge inline-block px-3 py-1 text-xs font-bold rounded-full backdrop-blur-sm mb-2">
+                  Support
+                </span>
+                <div className="text-sm text-amber-600 font-semibold">Your contribution matters</div>
+              </div>
+              <h3 className="text-2xl font-bold mb-4 text-gray-800">Support Our Mission</h3>
+              <p className="text-gray-600 mb-8 leading-relaxed">
+                Help us protect children and empower communities by contributing to our mission.
+              </p>
+              <Link
+                to="/contact"
+                className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
+              >
+                <span className="relative z-10">Reach Out</span>
+                <svg
+                  className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </Link>
+            </article>
           </div>
         </div>
       </section>
@@ -320,7 +430,7 @@ function GetInvolved() {
       <section
         id="volunteer"
         className="py-20 bg-white section-opacity"
-        ref={(el) => (sectionsRef.current[3] = el)}
+        ref={(el) => (sectionsRef.current[5] = el)}
       >
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
@@ -388,74 +498,10 @@ function GetInvolved() {
         </div>
       </section>
 
-      {/* Partnership Section */}
-      <section
-        className="py-20 bg-gray-50 section-opacity"
-        ref={(el) => (sectionsRef.current[4] = el)}
-      >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid lg:grid-cols-2 gap-16 items-center">
-            <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-teal-600 rounded-2xl transform rotate-3 opacity-20"></div>
-              <img
-                src={SupportGroup}
-                alt="Partnership"
-                className="relative rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            
-            <div>
-              <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
-                Partnership
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                Partner <span className="text-gradient">With Us</span>
-              </h2>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                We collaborate with churches, schools, and organizations to create safe environments and promote child protection.
-              </p>
-              
-              <div className="space-y-4 mb-8">
-                {[
-                  'Training and capacity building',
-                  'Resource development and sharing',
-                  'Joint advocacy and awareness campaigns',
-                  'Safe environment consultations'
-                ].map((item, i) => (
-                  <div key={i} className="flex items-center">
-                    <div className="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center mr-3">
-                      <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                    </div>
-                    <span className="text-gray-700">{item}</span>
-                  </div>
-                ))}
-              </div>
-              
-              <Link
-                to="/contact"
-                className="inline-flex items-center px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
-              >
-                <span className="relative z-10">Start Partnership</span>
-                <svg
-                  className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                </svg>
-              </Link>
-            </div>
-          </div>
-        </div>
-      </section>
-
       {/* CTA Section */}
       <section
         className="py-20 gradient-bg section-opacity"
-        ref={(el) => (sectionsRef.current[5] = el)}
+        ref={(el) => (sectionsRef.current[6] = el)}
       >
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="glass-card rounded-2xl p-12">

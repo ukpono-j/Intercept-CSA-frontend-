@@ -41,6 +41,7 @@ function Navbar() {
     // },
     { to: '/get-involved', label: 'Get Involved' },
     { to: '/report-abuse', label: 'Report Abuse' },
+    { to: '/podcast', label: 'Podcast' },
     { to: '/resources', label: 'Resources' },
     { to: '/blog', label: 'Blog' },
     { to: '/contact', label: 'Contact' },
@@ -63,7 +64,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className="fixed top-0 left-0 w-full z-[100] bg-white/95 backdrop-blur-md shadow-lg">
+      <nav className="fixed top-0 left-0 w-full z-30 bg-white/95 backdrop-blur-md shadow-lg">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           <div
             className="absolute w-96 h-96 rounded-full opacity-5 blur-3xl transition-all duration-1000"

@@ -80,7 +80,6 @@ const StoryOfHope = () => {
     }
   ];
 
-  // Auto-play functionality
   useEffect(() => {
     if (isPlaying) {
       intervalRef.current = setInterval(() => {
@@ -108,9 +107,7 @@ const StoryOfHope = () => {
       ref={sectionRef}
       className="relative min-h-screen bg-gradient-to-br from-slate-50 via-white to-purple-50 overflow-hidden py-20"
     >
-      {/* Dynamic Background Elements */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Floating Particles */}
         {[...Array(12)].map((_, i) => (
           <div
             key={i}
@@ -125,7 +122,6 @@ const StoryOfHope = () => {
           />
         ))}
 
-        {/* Interactive Light Effect */}
         <div 
           className="absolute w-96 h-96 rounded-full opacity-5 pointer-events-none transition-all duration-1000"
           style={{
@@ -138,41 +134,35 @@ const StoryOfHope = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10">
-        {/* Header Section */}
         <div className="text-center mb-16">
           <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-gray-200/50 shadow-lg">
             <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
-            <span className="text-gray-700 font-semibold">Real Stories, Real Impact</span>
+            <span className="text-gray-700 font-semibold">Advocacy. Education. Storytelling. Empowerment.</span>
             <Sparkles className="w-4 h-4 text-amber-500" />
           </div>
           
           <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
-            <span className="text-gray-900">Stories of </span>
+            <span className="text-gray-900">Who </span>
             <span 
               className={`bg-gradient-to-r ${currentStoryData.gradient} bg-clip-text text-transparent transition-all duration-1000`}
             >
-              Hope & Healing
+              We Are
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-            Real voices, real impact. Discover how our community comes together to create 
-            <span className="font-semibold text-gray-800"> lasting change</span> and build 
-            <span className="font-semibold text-gray-800"> brighter futures</span>.
+            Advocacy. Education. Storytelling. Empowerment.
           </p>
         </div>
 
-        {/* Main Story Display */}
         <div className="max-w-6xl mx-auto">
           <div className="relative">
-            {/* Story Card */}
             <div 
               className="relative bg-white/90 backdrop-blur-xl rounded-3xl shadow-2xl border border-white/20 overflow-hidden transition-all duration-1000"
               style={{
                 transform: `translateY(${Math.sin(scrollY * 0.005) * 10}px)`
               }}
             >
-              {/* Background Pattern */}
               <div className="absolute inset-0 opacity-5">
                 <div 
                   className={`absolute top-0 right-0 w-96 h-96 bg-gradient-to-br ${currentStoryData.gradient} rounded-full blur-3xl`}
@@ -183,7 +173,6 @@ const StoryOfHope = () => {
               </div>
 
               <div className="relative p-8 md:p-16">
-                {/* Story Header */}
                 <div className="flex items-center justify-between mb-12">
                   <div className="flex items-center gap-4">
                     <div 
@@ -197,7 +186,6 @@ const StoryOfHope = () => {
                     </div>
                   </div>
                   
-                  {/* Stats */}
                   <div className="hidden md:block text-right">
                     <div className={`text-3xl font-black bg-gradient-to-r ${currentStoryData.gradient} bg-clip-text text-transparent`}>
                       {currentStoryData.stats}
@@ -206,7 +194,6 @@ const StoryOfHope = () => {
                   </div>
                 </div>
 
-                {/* Quote */}
                 <div className="relative mb-12">
                   <Quote className="absolute -top-4 -left-2 w-16 h-16 text-gray-200" />
                   <blockquote className="text-2xl md:text-4xl lg:text-5xl text-gray-800 font-light leading-relaxed italic pl-12">
@@ -214,7 +201,6 @@ const StoryOfHope = () => {
                   </blockquote>
                 </div>
 
-                {/* Author */}
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className={`w-1 h-16 bg-gradient-to-b ${currentStoryData.gradient} rounded-full`} />
@@ -226,7 +212,6 @@ const StoryOfHope = () => {
                     </div>
                   </div>
                   
-                  {/* Mobile Stats */}
                   <div className="md:hidden text-right">
                     <div className={`text-2xl font-black bg-gradient-to-r ${currentStoryData.gradient} bg-clip-text text-transparent`}>
                       {currentStoryData.stats}
@@ -237,7 +222,6 @@ const StoryOfHope = () => {
               </div>
             </div>
 
-            {/* Navigation Controls */}
             <div className="absolute top-1/2 -translate-y-1/2 -left-16 -right-16 flex justify-between pointer-events-none">
               <button
                 onClick={prevStory}
@@ -254,7 +238,6 @@ const StoryOfHope = () => {
             </div>
           </div>
 
-          {/* Story Indicators */}
           <div className="flex justify-center mt-12 gap-4">
             {stories.map((story, index) => (
               <button
@@ -279,22 +262,8 @@ const StoryOfHope = () => {
               </button>
             ))}
           </div>
-
-          {/* Play/Pause Control */}
-          {/* <div className="flex justify-center mt-8">
-            <button
-              onClick={() => setIsPlaying(!isPlaying)}
-              className="flex items-center gap-3 px-6 py-3 bg-white/80 backdrop-blur-sm rounded-full shadow-lg border border-gray-200/50 hover:scale-105 transition-all duration-300"
-            >
-              <Play className={`w-4 h-4 text-gray-700 ${isPlaying ? 'animate-pulse' : ''}`} />
-              <span className="text-gray-700 font-medium">
-                {isPlaying ? 'Auto-playing' : 'Paused'}
-              </span>
-            </button>
-          </div> */}
         </div>
 
-        {/* Call to Action */}
         <div className="text-center mt-20">
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <button className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 via-rose-500 to-amber-500 text-white font-bold rounded-full text-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl">

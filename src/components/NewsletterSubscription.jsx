@@ -1,9 +1,7 @@
 import React, { useState } from 'react';
 
-// Use the same API_URL as in Blog component
 const API_URL = import.meta.env.VITE_API_URL || 'https://intercept-csa-backend.onrender.com/api';
 
-// Button component (unchanged from original)
 const Button = ({ children, variant = 'primary', className = '', disabled = false, onClick }) => {
   const baseClasses = 'px-6 py-3 rounded-full font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2';
   const variants = {
@@ -25,7 +23,7 @@ const NewsletterSubscription = ({ StayConnected }) => {
   const [email, setEmail] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [message, setMessage] = useState('');
-  const [messageType, setMessageType] = useState(''); // 'success' or 'error'
+  const [messageType, setMessageType] = useState('');
 
   const handleSubscribe = async (e) => {
     e.preventDefault();
@@ -36,7 +34,6 @@ const NewsletterSubscription = ({ StayConnected }) => {
       return;
     }
 
-    // Basic email validation
     const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailRegex.test(email)) {
       setMessage('Please enter a valid email address');
@@ -61,7 +58,7 @@ const NewsletterSubscription = ({ StayConnected }) => {
       if (response.ok && data.success) {
         setMessage(data.message || 'Thank you for subscribing! You\'ll receive updates on our work and ways to get involved.');
         setMessageType('success');
-        setEmail(''); // Clear the input
+        setEmail('');
       } else {
         setMessage(data.message || 'Something went wrong. Please try again.');
         setMessageType('error');
@@ -95,10 +92,10 @@ const NewsletterSubscription = ({ StayConnected }) => {
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center relative z-10">
         <div className="mb-6"></div>
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-          Stay <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Connected</span>
+          Join the <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Movement</span>
         </h2>
         <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-10">
-          Join our community to receive updates on our work, survivor stories, and ways to get involved.
+          Join the movement to intercept silence and protect children.
         </p>
         
         <div className="max-w-md mx-auto">
@@ -140,7 +137,7 @@ const NewsletterSubscription = ({ StayConnected }) => {
                 Subscribing...
               </span>
             ) : (
-              'Subscribe Now'
+              'Get Involved'
             )}
           </Button>
         </div>

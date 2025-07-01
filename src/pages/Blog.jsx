@@ -90,7 +90,7 @@ function Blog() {
 
     return (
       <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50 p-4 backdrop-blur-sm">
-        <div className="relative bg-white rounded-2xl max-w-4xl w-full max-h-[90vh]  overflow-y-auto shadow-2xl">
+        <div className="relative bg-white rounded-2xl max-w-4xl w-full max-h-[90vh] overflow-y-auto shadow-2xl">
           <button
             onClick={onClose}
             className="absolute top-4 right-4 p-2 rounded-full bg-slate-200 hover:bg-slate-300 text-slate-800 transition-all duration-200 z-10"
@@ -116,6 +116,13 @@ function Blog() {
                   }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+              </div>
+            )}
+            {!post.image && post.excerpt && (
+              <div className="relative h-64 sm:h-80 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center rounded-t-2xl">
+                <blockquote className="text-center px-6 max-w-md">
+                  <p className="text-lg italic text-slate-600 line-clamp-3">"{post.excerpt}"</p>
+                </blockquote>
               </div>
             )}
             
@@ -241,17 +248,17 @@ function Blog() {
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg:py-32">
           <div className="text-center">
             <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
-              Blog & <span
+              Letters, Lessons & <span
                 className="block bg-clip-text text-transparent"
                 style={{
                   background: `linear-gradient(135deg, ${colors.accent} 0%, ${colors.primaryLight} 100%)`,
                   WebkitBackgroundClip: 'text',
                   WebkitTextFillColor: 'transparent',
                 }}
-              >Resources</span>
+              >Stories</span>
             </h1>
             <p className="text-xl sm:text-2xl text-slate-300 max-w-4xl mx-auto leading-relaxed mb-10 font-light">
-              Discover powerful articles, survivor stories, and advocacy tools dedicated to preventing and addressing child sexual abuse.
+              Discover powerful reflections, survivor stories, cultural insights, and community lessons dedicated to preventing and addressing child sexual abuse.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
               <a
@@ -267,7 +274,7 @@ function Blog() {
                 </svg>
               </a>
               <a href="#articles" className="inline-flex items-center px-8 py-4 text-lg font-semibold text-white border-2 border-white/30 rounded-full hover:bg-white/10 hover:border-white/50 transition-all duration-300 backdrop-blur-sm">
-                Explore Articles
+                Explore Stories
                 <svg className="ml-2 w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
                 </svg>
@@ -287,11 +294,11 @@ function Blog() {
           <EmptyState />
         ) : (
           <>
-            {/* Featured Article */}
+            {/* Featured Story */}
             {posts.length > 0 && (
               <div className="mb-16">
                 <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center" style={{ color: colors.text }}>
-                  Featured Article
+                  Featured Story
                 </h2>
                 <div className="relative group max-w-4xl mx-auto">
                   <div
@@ -303,18 +310,26 @@ function Blog() {
                   <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
                     <div className="flex flex-col sm:flex-row gap-6 min-h-[300px]">
                       <div className="relative sm:w-1/2 overflow-hidden">
-                        <img
-                          src={getImageUrl(posts[0].image)}
-                          alt={posts[0].title}
-                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                          loading="lazy"
-                          onError={(e) => {
-                            if (!imageErrors[posts[0]._id]) {
-                              e.target.src = '/assets/placeholder.jpg';
-                              setImageErrors((prev) => ({ ...prev, [posts[0]._id]: posts[0].image }));
-                            }
-                          }}
-                        />
+                        {posts[0].image ? (
+                          <img
+                            src={getImageUrl(posts[0].image)}
+                            alt={posts[0].title}
+                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                            loading="lazy"
+                            onError={(e) => {
+                              if (!imageErrors[posts[0]._id]) {
+                                e.target.src = '/assets/placeholder.jpg';
+                                setImageErrors((prev) => ({ ...prev, [posts[0]._id]: posts[0].image }));
+                              }
+                            }}
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                            <blockquote className="text-center px-6 max-w-md">
+                              <p className="text-lg italic text-slate-600 line-clamp-3">"{posts[0].excerpt}"</p>
+                            </blockquote>
+                          </div>
+                        )}
                         <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       </div>
                       <div className="p-6 sm:p-8 sm:w-1/2 flex flex-col justify-center">
@@ -322,7 +337,7 @@ function Blog() {
                           className="inline-block px-3 py-1 text-sm font-medium rounded-full mb-4 w-fit text-white"
                           style={{ backgroundColor: colors.accent }}
                         >
-                          Featured
+                          {posts[0].category || 'Featured'}
                         </span>
                         <span className="text-slate-500 text-sm mb-3 font-medium">
                           {new Date(posts[0].createdAt).toLocaleDateString('en-US', {
@@ -334,7 +349,7 @@ function Blog() {
                         <h3 className="text-2xl sm:text-3xl font-bold mb-4 leading-tight line-clamp-2" style={{ color: colors.text }}>
                           {posts[0].title}
                         </h3>
-                        <p className="text-slate-600 text-base leading-relaxed mb-6 line-clamp-3">
+                        <p className="text-slate-600 text-base leading-relaxed mb-6 line-clamp-2">
                           {posts[0].excerpt}
                         </p>
                         <button
@@ -344,7 +359,7 @@ function Blog() {
                             background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryDark} 100%)`
                           }}
                         >
-                          Read Full Article
+                          Read Full Story
                           <svg className="ml-2 w-5 h-5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
                           </svg>
@@ -356,14 +371,14 @@ function Blog() {
               </div>
             )}
 
-            {/* Articles Grid */}
+            {/* Stories Grid */}
             <section>
               <div className="flex items-center justify-between mb-12">
                 <h2 className="text-3xl sm:text-4xl font-bold" style={{ color: colors.text }}>
-                  Latest Articles
+                  Latest Stories
                 </h2>
                 <div className="hidden sm:flex items-center space-x-2 text-slate-500">
-                  <span className="text-sm font-medium">{posts.length - 1} Articles</span>
+                  <span className="text-sm font-medium">{posts.length - 1} Stories</span>
                   <div className="w-1 h-1 bg-slate-400 rounded-full"></div>
                   <span className="text-sm">Updated regularly</span>
                 </div>
@@ -375,22 +390,30 @@ function Blog() {
                     className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-100 hover:border-slate-200 transform hover:-translate-y-2"
                   >
                     <div className="relative h-48 sm:h-56 overflow-hidden">
-                      <img
-                        src={getImageUrl(post.image)}
-                        alt={post.title}
-                        className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
-                        loading="lazy"
-                        onError={(e) => {
-                          if (!imageErrors[post._id]) {
-                            e.target.src = '/assets/placeholder.jpg';
-                            setImageErrors((prev) => ({ ...prev, [post._id]: post.image }));
-                          }
-                        }}
-                      />
+                      {post.image ? (
+                        <img
+                          src={getImageUrl(post.image)}
+                          alt={post.title}
+                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                          loading="lazy"
+                          onError={(e) => {
+                            if (!imageErrors[post._id]) {
+                              e.target.src = '/assets/placeholder.jpg';
+                              setImageErrors((prev) => ({ ...prev, [post._id]: post.image }));
+                            }
+                          }}
+                        />
+                      ) : (
+                        <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                          <blockquote className="text-center px-6 max-w-md">
+                            <p className="text-sm italic text-slate-600 line-clamp-3">"{post.excerpt}"</p>
+                          </blockquote>
+                        </div>
+                      )}
                       <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                       <div className="absolute top-4 left-4">
                         <span className="inline-block px-3 py-1 text-xs font-bold text-white bg-black/20 backdrop-blur-sm rounded-full border border-white/20">
-                          Article {index + 2}
+                          {post.category || `Story ${index + 2}`}
                         </span>
                       </div>
                     </div>
@@ -407,7 +430,7 @@ function Blog() {
                       <h3 className="text-xl font-bold mb-3 leading-tight line-clamp-2 group-hover:text-slate-800 transition-colors" style={{ color: colors.text }}>
                         {post.title}
                       </h3>
-                      <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-3 flex-grow">
+                      <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2 flex-grow">
                         {post.excerpt}
                       </p>
                       <button
@@ -463,10 +486,12 @@ function Blog() {
             >Solution</span>
           </h2>
           <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10">
-            Subscribe for updates on new articles, resources, and ways to support our mission in protecting children and empowering communities.
+            Subscribe for updates on new stories, reflections, and ways to support our mission in protecting children and empowering communities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <a href="/contact" className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+            <a
+              href="/contact"
+              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
               style={{
                 background: `linear-gradient(to right, ${colors.primary}, ${colors.accent})`
               }}

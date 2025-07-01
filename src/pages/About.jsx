@@ -1,6 +1,6 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-
+import FounderImage from "../assets/founderImage.jpg";
 
 // Optimized color palette focused on teal and white
 const colors = {
@@ -20,11 +20,13 @@ const images = {
   hero: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&h=800&fit=crop',
   mission: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&h=400&fit=crop',
   vision: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=400&fit=crop',
-  community: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=600&fit=crop'
+  community: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1200&h=600&fit=crop',
+  founder: FounderImage, // Corrected to use the direct string path
 };
 
 function About() {
   const sectionsRef = useRef([]);
+  const [imageErrors, setImageErrors] = useState({});
 
   useEffect(() => {
     const observer = new IntersectionObserver(
@@ -45,18 +47,12 @@ function About() {
     return () => observer.disconnect();
   }, []);
 
-  const objectives = [
-    { title: 'Prevent Abuse', desc: 'Education and awareness programs to stop abuse before it happens', icon: '🛡️' },
-    { title: 'Support Survivors', desc: 'Comprehensive care and resources for healing and recovery', icon: '💝' },
-    { title: 'Empower Communities', desc: 'Building strong, protective networks across Nigeria', icon: '🤝' },
-    { title: 'Drive Change', desc: 'Advocating for policies and systems that protect children', icon: '⚖️' }
-  ];
-
-  const timeline = [
-    { year: '2018', event: 'Foundation established', desc: 'Started our mission to protect Nigerian children' },
-    { year: '2021', event: 'Community programs launched', desc: 'Reached 1,000+ families with education' },
-    { year: '2024', event: 'Survivor support expanded', desc: 'Comprehensive care for 500+ individuals' },
-    { year: '2025', event: 'National impact', desc: 'Targeting 10,000+ lives across Nigeria' }
+  const pillars = [
+    { title: 'Safe Visibility', desc: 'Children seen as children', icon: '👀' },
+    { title: 'Everyday Interceptions', desc: 'Protection where children live and play', icon: '🛡️' },
+    { title: 'Voice Culture', desc: 'Shame-free storytelling and listening', icon: '🗣️' },
+    { title: 'Faith & Culture Reframing', desc: 'Transform harmful beliefs into tools for protection', icon: '🙏' },
+    { title: 'Accountability Loops', desc: 'Let the community report to itself', icon: '🔄' }
   ];
 
   return (
@@ -130,13 +126,13 @@ function About() {
 
         <div className="relative z-20 text-center px-6 max-w-4xl mx-auto">
           <div className="inline-block px-6 py-2 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-6">
-            Who We Are
+            Our Why
           </div>
           <h1 className="hero-title text-5xl md:text-6xl font-bold mb-6 leading-tight">
             About <span className="text-teal-300">Intercept CSA</span>
           </h1>
           <p className="text-xl md:text-2xl mb-10 text-gray-200 leading-relaxed">
-            Protecting Nigerian children, empowering survivors, and transforming communities through prevention and healing.
+            We exist because silence protects abusers. We exist because culture often doesn’t know what to say. We exist to teach, to interrupt, and to walk with children, not just for them.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link
@@ -164,8 +160,7 @@ function About() {
                 Preventing Abuse, <span className="text-teal-200">Empowering Lives</span>
               </h2>
               <p className="text-xl text-teal-50 mb-8 leading-relaxed">
-                To prevent child sexual abuse through education, support survivors with compassion,
-                and create lasting change in Nigerian communities.
+                To actively prevent child sexual abuse and disrupt cycles of trauma through education, advocacy, and survivor-centered support.
               </p>
               <div className="space-y-4">
                 {['Prevention Education', 'Survivor Support', 'Community Empowerment'].map((item, i) => (
@@ -183,13 +178,12 @@ function About() {
                 Our Vision
               </div>
               <h3 className="text-3xl font-bold text-white mb-6">
-                A Safe Nigeria for Every Child
+                A Safe World for Every Child
               </h3>
               <p className="text-teal-50 text-lg leading-relaxed mb-6">
-                A Nigeria where child sexual abuse is prevented, survivors are empowered to heal,
-                and every child grows up safe, protected, and free to thrive.
+                A world where child sexual abuse is prevented before it begins, interrupted where it occurs, and survivors are empowered to heal.
               </p>
-              <div className="grid grid-cols-2 gap-4">
+              {/* <div className="grid grid-cols-2 gap-4">
                 <div className="text-center">
                   <div className="text-3xl font-bold text-teal-300">10K+</div>
                   <div className="text-sm text-teal-100">Lives Impacted</div>
@@ -198,13 +192,13 @@ function About() {
                   <div className="text-3xl font-bold text-teal-300">500+</div>
                   <div className="text-sm text-teal-100">Survivors Supported</div>
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Our Story Timeline */}
+      {/* Our Story */}
       <section
         className="py-20 bg-gray-50 section-opacity"
         ref={(el) => (sectionsRef.current[2] = el)}
@@ -212,50 +206,74 @@ function About() {
         <div className="max-w-6xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
-              Our Journey
+              Our Story
             </div>
             <h2 className="section-title text-4xl md:text-5xl font-bold text-gray-800 mb-6">
               Our <span className="text-gradient">Story</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              From humble beginnings to transforming communities across Nigeria
+              InterceptCSA began with a single spark: a vision to break the silence that protects abusers and to create a world where every child is safe. Founded by Inimfon Sampson, our journey started in response to the urgent need for education, advocacy, and healing in Nigerian communities. From our first community workshop to now impacting thousands, we’ve grown into a movement dedicated to prevention, survivor support, and cultural change.
             </p>
-          </div>
-
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {timeline.map((item, index) => (
-              <div key={index} className="text-center hover-lift">
-                <div className="w-20 h-20 bg-teal-600 text-white rounded-full flex items-center justify-center text-2xl font-bold mx-auto mb-6">
-                  {item.year}
-                </div>
-                <h3 className="text-xl font-bold text-gray-800 mb-3">{item.event}</h3>
-                <p className="text-gray-600">{item.desc}</p>
-              </div>
-            ))}
           </div>
         </div>
       </section>
 
-      {/* Objectives */}
+      {/* Meet the Founder */}
       <section
         className="py-20 bg-white section-opacity"
         ref={(el) => (sectionsRef.current[3] = el)}
       >
+        <div className="max-w-6xl mx-auto px-6">
+          <div className="text-center mb-16">
+            <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
+              Meet the Founder
+            </div>
+            <h2 className="section-title text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+              Our <span className="text-gradient">Founder</span>
+            </h2>
+          </div>
+          <div className="flex flex-col md:flex-row items-center gap-8 max-w-4xl mx-auto">
+            <img
+              src={images.founder}
+              alt="Inimfon Sampson, Founder"
+              className="w-48 h-48 rounded-full object-cover shadow-lg"
+              onError={(e) => {
+                if (!imageErrors['founder']) {
+                  e.target.src = '/assets/placeholder.jpg';
+                  setImageErrors((prev) => ({ ...prev, founder: images.founder }));
+                }
+              }}
+            />
+            <div className="text-center md:text-left">
+              <p className="text-xl text-gray-600 mb-6 leading-relaxed">
+                “I started this because I saw the gap between pain and protection — and because I believe every story deserves safety.”
+              </p>
+              <p className="text-lg font-bold text-gray-800">— Inimfon Sampson, Founder</p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Our Pillars */}
+      <section
+        className="py-20 bg-white section-opacity"
+        ref={(el) => (sectionsRef.current[4] = el)}
+      >
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
             <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
-              Our Focus
+              Our Pillars
             </div>
             <h2 className="section-title text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              Our <span className="text-gradient">Objectives</span>
+              Our <span className="text-gradient">Pillars</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto">
-              Strategic goals driving our mission to protect Nigerian children
+              The core principles guiding our mission to protect and empower
             </p>
           </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {objectives.map((obj, index) => (
+          <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-8">
+            {pillars.map((obj, index) => (
               <div key={index} className="bg-white rounded-2xl p-8 shadow-lg hover-lift border border-gray-100">
                 <div className="text-4xl mb-6">{obj.icon}</div>
                 <h3 className="text-xl font-bold text-gray-800 mb-4">{obj.title}</h3>
@@ -269,7 +287,7 @@ function About() {
       {/* Call to Action */}
       <section
         className="py-20 gradient-bg section-opacity"
-        ref={(el) => (sectionsRef.current[4] = el)}
+        ref={(el) => (sectionsRef.current[5] = el)}
       >
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="glass-card rounded-2xl p-12">
@@ -277,8 +295,7 @@ function About() {
               Join Our <span className="text-gradient">Movement</span>
             </h2>
             <p className="text-xl text-gray-600 mb-10 leading-relaxed">
-              Together, we can protect children, empower survivors, and create a safer Nigeria.
-              Your support makes the difference.
+              Together, we can protect children, empower survivors, and create a safer world.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
@@ -286,9 +303,6 @@ function About() {
                 className="px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105">
                 Get Involved
               </Link>
-              {/* <button className="px-8 py-4 border-2 border-teal-600 text-teal-600 hover:bg-teal-600 hover:text-white font-semibold rounded-full transition-all duration-300">
-                Donate Now
-              </button> */}
             </div>
           </div>
         </div>

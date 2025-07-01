@@ -14,7 +14,7 @@ import {
 import { Link } from 'react-router-dom';
 
 const colors = {
-  primary: '#0F766E', // Dark teal
+  primary: '#0F766E',
   primaryLight: '#14B8A6',
   secondary: '#FF5245',
   accent: '#FFC938',
@@ -39,8 +39,8 @@ const WhyOurWorkMatters = () => {
     {
       id: 'prevention',
       icon: Shield,
-      title: 'Prevention',
-      subtitle: 'Saves Lives',
+      title: 'Prevention & Training',
+      subtitle: '',
       description: 'We empower communities with cutting-edge tools to recognize and prevent abuse early, creating an unbreakable shield around our children.',
       gradient: 'from-emerald-400 to-emerald-600',
       stats: '85%',
@@ -49,22 +49,32 @@ const WhyOurWorkMatters = () => {
     {
       id: 'healing',
       icon: Heart,
-      title: 'Healing',
-      subtitle: 'Restores Hope',
+      title: 'Survivor Support',
+      subtitle: '',
       description: 'Our innovative safe spaces and transformative creative programs help survivors heal completely, rebuild unshakeable confidence, and embrace an extraordinary future.',
       gradient: 'from-rose-400 to-rose-600',
       stats: '200+',
       statsLabel: 'Lives Transformed'
     },
     {
-      id: 'unity',
+      id: 'partnerships',
       icon: Users,
-      title: 'Unity',
-      subtitle: 'Creates Change',
-      description: 'By forging powerful alliances between families, schools, and communities, we build an unstoppable network that protects every child.',
+      title: 'Faith & Culture Partnerships',
+      subtitle: '',
+      description: 'By forging powerful alliances with faith and cultural institutions, we build an unstoppable network that protects every child.',
       gradient: 'from-blue-400 to-blue-600',
       stats: '50+',
       statsLabel: 'Communities United'
+    },
+    {
+      id: 'safe-environments',
+      icon: Shield,
+      title: 'Safe Environments',
+      subtitle: '',
+      description: 'We create safe environments through education and advocacy, ensuring children are protected in their communities.',
+      gradient: 'from-teal-400 to-teal-600',
+      stats: '100+',
+      statsLabel: 'Safe Spaces Created'
     }
   ];
 
@@ -76,7 +86,6 @@ const WhyOurWorkMatters = () => {
         background: `linear-gradient(135deg, ${colors.darkTeal} 0%, ${colors.primary} 50%, ${colors.mediumTeal} 100%)`
       }}
     >
-      {/* Background Effects - Matching ImpactfulPrograms */}
       <div className="absolute inset-0 pointer-events-none">
         <div
           className="absolute w-96 h-96 rounded-full opacity-5 blur-3xl"
@@ -108,35 +117,30 @@ const WhyOurWorkMatters = () => {
       </div>
 
       <div className="container mx-auto px-6 relative z-10 max-w-6xl">
-
-        {/* Header Section - Enhanced */}
         <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/20">
             <Sparkles className="w-5 h-5 text-amber-400" />
-            <span className="text-white font-semibold">Our Impact Story</span>
+            <span className="text-white font-semibold">Our Goal</span>
           </div>
 
           <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
-            Why Our Work{' '}
-            <span
+            Our <span
               className="bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 bg-clip-text text-transparent"
               style={{
                 backgroundSize: '200% 200%',
                 animation: 'gradient-shift 3s ease-in-out infinite'
               }}
             >
-              Matters
+              Goal
             </span>
           </h1>
 
           <p className="text-xl text-white/90 max-w-4xl mx-auto leading-relaxed">
-            Child sexual abuse is a hidden crisis. We're <span className="text-amber-300 font-semibold">breaking the silence</span> through
-            education, healing, and united action to <span className="text-teal-300 font-semibold">protect and empower</span> our children.
+            To actively prevent child sexual abuse from spreading within communities, intervene in the lives of at-risk children, and disrupt cycles of trauma for survivors.
           </p>
         </div>
 
-        {/* Cards Section - Redesigned to match ImpactfulPrograms style */}
-        <div className="grid md:grid-cols-3 gap-8 mb-20">
+        <div className="grid md:grid-cols-2 gap-8 mb-20">
           {cards.map((card, index) => {
             const Icon = card.icon;
             const isActive = activeCard === card.id;
@@ -153,37 +157,33 @@ const WhyOurWorkMatters = () => {
                   animation: isVisible ? 'slideInUp 0.8s ease-out forwards' : 'none'
                 }}
               >
-                {/* Card Glow Effect */}
                 <div
                   className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl`}
                   style={{ backgroundColor: colors.accent }}
                 />
 
-                {/* Main Card */}
                 <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 h-full overflow-hidden group-hover:bg-white/15 transition-all duration-500">
-
-                  {/* Icon Section */}
                   <div className="mb-6">
                     <div className={`inline-flex p-4 rounded-xl bg-gradient-to-r ${card.gradient}`}>
                       <Icon className="w-8 h-8 text-white" />
                     </div>
                   </div>
 
-                  {/* Content */}
                   <div className="space-y-4">
                     <div>
                       <h3 className="text-2xl font-bold text-white mb-2">{card.title}</h3>
-                      <p className={`text-lg font-medium bg-gradient-to-r ${card.gradient} bg-clip-text text-transparent`}>
-                        {card.subtitle}
-                      </p>
+                      {card.subtitle && (
+                        <p className={`text-lg font-medium bg-gradient-to-r ${card.gradient} bg-clip-text text-transparent`}>
+                          {card.subtitle}
+                        </p>
+                      )}
                     </div>
 
                     <p className="text-white/80 leading-relaxed">
                       {card.description}
                     </p>
 
-                    {/* Stats */}
-                    <div className="pt-4 border-t border-white/20">
+                    {/* <div className="pt-4 border-t border-white/20">
                       <div className="flex items-center justify-between">
                         <div>
                           <div className={`text-3xl font-bold bg-gradient-to-r ${card.gradient} bg-clip-text text-transparent`}>
@@ -193,7 +193,7 @@ const WhyOurWorkMatters = () => {
                         </div>
                         <ArrowRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -201,16 +201,15 @@ const WhyOurWorkMatters = () => {
           })}
         </div>
 
-        {/* CTA Section - Enhanced to match ImpactfulPrograms */}
         <div className={`text-center transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="space-y-6">
             <div className="relative inline-block group">
               <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-cyan-400 rounded-full blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
-              <Link to="/programs">
+              <Link to="/about">
                 <button className="relative bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold py-4 px-8 rounded-full text-lg hover:scale-105 transition-all duration-300 shadow-lg border-2 border-white/20">
                   <span className="flex items-center gap-3">
                     <HandHeart className="w-5 h-5" />
-                    Join Our Mission
+                    Who We Are
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
                   </span>
                 </button>

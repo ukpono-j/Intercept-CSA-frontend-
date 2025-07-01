@@ -16,12 +16,10 @@ const colors = {
 
 // Dummy images - replace with your actual images
 const programImages = {
-  education: 'https://images.unsplash.com/photo-1427504494785-3a9ca7044f45?w=600&h=400&fit=crop',
-  outreach: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&h=400&fit=crop',
-  faith: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop',
   training: 'https://images.unsplash.com/photo-1552664730-d307ca884978?w=600&h=400&fit=crop',
-  healing: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=400&fit=crop',
-  resources: 'https://images.unsplash.com/photo-1481627834876-b7833e8f5570?w=600&h=400&fit=crop',
+  workshops: 'https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=600&h=400&fit=crop',
+  survivor: 'https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&h=400&fit=crop',
+  faith: 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&h=400&fit=crop',
   hero: 'https://images.unsplash.com/photo-1582213782179-e0d53f98f2ca?w=1200&h=800&fit=crop'
 };
 
@@ -55,53 +53,41 @@ function Programs() {
 
   const programs = [
     {
-      title: 'CSA Education & Advocacy',
-      description: 'We educate communities on child sexual abuse prevention and advocate for policies that protect children and support survivors.',
-      image: programImages.education,
-      icon: '🛡️',
-      stats: '5,000+ educated',
-      category: 'Prevention'
-    },
-    {
-      title: 'Street Kids Awareness & Outreach',
-      description: 'Our outreach programs raise awareness and provide support to vulnerable street children, reducing their risk of abuse.',
-      image: programImages.outreach,
-      icon: '🤝',
-      stats: '1,200+ reached',
-      category: 'Outreach'
-    },
-    {
-      title: 'Faith Community Engagement',
-      description: 'We partner with faith-based organizations to promote child protection and create safe environments within religious communities.',
-      image: programImages.faith,
-      icon: '⛪',
-      stats: '150+ communities',
-      category: 'Partnership'
-    },
-    {
-      title: 'Volunteer Training & Capacity Building',
-      description: 'We equip volunteers with the skills and knowledge needed to prevent abuse and support our mission effectively.',
+      title: 'First Listener Training',
+      description: 'A safe-space response training for everyday people on how to listen without harm when a child discloses abuse.',
       image: programImages.training,
-      icon: '📚',
-      stats: '800+ volunteers',
-      category: 'Training'
+      icon: '👂',
+      stats: '800+ trained',
+      category: 'Training',
+      buttons: [
+        { label: 'Book a Training', to: '/book-training' },
+        { label: 'Join a Webinar', to: '/webinar' }
+      ]
     },
     {
-      title: 'Creative Healing Programs',
-      description: 'Our programs use creative outlets like art and storytelling to support survivors in their healing journey.',
-      image: programImages.healing,
-      icon: '🎨',
-      stats: '300+ survivors',
+      title: 'Community Workshops',
+      description: 'From neighborhoods to schools, our training brings child protection into everyday life.',
+      image: programImages.workshops,
+      icon: '🏘️',
+      stats: '50+ communities',
+      category: 'Workshops'
+    },
+    {
+      title: 'Survivor Support (Coming Soon)',
+      description: 'We’re building survivor-centered partnerships to offer trauma-informed counseling, legal aid, and long-term healing options.',
+      image: programImages.survivor,
+      icon: '💝',
+      stats: 'In Development',
       category: 'Healing'
     },
     {
-      title: 'Resource Development',
-      description: 'We develop manuals, booklets, and training materials to empower communities and organizations in the fight against CSA.',
-      image: programImages.resources,
-      icon: '📖',
-      stats: '50+ resources',
-      category: 'Development'
-    },
+      title: 'Faith + Cultural Allyship',
+      description: 'We work with faith leaders, men, and caregivers to rewrite the stories that often protect abusers instead of children.',
+      image: programImages.faith,
+      icon: '🙏',
+      stats: '150+ partners',
+      category: 'Partnership'
+    }
   ];
 
   const impact = [
@@ -241,7 +227,7 @@ function Programs() {
             <span className="block text-teal-300 mt-2">Powerful Programs</span>
           </h1>
           <p className="text-xl md:text-2xl mb-12 text-gray-200 leading-relaxed max-w-4xl mx-auto">
-            Empowering Nigerian communities through prevention, education, and healing to combat child sexual abuse and create lasting change.
+            Empowering communities through prevention, education, and healing to combat child sexual abuse and create lasting change.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button 
@@ -261,7 +247,7 @@ function Programs() {
       </section>
 
       {/* Impact Stats */}
-      <section 
+      {/* <section 
         className="py-16 gradient-bg section-opacity"
         ref={(el) => (sectionsRef.current[1] = el)}
       >
@@ -276,7 +262,7 @@ function Programs() {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Programs Section */}
       <section
@@ -293,11 +279,11 @@ function Programs() {
               Our <span className="text-gradient">Programs</span>
             </h2>
             <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              Comprehensive initiatives designed to prevent abuse, support survivors, and empower communities across Nigeria.
+              Comprehensive initiatives designed to prevent abuse, support survivors, and empower communities.
             </p>
           </div>
 
-          <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid gap-8 md:grid-cols-2">
             {programs.map((program, index) => (
               <article
                 key={index}
@@ -340,21 +326,43 @@ function Programs() {
                   </p>
                   
                   <div className="flex items-center justify-between">
-                    <Link
-                      to="/resources"
-                      className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
-                      aria-label={`Learn more about ${program.title}`}
-                    >
-                      <span className="relative z-10">Learn More</span>
-                      <svg
-                        className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform"
-                        fill="none"
-                        stroke="currentColor"
-                        viewBox="0 0 24 24"
-                      >
-                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                      </svg>
-                    </Link>
+                    <div className="flex gap-4">
+                      {(program.buttons || []).map((button, btnIndex) => (
+                        <Link
+                          key={btnIndex}
+                          to={button.to}
+                          className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
+                          aria-label={button.label}
+                        >
+                          <span className="relative z-10">{button.label}</span>
+                          <svg
+                            className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </Link>
+                      ))}
+                      {!program.buttons && (
+                        <Link
+                          to="/resources"
+                          className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white text-sm font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
+                          aria-label={`Learn more about ${program.title}`}
+                        >
+                          <span className="relative z-10">Learn More</span>
+                          <svg
+                            className="ml-2 w-4 h-4 transform group-hover:translate-x-1 transition-transform"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </Link>
+                      )}
+                    </div>
                     
                     <div className="text-right">
                       <div className="text-xs text-gray-500">Program {index + 1}</div>
@@ -382,7 +390,7 @@ function Programs() {
                 How We <span className="text-gradient">Create Change</span>
               </h2>
               <p className="text-xl text-gray-600 mb-8 leading-relaxed">
-                Our comprehensive approach combines prevention, intervention, and healing to create lasting impact in Nigerian communities.
+                Our comprehensive approach combines prevention, intervention, and healing to create lasting impact in communities.
               </p>
               
               <div className="space-y-6">
@@ -430,7 +438,7 @@ function Programs() {
               Support Our <span className="text-[#237985]">Programs</span>
             </h2>
             <p className="text-xl text-black mb-10 leading-relaxed max-w-3xl mx-auto">
-              Get involved or donate to help us protect children and empower communities across Nigeria. Every contribution makes a difference.
+              Get involved to help us protect children and empower communities. Every contribution makes a difference.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
               <Link
@@ -439,12 +447,6 @@ function Programs() {
               >
                 Get Involved
               </Link>
-              {/* <Link
-                to="/donate"
-                className="px-10 py-4 border-2 border-[#237985] text-black hover:bg-white hover:text-teal-600 font-semibold rounded-full transition-all duration-300 inline-block"
-              >
-                Donate Now
-              </Link> */}
             </div>
           </div>
         </div>

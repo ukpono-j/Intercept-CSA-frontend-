@@ -37,9 +37,7 @@ const Solution = () => {
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
-      {/* Dynamic Background Effects */}
       <div className="absolute inset-0 pointer-events-none">
-        {/* Animated Gradient Orbs */}
         <div 
           className="absolute w-96 h-96 rounded-full opacity-20 blur-3xl transition-all duration-1000"
           style={{
@@ -56,8 +54,6 @@ const Solution = () => {
             bottom: `${20 + Math.cos(scrollY * 0.004) * 10}%`,
           }}
         />
-
-        {/* Interactive Mouse Effect */}
         <div 
           className="absolute w-64 h-64 rounded-full opacity-10 pointer-events-none transition-all duration-500"
           style={{
@@ -67,8 +63,6 @@ const Solution = () => {
             transform: `scale(${isHovered ? 1.5 : 1})`
           }}
         />
-
-        {/* Floating Elements */}
         {[...Array(6)].map((_, i) => (
           <div
             key={i}
@@ -90,20 +84,13 @@ const Solution = () => {
       </div>
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-12 md:py-16 text-center relative z-10">
-        {/* Header Section */}
-        {/* <div className="inline-flex items-center gap-3 bg-gray-100/50 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-gray-200/50">
-          <Heart className="w-5 h-5 text-red-400" />
-          <span className="text-gray-800 font-semibold">Make a Difference</span>
-        </div> */}
-        
         <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-gray-900 mb-6 leading-tight">
-          Be a <span className="block bg-gradient-to-r from-cyan-500 to-teal-600 bg-clip-text text-transparent">Part of the Solution</span>
+          Join the <span className="block bg-gradient-to-r from-cyan-500 to-teal-600 bg-clip-text text-transparent">Movement</span>
         </h2>
         <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed mb-10">
-          Your support can change lives. Join us to <span className="text-cyan-500 font-semibold">protect children</span> and <span className="text-rose-500 font-semibold">empower survivors</span> across Nigeria.
+          Join the movement to intercept silence and protect children.
         </p>
 
-        {/* Call to Action Buttons */}
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
           <Link
             to="/get-involved"
@@ -120,7 +107,7 @@ const Solution = () => {
             }}
           >
             <span className="relative z-10 flex items-center gap-2">
-              Volunteer Now
+              Get Involved
               <ArrowRight className="w-5 h-5 transform group-hover:translate-x-1 transition-transform" />
             </span>
             <div
