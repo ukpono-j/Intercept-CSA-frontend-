@@ -3,8 +3,35 @@
   font-family: 'Raleway', sans-serif;
 }
 
-/* Responsive Design */
-@media (max-width: 1024px) {
+/* Base styles for large screens (≥1234px) */
+.navbar .text-sm {
+  font-size: 0.875rem; /* 14px for nav links */
+}
+
+.navbar .text-xl {
+  font-size: 1.25rem; /* Logo text */
+}
+
+.navbar .px-4 {
+  padding-left: 1rem;
+  padding-right: 1rem;
+}
+
+.navbar .py-5 {
+  padding-top: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.navbar .p-3 {
+  padding: 0.75rem; /* Touch target for buttons */
+}
+
+.navbar .min-w-48 {
+  min-width: 48px; /* WCAG touch target */
+}
+
+/* Responsive Design for mobile menu (≤1234px) */
+@media (max-width: 1234px) {
   .navbar .px-4 {
     padding-left: 1rem;
     padding-right: 1rem;
@@ -14,33 +41,27 @@
     padding-bottom: 1.25rem;
   }
   .navbar .text-xl {
-    font-size: 1.75rem; /* Matches Contact menu title at 768px */
+    font-size: 1.75rem; /* Mobile menu title */
   }
   .navbar .text-base {
-    font-size: 1rem; /* Matches nav links */
-  }
-  .navbar .text-sm {
-    font-size: 0.875rem; /* Matches dropdown items */
+    font-size: 1rem; /* Mobile nav links */
   }
   .navbar .p-5 {
-    padding: 1.25rem; /* Matches mobile menu padding */
+    padding: 1.25rem; /* Mobile menu padding */
   }
   .navbar .py-3 {
     padding-top: 0.75rem;
     padding-bottom: 0.75rem;
   }
-  .navbar .px-4 {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
   .navbar .p-3 {
-    padding: 0.75rem; /* 48px touch target for buttons */
+    padding: 0.75rem; /* Touch target for buttons */
   }
-  .navbar .min-w-\[48px\] {
+  .navbar .min-w-48 {
     min-width: 48px; /* WCAG touch target */
   }
 }
 
+/* Smaller screens (≤640px) */
 @media (max-width: 640px) {
   .navbar .px-4 {
     padding-left: 0.75rem;
@@ -51,13 +72,10 @@
     padding-bottom: 1rem;
   }
   .navbar .text-xl {
-    font-size: 1.5rem; /* Matches Contact menu title at 640px */
+    font-size: 1.5rem; /* Mobile menu title */
   }
   .navbar .text-base {
-    font-size: 0.9375rem; /* Matches nav links at 640px */
-  }
-  .navbar .text-sm {
-    font-size: 0.75rem; /* Smaller dropdown items */
+    font-size: 0.9375rem; /* Mobile nav links */
   }
   .navbar .p-5 {
     padding: 1rem; /* Reduced mobile menu padding */
@@ -71,9 +89,9 @@
     padding-right: 0.75rem;
   }
   .navbar .p-3 {
-    padding: 0.75rem; /* 48px touch target maintained */
+    padding: 0.75rem; /* Touch target maintained */
   }
-  .navbar .min-w-\[48px\] {
+  .navbar .min-w-48 {
     min-width: 48px; /* WCAG touch target */
   }
   .navbar .h-12 {
@@ -82,8 +100,19 @@
   }
 }
 
+/* Extra-large screens (≥1280px) */
+@media (min-width: 1280px) {
+  .navbar .text-sm {
+    font-size: 0.8125rem; /* 13px for nav links */
+  }
+}
+
 /* Float animation */
 @keyframes float {
-  0%, 100% { transform: translateY(0px); }
-  50% { transform: translateY(-6px); }
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-6px);
+  }
 }

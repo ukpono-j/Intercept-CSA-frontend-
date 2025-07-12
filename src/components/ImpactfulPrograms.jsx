@@ -11,6 +11,7 @@ import {
   BookOpen
 } from 'lucide-react';
 import './ImpactfulPrograms.css';
+import { Link } from 'react-router-dom';
 
 const colors = {
   primary: '#0F766E',
@@ -147,17 +148,19 @@ const ImpactfulPrograms = () => {
 
         <div className="text-center">
           <div className="space-y-6">
-            <button
-              className="font-bold py-3 px-6 rounded-full text-base hover:opacity-90 transition-opacity duration-300 shadow-lg text-white"
-              style={{ backgroundColor: colors.yellow }}
-              onClick={() => window.location.href = '/get-involved'}
-            >
-              <span className="flex items-center gap-3">
-                <BookOpen className="w-5 h-5" />
-                Get Involved
-                <ArrowRight className="w-5 h-5" />
-              </span>
-            </button>
+            <Link to="/get-involved">
+              <button
+                className="font-bold py-3 px-6 rounded-full text-base hover:opacity-90 transition-opacity duration-300 shadow-lg text-white"
+                style={{ backgroundColor: colors.yellow }}
+                // onClick={() => window.location.href = '/get-involved'}
+              >
+                <span className="flex items-center gap-3">
+                  <BookOpen className="w-5 h-5" />
+                  Get Involved
+                  <ArrowRight className="w-5 h-5" />
+                </span>
+              </button>
+            </Link>
           </div>
         </div>
       </div>

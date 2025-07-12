@@ -25,6 +25,9 @@ module.exports = {
         accent: '#F3F4F6',
         text: '#1F2937',
       },
+      screens: {
+        'custom-lg': '1234px',
+      },
     },
   },
   plugins: [],

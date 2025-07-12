@@ -7,6 +7,7 @@ import {
   HandHeart
 } from 'lucide-react';
 import './WhyOurWorkMatters.css';
+import { Link } from 'react-router-dom';
 
 const colors = {
   primary: '#0D9488', // Teal
@@ -112,7 +113,7 @@ const WhyOurWorkMatters = () => {
 
         <div className={`text-center transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="space-y-6">
-            <a href="/about">
+            <Link to="/about">
               <button
                 className="text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl"
                 style={{ backgroundColor: colors.orange }}
@@ -129,7 +130,7 @@ const WhyOurWorkMatters = () => {
                   <ArrowRight className="w-5 h-5" />
                 </span>
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
