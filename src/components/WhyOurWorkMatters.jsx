@@ -4,35 +4,27 @@ import {
   Heart,
   Users,
   ArrowRight,
-  Sparkles,
-  ChevronDown,
-  Target,
-  CheckCircle,
-  HandHeart,
-  BookOpen
+  HandHeart
 } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import './WhyOurWorkMatters.css';
 
 const colors = {
-  primary: '#0F766E',
-  primaryLight: '#14B8A6',
-  secondary: '#FF5245',
-  accent: '#FFC938',
+  primary: '#0D9488', // Teal
+  primaryLight: '#14B8A6', // Lighter teal
+  white: '#FFFFFF',
   darkTeal: '#134E4A',
-  mediumTeal: '#0D9488',
+  gray: '#6B7280',
+  lightGray: '#F9FAFB',
+  orange: '#F59E0B', // Hero button orange
+  orangeHover: '#F59E0B' // Hero button hover orange
 };
 
 const WhyOurWorkMatters = () => {
-  const [activeCard, setActiveCard] = useState(null);
-  const [scrollY, setScrollY] = useState(0);
   const [isVisible, setIsVisible] = useState(false);
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    const handleScroll = () => setScrollY(window.scrollY);
-    window.addEventListener('scroll', handleScroll);
     setIsVisible(true);
-    return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
   const cards = [
@@ -40,9 +32,7 @@ const WhyOurWorkMatters = () => {
       id: 'prevention',
       icon: Shield,
       title: 'Prevention & Training',
-      subtitle: '',
-      description: 'We empower communities with cutting-edge tools to recognize and prevent abuse early, creating an unbreakable shield around our children.',
-      gradient: 'from-emerald-400 to-emerald-600',
+      description: 'We empower communities with tools to recognize and prevent abuse early, creating protection around our children.',
       stats: '85%',
       statsLabel: 'Prevention Success Rate'
     },
@@ -50,9 +40,7 @@ const WhyOurWorkMatters = () => {
       id: 'healing',
       icon: Heart,
       title: 'Survivor Support',
-      subtitle: '',
-      description: 'Our innovative safe spaces and transformative creative programs help survivors heal completely, rebuild unshakeable confidence, and embrace an extraordinary future.',
-      gradient: 'from-rose-400 to-rose-600',
+      description: 'Our safe spaces and creative programs help survivors heal, rebuild confidence, and embrace their future.',
       stats: '200+',
       statsLabel: 'Lives Transformed'
     },
@@ -60,9 +48,7 @@ const WhyOurWorkMatters = () => {
       id: 'partnerships',
       icon: Users,
       title: 'Faith & Culture Partnerships',
-      subtitle: '',
-      description: 'By forging powerful alliances with faith and cultural institutions, we build an unstoppable network that protects every child.',
-      gradient: 'from-blue-400 to-blue-600',
+      description: 'By partnering with faith and cultural institutions, we build a network that protects every child.',
       stats: '50+',
       statsLabel: 'Communities United'
     },
@@ -70,9 +56,7 @@ const WhyOurWorkMatters = () => {
       id: 'safe-environments',
       icon: Shield,
       title: 'Safe Environments',
-      subtitle: '',
       description: 'We create safe environments through education and advocacy, ensuring children are protected in their communities.',
-      gradient: 'from-teal-400 to-teal-600',
       stats: '100+',
       statsLabel: 'Safe Spaces Created'
     }
@@ -81,120 +65,45 @@ const WhyOurWorkMatters = () => {
   return (
     <div
       ref={sectionRef}
-      className="relative min-h-screen overflow-hidden py-20"
-      style={{
-        background: `linear-gradient(135deg, ${colors.darkTeal} 0%, ${colors.primary} 50%, ${colors.mediumTeal} 100%)`
-      }}
+      className="why-our-work-matters py-16 bg-white"
     >
-      <div className="absolute inset-0 pointer-events-none">
-        <div
-          className="absolute w-96 h-96 rounded-full opacity-5 blur-3xl"
-          style={{
-            background: `radial-gradient(circle, ${colors.primaryLight}, transparent 70%)`,
-            left: '10%',
-            top: '20%',
-            transform: `translateY(${scrollY * 0.05}px)`,
-          }}
-        />
-        <div
-          className="absolute w-80 h-80 rounded-full opacity-5 blur-3xl"
-          style={{
-            background: `radial-gradient(circle, ${colors.accent}, transparent 70%)`,
-            right: '10%',
-            bottom: '20%',
-            transform: `translateY(${-scrollY * 0.05}px)`,
-          }}
-        />
-        <div
-          className="absolute w-64 h-64 rounded-full opacity-5 blur-3xl"
-          style={{
-            background: `radial-gradient(circle, ${colors.secondary}, transparent 70%)`,
-            left: '50%',
-            top: '50%',
-            transform: `translate(-50%, -50%) translateY(${scrollY * 0.03}px)`,
-          }}
-        />
-      </div>
-
-      <div className="container mx-auto px-6 relative z-10 max-w-6xl">
-        <div className={`text-center mb-16 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="inline-flex items-center gap-3 bg-white/10 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-white/20">
-            <Sparkles className="w-5 h-5 text-amber-400" />
-            <span className="text-white font-semibold">Our Goal</span>
-          </div>
-
-          <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight text-white">
-            Our <span
-              className="bg-gradient-to-r from-amber-400 via-yellow-400 to-amber-500 bg-clip-text text-transparent"
-              style={{
-                backgroundSize: '200% 200%',
-                animation: 'gradient-shift 3s ease-in-out infinite'
-              }}
-            >
-              Goal
-            </span>
+      <div className="container mx-auto px-6 max-w-6xl">
+        <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight" style={{ color: colors.primary }}>
+            Our Goal
           </h1>
 
-          <p className="text-xl text-white/90 max-w-4xl mx-auto leading-relaxed">
+          <p className="text-xl max-w-4xl mx-auto leading-relaxed" style={{ color: colors.gray }}>
             To actively prevent child sexual abuse from spreading within communities, intervene in the lives of at-risk children, and disrupt cycles of trauma for survivors.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-20">
+        <div className="grid md:grid-cols-2 gap-8 mb-16">
           {cards.map((card, index) => {
             const Icon = card.icon;
-            const isActive = activeCard === card.id;
 
             return (
               <div
                 key={card.id}
-                className={`group relative cursor-pointer transition-all duration-700 ${isActive ? 'scale-105 z-20' : 'hover:scale-102'
-                  }`}
-                onMouseEnter={() => setActiveCard(card.id)}
-                onMouseLeave={() => setActiveCard(null)}
+                className="bg-white border border-gray-200 rounded-lg p-6 h-full hover:shadow-lg transition-shadow duration-300"
                 style={{
                   animationDelay: `${index * 200}ms`,
                   animation: isVisible ? 'slideInUp 0.8s ease-out forwards' : 'none'
                 }}
               >
-                <div
-                  className={`absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-20 transition-opacity duration-500 blur-xl`}
-                  style={{ backgroundColor: colors.accent }}
-                />
-
-                <div className="relative bg-white/10 backdrop-blur-sm border border-white/20 rounded-2xl p-8 h-full overflow-hidden group-hover:bg-white/15 transition-all duration-500">
-                  <div className="mb-6">
-                    <div className={`inline-flex p-4 rounded-xl bg-gradient-to-r ${card.gradient}`}>
-                      <Icon className="w-8 h-8 text-white" />
-                    </div>
+                <div className="mb-4">
+                  <div className="inline-flex p-3 rounded-lg" style={{ backgroundColor: colors.lightGray }}>
+                    <Icon className="w-6 h-6" style={{ color: colors.primary }} />
                   </div>
+                </div>
 
-                  <div className="space-y-4">
-                    <div>
-                      <h3 className="text-2xl font-bold text-white mb-2">{card.title}</h3>
-                      {card.subtitle && (
-                        <p className={`text-lg font-medium bg-gradient-to-r ${card.gradient} bg-clip-text text-transparent`}>
-                          {card.subtitle}
-                        </p>
-                      )}
-                    </div>
-
-                    <p className="text-white/80 leading-relaxed">
-                      {card.description}
-                    </p>
-
-                    {/* <div className="pt-4 border-t border-white/20">
-                      <div className="flex items-center justify-between">
-                        <div>
-                          <div className={`text-3xl font-bold bg-gradient-to-r ${card.gradient} bg-clip-text text-transparent`}>
-                            {card.stats}
-                          </div>
-                          <div className="text-sm text-white/70 font-medium">{card.statsLabel}</div>
-                        </div>
-                        <ArrowRight className="w-5 h-5 text-white/60 group-hover:text-white group-hover:translate-x-1 transition-all duration-300" />
-                      </div>
-                    </div> */}
-                  </div>
+                <div className="space-y-3">
+                  <h3 className="text-xl font-bold mb-2" style={{ color: colors.darkTeal }}>
+                    {card.title}
+                  </h3>
+                  <p className="text-base leading-relaxed" style={{ color: colors.gray }}>
+                    {card.description}
+                  </p>
                 </div>
               </div>
             );
@@ -203,43 +112,27 @@ const WhyOurWorkMatters = () => {
 
         <div className={`text-center transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
           <div className="space-y-6">
-            <div className="relative inline-block group">
-              <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-cyan-400 rounded-full blur-xl opacity-50 group-hover:opacity-70 transition-opacity duration-500" />
-              <Link to="/about">
-                <button className="relative bg-gradient-to-r from-teal-500 to-cyan-500 text-white font-bold py-4 px-8 rounded-full text-lg hover:scale-105 transition-all duration-300 shadow-lg border-2 border-white/20">
-                  <span className="flex items-center gap-3">
-                    <HandHeart className="w-5 h-5" />
-                    Who We Are
-                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
-                  </span>
-                </button>
-              </Link>
-            </div>
+            <a href="/about">
+              <button
+                className="text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl"
+                style={{ backgroundColor: colors.orange }}
+                onMouseEnter={(e) => {
+                  e.target.style.backgroundColor = colors.orangeHover;
+                }}
+                onMouseLeave={(e) => {
+                  e.target.style.backgroundColor = colors.orange;
+                }}
+              >
+                <span className="flex items-center gap-3">
+                  <HandHeart className="w-5 h-5" />
+                  Who We Are
+                  <ArrowRight className="w-5 h-5" />
+                </span>
+              </button>
+            </a>
           </div>
         </div>
       </div>
-
-      <style jsx>{`
-        @keyframes gradient-shift {
-          0%, 100% {
-            background-position: 0% 50%;
-          }
-          50% {
-            background-position: 100% 50%;
-          }
-        }
-
-        @keyframes slideInUp {
-          from {
-            opacity: 0;
-            transform: translateY(20px);
-          }
-          to {
-            opacity: 1;
-            transform: translateY(0);
-          }
-        }
-      `}</style>
     </div>
   );
 };

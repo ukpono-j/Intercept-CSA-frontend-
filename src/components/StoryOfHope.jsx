@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Heart, Quote, Star, Play, Sparkles, ArrowRight, Users } from 'lucide-react';
+import { ChevronLeft, ChevronRight, Heart, Quote, Star, Sparkles, ArrowRight, Users } from 'lucide-react';
 
 const colors = {
   primary: '#2A8E9D',
@@ -44,8 +44,8 @@ const StoryOfHope = () => {
       highlight: "found a safe space to heal",
       emotion: "healing",
       color: colors.primary,
-      gradient: "from-cyan-400 to-teal-600",
-      bgGradient: "from-cyan-50 to-teal-100",
+      gradient: "from-[#2A8E9D] to-[#237985]",
+      bgGradient: "from-teal-50 to-teal-100",
       icon: Heart,
       stats: "6 months",
       statsLabel: "Journey to Healing"
@@ -57,9 +57,9 @@ const StoryOfHope = () => {
       role: "Prevention Champion",
       highlight: "empowered to make a difference",
       emotion: "empowerment",
-      color: colors.accent,
-      gradient: "from-amber-400 to-orange-500",
-      bgGradient: "from-amber-50 to-orange-100",
+      color: colors.primary,
+      gradient: "from-[#2A8E9D] to-[#237985]",
+      bgGradient: "from-teal-50 to-teal-100",
       icon: Star,
       stats: "50+",
       statsLabel: "Lives Impacted"
@@ -71,9 +71,9 @@ const StoryOfHope = () => {
       role: "Grateful Family",
       highlight: "regain confidence",
       emotion: "gratitude",
-      color: colors.secondary,
-      gradient: "from-rose-400 to-red-500",
-      bgGradient: "from-rose-50 to-red-100",
+      color: colors.primary,
+      gradient: "from-[#2A8E9D] to-[#237985]",
+      bgGradient: "from-teal-50 to-teal-100",
       icon: Users,
       stats: "100%",
       statsLabel: "Recovery Success"
@@ -113,7 +113,7 @@ const StoryOfHope = () => {
             key={i}
             className="absolute w-2 h-2 rounded-full opacity-20 animate-bounce"
             style={{
-              backgroundColor: i % 3 === 0 ? colors.primary : i % 3 === 1 ? colors.accent : colors.secondary,
+              backgroundColor: colors.primary,
               left: `${Math.random() * 100}%`,
               top: `${Math.random() * 100}%`,
               animationDelay: `${Math.random() * 3}s`,
@@ -125,7 +125,7 @@ const StoryOfHope = () => {
         <div 
           className="absolute w-96 h-96 rounded-full opacity-5 pointer-events-none transition-all duration-1000"
           style={{
-            background: `radial-gradient(circle, ${currentStoryData.color}30, transparent 70%)`,
+            background: `radial-gradient(circle, ${colors.primary}30, transparent 70%)`,
             left: mousePosition.x - 192,
             top: mousePosition.y - 192,
             transform: `scale(${1 + Math.sin(scrollY * 0.01) * 0.1})`
@@ -135,20 +135,15 @@ const StoryOfHope = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center mb-16">
-          <div className="inline-flex items-center gap-3 bg-white/80 backdrop-blur-sm rounded-full px-6 py-3 mb-8 border border-gray-200/50 shadow-lg">
-            <Heart className="w-5 h-5 text-rose-500 animate-pulse" />
-            <span className="text-gray-700 font-semibold">Advocacy. Education. Storytelling. Empowerment.</span>
-            <Sparkles className="w-4 h-4 text-amber-500" />
-          </div>
-          
           <h1 className="text-5xl md:text-7xl font-black mb-6 leading-tight">
             <span className="text-gray-900">Who </span>
             <span 
-              className={`bg-gradient-to-r ${currentStoryData.gradient} bg-clip-text text-transparent transition-all duration-1000`}
+              className="bg-gradient-to-r from-[#2A8E9D] to-[#237985] bg-clip-text text-transparent transition-all duration-1000"
             >
               We Are
             </span>
           </h1>
+          
           
           <p className="text-xl md:text-2xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
             Advocacy. Education. Storytelling. Empowerment.
@@ -165,10 +160,10 @@ const StoryOfHope = () => {
             >
               <div className="absolute inset-0 opacity-5">
                 <div 
-                  className={`absolute top-0 right-0 w-96 h-96 bg-gradient-to-br ${currentStoryData.gradient} rounded-full blur-3xl`}
+                  className="absolute top-0 right-0 w-96 h-96 bg-gradient-to-br from-[#2A8E9D] to-[#237985] rounded-full blur-3xl"
                 />
                 <div 
-                  className={`absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr ${currentStoryData.gradient} rounded-full blur-3xl`}
+                  className="absolute bottom-0 left-0 w-80 h-80 bg-gradient-to-tr from-[#2A8E9D] to-[#237985] rounded-full blur-3xl"
                 />
               </div>
 
@@ -176,7 +171,7 @@ const StoryOfHope = () => {
                 <div className="flex items-center justify-between mb-12">
                   <div className="flex items-center gap-4">
                     <div 
-                      className={`p-4 rounded-2xl bg-gradient-to-br ${currentStoryData.gradient} shadow-lg`}
+                      className="p-4 rounded-2xl bg-gradient-to-br from-[#2A8E9D] to-[#237985] shadow-lg"
                     >
                       <StoryIcon className="w-8 h-8 text-white" />
                     </div>
@@ -187,7 +182,7 @@ const StoryOfHope = () => {
                   </div>
                   
                   <div className="hidden md:block text-right">
-                    <div className={`text-3xl font-black bg-gradient-to-r ${currentStoryData.gradient} bg-clip-text text-transparent`}>
+                    <div className="text-3xl font-black bg-gradient-to-r from-[#2A8E9D] to-[#237985] bg-clip-text text-transparent">
                       {currentStoryData.stats}
                     </div>
                     <div className="text-sm text-gray-500 font-medium">{currentStoryData.statsLabel}</div>
@@ -203,7 +198,7 @@ const StoryOfHope = () => {
 
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
-                    <div className={`w-1 h-16 bg-gradient-to-b ${currentStoryData.gradient} rounded-full`} />
+                    <div className="w-1 h-16 bg-gradient-to-b from-[#2A8E9D] to-[#237985] rounded-full" />
                     <div>
                       <cite className="text-xl md:text-2xl font-bold text-gray-900 not-italic">
                         {currentStoryData.author}
@@ -213,7 +208,7 @@ const StoryOfHope = () => {
                   </div>
                   
                   <div className="md:hidden text-right">
-                    <div className={`text-2xl font-black bg-gradient-to-r ${currentStoryData.gradient} bg-clip-text text-transparent`}>
+                    <div className="text-2xl font-black bg-gradient-to-r from-[#2A8E9D] to-[#237985] bg-clip-text text-transparent">
                       {currentStoryData.stats}
                     </div>
                     <div className="text-xs text-gray-500 font-medium">{currentStoryData.statsLabel}</div>
@@ -251,13 +246,13 @@ const StoryOfHope = () => {
                 }`}
                 style={{
                   background: index === currentStory 
-                    ? `linear-gradient(135deg, ${story.color}, ${story.color}cc)` 
+                    ? `linear-gradient(135deg, ${colors.primary}, ${colors.primaryDark})` 
                     : '#e5e7eb'
                 }}
               >
                 <story.icon className="w-6 h-6 text-white absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2" />
                 {index === currentStory && (
-                  <div className="absolute inset-0 rounded-2xl animate-ping" style={{ backgroundColor: `${story.color}40` }} />
+                  <div className="absolute inset-0 rounded-2xl animate-ping" style={{ backgroundColor: `${colors.primary}40` }} />
                 )}
               </button>
             ))}
@@ -266,17 +261,21 @@ const StoryOfHope = () => {
 
         <div className="text-center mt-20">
           <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button className="group relative px-8 py-4 bg-gradient-to-r from-cyan-500 via-rose-500 to-amber-500 text-white font-bold rounded-full text-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl">
+            <button 
+              className="group relative px-8 py-4 bg-gradient-to-r from-[#2A8E9D] to-[#237985] text-white font-bold rounded-full text-lg hover:scale-105 transition-all duration-300 shadow-lg hover:shadow-2xl"
+            >
               <span className="flex items-center gap-3">
                 Read More Stories
                 <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-300" />
               </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 via-rose-400 to-amber-400 rounded-full blur-lg opacity-50 -z-10 animate-pulse" />
+              <div className="absolute inset-0 bg-gradient-to-r from-[#2A8E9D] to-[#237985] rounded-full blur-lg opacity-50 -z-10 animate-pulse" />
             </button>
             
-            <button className="text-gray-700 hover:text-gray-900 font-semibold text-lg transition-colors duration-300 hover:underline flex items-center gap-2">
+            <button 
+              className="text-gray-700 hover:text-gray-900 font-semibold text-lg transition-colors duration-300 hover:underline flex items-center gap-2"
+            >
               <Heart className="w-5 h-5" />
-              Share Your Story
+              <span>Share Your Story</span>
             </button>
           </div>
         </div>

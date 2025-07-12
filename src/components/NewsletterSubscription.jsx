@@ -1,11 +1,12 @@
 import React, { useState } from 'react';
+import './NewsletterSubscription.css';
 
 const API_URL = import.meta.env.VITE_API_URL || 'https://intercept-csa-backend.onrender.com/api';
 
 const Button = ({ children, variant = 'primary', className = '', disabled = false, onClick }) => {
   const baseClasses = 'px-6 py-3 rounded-full font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2';
   const variants = {
-    primary: 'bg-gradient-to-r from-yellow-400 to-orange-500 text-white hover:from-yellow-500 hover:to-orange-600 focus:ring-yellow-500',
+    primary: 'bg-[#F59E0B] text-white hover:bg-[#F59E0B]/90 focus:ring-[#F59E0B]',
   };
   
   return (
@@ -73,10 +74,10 @@ const NewsletterSubscription = ({ StayConnected }) => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800">
+    <section className="relative overflow-hidden bg-white newsletter-subscription">
       <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
+        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-teal-400 to-teal-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-bl from-teal-400 to-teal-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
       </div>
       
       {StayConnected && (
@@ -89,12 +90,11 @@ const NewsletterSubscription = ({ StayConnected }) => {
         />
       )}
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center relative z-10">
-        <div className="mb-6"></div>
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight">
-          Join the <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Movement</span>
+      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-10 md:py-20 text-center relative z-10">
+        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight">
+          Join the <span className="block bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">Movement</span>
         </h2>
-        <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-10">
+        <p className="text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed mb-10">
           Join the movement to intercept silence and protect children.
         </p>
         
@@ -105,7 +105,7 @@ const NewsletterSubscription = ({ StayConnected }) => {
               placeholder="Enter your email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-full text-slate-900 bg-white/90 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300"
+              className="w-full px-4 py-3 rounded-full text-slate-900 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all duration-300"
               aria-label="Email for newsletter subscription"
               disabled={isLoading}
               onKeyPress={(e) => e.key === 'Enter' && handleSubscribe(e)}
@@ -137,12 +137,12 @@ const NewsletterSubscription = ({ StayConnected }) => {
                 Subscribing...
               </span>
             ) : (
-              'Get Involved'
+              'Join Now'
             )}
           </Button>
         </div>
         
-        <p className="text-sm text-slate-400 mt-4">
+        <p className="text-sm text-slate-600 mt-4">
           We respect your privacy and will never share your email address.
         </p>
       </div>

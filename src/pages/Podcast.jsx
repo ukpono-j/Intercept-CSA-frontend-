@@ -107,8 +107,11 @@ function Podcast() {
               <div className="relative h-64 sm:h-80 overflow-hidden rounded-t-2xl">
                 <img
                   src={getImageUrl(episode.image)}
+                  srcSet={`${getImageUrl(episode.image)}?w=320 320w, ${getImageUrl(episode.image)}?w=640 640w`}
+                  sizes="(max-width: 640px) 320px, 640px"
                   alt={episode.title}
                   className="w-full h-full object-cover"
+                  loading="lazy"
                   onError={(e) => {
                     if (!imageErrors[episode._id]) {
                       e.target.src = '/assets/placeholder.jpg';
@@ -122,7 +125,7 @@ function Podcast() {
             {!episode.image && episode.excerpt && (
               <div className="relative h-64 sm:h-80 bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center rounded-t-2xl">
                 <blockquote className="text-center px-6 max-w-md">
-                  <p className="text-lg italic text-slate-600 line-clamp-3">"{episode.excerpt}"</p>
+                  <p className="text-base italic text-slate-600 line-clamp-3">"{episode.excerpt}"</p>
                 </blockquote>
               </div>
             )}
@@ -163,7 +166,7 @@ function Podcast() {
                 )}
               </div>
               
-              <p className="text-slate-600 text-lg leading-relaxed mb-6">
+              <p className="text-slate-600 text-base leading-relaxed mb-6">
                 {episode.excerpt}
               </p>
 
@@ -184,7 +187,7 @@ function Podcast() {
                 </div>
               )}
 
-              <div className="prose prose-slate max-w-none text-lg leading-relaxed">
+              <div className="prose prose-slate max-w-none text-base leading-relaxed">
                 {episode.description?.split('\n').map((paragraph, index) => (
                   <p key={`para-${index}`} className="mb-4">
                     {paragraph || <br />}
@@ -199,7 +202,7 @@ function Podcast() {
   };
 
   const LoadingSpinner = () => (
-    <div className="text-center py-20">
+    <div className="text-center py-16">
       <div className="relative inline-block">
         <div
           className="w-16 h-16 border-4 border-slate-200 rounded-full animate-spin"
@@ -210,24 +213,22 @@ function Podcast() {
           style={{ borderRightColor: colors.primary }}
         ></div>
       </div>
-      <p className="text-xl text-slate-600 mt-6 font-medium">Loading podcast episodes...</p>
+      <p className="text-lg text-slate-600 mt-6 font-medium">Loading podcast episodes...</p>
     </div>
   );
 
   const ErrorDisplay = () => (
-    <div className="text-center py-20">
+    <div className="text-center py-16">
       <div className="inline-flex items-center justify-center w-16 h-16 bg-red-100 rounded-full mb-6">
         <svg className="w-8 h-8 text-red-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
         </svg>
       </div>
-      <p className="text-xl text-slate-600 font-medium">{error}</p>
+      <p className="text-lg text-slate-600 font-medium">{error}</p>
       <button
         onClick={() => window.location.reload()}
         className="mt-6 px-6 py-3 text-base font-semibold text-white rounded-full hover:shadow-xl transition-all duration-300"
-        style={{
-          background: `linear-gradient(135deg, ${colors.accent} 0%, ${colors.primary} 100%)`
-        }}
+        style={{ backgroundColor: colors.accent, ':hover': { backgroundColor: `${colors.accent}/90` } }}
       >
         Try Again
       </button>
@@ -235,32 +236,32 @@ function Podcast() {
   );
 
   const EmptyState = () => (
-    <div className="text-center py-20">
+    <div className="text-center py-16">
       <div className="inline-flex items-center justify-center w-16 h-16 bg-slate-100 rounded-full mb-6">
         <svg className="w-8 h-8 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
       </div>
-      <p className="text-xl text-slate-600 font-medium">No podcast episodes available yet.</p>
+      <p className="text-lg text-slate-600 font-medium">No podcast episodes available yet.</p>
       <p className="text-slate-500 mt-2">Check back soon for new episodes.</p>
     </div>
   );
 
   return (
-    <div className="min-h-screen pt-20 bg-white">
+    <div className="min-h-screen podcast">
       {/* Hero Section */}
       <header className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <div className="absolute inset-0 opacity-10">
           <div
-            className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"
+            className="absolute top-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl animate-pulse"
             style={{ background: `linear-gradient(135deg, ${colors.accent} 0%, ${colors.primary} 100%)` }}
           ></div>
           <div
-            className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"
+            className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-1000"
             style={{ background: `linear-gradient(225deg, ${colors.primary} 0%, ${colors.accent} 100%)` }}
           ></div>
           <div
-            className="absolute bottom-0 left-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-2000"
+            className="absolute bottom-0 left-1/2 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl animate-pulse delay-2000"
             style={{ background: `linear-gradient(45deg, ${colors.accent} 0%, ${colors.primary} 100%)` }}
           ></div>
         </div>
@@ -269,21 +270,19 @@ function Podcast() {
           backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
         }}></div>
         
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-20 md:py-28 lg:py-32">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-16 md:py-20">
+          <div className="grid lg:grid-cols-2 gap-8 items-center">
             <div className="text-center lg:text-left">
-              <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold tracking-tight text-white mb-6 leading-tight">
+              <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-6 leading-tight">
                 Podcast
               </h1>
-              <p className="text-xl sm:text-2xl text-slate-300 max-w-4xl mx-auto lg:mx-0 leading-relaxed mb-10 font-light">
+              <p className="text-xl text-slate-300 max-w-4xl mx-auto lg:mx-0 leading-relaxed mb-8 font-light">
                 CSA awareness and education through powerful conversations and stories.
               </p>
               <a
                 href="#episodes"
-                className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-                style={{
-                  background: `linear-gradient(135deg, ${colors.accent} 0%, ${colors.primary} 100%)`
-                }}
+                className="group relative inline-flex items-center px-6 py-3 text-base font-semibold text-white rounded-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
+                style={{ backgroundColor: colors.accent }}
               >
                 <span className="relative z-10">Listen to the Podcast</span>
                 <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -294,13 +293,16 @@ function Podcast() {
             </div>
             <div className="relative max-w-md mx-auto lg:mx-0">
               <div
-                className="absolute -inset-2 rounded-2xl blur opacity-30"
+                className="absolute -inset-2 rounded-2xl blur opacity-20"
                 style={{ background: `linear-gradient(135deg, ${colors.accent} 0%, ${colors.primary} 100%)` }}
               ></div>
               <img
                 src={PodcastImage}
+                srcSet={`${PodcastImage}?w=320 320w, ${PodcastImage}?w=640 640w`}
+                sizes="(max-width: 640px) 320px, 640px"
                 alt="Podcast Host"
-                className="relative w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
+                className="relative w-full h-auto rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-300"
+                loading="lazy"
               />
             </div>
           </div>
@@ -308,7 +310,7 @@ function Podcast() {
       </header>
 
       {/* Main Content */}
-      <main id="episodes" className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-16 md:py-24">
+      <main id="episodes" className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-16">
         {isLoading ? (
           <LoadingSpinner />
         ) : error ? (
@@ -325,10 +327,8 @@ function Podcast() {
                 </h2>
                 <div className="relative group max-w-4xl mx-auto">
                   <div
-                    className="absolute -inset-1 rounded-2xl blur opacity-25 group-hover:opacity-40 transition duration-1000 group-hover:duration-200"
-                    style={{
-                      background: `linear-gradient(135deg, ${colors.accent} 0%, ${colors.primary} 100%)`
-                    }}
+                    className="absolute -inset-1 rounded-2xl blur opacity-20 group-hover:opacity-30 transition duration-300"
+                    style={{ background: `linear-gradient(135deg, ${colors.accent} 0%, ${colors.primary} 100%)` }}
                   ></div>
                   <div className="relative bg-white rounded-2xl shadow-2xl overflow-hidden">
                     <div className="flex flex-col sm:flex-row gap-6 min-h-[300px]">
@@ -336,8 +336,10 @@ function Podcast() {
                         {episodes[0].image ? (
                           <img
                             src={getImageUrl(episodes[0].image)}
+                            srcSet={`${getImageUrl(episodes[0].image)}?w=320 320w, ${getImageUrl(episodes[0].image)}?w=640 640w`}
+                            sizes="(max-width: 640px) 320px, 640px"
                             alt={episodes[0].title}
-                            className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
                             loading="lazy"
                             onError={(e) => {
                               if (!imageErrors[episodes[0]._id]) {
@@ -349,11 +351,11 @@ function Podcast() {
                         ) : (
                           <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
                             <blockquote className="text-center px-6 max-w-md">
-                              <p className="text-lg italic text-slate-600 line-clamp-3">"{episodes[0].excerpt}"</p>
+                              <p className="text-base italic text-slate-600 line-clamp-3">"{episodes[0].excerpt}"</p>
                             </blockquote>
                           </div>
                         )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       </div>
                       <div className="p-6 sm:p-8 sm:w-1/2 flex flex-col justify-center">
                         <span
@@ -369,7 +371,7 @@ function Podcast() {
                             day: 'numeric'
                           })}
                         </span>
-                        <h3 className="text-2xl sm:text-3xl font-bold mb-4 leading-tight line-clamp-2" style={{ color: colors.text }}>
+                        <h3 className="text-xl sm:text-2xl font-bold mb-4 leading-tight line-clamp-2" style={{ color: colors.text }}>
                           {episodes[0].title}
                         </h3>
                         <p className="text-slate-600 text-base leading-relaxed mb-6 line-clamp-2">
@@ -378,9 +380,7 @@ function Podcast() {
                         <button
                           onClick={() => setSelectedEpisode(episodes[0])}
                           className="inline-flex items-center px-6 py-3 text-base font-semibold text-white rounded-xl hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5 w-fit group/btn"
-                          style={{
-                            background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryDark} 100%)`
-                          }}
+                          style={{ backgroundColor: colors.accent }}
                         >
                           Listen Now
                           <svg className="ml-2 w-5 h-5 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -411,14 +411,16 @@ function Podcast() {
                 {episodes.slice(1, 6).map((episode, index) => (
                   <article
                     key={episode._id}
-                    className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-500 overflow-hidden border border-slate-100 hover:border-slate-200 transform hover:-translate-y-2"
+                    className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-100 hover:border-slate-200 transform hover:-translate-y-2"
                   >
                     <div className="relative h-48 sm:h-56 overflow-hidden">
                       {episode.image ? (
                         <img
                           src={getImageUrl(episode.image)}
+                          srcSet={`${getImageUrl(episode.image)}?w=320 320w, ${getImageUrl(episode.image)}?w=640 640w`}
+                          sizes="(max-width: 640px) 320px, 640px"
                           alt={episode.title}
-                          className="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-700"
+                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
                           loading="lazy"
                           onError={(e) => {
                             if (!imageErrors[episode._id]) {
@@ -434,7 +436,7 @@ function Podcast() {
                           </blockquote>
                         </div>
                       )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
                       <div className="absolute top-4 left-4">
                         <span className="inline-block px-3 py-1 text-xs font-bold text-white bg-black/20 backdrop-blur-sm rounded-full border border-white/20">
                           {episode.category || `Episode ${index + 2}`}
@@ -451,7 +453,7 @@ function Podcast() {
                           })}
                         </span>
                       </div>
-                      <h3 className="text-xl font-bold mb-3 leading-tight line-clamp-2 group-hover:text-slate-800 transition-colors" style={{ color: colors.text }}>
+                      <h3 className="text-lg font-bold mb-3 leading-tight line-clamp-2 group-hover:text-slate-800 transition-colors" style={{ color: colors.text }}>
                         {episode.title}
                       </h3>
                       <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2 flex-grow">
@@ -460,9 +462,7 @@ function Podcast() {
                       <button
                         onClick={() => setSelectedEpisode(episode)}
                         className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-fit group/btn mt-auto"
-                        style={{
-                          background: `linear-gradient(135deg, ${colors.primary} 0%, ${colors.primaryDark} 100%)`
-                        }}
+                        style={{ backgroundColor: colors.accent }}
                         aria-label={`Listen to ${episode.title}`}
                       >
                         Listen Now
@@ -487,20 +487,16 @@ function Podcast() {
       <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 to-slate-100">
         <div className="absolute inset-0 opacity-5">
           <div
-            className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
-            style={{
-              background: `linear-gradient(225deg, ${colors.accent} 0%, ${colors.primary} 100%)`
-            }}
+            className="absolute top-0 right-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl"
+            style={{ background: `linear-gradient(225deg, ${colors.accent} 0%, ${colors.primary} 100%)` }}
           ></div>
           <div
-            className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-3xl"
-            style={{
-              background: `linear-gradient(45deg, ${colors.primary} 0%, ${colors.accent} 100%)`
-            }}
+            className="absolute bottom-0 left-0 w-96 h-96 rounded-full mix-blend-multiply filter blur-xl"
+            style={{ background: `linear-gradient(45deg, ${colors.primary} 0%, ${colors.accent} 100%)` }}
           ></div>
         </div>
-        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold mb-6 leading-tight" style={{ color: colors.text }}>
+        <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-16">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-6 leading-tight text-center" style={{ color: colors.text }}>
             Stay Tuned for <span
               className="block bg-clip-text text-transparent"
               style={{
@@ -510,16 +506,14 @@ function Podcast() {
               }}
             >New Episodes</span>
           </h2>
-          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-10">
+          <p className="text-xl text-slate-600 max-w-3xl mx-auto leading-relaxed mb-8 text-center">
             Subscribe for updates on new podcast episodes, stories, and ways to support our mission in protecting children and empowering communities.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <a
               href="/contact"
-              className="group relative inline-flex items-center px-8 py-4 text-lg font-semibold text-white rounded-full hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-              style={{
-                background: `linear-gradient(to right, ${colors.primary}, ${colors.accent})`
-              }}
+              className="group relative inline-flex items-center px-6 py-3 text-base font-semibold text-white rounded-full hover:shadow-xl transition-all duration-300 transform hover:-translate-y-0.5"
+              style={{ backgroundColor: colors.accent }}
             >
               <span className="relative z-10">Subscribe Now</span>
               <svg className="ml-2 w-5 h-5 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">

@@ -4,72 +4,9 @@
   background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 320'%3E%3Cpath fill='%23FFF7ED' fill-opacity='0.1' d='M0,160L48,154.7C96,149,192,139,288,160C384,181,480,235,576,245.3C672,256,768,224,864,197.3C960,171,1056,149,1152,149.3C1248,149,1344,171,1392,181.3L1440,192L1440,0L1392,0C1344,0,1248,0,1152,0C1056,0,960,0,864,0C768,0,672,0,576,0C480,0,384,0,288,0C192,0,96,0,48,0L0,0Z'%3E%3C/path%3E%3C/svg%3E");
   background-size: cover;
   background-position: bottom;
-  color: white; /* Default text color for the entire section */
 }
 
-/* Ensure all text elements use white color for readability */
-.why-our-work-matters h1,
-.why-our-work-matters h2,
-.why-our-work-matters h3,
-.why-our-work-matters p,
-.why-our-work-matters span {
-  color: white;
-}
-
-/* Card text should be white for better visual consistency */
-.why-our-work-matters .bg-warm100 h3,
-.why-our-work-matters .bg-warm100 p,
-.why-our-work-matters .bg-warm100 span,
-.why-our-work-matters .bg-warm100 div {
-  color: white !important;
-}
-
-/* Stats text in cards - also white */
-.why-our-work-matters .bg-warm100 .text-xs {
-  color: rgba(255, 255, 255, 0.8) !important; /* Semi-transparent white for secondary text */
-}
-
-/* Badge text */
-.why-our-work-matters .bg-warm100\/50 span {
-  color: white;
-}
-
-/* Ensure proper contrast for gradient text */
-.why-our-work-matters .bg-gradient-to-r.bg-clip-text.text-transparent {
-  background: linear-gradient(to right, #fbbf24, #f59e0b);
-  -webkit-background-clip: text;
-  background-clip: text;
-  color: transparent;
-}
-
-/* Button text should remain white */
-.why-our-work-matters a span {
-  color: white !important;
-}
-
-/* Footer text */
-.why-our-work-matters .text-text {
-  color: rgba(255, 255, 255, 0.8);
-}
-
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px) rotate(0deg);
-  }
-  50% {
-    transform: translateY(-10px) rotate(3deg);
-  }
-}
-
-@keyframes gradient-shift {
-  0%, 100% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-}
-
+/* Animations */
 @keyframes slideInUp {
   from {
     opacity: 0;
@@ -93,5 +30,68 @@
   100% {
     opacity: 0.6;
     transform: scale(1);
+  }
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .why-our-work-matters {
+    padding-top: 7.3125rem; /* ~149px */
+    padding-bottom: 7.3125rem; /* ~149px */
+  }
+  .why-our-work-matters h1 {
+    font-size: 2.75rem; /* Matches Hero title at 768px */
+  }
+  .why-our-work-matters p {
+    font-size: 1rem; /* Matches Hero subtitle at 768px */
+    max-width: 600px;
+  }
+  .why-our-work-matters .text-xl {
+    font-size: 1rem; /* Matches Hero subtitle */
+  }
+  .why-our-work-matters .text-2xl {
+    font-size: 1.25rem; /* Smaller card titles for mobile */
+  }
+  .why-our-work-matters .text-base {
+    font-size: 0.9375rem; /* Matches Hero button text */
+  }
+  .why-our-work-matters .p-8 {
+    padding: 1.5rem; /* Reduced padding for cards */
+  }
+  .why-our-work-matters button {
+    font-size: 1rem; /* Matches Hero button text */
+    padding: 1rem 1.5rem; /* Matches Hero button padding */
+    min-width: 200px; /* Compact but readable */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+}
+
+@media (max-width: 640px) {
+  .why-our-work-matters {
+    padding-top: 5.3125rem; /* ~149px */
+    padding-bottom: 5.3125rem; /* ~149px */
+  }
+  .why-our-work-matters h1 {
+    font-size: 2rem; /* Matches Hero title at 640px */
+  }
+  .why-our-work-matters p {
+    font-size: 0.875rem; /* Matches Hero subtitle at 640px */
+  }
+  .why-our-work-matters .text-xl {
+    font-size: 0.875rem; /* Matches Hero subtitle */
+  }
+  .why-our-work-matters .text-2xl {
+    font-size: 1.125rem; /* Even smaller card titles */
+  }
+  .why-our-work-matters .text-base {
+    font-size: 0.875rem; /* Matches Hero button text at 640px */
+  }
+  .why-our-work-matters .p-8 {
+    padding: 1rem; /* Further reduced padding for cards */
+  }
+  .why-our-work-matters button {
+    font-size: 0.9375rem; /* Matches Hero button text at 640px */
+    padding: 1rem 1.5rem;
+    min-width: 180px; /* Slightly smaller for smallest screens */
   }
 }

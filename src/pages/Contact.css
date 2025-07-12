@@ -1,0 +1,105 @@
+/* Scoped to .contact */
+.contact {
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .contact section {
+    padding-top: 5rem; /* Matches Hero, Podcast, Resources, Blog padding */
+    padding-bottom: 5rem;
+  }
+  .contact h1 {
+    font-size: 2.75rem; /* Matches Hero title at 768px */
+  }
+  .contact h2 {
+    font-size: 2rem; /* Smaller section headings */
+  }
+  .contact h3 {
+    font-size: 1.25rem; /* Smaller card titles */
+  }
+  .contact .text-lg {
+    font-size: 1rem; /* Matches Hero subtitle at 768px */
+  }
+  .contact .text-xl {
+    font-size: 1rem; /* Matches Hero subtitle at 768px */
+  }
+  .contact .text-base {
+    font-size: 0.9375rem; /* Matches Hero button text */
+  }
+  .contact .text-sm {
+    font-size: 0.875rem; /* Matches secondary text */
+  }
+  .contact button, .contact a:not(.group .text-sm) {
+    font-size: 1rem; /* Matches Hero button text */
+    padding: 1rem 1.5rem; /* Matches Hero button padding */
+    min-width: 200px; /* Matches Hero button */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  .contact .p-6 {
+    padding: 1.5rem; /* Reduced padding for cards */
+  }
+  .contact .p-8 {
+    padding: 1.5rem; /* Reduced padding for form/map */
+  }
+  .contact .h-48 {
+    height: 14rem; /* Smaller map height */
+  }
+  .contact .min-h-\[100px\] {
+    min-height: 80px; /* Smaller textarea height */
+  }
+  .contact .grid-cols-4 {
+    grid-template-columns: repeat(2, minmax(0, 1fr)); /* 2 columns for contact cards */
+  }
+  .contact .grid-cols-2 {
+    grid-template-columns: 1fr; /* 1 column for contact options */
+  }
+}
+
+@media (max-width: 640px) {
+  .contact section {
+    padding-top: 5rem; /* Matches Hero, Podcast, Resources, Blog padding */
+    padding-bottom: 5rem;
+  }
+  .contact h1 {
+    font-size: 2rem; /* Matches Hero title at 640px */
+  }
+  .contact h2 {
+    font-size: 1.75rem; /* Smaller section headings */
+  }
+  .contact h3 {
+    font-size: 1.125rem; /* Even smaller card titles */
+  }
+  .contact .text-lg {
+    font-size: 0.875rem; /* Matches Hero subtitle at 640px */
+  }
+  .contact .text-xl {
+    font-size: 0.875rem; /* Matches Hero subtitle at 640px */
+  }
+  .contact .text-base {
+    font-size: 0.875rem; /* Matches Hero button text at 640px */
+  }
+  .contact .text-sm {
+    font-size: 0.75rem; /* Smaller secondary text */
+  }
+  .contact button, .contact a:not(.group .text-sm) {
+    font-size: 0.9375rem; /* Matches Hero button text at 640px */
+    padding: 1rem 1.5rem;
+    min-width: 180px; /* Matches Hero button at 640px */
+  }
+  .contact .p-6 {
+    padding: 1rem; /* Further reduced padding for cards */
+  }
+  .contact .p-8 {
+    padding: 1rem; /* Further reduced padding for form/map */
+  }
+  .contact .h-48 {
+    height: 12rem; /* Even smaller map height */
+  }
+  .contact .min-h-\[100px\] {
+    min-height: 80px; /* Even smaller textarea height */
+  }
+  .contact .grid-cols-4 {
+    grid-template-columns: 1fr; /* 1 column for contact cards */
+  }
+}

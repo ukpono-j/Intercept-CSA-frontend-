@@ -188,17 +188,17 @@ function Contact() {
 
       <div className="relative z-10">
         {/* Hero Section */}
-        <section className="pt-32 pb-12 px-4">
+        <section className="pt-40 pb-12 px-4">
           <div className="container mx-auto max-w-5xl">
             <div className={`text-center transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
-              <h1 className="text-4xl sm:text-5xl font-extrabold bg-gradient-to-r from-[#2A8E9D] to-[#F97316] bg-clip-text text-transparent mb-4">
+              <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1F2937] mb-4">
                 Connect with Us
               </h1>
               <p className="text-lg sm:text-xl text-[#1F2937] max-w-2xl mx-auto leading-relaxed">
                 Let’s join hands to protect our children and build safer communities. Reach out now!
               </p>
               <div className="mt-6 flex justify-center">
-                <div className="h-1 w-24 bg-gradient-to-r from-[#FECB0A] to-[#F97316] rounded-full"></div>
+                {/* <div className="h-1 w-24 bg-gradient-to-r from-[#FECB0A] to-[#F97316] rounded-full"></div> */}
               </div>
             </div>
           </div>
@@ -229,7 +229,7 @@ function Contact() {
                       {info.href ? (
                         <a
                           href={info.href}
-                          className="text-[#F97316] hover:text-[#F97316] font-semibold text-sm transition-colors duration-300"
+                          className="text-[#1F2937] hover:text-[#F97316] font-semibold text-sm transition-colors duration-300"
                         >
                           {info.content}
                         </a>
@@ -275,7 +275,7 @@ function Contact() {
                   )}
                   <form onSubmit={handleSubmit} className="space-y-6">
                     <div className="relative group">
-                      <label className="absolute -top-2 left-4 bg-white px-2 text-sm font-semibold text-[#F97316] transform -translate-y-1/2">
+                      <label className="absolute -top-2 left-4 bg-white px-2 text-sm font-semibold text-[#1F2937] transform -translate-y-1/2">
                         Name *
                       </label>
                       <input
@@ -288,7 +288,7 @@ function Contact() {
                       />
                     </div>
                     <div className="relative group">
-                      <label className="absolute -top-2 left-4 bg-white px-2 text-sm font-semibold text-[#F97316] transform -translate-y-1/2">
+                      <label className="absolute -top-2 left-4 bg-white px-2 text-sm font-semibold text-[#1F2937] transform -translate-y-1/2">
                         Email *
                       </label>
                       <input
@@ -301,7 +301,7 @@ function Contact() {
                       />
                     </div>
                     <div className="relative group">
-                      <label className="absolute -top-2 left-4 bg-white px-2 text-sm font-semibold text-[#F97316] transform -translate-y-1/2">
+                      <label className="absolute -top-2 left-4 bg-white px-2 text-sm font-semibold text-[#1F2937] transform -translate-y-1/2">
                         Message *
                       </label>
                       <textarea
@@ -390,7 +390,7 @@ function Contact() {
                       </div>
                       <div>
                         <h3 className="text-lg font-bold text-[#1F2937]">{option.title}</h3>
-                        <p className="text-sm text-[#F97316] font-semibold">{option.content}</p>
+                        <p className="text-sm text-[#F59E0B] font-semibold">{option.content}</p>
                       </div>
                     </div>
                   </a>

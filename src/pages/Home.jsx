@@ -70,55 +70,23 @@ function Home() {
   ];
 
   return (
-    <div className="min-h-screen mt-14 bg-white">
+    <div className="min-h-screen pt-14 bg-white">
       <Hero />
 
       <WhyOurWorkMatters />
 
       {/* Story of Hope section */}
-      <StoryOfHope />
-      {/* in this impactful programs use it to write why we are dealing with child sexual abuse */}
+
+      {/* <StoryOfHope /> */}
+
       <ImpactfulPrograms />
 
-      <Solution />
+      {/* <Solution /> */}
 
-      <Voices/>
+      {/* <Voices/> */}
 
-     <Partners/>
-
-      {/* <section className="relative overflow-hidden bg-gradient-to-br from-slate-900 to-slate-800 opacity-0 animate-section" ref={(el) => (sectionsRef.current[6] = el)}>
-        <div className="absolute inset-0 opacity-10">
-          <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-          <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-bl from-orange-400 to-yellow-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
-        </div>
-        <img
-          src={StayConnected}
-          alt="Children playing in a safe environment"
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
-          loading="lazy"
-          decoding="async"
-        />
-        <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-20 md:py-24 text-center">
-          <div className="mb-6"></div>
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-white mb-6 leading-tight animate-cta-title">
-            Stay <span className="block bg-gradient-to-r from-yellow-400 to-orange-500 bg-clip-text text-transparent">Connected</span>
-          </h2>
-          <p className="text-xl text-slate-300 max-w-3xl mx-auto leading-relaxed mb-10 animate-cta-text">
-            Join our community to receive updates on our work, survivor stories, and ways to get involved.
-          </p>
-          <div className="max-w-md mx-auto">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="w-full px-4 py-3 rounded-full text-slate-900 bg-white/90 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition-all duration-300 mb-4"
-              aria-label="Email for newsletter subscription"
-            />
-            <Button variant="primary" className="w-full">
-              Subscribe Now
-            </Button>
-          </div>
-        </div>
-      </section> */}
+     {/* <Partners/> */}
+     
       <NewsletterSubscription />
     </div>
   );

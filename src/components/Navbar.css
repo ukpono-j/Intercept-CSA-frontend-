@@ -1,0 +1,89 @@
+/* Scoped to .navbar */
+.navbar {
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .navbar .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .navbar .py-5 {
+    padding-top: 1.25rem;
+    padding-bottom: 1.25rem;
+  }
+  .navbar .text-xl {
+    font-size: 1.75rem; /* Matches Contact menu title at 768px */
+  }
+  .navbar .text-base {
+    font-size: 1rem; /* Matches nav links */
+  }
+  .navbar .text-sm {
+    font-size: 0.875rem; /* Matches dropdown items */
+  }
+  .navbar .p-5 {
+    padding: 1.25rem; /* Matches mobile menu padding */
+  }
+  .navbar .py-3 {
+    padding-top: 0.75rem;
+    padding-bottom: 0.75rem;
+  }
+  .navbar .px-4 {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+  .navbar .p-3 {
+    padding: 0.75rem; /* 48px touch target for buttons */
+  }
+  .navbar .min-w-\[48px\] {
+    min-width: 48px; /* WCAG touch target */
+  }
+}
+
+@media (max-width: 640px) {
+  .navbar .px-4 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  .navbar .py-5 {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+  }
+  .navbar .text-xl {
+    font-size: 1.5rem; /* Matches Contact menu title at 640px */
+  }
+  .navbar .text-base {
+    font-size: 0.9375rem; /* Matches nav links at 640px */
+  }
+  .navbar .text-sm {
+    font-size: 0.75rem; /* Smaller dropdown items */
+  }
+  .navbar .p-5 {
+    padding: 1rem; /* Reduced mobile menu padding */
+  }
+  .navbar .py-3 {
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+  .navbar .px-4 {
+    padding-left: 0.75rem;
+    padding-right: 0.75rem;
+  }
+  .navbar .p-3 {
+    padding: 0.75rem; /* 48px touch target maintained */
+  }
+  .navbar .min-w-\[48px\] {
+    min-width: 48px; /* WCAG touch target */
+  }
+  .navbar .h-12 {
+    height: 2.5rem; /* Smaller logo */
+    width: 2.5rem;
+  }
+}
+
+/* Float animation */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-6px); }
+}

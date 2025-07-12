@@ -1,136 +1,136 @@
-/* Scoped to .resources */
-.resources {
+/* Scoped to .blog */
+.blog {
   font-family: 'Raleway', sans-serif;
 }
 
 /* Responsive Design */
 @media (max-width: 768px) {
-  .resources header {
-    padding-top: 5rem; /* Matches updated Hero and Podcast padding */
+  .blog header {
+    padding-top: 5rem; /* Matches updated Hero, Podcast, and Resources padding */
     padding-bottom: 5rem;
   }
-  .resources main {
-    padding-top: 5rem; /* Matches updated Hero and Podcast padding */
+  .blog main {
+    padding-top: 5rem; /* Matches updated Hero, Podcast, and Resources padding */
     padding-bottom: 5rem;
   }
-  .resources section {
-    padding-top: 5rem; /* Matches updated Hero and Podcast padding */
+  .blog section {
+    padding-top: 5rem; /* Matches updated Hero, Podcast, and Resources padding */
     padding-bottom: 5rem;
   }
-  .resources h1 {
+  .blog h1 {
     font-size: 2.75rem; /* Matches Hero title at 768px */
   }
-  .resources h2 {
+  .blog h2 {
     font-size: 2rem; /* Smaller section headings */
   }
-  .resources h3 {
+  .blog h3 {
     font-size: 1.25rem; /* Smaller card titles */
   }
-  .resources .text-xl {
+  .blog .text-xl {
     font-size: 1rem; /* Matches Hero subtitle at 768px */
   }
-  .resources .text-2xl {
+  .blog .text-2xl {
     font-size: 1.25rem; /* Matches card titles */
   }
-  .resources .text-3xl {
+  .blog .text-3xl {
     font-size: 1.5rem; /* Matches section headings */
   }
-  .resources .text-base {
+  .blog .text-base {
     font-size: 0.9375rem; /* Matches Hero button text */
   }
-  .resources .text-lg {
+  .blog .text-lg {
     font-size: 0.9375rem; /* Matches Hero button text */
   }
-  .resources .text-sm {
+  .blog .text-sm {
     font-size: 0.875rem; /* Matches secondary text */
   }
-  .resources button, .resources a {
+  .blog button, .blog a {
     font-size: 1rem; /* Matches Hero button text */
     padding: 1rem 1.5rem; /* Matches Hero button padding */
     min-width: 200px; /* Matches Hero button */
     white-space: nowrap; /* Prevent text wrapping */
   }
-  .resources .p-6 {
+  .blog .p-6 {
     padding: 1.5rem; /* Reduced padding for cards */
   }
-  .resources .p-8 {
-    padding: 1.5rem; /* Reduced padding for featured resource */
+  .blog .p-8 {
+    padding: 1.5rem; /* Reduced padding for featured post */
   }
-  .resources .h-64 {
+  .blog .h-64 {
     height: 14rem; /* Smaller image height */
   }
-  .resources .h-48 {
+  .blog .h-48 {
     height: 10rem; /* Smaller card image height */
   }
-  .resources .min-h-\[200px\] {
+  .blog .min-h-\[250px\] {
     min-height: 180px; /* Smaller card height */
   }
-  .resources .min-h-\[300px\] {
-    min-height: 240px; /* Smaller featured resource height */
+  .blog .min-h-\[300px\] {
+    min-height: 240px; /* Smaller featured post height */
   }
 }
 
 @media (max-width: 640px) {
-  .resources header {
-    padding-top: 5rem; /* Matches updated Hero and Podcast padding */
+  .blog header {
+    padding-top: 5rem; /* Matches updated Hero, Podcast, and Resources padding */
     padding-bottom: 5rem;
   }
-  .resources main {
-    padding-top: 5rem; /* Matches updated Hero and Podcast padding */
+  .blog main {
+    padding-top: 5rem; /* Matches updated Hero, Podcast, and Resources padding */
     padding-bottom: 5rem;
   }
-  .resources section {
-    padding-top: 5rem; /* Matches updated Hero and Podcast padding */
+  .blog section {
+    padding-top: 5rem; /* Matches updated Hero, Podcast, and Resources padding */
     padding-bottom: 5rem;
   }
-  .resources h1 {
+  .blog h1 {
     font-size: 2rem; /* Matches Hero title at 640px */
   }
-  .resources h2 {
+  .blog h2 {
     font-size: 1.75rem; /* Smaller section headings */
   }
-  .resources h3 {
+  .blog h3 {
     font-size: 1.125rem; /* Even smaller card titles */
   }
-  .resources .text-xl {
+  .blog .text-xl {
     font-size: 0.875rem; /* Matches Hero subtitle at 640px */
   }
-  .resources .text-2xl {
+  .blog .text-2xl {
     font-size: 1.125rem; /* Matches card titles */
   }
-  .resources .text-3xl {
+  .blog .text-3xl {
     font-size: 1.25rem; /* Matches section headings */
   }
-  .resources .text-base {
+  .blog .text-base {
     font-size: 0.875rem; /* Matches Hero button text at 640px */
   }
-  .resources .text-lg {
+  .blog .text-lg {
     font-size: 0.875rem; /* Matches Hero button text at 640px */
   }
-  .resources .text-sm {
+  .blog .text-sm {
     font-size: 0.75rem; /* Smaller secondary text */
   }
-  .resources button, .resources a {
+  .blog button, .blog a {
     font-size: 0.9375rem; /* Matches Hero button text at 640px */
     padding: 1rem 1.5rem;
     min-width: 180px; /* Matches Hero button at 640px */
   }
-  .resources .p-6 {
+  .blog .p-6 {
     padding: 1rem; /* Further reduced padding for cards */
   }
-  .resources .p-8 {
-    padding: 1rem; /* Further reduced padding for featured resource */
+  .blog .p-8 {
+    padding: 1rem; /* Further reduced padding for featured post */
   }
-  .resources .h-64 {
+  .blog .h-64 {
     height: 12rem; /* Even smaller image height */
   }
-  .resources .h-48 {
+  .blog .h-48 {
     height: 8rem; /* Even smaller card image height */
   }
-  .resources .min-h-\[200px\] {
+  .blog .min-h-\[250px\] {
     min-height: 160px; /* Even smaller card height */
   }
-  .resources .min-h-\[300px\] {
-    min-height: 200px; /* Even smaller featured resource height */
+  .blog .min-h-\[300px\] {
+    min-height: 200px; /* Even smaller featured post height */
   }
 }

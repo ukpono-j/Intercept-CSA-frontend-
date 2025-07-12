@@ -1,0 +1,108 @@
+/* Scoped to .impactful-programs */
+.impactful-programs {
+  font-family: 'Raleway', sans-serif;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .impactful-programs {
+    padding-top: 7.3125rem; /* ~149px */
+    padding-bottom: 7.3125rem; /* ~149px */
+  }
+  .impactful-programs h1 {
+    font-size: 2.75rem; /* Matches Hero title at 768px */
+  }
+  .impactful-programs .text-xl {
+    font-size: 1rem; /* Matches Hero subtitle at 768px */
+  }
+  .impactful-programs .text-2xl {
+    font-size: 1.5rem; /* Smaller section headings */
+  }
+  .impactful-programs .text-3xl {
+    font-size: 1.5rem; /* Matches section headings */
+  }
+  .impactful-programs .text-lg {
+    font-size: 0.9375rem; /* Matches Hero button text */
+  }
+  .impactful-programs .text-base {
+    font-size: 0.9375rem; /* Matches Hero button text */
+  }
+  .impactful-programs .text-4xl {
+    font-size: 2rem; /* Smaller stat values */
+  }
+  .impactful-programs .p-8 {
+    padding: 1.5rem; /* Reduced padding for cards */
+  }
+  .impactful-programs .p-12 {
+    padding: 2rem; /* Reduced padding for summary section */
+  }
+  .impactful-programs button {
+    font-size: 1rem; /* Matches Hero button text */
+    padding: 1rem 1.5rem; /* Matches Hero button padding */
+    min-width: 200px; /* Compact but readable */
+    white-space: nowrap; /* Prevent text wrapping */
+  }
+  .impactful-programs .w-12 {
+    width: 2.5rem; /* Smaller icons */
+    height: 2.5rem;
+  }
+  .impactful-programs .w-10 {
+    width: 2rem; /* Smaller stat icons */
+    height: 2rem;
+  }
+  .impactful-programs .w-6 {
+    width: 1.25rem; /* Smaller heading icons */
+    height: 1.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .impactful-programs {
+    padding-top: 5.3125rem; /* ~149px */
+    padding-bottom: 5.3125rem; /* ~149px */
+  }
+  .impactful-programs h1 {
+    font-size: 2rem; /* Matches Hero title at 640px */
+  }
+  .impactful-programs .text-xl {
+    font-size: 0.875rem; /* Matches Hero subtitle at 640px */
+  }
+  .impactful-programs .text-2xl {
+    font-size: 1.25rem; /* Smaller section headings */
+  }
+  .impactful-programs .text-3xl {
+    font-size: 1.25rem; /* Matches section headings */
+  }
+  .impactful-programs .text-lg {
+    font-size: 0.875rem; /* Matches Hero button text at 640px */
+  }
+  .impactful-programs .text-base {
+    font-size: 0.875rem; /* Matches Hero button text at 640px */
+  }
+  .impactful-programs .text-4xl {
+    font-size: 1.75rem; /* Even smaller stat values */
+  }
+  .impactful-programs .p-8 {
+    padding: 1rem; /* Further reduced padding for cards */
+  }
+  .impactful-programs .p-12 {
+    padding: 1.5rem; /* Further reduced padding for summary section */
+  }
+  .impactful-programs button {
+    font-size: 0.9375rem; /* Matches Hero button text at 640px */
+    padding: 1rem 1.5rem;
+    min-width: 180px; /* Slightly smaller for smallest screens */
+  }
+  .impactful-programs .w-12 {
+    width: 2rem; /* Even smaller icons */
+    height: 2rem;
+  }
+  .impactful-programs .w-10 {
+    width: 1.75rem; /* Even smaller stat icons */
+    height: 1.75rem;
+  }
+  .impactful-programs .w-6 {
+    width: 1rem; /* Even smaller heading icons */
+    height: 1rem;
+  }
+}

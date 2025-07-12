@@ -1,6 +1,5 @@
 import { useState, useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
-import { colors } from '../utils/colors';
 import FormInput from '../components/FormInput';
 import Button from '../components/Button';
 import './GetInvolved.css';
@@ -77,131 +76,44 @@ function GetInvolved() {
     return () => observer.disconnect();
   }, []);
 
-  const impact = [
-    { number: '1,000+', label: 'Volunteers Trained', icon: '👥' },
-    { number: '150+', label: 'Organizations Partnered', icon: '🤝' },
-    { number: '5,000+', label: 'People Educated', icon: '📚' },
-    { number: '500+', label: 'Survivors Supported', icon: '💝' }
-  ];
-
   return (
-    <div className="min-h-screen bg-white">
-      <style jsx>{`
-        @keyframes fadeInUp {
-          from { opacity: 0; transform: translateY(40px); }
-          to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .animate-in {
-          animation: fadeInUp 0.8s ease-out forwards;
-        }
-
-        .section-opacity {
-          opacity: 0;
-        }
-
-        .gradient-bg {
-          background: linear-gradient(135deg, ${themeColors.primary} 0%, ${themeColors.primaryLight} 100%);
-        }
-
-        .text-gradient {
-          background: linear-gradient(135deg, ${themeColors.primary}, ${themeColors.primaryLight});
-          -webkit-background-clip: text;
-          background-clip: text;
-          -webkit-text-fill-color: transparent;
-        }
-
-        .glass-card {
-          background: rgba(255, 255, 255, 0.95);
-          backdrop-filter: blur(10px);
-          border: 1px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .hover-lift {
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .hover-lift:hover {
-          transform: translateY(-8px) scale(1.02);
-          box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-        }
-
-        .way-card {
-          background: linear-gradient(145deg, rgba(255,255,255,0.9), rgba(255,255,255,0.7));
-          border: 1px solid rgba(15, 118, 110, 0.1);
-          transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-
-        .way-card:hover {
-          background: rgba(255,255,255,0.95);
-          border-color: ${themeColors.primaryLight};
-        }
-
-        .category-badge {
-          background: linear-gradient(135deg, ${themeColors.primary}20, ${themeColors.primaryLight}20);
-          color: ${themeColors.primary};
-          border: 1px solid ${themeColors.primary}30;
-        }
-
-        .floating-element {
-          animation: float 6s ease-in-out infinite;
-        }
-
-        @keyframes float {
-          0%, 100% { transform: translateY(0px); }
-          50% { transform: translateY(-10px); }
-        }
-
-        .form-card {
-          background: linear-gradient(145deg, rgba(15, 118, 110, 0.95), rgba(20, 184, 166, 0.9));
-          backdrop-filter: blur(10px);
-        }
-
-        @media (max-width: 768px) {
-          .hero-title { font-size: 2.5rem !important; }
-          .section-title { font-size: 2rem !important; }
-        }
-      `}</style>
-
+    <div className="get-involved-container min-h-screen bg-white">
       {/* Hero Section */}
-      <section 
+      <section
         className="relative min-h-screen flex pt-36 pb-24 items-center justify-center text-white section-opacity"
         ref={(el) => (sectionsRef.current[0] = el)}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-black/50 z-10"></div>
-        <img 
-          src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1200&h=800&fit=crop" 
-          alt="Get Involved" 
+        <img
+          src="https://images.unsplash.com/photo-1559027615-cd4628902d4a?w=1200&h=800&fit=crop"
+          alt="Get Involved"
           className="absolute inset-0 w-full h-full object-cover"
         />
-        
+
         {/* Floating background elements */}
         <div className="absolute inset-0 z-5">
           <div className="absolute top-20 left-10 w-32 h-32 bg-teal-400/10 rounded-full blur-xl floating-element"></div>
-          <div className="absolute top-40 right-20 w-24 h-24 bg-amber-400/10 rounded-full blur-xl floating-element" style={{animationDelay: '2s'}}></div>
-          <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-teal-300/10 rounded-full blur-xl floating-element" style={{animationDelay: '4s'}}></div>
+          <div className="absolute top-40 right-20 w-24 h-24 bg-amber-400/10 rounded-full blur-xl floating-element" style={{ animationDelay: '2s' }}></div>
+          <div className="absolute bottom-32 left-1/4 w-40 h-40 bg-teal-300/10 rounded-full blur-xl floating-element" style={{ animationDelay: '4s' }}></div>
         </div>
-        
+
         <div className="relative z-20 text-center px-6 max-w-5xl mx-auto">
-          <div className="inline-block px-6 py-3 bg-white/20 backdrop-blur-sm rounded-full text-sm font-medium mb-8 border border-white/30">
-            Make a Difference
-          </div>
-          <h1 className="hero-title text-5xl md:text-7xl font-bold mb-8 leading-tight">
+          <h1 className="hero-title font-bold mb-8 leading-tight">
             Get <span className="block text-teal-300 mt-2">Involved</span>
           </h1>
-          <p className="text-xl md:text-2xl mb-12 text-gray-200 leading-relaxed max-w-4xl mx-auto">
+          <p className="text-lg mb-12 text-gray-200 leading-relaxed max-w-4xl mx-auto">
             Join Intercept CSA to prevent child sexual abuse, empower survivors, and build safer Nigerian communities.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
-            <button 
+            <button
               onClick={() => document.getElementById('become-a-first-listener')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-10 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+              className="btn-primary px-10 py-4 font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
             >
               Explore Ways
             </button>
-            <button 
+            <button
               onClick={() => document.getElementById('volunteer')?.scrollIntoView({ behavior: 'smooth' })}
-              className="px-10 py-4 border-2 border-white text-white hover:bg-white hover:text-teal-800 font-semibold rounded-full transition-all duration-300"
+              className="btn-outline px-10 py-4 font-semibold rounded-full transition-all duration-300"
             >
               Volunteer Now
             </button>
@@ -209,61 +121,37 @@ function GetInvolved() {
         </div>
       </section>
 
-      {/* Impact Stats */}
-      {/* <section 
-        className="py-16 gradient-bg section-opacity"
-        ref={(el) => (sectionsRef.current[1] = el)}
-      >
-        <div className="max-w-7xl mx-auto px-6">
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {impact.map((stat, index) => (
-              <div key={index} className="text-center text-white">
-                <div className="text-4xl mb-4">{stat.icon}</div>
-                <div className="text-4xl md:text-5xl font-bold mb-2 text-teal-200">{stat.number}</div>
-                <div className="text-lg text-teal-100">{stat.label}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section> */}
-
       {/* Become a First Listener */}
       <section
         id="become-a-first-listener"
-        className="py-20 bg-gray-50 section-opacity"
-        ref={(el) => (sectionsRef.current[2] = el)}
+        className="py-20 bg-white section-opacity"
+        ref={(el) => (sectionsRef.current[1] = el)}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
-              Become a First Listener
-            </div>
-            <h2 className="section-title text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+            <h2 className="section-title font-bold text-gray-800 mb-6">
               Become a <span className="text-gradient">First Listener</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
               Be the first to listen, support, and guide children and survivors toward safety and healing through our training programs or by offering your space.
             </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-2">
             <article className="way-card rounded-2xl p-8 hover-lift shadow-lg text-center">
-              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-6">
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-2xl mx-auto mb-6">
                 👥
               </div>
               <div className="mb-4">
-                <span className="category-badge inline-block px-3 py-1 text-xs font-bold rounded-full backdrop-blur-sm mb-2">
-                  Training
-                </span>
                 <div className="text-sm text-amber-600 font-semibold">Join our community</div>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">Join a Training</h3>
-              <p className="text-gray-600 mb-8 leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 text-gray-800">Join a Training</h3>
+              <p className="text-base text-gray-600 mb-8 leading-relaxed">
                 Participate in our First Listener training to learn how to support children and survivors effectively.
               </p>
               <button
                 onClick={() => document.getElementById('volunteer')?.scrollIntoView({ behavior: 'smooth' })}
-                className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
+                className="btn-primary inline-flex items-center px-6 py-3 font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
               >
                 <span className="relative z-10">Join Now</span>
                 <svg
@@ -277,22 +165,19 @@ function GetInvolved() {
               </button>
             </article>
             <article className="way-card rounded-2xl p-8 hover-lift shadow-lg text-center">
-              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-6">
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-2xl mx-auto mb-6">
                 🏛️
               </div>
               <div className="mb-4">
-                <span className="category-badge inline-block px-3 py-1 text-xs font-bold rounded-full backdrop-blur-sm mb-2">
-                  Venue Support
-                </span>
                 <div className="text-sm text-amber-600 font-semibold">Offer your space</div>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">Volunteer Your Space</h3>
-              <p className="text-gray-600 mb-8 leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 text-gray-800">Volunteer Your Space</h3>
+              <p className="text-base text-gray-600 mb-8 leading-relaxed">
                 Provide a venue for our training sessions or community events to help us reach more people.
               </p>
               <Link
                 to="/contact"
-                className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
+                className="btn-primary inline-flex items-center px-6 py-3 font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
               >
                 <span className="relative z-10">Offer a Space</span>
                 <svg
@@ -312,31 +197,28 @@ function GetInvolved() {
       {/* Partner With Us */}
       <section
         id="partner-with-us"
-        className="py-20 bg-white section-opacity"
-        ref={(el) => (sectionsRef.current[3] = el)}
+        className="py-20 gradient-bg section-opacity"
+        ref={(el) => (sectionsRef.current[2] = el)}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <div className="relative">
-              <div className="absolute inset-0 bg-gradient-to-r from-teal-400 to-teal-600 rounded-2xl transform rotate-3 opacity-20"></div>
+              <div className="absolute inset-0 bg-gradient-to-r from-teal-400/50 to-teal-600/50 rounded-2xl transform rotate-3 opacity-20"></div>
               <img
                 src={SupportGroup}
                 alt="Partnership"
                 className="relative rounded-2xl shadow-2xl transform hover:scale-105 transition-transform duration-500"
               />
             </div>
-            
+
             <div>
-              <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
-                Partnership
-              </div>
-              <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-                Partner <span className="text-gradient">With Us</span>
+              <h2 className="section-title font-bold text-white mb-6">
+                Partner <span className="">With Us</span>
               </h2>
-              <p className="text-xl text-gray-600 mb-8 leading-relaxed">
+              <p className="text-lg text-gray-50 mb-8 leading-relaxed">
                 We collaborate with schools, churches, and other NGOs to create safe environments and promote child protection.
               </p>
-              
+
               <div className="space-y-4 mb-8">
                 {[
                   'Schools: Implement child safety programs and training.',
@@ -344,19 +226,20 @@ function GetInvolved() {
                   'NGOs: Partner for joint initiatives and resource sharing.'
                 ].map((item, i) => (
                   <div key={i} className="flex items-center">
-                    <div className="w-6 h-6 bg-teal-100 text-teal-700 rounded-full flex items-center justify-center mr-3">
+                    <div className="w-6 h-6 bg-white text-primary-dark rounded-full flex items-center justify-center mr-3">
                       <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
                         <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
                       </svg>
                     </div>
-                    <span className="text-gray-700">{item}</span>
+                    <span className="text-lg text-teal-50">{item}</span>
                   </div>
                 ))}
               </div>
-              
+
               <Link
                 to="/contact"
-                className="inline-flex items-center px-8 py-4 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
+                className="btn-primary inline-flex items-center px-8 py-4 font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl group"
+                style={{ backgroundColor: themeColors.accent, color: themeColors.text }}
               >
                 <span className="relative z-10">Start Partnership</span>
                 <svg
@@ -376,40 +259,34 @@ function GetInvolved() {
       {/* Support Our Work */}
       <section
         id="support-our-work"
-        className="py-20 bg-gray-50 section-opacity"
-        ref={(el) => (sectionsRef.current[4] = el)}
+        className="py-20 bg-white section-opacity"
+        ref={(el) => (sectionsRef.current[3] = el)}
       >
         <div className="max-w-7xl mx-auto px-6">
           <div className="text-center mb-16">
-            <div className="inline-block px-4 py-2 bg-teal-600 text-white rounded-full text-sm font-medium mb-6">
-              Support Our Work
-            </div>
-            <h2 className="section-title text-4xl md:text-5xl font-bold text-gray-800 mb-6">
+            <h2 className="section-title font-bold text-gray-800 mb-6">
               Support <span className="text-gradient">Our Work</span>
             </h2>
-            <p className="text-xl text-gray-600 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
               We’re building a funding model rooted in impact and care. Until then, email us if you’d like to support.
             </p>
           </div>
 
           <div className="grid gap-8 md:grid-cols-1">
             <article className="way-card rounded-2xl p-8 hover-lift shadow-lg text-center">
-              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-3xl mx-auto mb-6">
+              <div className="w-16 h-16 bg-teal-100 rounded-full flex items-center justify-center text-2xl mx-auto mb-6">
                 💝
               </div>
               <div className="mb-4">
-                <span className="category-badge inline-block px-3 py-1 text-xs font-bold rounded-full backdrop-blur-sm mb-2">
-                  Support
-                </span>
                 <div className="text-sm text-amber-600 font-semibold">Your contribution matters</div>
               </div>
-              <h3 className="text-2xl font-bold mb-4 text-gray-800">Support Our Mission</h3>
-              <p className="text-gray-600 mb-8 leading-relaxed">
+              <h3 className="text-xl font-bold mb-4 text-gray-800">Support Our Mission</h3>
+              <p className="text-base text-gray-600 mb-8 leading-relaxed">
                 Help us protect children and empower communities by contributing to our mission.
               </p>
               <Link
                 to="/contact"
-                className="inline-flex items-center px-6 py-3 bg-teal-600 hover:bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
+                className="btn-primary inline-flex items-center px-6 py-3 font-semibold rounded-full transition-all duration-300 transform hover:-translate-y-1 shadow-lg hover:shadow-xl group"
               >
                 <span className="relative z-10">Reach Out</span>
                 <svg
@@ -429,20 +306,20 @@ function GetInvolved() {
       {/* Volunteer Form */}
       <section
         id="volunteer"
-        className="py-20 bg-white section-opacity"
-        ref={(el) => (sectionsRef.current[5] = el)}
+        className="py-20 gradient-bg section-opacity"
+        ref={(el) => (sectionsRef.current[4] = el)}
       >
         <div className="max-w-4xl mx-auto px-6">
           <div className="text-center mb-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-gray-800 mb-6">
-              Volunteer <span className="text-gradient">Application</span>
+            <h2 className="section-title font-bold text-white mb-6">
+              Volunteer <span className="">Application</span>
             </h2>
-            <p className="text-xl text-gray-600 leading-relaxed">
+            <p className="text-lg text-gray-50 leading-relaxed">
               Join our team of dedicated volunteers making a real difference in children's lives.
             </p>
           </div>
-          
-          <div className="form-card rounded-2xl shadow-2xl p-8 sm:p-12 text-white">
+
+          <div className="form-card rounded-2xl shadow-2xl p-8 sm:p-12" style={{ background: 'rgba(15, 118, 110, 0.2)' }}>
             <form onSubmit={handleVolunteerSubmit} className="space-y-8">
               <div className="grid md:grid-cols-2 gap-6">
                 <div>
@@ -453,13 +330,12 @@ function GetInvolved() {
                     value={volunteerForm.name}
                     onChange={handleInputChange}
                     required
-                    className={`w-full border-b-2 ${
-                      errors.name ? 'border-red-400' : 'border-white/50'
-                    } focus:border-white text-white bg-transparent placeholder-white/70 pb-2`}
+                    className={`w-full outline-none border-b-2 ${errors.name ? 'border-red-400' : 'border-teal-50'
+                      } focus:border-teal-50 text-teal-50 bg-transparent placeholder-teal-50/70 pb-2 text-base`}
                   />
                   {errors.name && <p className="text-red-300 text-sm mt-2">{errors.name}</p>}
                 </div>
-                
+
                 <div>
                   <FormInput
                     label="Email Address"
@@ -468,14 +344,13 @@ function GetInvolved() {
                     value={volunteerForm.email}
                     onChange={handleInputChange}
                     required
-                    className={`w-full border-b-2 ${
-                      errors.email ? 'border-red-400' : 'border-white/50'
-                    } focus:border-white text-white bg-transparent placeholder-white/70 pb-2`}
+                    className={`w-full outline-none border-b-2 ${errors.email ? 'border-red-400' : 'border-teal-50'
+                      } focus:border-teal-50 text-teal-50 bg-transparent placeholder-teal-50/70 pb-2 text-base`}
                   />
                   {errors.email && <p className="text-red-300 text-sm mt-2">{errors.email}</p>}
                 </div>
               </div>
-              
+
               <div>
                 <FormInput
                   label="Why do you want to volunteer with us?"
@@ -483,13 +358,14 @@ function GetInvolved() {
                   name="message"
                   value={volunteerForm.message}
                   onChange={handleInputChange}
-                  className="w-full border-b-2 border-white/50 focus:border-white text-white bg-transparent placeholder-white/70 pb-2 min-h-24"
+                  className="w-full outline-none border-b-2 border-teal-50 focus:border-teal-50 text-teal-50 bg-transparent placeholder-teal-50/70 pb-2 min-h-24 text-base"
                 />
               </div>
-              
+
               <Button
                 type="submit"
-                className="w-full bg-white text-teal-700 hover:bg-gray-100 font-bold py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="btn-primary w-full font-bold py-4 rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                style={{ backgroundColor: themeColors.accent, color: themeColors.text }}
               >
                 Submit Application
               </Button>
@@ -500,30 +376,24 @@ function GetInvolved() {
 
       {/* CTA Section */}
       <section
-        className="py-20 gradient-bg section-opacity"
-        ref={(el) => (sectionsRef.current[6] = el)}
+        className="py-20 bg-white section-opacity"
+        ref={(el) => (sectionsRef.current[5] = el)}
       >
         <div className="max-w-4xl mx-auto px-6 text-center">
           <div className="glass-card rounded-2xl p-12">
-            <h2 className="text-4xl md:text-5xl font-bold text-black mb-6">
-              Ready to Make a <span className="text-teal-700">Difference?</span>
+            <h2 className="section-title font-bold text-gray-800 mb-6">
+              Ready to Make a <span className="text-[#DC4A05]">Difference?</span>
             </h2>
-            <p className="text-xl text-black mb-10 leading-relaxed max-w-3xl mx-auto">
+            <p className="text-lg text-gray-600 mb-10 leading-relaxed max-w-3xl mx-auto">
               Join thousands of Nigerians working together to protect children and support survivors. Your involvement matters.
             </p>
             <div className="flex flex-col sm:flex-row gap-6 justify-center">
-              <button 
+              <button
                 onClick={() => document.getElementById('volunteer')?.scrollIntoView({ behavior: 'smooth' })}
-                className="px-10 py-4 bg-teal-700 text-white font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
+                className="btn-primary px-10 py-4 font-semibold rounded-full transition-all duration-300 transform hover:scale-105 shadow-lg hover:shadow-xl"
               >
                 Volunteer Today
               </button>
-              <Link
-                to="/contact"
-                className="px-10 py-4 border-2 border-teal-700 text-black hover:bg-white hover:text-teal-600 font-semibold rounded-full transition-all duration-300 inline-block"
-              >
-                Get in Touch
-              </Link>
             </div>
           </div>
         </div>

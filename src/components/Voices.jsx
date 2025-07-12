@@ -129,10 +129,6 @@ const Voices = () => {
 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl relative z-10">
         <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="inline-flex items-center gap-3 bg-white/50 backdrop-blur-sm rounded-full px-6 py-3 mb-6 border border-gray-200/50">
-            <Quote className="w-5 h-5 text-yellow-500" />
-            <span className="text-gray-800 font-semibold">Voices of Impact</span>
-          </div>
           <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-6 leading-tight">
             Voices of{' '}
             <span 
