@@ -16,13 +16,13 @@ import 'swiper/css/pagination';
 import WhyOurWorkMatters from '../components/WhyOurWorkMatters';
 import Hero from '../components/Hero';
 import { useEffect, useRef } from 'react';
-import StoryOfHope from '../components/StoryOfHope';
 import NewsletterSubscription from '../components/NewsletterSubscription';
 import { colors } from '../utils/colors';
 import ImpactfulPrograms from '../components/ImpactfulPrograms';
-import Solution from '../components/Solution';
 import Voices from '../components/Voices';
 import Partners from '../components/Partners';
+import HomeBlog from '../components/HomeBlog';
+import HomePodcastComponent from '../components/HomePodcastComponent';
 
 
 function Home() {
@@ -70,23 +70,20 @@ function Home() {
   ];
 
   return (
-    <div className="min-h-screen pt-14 bg-white">
+    <div className="min-h-screen">
       <Hero />
 
       <WhyOurWorkMatters />
 
-      {/* Story of Hope section */}
+      <HomePodcastComponent />
 
-      {/* <StoryOfHope /> */}
+      <HomeBlog />
 
       <ImpactfulPrograms />
-
-      {/* <Solution /> */}
-
       {/* <Voices/> */}
 
-     {/* <Partners/> */}
-     
+      {/* <Partners/> */}
+
       <NewsletterSubscription />
     </div>
   );

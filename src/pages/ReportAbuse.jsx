@@ -388,6 +388,7 @@ function ReportAbuse() {
 
       {/* Hero Section */}
       <section 
+      id="hero-section"
         className="relative min-h-screen flex items-center justify-center text-white section-opacity"
         style={{ paddingTop: '8rem', paddingBottom: '4rem' }}
         ref={(el) => (sectionsRef.current[0] = el)}

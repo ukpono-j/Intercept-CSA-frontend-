@@ -12,12 +12,14 @@ import Signup from './pages/Signup';
 import Login from './pages/Login';
 import Resources from './pages/Resources';
 import Podcast from './pages/Podcast';
+import ScrollToTop from './components/ScrollToTop'; // Import the new component
 
 function App() {
   return (
     <HashRouter>
       <div className="flex flex-col min-h-screen">
         <Navbar />
+        <ScrollToTop /> {/* Add ScrollToTop here */}
         <main className="flex-grow">
           <Routes>
             <Route path="/" element={<Home />} />

@@ -1,8 +1,3 @@
-/* Scoped to .contact */
-.contact {
-  font-family: 'Raleway', sans-serif;
-}
-
 /* Responsive Design */
 @media (max-width: 768px) {
   .contact section {

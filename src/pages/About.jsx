@@ -120,7 +120,7 @@ function About() {
   ];
 
   return (
-    <main className="about-container pt-14">
+    <main id="hero-section" className="about-container pt-14">
       {/* Hero Section */}
       <section
         className="about-section relative min-h-[calc(100vh-4rem)] flex items-center justify-center text-white about-section-opacity"

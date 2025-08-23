@@ -4,133 +4,146 @@ import {
   Heart,
   Users,
   ArrowRight,
-  HandHeart
+  HandHeart,
+  Sparkles,
+  Target
 } from 'lucide-react';
-import './WhyOurWorkMatters.css';
-import { Link } from 'react-router-dom';
-
-const colors = {
-  primary: '#0D9488', // Teal
-  primaryLight: '#14B8A6', // Lighter teal
-  white: '#FFFFFF',
-  darkTeal: '#134E4A',
-  gray: '#6B7280',
-  lightGray: '#F9FAFB',
-  orange: '#F59E0B', // Hero button orange
-  orangeHover: '#F59E0B' // Hero button hover orange
-};
 
 const WhyOurWorkMatters = () => {
   const [isVisible, setIsVisible] = useState(false);
+  const [hoveredCard, setHoveredCard] = useState(null);
   const sectionRef = useRef(null);
 
   useEffect(() => {
-    setIsVisible(true);
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    return () => observer.disconnect();
   }, []);
 
   const cards = [
     {
       id: 'prevention',
       icon: Shield,
-      title: 'Prevention & Training',
-      description: 'We empower communities with tools to recognize and prevent abuse early, creating protection around our children.',
-      stats: '85%',
-      statsLabel: 'Prevention Success Rate'
+      title: 'Our Vision',
+      description: 'A world where child sexual abuse is prevented before it begins.',
+      gradient: 'from-teal-500 to-teal-600'
     },
     {
       id: 'healing',
       icon: Heart,
-      title: 'Survivor Support',
-      description: 'Our safe spaces and creative programs help survivors heal, rebuild confidence, and embrace their future.',
-      stats: '200+',
-      statsLabel: 'Lives Transformed'
+      title: 'Our Mission',
+      description: 'To actively prevent child sexual abuse, intervene in at-risk communities, support survivors, and foster safe environments through advocacy and holistic systemic support.',
+      gradient: 'from-red-400 to-red-500'
     },
     {
       id: 'partnerships',
       icon: Users,
-      title: 'Faith & Culture Partnerships',
-      description: 'By partnering with faith and cultural institutions, we build a network that protects every child.',
-      stats: '50+',
-      statsLabel: 'Communities United'
-    },
-    {
-      id: 'safe-environments',
-      icon: Shield,
-      title: 'Safe Environments',
-      description: 'We create safe environments through education and advocacy, ensuring children are protected in their communities.',
-      stats: '100+',
-      statsLabel: 'Safe Spaces Created'
+      title: 'The Five Pillars',
+      description: 'Our InterceptCSA Model is built on Safe Visibility, Everyday Interceptions, Voice Culture, Faith & Culture-Rooted Reframing, and Accountability Loops to create resilient, protective communities.',
+      gradient: 'from-yellow-400 to-yellow-500'
     }
   ];
 
   return (
     <div
       ref={sectionRef}
-      className="why-our-work-matters py-16 bg-white"
+      className="relative py-16 lg:py-20 overflow-hidden"
     >
-      <div className="container mx-auto px-6 max-w-6xl">
+      {/* Subtle Background */}
+      <div className="absolute inset-0 bg-gradient-to-br from-slate-50 via-white to-teal-50/20"></div>
+
+      {/* Reduced Background Elements */}
+      <div className="absolute inset-0 overflow-hidden opacity-40">
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-gradient-to-br from-teal-200/30 to-teal-300/10 rounded-full blur-2xl"></div>
+        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-gradient-to-br from-yellow-200/30 to-yellow-300/10 rounded-full blur-2xl"></div>
+      </div>
+
+      <div className="container mx-auto px-6 max-w-6xl relative z-10">
+        {/* Compact Header Section */}
         <div className={`text-center mb-12 transition-all duration-1000 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 leading-tight" style={{ color: colors.primary }}>
-            Our Goal
+          <h1 className="text-3xl md:text-4xl font-bold mb-6 leading-tight">
+            <span className="bg-gradient-to-r from-slate-800 via-slate-700 to-slate-800 bg-clip-text text-transparent">
+              Our Goal
+            </span>
           </h1>
 
-          <p className="text-xl max-w-4xl mx-auto leading-relaxed" style={{ color: colors.gray }}>
-            To actively prevent child sexual abuse from spreading within communities, intervene in the lives of at-risk children, and disrupt cycles of trauma for survivors.
+          <p className="text-lg lg:text-xl max-w-4xl mx-auto leading-relaxed text-slate-600 font-light">
+            To achieve our vision through Intervention & Prevention, Survivor Support, Safe Environments, Allyship, and Holistic Systemic Support, disrupting cycles of trauma and protecting vulnerable children.
           </p>
         </div>
 
-        <div className="grid md:grid-cols-2 gap-8 mb-16">
+        {/* Compact Cards Grid */}
+        <div className="grid lg:grid-cols-3 gap-6 lg:gap-8 mb-16">
           {cards.map((card, index) => {
             const Icon = card.icon;
 
             return (
               <div
                 key={card.id}
-                className="bg-white border border-gray-200 rounded-lg p-6 h-full hover:shadow-lg transition-shadow duration-300"
+                className={`group relative bg-white/90 backdrop-blur-sm border border-slate-200/50 rounded-2xl p-6 lg:p-7 h-full shadow-sm hover:shadow-lg transition-all duration-300 cursor-pointer transform hover:-translate-y-1 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-20'
+                  }`}
                 style={{
                   animationDelay: `${index * 200}ms`,
-                  animation: isVisible ? 'slideInUp 0.8s ease-out forwards' : 'none'
+                  transitionDelay: isVisible ? `${index * 100}ms` : '0ms'
                 }}
+                onMouseEnter={() => setHoveredCard(card.id)}
+                onMouseLeave={() => setHoveredCard(null)}
               >
-                <div className="mb-4">
-                  <div className="inline-flex p-3 rounded-lg" style={{ backgroundColor: colors.lightGray }}>
-                    <Icon className="w-6 h-6" style={{ color: colors.primary }} />
+                {/* Content */}
+                <div className="relative z-10">
+                  {/* Icon Section */}
+                  <div className="mb-6">
+                    <div className={`inline-flex p-3 rounded-xl bg-gradient-to-br ${card.gradient} shadow-md transform transition-all duration-300 group-hover:scale-105`}>
+                      <Icon className="w-6 h-6 text-white" />
+                    </div>
                   </div>
-                </div>
 
-                <div className="space-y-3">
-                  <h3 className="text-xl font-bold mb-2" style={{ color: colors.darkTeal }}>
-                    {card.title}
-                  </h3>
-                  <p className="text-base leading-relaxed" style={{ color: colors.gray }}>
-                    {card.description}
-                  </p>
+                  {/* Text Content */}
+                  <div className="space-y-4">
+                    <h3 className="text-xl lg:text-2xl font-bold text-slate-800 group-hover:text-slate-900 transition-colors duration-300">
+                      {card.title}
+                    </h3>
+                    <p className="text-sm lg:text-base leading-relaxed text-slate-600 group-hover:text-slate-700 transition-colors duration-300">
+                      {card.description}
+                    </p>
+                  </div>
+
+                  {/* Subtle Hover Effect Arrow */}
+                  <div className={`mt-4 transform transition-all duration-300 ${hoveredCard === card.id ? 'translate-x-1 opacity-100' : 'translate-x-0 opacity-0'
+                    }`}>
+                    <ArrowRight className="w-5 h-5 text-slate-400" />
+                  </div>
                 </div>
               </div>
             );
           })}
         </div>
 
-        <div className={`text-center transition-all duration-1000 delay-500 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
-          <div className="space-y-6">
-            <Link to="/about">
-              <button
-                className="text-white font-semibold py-4 px-8 rounded-full text-lg transition-all duration-300 hover:transform hover:scale-105 hover:shadow-xl"
-                style={{ backgroundColor: colors.orange }}
-                onMouseEnter={(e) => {
-                  e.target.style.backgroundColor = colors.orangeHover;
-                }}
-                onMouseLeave={(e) => {
-                  e.target.style.backgroundColor = colors.orange;
-                }}
-              >
-                <span className="flex items-center gap-3">
-                  <HandHeart className="w-5 h-5" />
-                  Who We Are
-                  <ArrowRight className="w-5 h-5" />
-                </span>
-              </button>
-            </Link>
+        {/* Compact CTA Section */}
+        <div className={`text-center transition-all duration-1000 delay-700 ${isVisible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10'}`}>
+          <div className="space-y-4">
+            <button className="group relative bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white font-semibold py-4 px-8 rounded-full text-base shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 overflow-hidden">
+              {/* Button Content */}
+              <span className="relative flex items-center gap-3">
+                <HandHeart className="w-5 h-5 transition-transform duration-300 group-hover:scale-110" />
+                <span>Who We Are</span>
+                <ArrowRight className="w-5 h-5 transition-transform duration-300 group-hover:translate-x-1" />
+              </span>
+
+              {/* Subtle Shine Effect */}
+              <div className="absolute inset-0 -skew-x-12 bg-gradient-to-r from-transparent via-white/20 to-transparent translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-700"></div>
+            </button>
           </div>
         </div>
       </div>

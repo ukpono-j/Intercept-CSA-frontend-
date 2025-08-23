@@ -219,7 +219,7 @@ ${post.content
   );
 
   return (
-    <div className="min-h-screen bg-white blog">
+    <div className="min-h-screen bg-white blog" id="hero-section">
       <header className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <div className="absolute inset-0 opacity-10">
           <div
@@ -232,7 +232,7 @@ ${post.content
           ></div>
         </div>
         <div className="relative container mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl py-16 md:py-20">
-          <div className="text-center">
+          <div className="text-center pt-14">
             <h1 className="text-4xl sm:text-5xl font-bold tracking-tight text-white mb-6 leading-tight">
               Letters, Lessons & <span
                 className="block bg-clip-text text-transparent"

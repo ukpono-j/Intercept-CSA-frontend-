@@ -248,7 +248,7 @@ function Podcast() {
   );
 
   return (
-    <div className="min-h-screen pt-20 podcast">
+    <div className="min-h-screen pt-20 podcast" id="hero-section">
       {/* Hero Section */}
       <header className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <div className="absolute inset-0 opacity-10">

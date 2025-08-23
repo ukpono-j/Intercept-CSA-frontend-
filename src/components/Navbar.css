@@ -1,118 +1,90 @@
-/* Scoped to .navbar */
-.navbar {
-  font-family: 'Raleway', sans-serif;
+.navbar-logo {
+  height: 60px;
+  width: auto;
+  max-width: 220px;
+  object-fit: contain;
+  transition: all 0.3s ease;
 }
 
-/* Base styles for large screens (≥1234px) */
-.navbar .text-sm {
-  font-size: 0.875rem; /* 14px for nav links */
+.nav-link {
+  position: relative;
+  transition: all 0.3s ease;
 }
 
-.navbar .text-xl {
-  font-size: 1.25rem; /* Logo text */
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 50%;
+  width: 0;
+  height: 2px;
+  background-color: #2A8E9D; /* secondary teal */
+  transition: all 0.3s ease;
+  transform: translateX(-50%);
 }
 
-.navbar .px-4 {
-  padding-left: 1rem;
-  padding-right: 1rem;
+.nav-link:hover::after {
+  width: 100%;
 }
 
-.navbar .py-5 {
-  padding-top: 1.25rem;
-  padding-bottom: 1.25rem;
+.nav-link.active::after {
+  width: 100%;
+  background-color: #FFC938; /* accent yellow */
 }
 
-.navbar .p-3 {
-  padding: 0.75rem; /* Touch target for buttons */
+.mobile-menu {
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
 }
 
-.navbar .min-w-48 {
-  min-width: 48px; /* WCAG touch target */
+.mobile-menu.open {
+  transform: translateX(0);
 }
 
-/* Responsive Design for mobile menu (≤1234px) */
-@media (max-width: 1234px) {
-  .navbar .px-4 {
-    padding-left: 1rem;
-    padding-right: 1rem;
-  }
-  .navbar .py-5 {
-    padding-top: 1.25rem;
-    padding-bottom: 1.25rem;
-  }
-  .navbar .text-xl {
-    font-size: 1.75rem; /* Mobile menu title */
-  }
-  .navbar .text-base {
-    font-size: 1rem; /* Mobile nav links */
-  }
-  .navbar .p-5 {
-    padding: 1.25rem; /* Mobile menu padding */
-  }
-  .navbar .py-3 {
-    padding-top: 0.75rem;
-    padding-bottom: 0.75rem;
-  }
-  .navbar .p-3 {
-    padding: 0.75rem; /* Touch target for buttons */
-  }
-  .navbar .min-w-48 {
-    min-width: 48px; /* WCAG touch target */
+.mobile-overlay {
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.mobile-overlay.open {
+  opacity: 1;
+}
+
+.mobile-nav-link {
+  transition: all 0.3s ease;
+  border-left: 3px solid transparent;
+}
+
+.mobile-nav-link:hover {
+  border-left-color: #2A8E9D; /* secondary teal */
+  background-color: #f8fafc; /* lightGray */
+  transform: translateX(8px);
+}
+
+.mobile-nav-link.active {
+  border-left-color: #FFC938; /* accent yellow */
+  background-color: #f8fafc; /* lightGray */
+  color: #374050; /* primary */
+  font-weight: 600;
+}
+
+@media (max-width: 1024px) {
+  .navbar-logo {
+    height: 38px;
+    max-width: 200px;
   }
 }
 
-/* Smaller screens (≤640px) */
+@media (max-width: 768px) {
+  .navbar-logo {
+    height: 34px;
+    max-width: 180px;
+  }
+}
+
 @media (max-width: 640px) {
-  .navbar .px-4 {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-  .navbar .py-5 {
-    padding-top: 1rem;
-    padding-bottom: 1rem;
-  }
-  .navbar .text-xl {
-    font-size: 1.5rem; /* Mobile menu title */
-  }
-  .navbar .text-base {
-    font-size: 0.9375rem; /* Mobile nav links */
-  }
-  .navbar .p-5 {
-    padding: 1rem; /* Reduced mobile menu padding */
-  }
-  .navbar .py-3 {
-    padding-top: 0.5rem;
-    padding-bottom: 0.5rem;
-  }
-  .navbar .px-4 {
-    padding-left: 0.75rem;
-    padding-right: 0.75rem;
-  }
-  .navbar .p-3 {
-    padding: 0.75rem; /* Touch target maintained */
-  }
-  .navbar .min-w-48 {
-    min-width: 48px; /* WCAG touch target */
-  }
-  .navbar .h-12 {
-    height: 2.5rem; /* Smaller logo */
-    width: 2.5rem;
-  }
-}
-
-/* Extra-large screens (≥1280px) */
-@media (min-width: 1280px) {
-  .navbar .text-sm {
-    font-size: 0.8125rem; /* 13px for nav links */
-  }
-}
-
-/* Float animation */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-6px);
+  .navbar-logo {
+    height: 30px;
+    max-width: 160px;
   }
 }

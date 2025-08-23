@@ -99,7 +99,7 @@ function Programs() {
   ];
 
   return (
-    <div className="program-container pt-14 min-h-screen bg-white">
+    <div className="program-container pt-14 min-h-screen bg-white" id="hero-section">
       {/* Hero Section */}
       <section 
         className="program-section relative min-h-screen flex pt-36 pb-24 items-center justify-center text-white program-section-opacity"

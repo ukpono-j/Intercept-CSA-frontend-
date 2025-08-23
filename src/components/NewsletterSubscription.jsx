@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import './NewsletterSubscription.css';
+import { Mail, CheckCircle, AlertCircle } from 'lucide-react';
 
 const API_URL = import.meta.env.VITE_API_URL || 'https://intercept-csa-backend.onrender.com/api';
 
 const Button = ({ children, variant = 'primary', className = '', disabled = false, onClick }) => {
-  const baseClasses = 'px-6 py-3 rounded-full font-semibold transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2';
+  const baseClasses = 'px-5 py-2.5 rounded-full font-medium transition-all duration-300 focus:outline-none focus:ring-2 focus:ring-offset-2';
   const variants = {
-    primary: 'bg-[#F59E0B] text-white hover:bg-[#F59E0B]/90 focus:ring-[#F59E0B]',
+    primary: 'bg-[#FFC938] text-[#374050] hover:bg-[#FFC938]/90 focus:ring-[#FFC938] hover:scale-105',
   };
   
   return (
@@ -74,76 +74,97 @@ const NewsletterSubscription = ({ StayConnected }) => {
   };
 
   return (
-    <section className="relative overflow-hidden bg-white newsletter-subscription">
-      <div className="absolute inset-0 opacity-10">
-        <div className="absolute top-0 left-0 w-96 h-96 bg-gradient-to-br from-teal-400 to-teal-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-0 right-0 w-96 h-96 bg-gradient-to-bl from-teal-400 to-teal-500 rounded-full mix-blend-multiply filter blur-3xl animate-pulse delay-1000"></div>
+    <section className="relative overflow-hidden bg-gradient-to-br from-slate-50 via-white to-teal-50/30 py-12 lg:py-16">
+      {/* Subtle Background Elements */}
+      <div className="absolute inset-0 opacity-5">
+        <div className="absolute top-10 left-10 w-32 h-32 bg-gradient-to-br from-teal-400 to-teal-500 rounded-full blur-2xl"></div>
+        <div className="absolute bottom-10 right-10 w-32 h-32 bg-gradient-to-bl from-teal-400 to-teal-500 rounded-full blur-2xl"></div>
       </div>
       
       {StayConnected && (
         <img
           src={StayConnected}
           alt="Children playing in a safe environment"
-          className="absolute inset-0 w-full h-full object-cover opacity-20"
+          className="absolute inset-0 w-full h-full object-cover opacity-10"
           loading="lazy"
           decoding="async"
         />
       )}
       
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 max-w-4xl py-10 md:py-20 text-center relative z-10">
-        <h2 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-900 mb-6 leading-tight">
-          Join the <span className="block bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">Movement</span>
-        </h2>
-        <p className="text-xl text-slate-700 max-w-3xl mx-auto leading-relaxed mb-10">
-          Join the movement to intercept silence and protect children.
-        </p>
-        
-        <div className="max-w-md mx-auto">
-          <div className="mb-4">
-            <input
-              type="email"
-              placeholder="Enter your email"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full px-4 py-3 rounded-full text-slate-900 bg-slate-100 focus:outline-none focus:ring-2 focus:ring-teal-500 transition-all duration-300"
-              aria-label="Email for newsletter subscription"
-              disabled={isLoading}
-              onKeyPress={(e) => e.key === 'Enter' && handleSubscribe(e)}
-            />
+      <div className="container mx-auto px-6 max-w-3xl text-center relative z-10">
+        {/* Compact Header */}
+        <div className="mb-8">
+          <div className="flex items-center justify-center gap-2 mb-4">
+            <Mail className="w-6 h-6 text-teal-600" />
+            <span className="text-sm font-semibold text-teal-600 uppercase tracking-wider">Stay Connected</span>
           </div>
           
-          {message && (
-            <div className={`mb-4 p-3 rounded-lg text-sm ${
-              messageType === 'success' 
-                ? 'bg-green-100 text-green-800 border border-green-200' 
-                : 'bg-red-100 text-red-800 border border-red-200'
-            }`}>
-              {message}
-            </div>
-          )}
+          <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-slate-900 mb-4 leading-tight">
+            Join the <span className="bg-gradient-to-r from-teal-500 to-teal-600 bg-clip-text text-transparent">Movement</span>
+          </h2>
           
-          <Button 
-            variant="primary" 
-            className="w-full"
-            disabled={isLoading}
-            onClick={handleSubscribe}
-          >
-            {isLoading ? (
-              <span className="flex items-center justify-center">
-                <svg className="animate-spin -ml-1 mr-3 h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                </svg>
-                Subscribing...
-              </span>
-            ) : (
-              'Join Now'
-            )}
-          </Button>
+          <p className="text-base lg:text-lg text-slate-700 max-w-2xl mx-auto leading-relaxed">
+            Join the movement to intercept silence and protect children. Get updates on our work and ways to help.
+          </p>
         </div>
         
-        <p className="text-sm text-slate-600 mt-4">
-          We respect your privacy and will never share your email address.
+        {/* Compact Form */}
+        <div className="max-w-lg mx-auto">
+          <div className="space-y-4">
+            <div className="flex flex-col sm:flex-row gap-3">
+              <div className="flex-1">
+                <input
+                  type="email"
+                  placeholder="Enter your email address"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="w-full px-4 py-3 rounded-full text-slate-900 bg-white/80 backdrop-blur-sm border border-slate-200 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all duration-300 shadow-sm hover:shadow-md"
+                  aria-label="Email for newsletter subscription"
+                  disabled={isLoading}
+                  onKeyPress={(e) => e.key === 'Enter' && handleSubscribe(e)}
+                />
+              </div>
+              
+              <Button 
+                variant="primary" 
+                className="sm:px-8 shadow-lg hover:shadow-xl"
+                disabled={isLoading}
+                onClick={handleSubscribe}
+              >
+                {isLoading ? (
+                  <span className="flex items-center justify-center gap-2">
+                    <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    <span className="hidden sm:inline">Subscribing...</span>
+                    <span className="sm:hidden">...</span>
+                  </span>
+                ) : (
+                  'Join Now'
+                )}
+              </Button>
+            </div>
+            
+            {message && (
+              <div className={`flex items-center gap-2 p-3 rounded-lg text-sm transition-all duration-300 ${
+                messageType === 'success' 
+                  ? 'bg-green-50 text-green-800 border border-green-200' 
+                  : 'bg-red-50 text-red-800 border border-red-200'
+              }`}>
+                {messageType === 'success' ? (
+                  <CheckCircle className="w-4 h-4 text-green-600 flex-shrink-0" />
+                ) : (
+                  <AlertCircle className="w-4 h-4 text-red-600 flex-shrink-0" />
+                )}
+                <span>{message}</span>
+              </div>
+            )}
+          </div>
+        </div>
+        
+        <p className="text-xs text-slate-500 mt-6 max-w-md mx-auto">
+          We respect your privacy and will never share your email address. Unsubscribe at any time.
         </p>
       </div>
     </section>

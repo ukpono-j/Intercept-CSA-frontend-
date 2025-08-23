@@ -173,7 +173,7 @@ function Contact() {
   ];
 
   return (
-    <div className="min-h-screen bg-[#F3F4F6] overflow-hidden">
+    <div className="min-h-screen bg-[#F3F4F6] overflow-hidden" id="hero-section">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 pointer-events-none">
         <div className="absolute -top-20 -right-20 w-64 h-64 bg-gradient-to-br from-[#FECB0A]/30 to-[#F97316]/30 rounded-full blur-3xl animate-pulse"></div>

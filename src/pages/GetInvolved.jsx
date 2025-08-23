@@ -77,7 +77,7 @@ function GetInvolved() {
   }, []);
 
   return (
-    <div className="get-involved-container min-h-screen bg-white">
+    <div className="get-involved-container min-h-screen bg-white" id="hero-section">
       {/* Hero Section */}
       <section
         className="relative min-h-screen flex pt-36 pb-24 items-center justify-center text-white section-opacity"

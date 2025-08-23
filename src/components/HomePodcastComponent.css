@@ -1,0 +1,54 @@
+/* Custom styles for HomePodcastComponent (beyond Tailwind) */
+@media (max-width: 768px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+
+  .text-4xl {
+    font-size: 2.5rem;
+  }
+
+  .text-3xl {
+    font-size: 2rem;
+  }
+
+  .text-lg {
+    font-size: 1rem;
+  }
+
+  .w-80 {
+    width: 16rem; /* 256px */
+  }
+
+  .h-80 {
+    height: 16rem; /* 256px */
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  .text-4xl {
+    font-size: 2rem;
+  }
+
+  .text-3xl {
+    font-size: 1.75rem;
+  }
+
+  .text-lg {
+    font-size: 0.875rem;
+  }
+
+  .w-80 {
+    width: 12rem; /* 192px */
+  }
+
+  .h-80 {
+    height: 12rem; /* 192px */
+  }
+}
