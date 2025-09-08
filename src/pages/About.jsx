@@ -2,14 +2,15 @@ import { useEffect, useRef, useState } from 'react';
 import FounderImage from "../assets/founderImage.jpg";
 import './About.css';
 import { Link } from 'react-router-dom';
+import { ArrowRight } from 'lucide-react';
 
 // Professional NGO color palette
 const colors = {
   primary: '#0f766e',      // Teal-700
   primaryLight: '#14b8a6', // Teal-500
   primaryDark: '#134e4a',  // Teal-800
-  accent: '#DC4A05',       // Orange for buttons
-  accentHover: '#B8370A',  // Darker orange for hover
+  accent: '#F59E0B',       // Orange for buttons
+  accentHover: '#e09005',  // Darker orange for hover
   text: '#1f2937',         // Gray-800
   textLight: '#6b7280',    // Gray-500
   white: '#ffffff',
@@ -39,7 +40,7 @@ function About() {
       (entries) => {
         entries.forEach((entry) => {
           if (entry.isIntersecting) {
-            entry.target.classList.add('about-animate-in'); // Scoped class name
+            entry.target.classList.add('about-animate-in');
           }
         });
       },
@@ -120,131 +121,114 @@ function About() {
   ];
 
   return (
-    <main id="hero-section" className="about-container pt-14">
+    <main id="about-main" className="about">
       {/* Hero Section */}
       <section
-        className="about-section relative min-h-[calc(100vh-4rem)] flex items-center justify-center text-white about-section-opacity"
+        className="about-hero-section"
         ref={(el) => (sectionsRef.current[0] = el)}
       >
-        <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-black/50 z-10"></div>
+        <div className="about-hero-overlay"></div>
         <img
           src={images.hero}
           alt="Community unity"
-          className="absolute inset-0 w-full h-full object-cover"
+          className="about-hero-image"
+          loading="eager"
         />
-
-        <div className="relative z-20 text-center px-4 sm:px-6 lg:px-8 max-w-5xl mx-auto">
-          <h1 className="about-hero-title mb-6 leading-tight">
-            About <span className="text-teal-300">Intercept CSA</span>
+        <div className="about-hero-content">
+          <h1 className="about-hero-title">
+            About <span className="about-text-accent">Intercept CSA</span>
           </h1>
-          <p className="about-text-lg text-gray-200 leading-relaxed max-w-4xl mx-auto mb-8">
+          <p className="about-hero-subtitle">
             We exist because silence protects abusers. We exist because culture often doesn't know what to say. We exist to teach, to interrupt, and to walk with children, not just for them.
           </p>
-          <Link to="/get-involved">
-            <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-              <button
-                className="about-btn-primary px-8 py-4 font-semibold about-text-base min-w-[200px]">
+          <div className="about-hero-buttons">
+            <Link to="/get-involved">
+              <button className="about-button about-button-primary">
                 Join Our Mission
+                <ArrowRight className="about-button-icon" />
               </button>
-            </div>
-          </Link>
+            </Link>
+          </div>
         </div>
       </section>
 
-      {/* Mission & Vision - TEAL BACKGROUND */}
+      {/* Mission & Vision */}
       <section
-        className="about-section py-16 lg:py-20 about-gradient-bg about-section-opacity"
+        className="about-section about-gradient-bg"
         ref={(el) => (sectionsRef.current[1] = el)}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
+        <div className="about-container">
+          <div className="about-mission-vision-grid">
             {/* Mission */}
-            <div className="text-white">
-              <h2 className="about-section-title mb-6">
-                Preventing Abuse, <span className="text-teal-200">Empowering Lives</span>
+            <div className="about-mission">
+              <h2 className="about-section-title">
+                Preventing Abuse, <span className="about-text-accent">Empowering Lives</span>
               </h2>
-              <p className="about-text-lg text-teal-50 mb-8 leading-relaxed">
+              <p className="about-section-subtitle">
                 To actively prevent child sexual abuse and disrupt cycles of trauma through education, advocacy, and survivor-centered support.
               </p>
-              <div className="space-y-4 mb-8">
+              <div className="about-mission-items">
                 {['Prevention Education', 'Survivor Support', 'Community Empowerment'].map((item, i) => (
-                  <div key={i} className="flex items-center">
-                    <div className="w-3 h-3 bg-teal-300 rounded-full mr-4"></div>
-                    <span className="text-teal-50 about-text-base">{item}</span>
+                  <div key={i} className="about-mission-item">
+                    <span className="about-mission-dot"></span>
+                    <span>{item}</span>
                   </div>
                 ))}
               </div>
               <Link to="/programs">
-                <div className="flex justify-start">
-                  <button
-                    className="about-btn-white px-8 py-4 font-semibold about-text-base min-w-[180px]">
-                    Our Services
-                  </button>
-                </div>
+                <button className="about-button about-button-white">
+                  Our Services
+                  <ArrowRight className="about-button-icon" />
+                </button>
               </Link>
             </div>
-
             {/* Vision */}
-            <div className="about-professional-card rounded-xl p-8 bg-white/95">
-              <h3 className="about-text-xl font-bold text-gray-800 mb-6">
-                A Safe World for Every Child
-              </h3>
-              <p className="text-gray-600 about-text-base leading-relaxed mb-6">
+            <div className="about-vision-card">
+              <h3 className="about-card-title">A Safe World for Every Child</h3>
+              <p className="about-card-subtitle">
                 A world where child sexual abuse is prevented before it begins, interrupted where it occurs, and survivors are empowered to heal.
               </p>
               <Link to="/programs">
-                <div className="flex justify-start">
-                  <button
-                    className="about-btn-outline px-6 py-3 font-semibold about-text-sm min-w-[140px]">
-                    Learn More
-                  </button>
-                </div>
+                <button className="about-button about-button-outline">
+                  Learn More
+                  <ArrowRight className="about-button-icon" />
+                </button>
               </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Our Story - WHITE BACKGROUND */}
+      {/* Our Story */}
       <section
-        className="about-section py-16 lg:py-20 bg-white about-section-opacity"
+        className="about-section about-white-bg"
         ref={(el) => (sectionsRef.current[2] = el)}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 lg:mb-16">
-            <h2 className="about-section-title text-gray-800 mb-6">
-              Our <span className="about-text-gradient">Story</span>
-            </h2>
-            <p className="about-text-base text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
-              InterceptCSA began with a single spark: a vision to break the silence that protects abusers and to create a world where every child is safe. Founded by Inimfon Sampson, our journey started in response to the urgent need for education, advocacy, and healing in Nigerian communities. From our first community workshop to now impacting thousands, we've grown into a movement dedicated to prevention, survivor support, and cultural change.
-            </p>
-            {/* <div className="flex justify-center">
-              <button
-                className="about-btn-primary px-8 py-4 font-semibold about-text-base min-w-[200px]">
-                Read Our Journey
-              </button>
-            </div> */}
-          </div>
+        <div className="about-container">
+          <h2 className="about-section-title">
+            Our <span className="about-text-gradient">Story</span>
+          </h2>
+          <p className="about-section-subtitle">
+            InterceptCSA began with a single spark: a vision to break the silence that protects abusers and to create a world where every child is safe. Founded by Inimfon Sampson, our journey started in response to the urgent need for education, advocacy, and healing in Nigerian communities. From our first community workshop to now impacting thousands, we've grown into a movement dedicated to prevention, survivor support, and cultural change.
+          </p>
         </div>
       </section>
 
-      {/* Meet the Founder - TEAL BACKGROUND */}
+      {/* Meet the Founder */}
       <section
-        className="about-section py-16 lg:py-20 about-gradient-bg about-section-opacity"
+        className="about-section about-gradient-bg"
         ref={(el) => (sectionsRef.current[3] = el)}
       >
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-12 lg:mb-16">
-            <h2 className="about-section-title text-white mb-6">
-              Meet Our <span className="text-teal-200">Founder</span>
-            </h2>
-          </div>
-          <div className="flex flex-col md:flex-row items-center gap-8 max-w-5xl mx-auto">
-            <div className="flex-shrink-0">
+        <div className="about-container">
+          <h2 className="about-section-title">
+            Meet Our <span className="about-text-accent">Founder</span>
+          </h2>
+          <div className="about-founder-grid">
+            <div className="about-founder-image-container">
               <img
                 src={images.founder}
                 alt="Inimfon Sampson, Founder"
-                className="w-48 h-48 lg:w-64 lg:h-64 rounded-full object-cover shadow-lg border-4 border-teal-200"
+                className="about-founder-image"
                 onError={(e) => {
                   if (!imageErrors['founder']) {
                     e.target.src = '/assets/placeholder.jpg';
@@ -253,111 +237,96 @@ function About() {
                 }}
               />
             </div>
-            <div className="text-center md:text-left text-white">
-              <p className="about-text-lg text-teal-50 mb-6 leading-relaxed">
+            <div className="about-founder-content">
+              <p className="about-founder-quote">
                 "I started this because I saw the gap between pain and protection — and because I believe every story deserves safety."
               </p>
-              <p className="about-text-base font-bold text-teal-200 mb-8">— Inimfon Sampson, Founder</p>
-              <div className="flex justify-center md:justify-start">
-                <button
-                  className="about-btn-white px-8 py-4 font-semibold about-text-base min-w-[180px]">
+              <p className="about-founder-name">— Inimfon Sampson, Founder</p>
+              <Link to="/about/founder">
+                <button className="about-button about-button-white">
                   Meet Inimfon
+                  <ArrowRight className="about-button-icon" />
                 </button>
-              </div>
+              </Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Enhanced Our Pillars - WHITE BACKGROUND */}
+      {/* Our Pillars */}
       <section
-        className="about-section py-20 lg:py-24 bg-white about-section-opacity"
+        className="about-section about-white-bg"
         ref={(el) => (sectionsRef.current[4] = el)}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-16 lg:mb-20">
-            <h2 className="about-section-title text-gray-800 mb-6">
-              Our <span className="about-text-gradient">Five Pillars</span>
-            </h2>
-            <p className="about-text-lg text-gray-600 max-w-3xl mx-auto leading-relaxed">
-              The foundational principles that guide our mission to create a world where every child is safe, seen, and supported.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 mb-16">
+        <div className="about-container">
+          <h2 className="about-section-title">
+            Our <span className="about-text-gradient">Five Pillars</span>
+          </h2>
+          <p className="about-section-subtitle">
+            The foundational principles that guide our mission to create a world where every child is safe, seen, and supported.
+          </p>
+          <div className="about-pillars-grid">
             {pillars.map((pillar, index) => (
-              <div key={index} className={`about-pillar-card rounded-2xl p-8 ${index === 2 && 'xl:col-span-1 xl:mx-auto xl:max-w-sm'}`}>
-                <div className={`w-16 h-16 ${pillar.iconBg} rounded-full flex items-center justify-center mb-6`}>
-                  <span className="about-text-3xl">{pillar.icon}</span>
+              <div key={index} className={`about-pillar-card ${pillar.color}`}>
+                <div className={`about-pillar-icon ${pillar.iconBg}`}>
+                  <span>{pillar.icon}</span>
                 </div>
-                <h3 className="about-text-xl font-bold text-gray-800 mb-4">{pillar.title}</h3>
-                <p className="text-gray-600 about-text-base leading-relaxed">{pillar.desc}</p>
+                <h3 className="about-pillar-title">{pillar.title}</h3>
+                <p className="about-pillar-desc">{pillar.desc}</p>
               </div>
             ))}
           </div>
-
-          {/* <div className="text-center">
-            <button
-              className="about-btn-primary px-10 py-4 font-semibold about-text-base min-w-[220px]">
-              Explore Our Approach
-            </button>
-          </div> */}
         </div>
       </section>
 
-      {/* Community Engagement - LIGHT TEAL BACKGROUND */}
+      {/* Community Engagement */}
       <section
-        className="about-section py-16 lg:py-20 about-section-opacity"
+        className="about-section about-teal-bg"
         ref={(el) => (sectionsRef.current[7] = el)}
-        style={{ backgroundColor: colors.teal50 }}
       >
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+        <div className="about-container">
+          <div className="about-community-grid">
             <div>
-              <h2 className="about-section-title text-gray-800 mb-6">
+              <h2 className="about-section-title">
                 Building <span className="about-text-gradient">Stronger Communities</span>
               </h2>
-              <p className="about-text-lg text-gray-700 mb-8 leading-relaxed">
+              <p className="about-section-subtitle">
                 Our work extends beyond individual healing to create systemic change. We partner with schools, religious organizations, and community leaders to build comprehensive protection networks.
               </p>
-              <div className="space-y-6">
+              <div className="about-community-items">
                 {[
                   { title: 'School Partnerships', desc: 'Training educators and staff to recognize and respond to abuse' },
                   { title: 'Faith Community Engagement', desc: 'Working with religious leaders to create safe spaces' },
                   { title: 'Parent Education', desc: 'Empowering families with knowledge and tools for protection' }
                 ].map((item, index) => (
-                  <div key={index} className="flex items-start">
-                    <div className="w-6 h-6 bg-teal-500 rounded-full flex items-center justify-center mr-4 mt-1">
-                      <span className="text-white about-text-sm">✓</span>
-                    </div>
+                  <div key={index} className="about-community-item">
+                    <span className="about-community-check"></span>
                     <div>
-                      <h4 className="font-semibold text-gray-800 mb-1">{item.title}</h4>
-                      <p className="text-gray-600 about-text-sm">{item.desc}</p>
+                      <h4 className="about-community-title">{item.title}</h4>
+                      <p className="about-community-desc">{item.desc}</p>
                     </div>
                   </div>
                 ))}
               </div>
             </div>
-            <div className="about-professional-card rounded-xl p-8 bg-white">
-              <h3 className="about-text-xl font-bold text-gray-800 mb-4">Get Involved</h3>
-              <p className="text-gray-600 mb-6">
+            <div className="about-community-card">
+              <h3 className="about-card-title">Get Involved</h3>
+              <p className="about-card-subtitle">
                 Whether you're an individual, organization, or community leader, there are many ways to join our mission.
               </p>
-              <div className="space-y-3">
-                <div>
-                  <Link to="/get-involved">
-                    <button className="about-btn-primary w-full py-3 font-semibold">
-                      Volunteer With Us
-                    </button>
-                  </Link>
-                </div>
-                <div>
-                  <Link to="/contact">
-                    <button className="about-btn-outline w-full py-3 font-semibold">
-                      Partner With Us
-                    </button>
-                  </Link>
-                </div>
+              <div className="about-community-buttons">
+                <Link to="/get-involved">
+                  <button className="about-button about-button-primary">
+                    Volunteer With Us
+                    <ArrowRight className="about-button-icon" />
+                  </button>
+                </Link>
+                <Link to="/contact">
+                  <button className="about-button about-button-outline">
+                    Partner With Us
+                    <ArrowRight className="about-button-icon" />
+                  </button>
+                </Link>
               </div>
             </div>
           </div>

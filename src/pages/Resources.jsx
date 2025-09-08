@@ -484,7 +484,7 @@ function Resources() {
   );
 
   return (
-    <div className="min-h-screen pt-20 bg-white resources" id="hero-section">
+    <div className="min-h-screen bg-white resources" id="hero-section">
       <header className="relative overflow-hidden bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900">
         <div className="absolute inset-0 opacity-10">
           <div

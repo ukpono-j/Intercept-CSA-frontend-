@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { Menu, X } from 'lucide-react';
 import Logo from '../assets/logo.png';
 import './Navbar.css';
@@ -17,9 +17,9 @@ const colors = {
 function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const [activeLink, setActiveLink] = useState('/');
+  const location = useLocation(); // Track current route
 
-  // Debounced scroll handler to prevent lag
+  // Debounced scroll handler
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 10);
   }, []);
@@ -28,6 +28,11 @@ function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, [handleScroll]);
+
+  // Sync active link with current route
+  useEffect(() => {
+    setIsMobileMenuOpen(false); // Close mobile menu on route change
+  }, [location.pathname]);
 
   const navItems = [
     { to: '/', label: 'Home' },
@@ -41,25 +46,27 @@ function Navbar() {
     { to: '/contact', label: 'Contact Us' },
   ];
 
+  const toggleMobileMenu = () => setIsMobileMenuOpen((prev) => !prev);
   const closeMobileMenu = () => setIsMobileMenuOpen(false);
 
   return (
     <nav
-      className={`w-full lg:static transition-all duration-300 ${
-        scrolled ? 'bg-white/95 backdrop-blur-md shadow-lg' : 'bg-white'
+      className={`w-full transition-all duration-300 ${
+        scrolled ? 'navbar-scrolled' : 'bg-white'
       } ${isMobileMenuOpen ? 'fixed top-0 z-50' : ''}`}
+      aria-label="Main navigation"
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-3">
         <div className="flex items-center justify-between h-20 lg:h-28">
           {/* Logo */}
           <div className="flex-shrink-0">
-            <Link to="/" onClick={() => setActiveLink('/')}>
+            <Link to="/" onClick={closeMobileMenu}>
               <img
                 src={Logo}
                 alt="InterceptCSA Logo"
-                className="navbar-logo h-14 lg:h-14 max-w-[220px] object-contain transition-all duration-300 hover:opacity-90"
+                className="navbar-logo h-14 lg:h-14 max-w-[220px] object-contain"
                 onError={(e) => {
-                  e.currentTarget.src = Logo;
+                  e.currentTarget.src = Logo; // Fallback to same logo
                 }}
               />
             </Link>
@@ -73,22 +80,22 @@ function Navbar() {
                   key={item.to}
                   to={item.to}
                   className={`nav-link px-3 py-2 text-[15px] font-medium ${
-                    activeLink === item.to ? 'active' : ''
+                    location.pathname === item.to ? 'active' : ''
                   }`}
                   style={{
-                    color: activeLink === item.to ? colors.primary : colors.text,
+                    color: location.pathname === item.to ? colors.primary : colors.text,
                   }}
-                  onClick={() => setActiveLink(item.to)}
                   onMouseEnter={(e) => {
-                    if (activeLink !== item.to) {
+                    if (location.pathname !== item.to) {
                       e.target.style.color = colors.secondary;
                     }
                   }}
                   onMouseLeave={(e) => {
-                    if (activeLink !== item.to) {
+                    if (location.pathname !== item.to) {
                       e.target.style.color = colors.text;
                     }
                   }}
+                  aria-current={location.pathname === item.to ? 'page' : undefined}
                 >
                   {item.label}
                 </Link>
@@ -99,15 +106,16 @@ function Navbar() {
           {/* Mobile menu button */}
           <div className="lg:hidden">
             <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100 transition-colors duration-300"
+              onClick={toggleMobileMenu}
+              className="mobile-menu-button inline-flex items-center justify-center p-2 rounded-md hover:bg-gray-100 transition-colors duration-300"
               style={{ color: colors.text }}
-              aria-label="Toggle mobile menu"
+              aria-label={isMobileMenuOpen ? 'Close mobile menu' : 'Open mobile menu'}
+              aria-expanded={isMobileMenuOpen}
             >
               {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
+                <X className="w-6 h-6" aria-hidden="true" />
               ) : (
-                <Menu className="w-6 h-6" />
+                <Menu className="w-6 h-6" aria-hidden="true" />
               )}
             </button>
           </div>
@@ -126,6 +134,7 @@ function Navbar() {
             visibility: isMobileMenuOpen ? 'visible' : 'hidden',
             pointerEvents: isMobileMenuOpen ? 'auto' : 'none',
           }}
+          aria-hidden="true"
         />
 
         {/* Menu Panel */}
@@ -133,6 +142,9 @@ function Navbar() {
           className={`mobile-menu fixed top-0 right-0 h-full w-80 max-w-[85vw] bg-white shadow-xl z-50 ${
             isMobileMenuOpen ? 'open' : ''
           }`}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Mobile navigation menu"
         >
           <div className="flex flex-col h-full">
             {/* Header */}
@@ -142,30 +154,29 @@ function Navbar() {
               </h2>
               <button
                 onClick={closeMobileMenu}
-                className="p-2 rounded-full hover:bg-gray-100 transition-colors duration-300"
+                className="mobile-menu-close-button p-2 rounded-full hover:bg-gray-100 transition-colors duration-300"
                 style={{ color: colors.text }}
+                aria-label="Close mobile menu"
               >
-                <X className="w-5 h-5" />
+                <X className="w-5 h-5" aria-hidden="true" />
               </button>
             </div>
 
             {/* Navigation Links */}
             <div className="flex-1 py-6">
-              <nav className="space-y-1">
+              <nav className="space-y-1" aria-label="Mobile navigation">
                 {navItems.map((item) => (
                   <Link
                     key={item.to}
                     to={item.to}
                     className={`mobile-nav-link block px-6 py-4 text-base font-medium ${
-                      activeLink === item.to ? 'active' : ''
+                      location.pathname === item.to ? 'active' : ''
                     }`}
                     style={{
-                      color: activeLink === item.to ? colors.primary : colors.text,
+                      color: location.pathname === item.to ? colors.primary : colors.text,
                     }}
-                    onClick={() => {
-                      setActiveLink(item.to);
-                      closeMobileMenu();
-                    }}
+                    onClick={closeMobileMenu}
+                    aria-current={location.pathname === item.to ? 'page' : undefined}
                   >
                     {item.label}
                   </Link>
@@ -176,7 +187,7 @@ function Navbar() {
             {/* Footer */}
             <div className="p-6 border-t border-gray-100">
               <p className="text-sm text-gray-500 text-center">
-                © 2024 InterceptCSA
+                © {new Date().getFullYear()} InterceptCSA
               </p>
             </div>
           </div>

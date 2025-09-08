@@ -188,7 +188,7 @@ function Contact() {
 
       <div className="relative z-10">
         {/* Hero Section */}
-        <section className="pt-40 pb-12 px-4">
+        <section className="pt-32 pb-12 px-4">
           <div className="container mx-auto max-w-5xl">
             <div className={`text-center transform transition-all duration-700 ${isVisible ? 'translate-y-0 opacity-100' : 'translate-y-10 opacity-0'}`}>
               <h1 className="text-4xl sm:text-5xl font-extrabold text-[#1F2937] mb-4">
