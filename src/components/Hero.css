@@ -116,9 +116,6 @@
 .hero-button-primary {
   background: linear-gradient(135deg, #FFC938 0%, #FFD700 100%);
   color: #1a1a1a;
-  /* box-shadow: 
-    0 8px 32px rgba(255, 201, 56, 0.4),
-    0 2px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .hero-button-primary:hover {
@@ -131,9 +128,6 @@
 .hero-button-secondary {
   background: linear-gradient(135deg, #FF5245 0%, #FF6B5A 100%);
   color: #ffffff;
-  /* box-shadow: 
-    0 8px 32px rgba(255, 82, 69, 0.4),
-    0 2px 8px rgba(0, 0, 0, 0.1); */
 }
 
 .hero-button-secondary:hover {
@@ -179,7 +173,6 @@
   left: -20px;
   right: 20px;
   bottom: 20px;
-  /* background: linear-gradient(135deg, rgba(255, 201, 56, 0.3), rgba(255, 82, 69, 0.3)); */
   border-radius: 2rem;
   z-index: -1;
   filter: blur(20px);
@@ -223,6 +216,142 @@
   }
 }
 
+/* ENHANCED LARGE SCREEN SUPPORT */
+
+/* Large Desktop Screens (1440px and up) */
+@media (min-width: 1440px) {
+  .hero {
+    padding: 3rem 4rem;
+  }
+  
+  .hero-container {
+    max-width: none;
+    gap: clamp(5rem, 8vw, 12rem);
+  }
+  
+  .hero-title {
+    font-size: clamp(4rem, 6vw, 5.5rem);
+    margin-bottom: 2rem;
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(1.4rem, 3vw, 1.8rem);
+    margin-bottom: 3rem;
+  }
+  
+  .hero-button {
+    padding: 1.25rem 2.5rem;
+    font-size: 1.2rem;
+  }
+  
+  .hero-button-icon {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+}
+
+/* Ultra-wide and 4K Screens (1800px and up) */
+@media (min-width: 1800px) {
+  .hero {
+    padding: 4rem clamp(5rem, 10vw, 15rem);
+  }
+  
+  .hero-container {
+    gap: clamp(6rem, 10vw, 15rem);
+  }
+  
+  .hero-title {
+    font-size: clamp(5.5rem, 7vw, 8rem);
+    margin-bottom: 2.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(1.8rem, 3.5vw, 2.4rem);
+    margin-bottom: 3.5rem;
+    max-width: 85%;
+  }
+  
+  .hero-buttons {
+    gap: 2rem;
+  }
+  
+  .hero-button {
+    padding: 1.5rem 3rem;
+    font-size: 1.3rem;
+  }
+  
+  .hero-button-icon {
+    width: 1.75rem;
+    height: 1.75rem;
+    margin-left: 1rem;
+  }
+  
+  .hero::after {
+    width: 300px;
+    height: 300px;
+  }
+}
+
+/* Extra Large Screens (2200px and up) */
+@media (min-width: 2200px) {
+  .hero {
+    padding: 5rem clamp(6rem, 12vw, 20rem);
+  }
+  
+  .hero-container {
+    gap: clamp(7rem, 12vw, 18rem);
+  }
+  
+  .hero-title {
+    font-size: clamp(7rem, 8vw, 9rem);
+    margin-bottom: 3rem;
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(2.2rem, 4vw, 2.8rem);
+    margin-bottom: 4rem;
+    max-width: 80%;
+  }
+  
+  .hero-button {
+    padding: 1.75rem 3.5rem;
+    font-size: 1.4rem;
+  }
+  
+  .hero-button-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+}
+
+/* Massive Screens (2800px and up) */
+@media (min-width: 2800px) {
+  .hero {
+    padding: 6rem clamp(8rem, 15vw, 25rem);
+  }
+  
+  .hero-container {
+    gap: clamp(8rem, 15vw, 22rem);
+  }
+  
+  .hero-title {
+    font-size: clamp(8.5rem, 9vw, 11rem);
+    margin-bottom: 3.5rem;
+  }
+  
+  .hero-subtitle {
+    font-size: clamp(2.6rem, 4.5vw, 3.2rem);
+    margin-bottom: 4.5rem;
+    max-width: 75%;
+  }
+  
+  .hero-button {
+    padding: 2rem 4rem;
+    font-size: 1.6rem;
+  }
+}
+
+/* Existing responsive breakpoints */
 @media (max-width: 1024px) {
   .hero {
     padding: 2rem;

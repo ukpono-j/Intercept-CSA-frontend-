@@ -1,131 +1,29 @@
-/* Responsive Design */
-@media (max-width: 768px) {
-  .podcast header {
-    padding-top: 5rem; /* Matches updated Hero padding */
-    padding-bottom: 5rem;
+.waveform-bar {
+  animation: wave 1.2s ease-in-out infinite;
+}
+
+.waveform-bar.playing {
+  animation: wave-active 0.6s ease-in-out infinite;
+}
+
+@keyframes wave {
+  0%, 100% {
+    transform: scaleY(0.3);
+    opacity: 0.5;
   }
-  .podcast main {
-    padding-top: 5rem; /* Matches updated Hero padding */
-    padding-bottom: 5rem;
-  }
-  .podcast section {
-    padding-top: 5rem; /* Matches updated Hero padding */
-    padding-bottom: 5rem;
-  }
-  .podcast h1 {
-    font-size: 2.75rem; /* Matches Hero title at 768px */
-  }
-  .podcast h2 {
-    font-size: 2rem; /* Smaller section headings */
-  }
-  .podcast h3 {
-    font-size: 1.25rem; /* Smaller card titles */
-  }
-  .podcast .text-xl {
-    font-size: 1rem; /* Matches Hero subtitle at 768px */
-  }
-  .podcast .text-2xl {
-    font-size: 1.25rem; /* Matches card titles */
-  }
-  .podcast .text-3xl {
-    font-size: 1.5rem; /* Matches section headings */
-  }
-  .podcast .text-base {
-    font-size: 0.9375rem; /* Matches Hero button text */
-  }
-  .podcast .text-lg {
-    font-size: 0.9375rem; /* Matches Hero button text */
-  }
-  .podcast .text-sm {
-    font-size: 0.875rem; /* Matches secondary text */
-  }
-  .podcast button, .podcast a {
-    font-size: 1rem; /* Matches Hero button text */
-    padding: 1rem 1.5rem; /* Matches Hero button padding */
-    min-width: 200px; /* Matches Hero button */
-    white-space: nowrap; /* Prevent text wrapping */
-  }
-  .podcast .p-6 {
-    padding: 1.5rem; /* Reduced padding for cards */
-  }
-  .podcast .p-8 {
-    padding: 1.5rem; /* Reduced padding for featured episode */
-  }
-  .podcast .h-64 {
-    height: 14rem; /* Smaller image height */
-  }
-  .podcast .h-48 {
-    height: 10rem; /* Smaller card image height */
-  }
-  .podcast .min-h-\[250px\] {
-    min-height: 200px; /* Smaller card height */
-  }
-  .podcast .min-h-\[300px\] {
-    min-height: 240px; /* Smaller featured episode height */
+  50% {
+    transform: scaleY(0.5);
+    opacity: 0.7;
   }
 }
 
-@media (max-width: 640px) {
-  .podcast header {
-    padding-top: 5rem; /* Matches updated Hero padding */
-    padding-bottom: 5rem;
+@keyframes wave-active {
+  0%, 100% {
+    transform: scaleY(0.5);
+    opacity: 0.8;
   }
-  .podcast main {
-    padding-top: 5rem; /* Matches updated Hero padding */
-    padding-bottom: 5rem;
-  }
-  .podcast section {
-    padding-top: 5rem; /* Matches updated Hero padding */
-    padding-bottom: 5rem;
-  }
-  .podcast h1 {
-    font-size: 2rem; /* Matches Hero title at 640px */
-  }
-  .podcast h2 {
-    font-size: 1.75rem; /* Smaller section headings */
-  }
-  .podcast h3 {
-    font-size: 1.125rem; /* Even smaller card titles */
-  }
-  .podcast .text-xl {
-    font-size: 0.875rem; /* Matches Hero subtitle at 640px */
-  }
-  .podcast .text-2xl {
-    font-size: 1.125rem; /* Matches card titles */
-  }
-  .podcast .text-3xl {
-    font-size: 1.25rem; /* Matches section headings */
-  }
-  .podcast .text-base {
-    font-size: 0.875rem; /* Matches Hero button text at 640px */
-  }
-  .podcast .text-lg {
-    font-size: 0.875rem; /* Matches Hero button text at 640px */
-  }
-  .podcast .text-sm {
-    font-size: 0.75rem; /* Smaller secondary text */
-  }
-  .podcast button, .podcast a {
-    font-size: 0.9375rem; /* Matches Hero button text at 640px */
-    padding: 1rem 1.5rem;
-    min-width: 180px; /* Matches Hero button at 640px */
-  }
-  .podcast .p-6 {
-    padding: 1rem; /* Further reduced padding for cards */
-  }
-  .podcast .p-8 {
-    padding: 1rem; /* Further reduced padding for featured episode */
-  }
-  .podcast .h-64 {
-    height: 12rem; /* Even smaller image height */
-  }
-  .podcast .h-48 {
-    height: 8rem; /* Even smaller card image height */
-  }
-  .podcast .min-h-\[250px\] {
-    min-height: 180px; /* Even smaller card height */
-  }
-  .podcast .min-h-\[300px\] {
-    min-height: 200px; /* Even smaller featured episode height */
+  50% {
+    transform: scaleY(1);
+    opacity: 1;
   }
 }

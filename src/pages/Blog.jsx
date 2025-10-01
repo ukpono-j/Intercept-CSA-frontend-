@@ -36,7 +36,9 @@ function Blog() {
             headers: { 'Content-Type': 'application/json' },
             timeout: 10000,
           });
-          setPosts(response.data);
+          console.log('API Response:', response.data); // Debug log
+          const data = Array.isArray(response.data) ? response.data : [];
+          setPosts(data);
           setIsLoading(false);
           return;
         } catch (err) {
@@ -48,7 +50,9 @@ function Blog() {
                 headers: { 'Content-Type': 'application/json' },
                 timeout: 10000,
               });
-              setPosts(retryResponse.data);
+              console.log('Retry Response:', retryResponse.data); // Debug log
+              const retryData = Array.isArray(retryResponse.data) ? retryResponse.data : [];
+              setPosts(retryData);
               setIsLoading(false);
               return;
             } catch (retryErr) {
@@ -290,11 +294,11 @@ ${post.content
           <LoadingSpinner />
         ) : error ? (
           <ErrorDisplay />
-        ) : posts.length === 0 ? (
+        ) : !Array.isArray(posts) || posts.length === 0 ? (
           <EmptyState />
         ) : (
           <>
-            {posts.length > 0 && (
+            {posts.length > 0 && Array.isArray(posts) && (
               <div className="mb-16">
                 <h2 className="text-3xl sm:text-4xl font-bold mb-12 text-center" style={{ color: colors.text }}>
                   Featured Story
@@ -379,71 +383,75 @@ ${post.content
                 </div>
               </div>
               <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                {posts.slice(1).map((post, index) => (
-                  <article
-                    key={post._id}
-                    className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-100 hover:border-slate-200 transform hover:-translate-y-2"
-                  >
-                    <div className="relative h-48 sm:h-56 overflow-hidden">
-                      {post.image ? (
-                        <img
-                          src={getImageUrl(post.image)}
-                          srcSet={`${getImageUrl(post.image)}?w=320 320w, ${getImageUrl(post.image)}?w=640 640w`}
-                          sizes="(max-width: 640px) 320px, 640px"
-                          alt={post.title}
-                          className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-                          loading="lazy"
-                          onError={(e) => {
-                            if (!imageErrors[post._id]) {
-                              e.target.src = '/assets/placeholder.jpg';
-                              setImageErrors((prev) => ({ ...prev, [post._id]: post.image }));
-                            }
-                          }}
-                        />
-                      ) : (
-                        <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-                          <blockquote className="text-center px-6 max-w-md">
-                            <p className="text-sm italic text-slate-600 line-clamp-3">"{post.excerpt}"</p>
-                          </blockquote>
+                {Array.isArray(posts) && posts.length > 1 ? (
+                  posts.slice(1).map((post, index) => (
+                    <article
+                      key={post._id}
+                      className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden border border-slate-100 hover:border-slate-200 transform hover:-translate-y-2"
+                    >
+                      <div className="relative h-48 sm:h-56 overflow-hidden">
+                        {post.image ? (
+                          <img
+                            src={getImageUrl(post.image)}
+                            srcSet={`${getImageUrl(post.image)}?w=320 320w, ${getImageUrl(post.image)}?w=640 640w`}
+                            sizes="(max-width: 640px) 320px, 640px"
+                            alt={post.title}
+                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                            loading="lazy"
+                            onError={(e) => {
+                              if (!imageErrors[post._id]) {
+                                e.target.src = '/assets/placeholder.jpg';
+                                setImageErrors((prev) => ({ ...prev, [post._id]: post.image }));
+                              }
+                            }}
+                          />
+                        ) : (
+                          <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                            <blockquote className="text-center px-6 max-w-md">
+                              <p className="text-sm italic text-slate-600 line-clamp-3">"{post.excerpt}"</p>
+                            </blockquote>
+                          </div>
+                        )}
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                        <div className="absolute top-4 left-4">
+                          <span className="inline-block px-3 py-1 text-xs font-bold text-white bg-black/20 backdrop-blur-sm rounded-full border border-white/20">
+                            {post.category || `Story ${index + 2}`}
+                          </span>
                         </div>
-                      )}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                      <div className="absolute top-4 left-4">
-                        <span className="inline-block px-3 py-1 text-xs font-bold text-white bg-black/20 backdrop-blur-sm rounded-full border border-white/20">
-                          {post.category || `Story ${index + 2}`}
-                        </span>
                       </div>
-                    </div>
-                    <div className="p-6 flex flex-col min-h-[250px]">
-                      <div className="mb-3">
-                        <span className="text-slate-500 text-sm font-medium">
-                          {new Date(post.createdAt).toLocaleDateString('en-US', {
-                            year: 'numeric',
-                            month: 'short',
-                            day: 'numeric'
-                          })}
-                        </span>
+                      <div className="p-6 flex flex-col min-h-[250px]">
+                        <div className="mb-3">
+                          <span className="text-slate-500 text-sm font-medium">
+                            {new Date(post.createdAt).toLocaleDateString('en-US', {
+                              year: 'numeric',
+                              month: 'short',
+                              day: 'numeric'
+                            })}
+                          </span>
+                        </div>
+                        <h3 className="text-xl font-bold mb-3 leading-tight line-clamp-2 group-hover:text-slate-800 transition-colors" style={{ color: colors.text }}>
+                          {post.title}
+                        </h3>
+                        <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2 flex-grow">
+                          {post.excerpt}
+                        </p>
+                        <button
+                          onClick={() => setSelectedPost(post)}
+                          className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-fit group/btn mt-auto"
+                          style={{ backgroundColor: colors.accent }}
+                          aria-label={`Read more about ${post.title}`}
+                        >
+                          Read More
+                          <svg className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                          </svg>
+                        </button>
                       </div>
-                      <h3 className="text-xl font-bold mb-3 leading-tight line-clamp-2 group-hover:text-slate-800 transition-colors" style={{ color: colors.text }}>
-                        {post.title}
-                      </h3>
-                      <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2 flex-grow">
-                        {post.excerpt}
-                      </p>
-                      <button
-                        onClick={() => setSelectedPost(post)}
-                        className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-fit group/btn mt-auto"
-                        style={{ backgroundColor: colors.accent }}
-                        aria-label={`Read more about ${post.title}`}
-                      >
-                        Read More
-                        <svg className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                        </svg>
-                      </button>
-                    </div>
-                  </article>
-                ))}
+                    </article>
+                  ))
+                ) : (
+                  <p>No additional stories available.</p>
+                )}
               </div>
             </section>
           </>

@@ -179,7 +179,7 @@ function Footer() {
         className="relative overflow-hidden py-16 text-white"
         style={{ backgroundColor: colors.secondary }}
       >
-        {/* Dynamic Background Effects - Your original animations */}
+        {/* Dynamic Background Effects */}
         <div className="absolute inset-0 pointer-events-none">
           {/* Animated Gradient Orbs */}
           <div
@@ -199,7 +199,7 @@ function Footer() {
             }}
           />
 
-          {/* Floating Elements - Your original sparkles */}
+          {/* Floating Elements */}
           {[...Array(4)].map((_, i) => (
             <div
               key={i}
@@ -216,55 +216,69 @@ function Footer() {
           ))}
         </div>
 
-        {/* Main Content - Improved Structure */}
-        <div className="container mx-auto px-6 relative z-10">
-          <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-12 mb-12">
+        {/* Main Content */}
+        <div className="container mx-auto px-6 lg:px-8 relative z-10 max-w-7xl">
+          {/* Top Section - Mission Statement */}
+          <div className="mb-16 text-left">
+            <h2 className="footer-text-xl font-bold mb-4" style={{ color: colors.accent }}>
+              Intercept CSA Foundation
+            </h2>
+            <p className="footer-text-base text-white/90 max-w-2xl leading-relaxed">
+              Preventing, confronting, and healing child sexual abuse through education, advocacy, and survivor support.
+            </p>
+          </div>
 
-            {/* Logo & Description - Better spacing */}
-            <div className="lg:col-span-2">
-              <p className="footer-text-base text-white/90 max-w-md leading-relaxed mb-8">
-                Preventing, confronting, and healing child sexual abuse through education, advocacy, and survivor support.
-              </p>
+          {/* Main Grid */}
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8 mb-16">
 
-              {/* Contact Info - Better organized */}
-              <div className="space-y-3">
-                <div className="footer-text-sm text-white/80">
-                  <strong style={{ color: colors.accent }}>Email:</strong> interceptcsa@gmail.com
+            {/* Quick Links */}
+            <div className="lg:col-span-4">
+              <h3 className="footer-text-lg font-bold mb-6" style={{ color: colors.accent }}>
+                Quick Links
+              </h3>
+              <div className="grid grid-cols-2 gap-x-4 gap-y-3">
+                {navLinks.map((link) => (
+                  <a
+                    key={link.to}
+                    href={link.to}
+                    className="footer-nav-link footer-text-sm text-white/90 hover:text-white"
+                  >
+                    {link.label}
+                  </a>
+                ))}
+              </div>
+            </div>
+
+            {/* Contact Info */}
+            <div className="lg:col-span-4">
+              <h3 className="footer-text-lg font-bold mb-6" style={{ color: colors.accent }}>
+                Get In Touch
+              </h3>
+              <div className="space-y-4">
+                <div>
+                  <div className="footer-text-sm font-semibold text-white mb-1">Email</div>
+                  <a 
+                    href="mailto:interceptcsa@gmail.com"
+                    className="footer-text-sm text-white/80 hover:text-white transition-colors"
+                  >
+                    interceptcsa@gmail.com
+                  </a>
                 </div>
-                <div className="footer-text-sm text-white/80">
-                  <strong style={{ color: colors.accent }}>Phone:</strong> 0810 335 0098
+                <div>
+                  <div className="footer-text-sm font-semibold text-white mb-1">Phone</div>
+                  <a 
+                    href="tel:08103350098"
+                    className="footer-text-sm text-white/80 hover:text-white transition-colors"
+                  >
+                    0810 335 0098
+                  </a>
                 </div>
               </div>
             </div>
 
-            {/* Navigation Links - Better layout */}
-            <div>
-              <h3
-                className="footer-text-lg font-semibold mb-6"
-                style={{ color: colors.accent }}
-              >
-                Quick Links
-              </h3>
-              <ul className="space-y-3">
-                {navLinks.map((link) => (
-                  <li key={link.to}>
-                    <a
-                      href={link.to}
-                      className="footer-nav-link footer-text-sm text-white/90 hover:text-white block"
-                    >
-                      {link.label}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Social Media - Better presentation */}
-            <div>
-              <h3
-                className="footer-text-lg font-semibold mb-6"
-                style={{ color: colors.accent }}
-              >
+            {/* Social Media */}
+            <div className="lg:col-span-4">
+              <h3 className="footer-text-lg font-bold mb-6" style={{ color: colors.accent }}>
                 Connect With Us
               </h3>
               <div className="space-y-4">
@@ -284,32 +298,24 @@ function Footer() {
                   );
                 })}
               </div>
-
-              {/* Emergency Notice */}
-              {/* <div
-                className="mt-8 p-4 rounded-lg border-l-4"
-                style={{
-                  backgroundColor: 'rgba(255, 82, 69, 0.15)',
-                  borderLeftColor: colors.coral
-                }}
-              >
-                <p className="footer-text-sm text-white">
-                  <span style={{ color: colors.coral, fontWeight: 'bold' }}>Emergency:</span>
-                  <span className="block mt-1">If you or a child is in immediate danger, contact emergency services.</span>
-                </p>
-              </div> */}
             </div>
           </div>
 
-          {/* Copyright - Cleaner design */}
-          <div className="pt-8 border-t border-white/20 text-center">
-            <p className="footer-text-sm text-white/70">
-              © {new Date().getFullYear()} Intercept CSA. All rights reserved.
-              <span className="mx-2">•</span>
-              <a href="/privacy" className="hover:text-white transition-colors">Privacy Policy</a>
-              <span className="mx-2">•</span>
-              <a href="/terms" className="hover:text-white transition-colors">Terms</a>
-            </p>
+          {/* Bottom Bar */}
+          <div className="pt-8 border-t border-white/20">
+            <div className="flex flex-col md:flex-row justify-between items-center gap-4">
+              <p className="footer-text-sm text-white/70">
+                © {new Date().getFullYear()} Intercept CSA. All rights reserved.
+              </p>
+              <div className="flex gap-6">
+                <a href="/privacy" className="footer-text-sm text-white/70 hover:text-white transition-colors">
+                  Privacy Policy
+                </a>
+                <a href="/terms" className="footer-text-sm text-white/70 hover:text-white transition-colors">
+                  Terms of Service
+                </a>
+              </div>
+            </div>
           </div>
         </div>
       </footer>

@@ -1,3 +1,476 @@
+/* Base styles for ImpactfulPrograms */
+section {
+  padding-top: clamp(2rem, 4vw, 4rem);
+  padding-bottom: clamp(2rem, 4vw, 4rem);
+  background: linear-gradient(135deg, #2A8E9D 0%, #0F766E 50%, #2A8E9D 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.floating-elements div {
+  position: absolute;
+  border-radius: 50%;
+}
+
+.floating-elements div:nth-child(1) {
+  top: clamp(4rem, 10vw, 5rem);
+  left: clamp(2rem, 5vw, 3rem);
+  width: clamp(0.5rem, 1vw, 0.75rem);
+  height: clamp(0.5rem, 1vw, 0.75rem);
+  background: rgba(255, 255, 255, 0.2);
+  animation: pulse 2s infinite;
+}
+
+.floating-elements div:nth-child(2) {
+  top: clamp(8rem, 15vw, 10rem);
+  right: clamp(3rem, 6vw, 4rem);
+  width: clamp(0.3rem, 0.8vw, 0.5rem);
+  height: clamp(0.3rem, 0.8vw, 0.5rem);
+  background: rgba(255, 255, 255, 0.3);
+  animation: ping 3s infinite;
+}
+
+.floating-elements div:nth-child(3) {
+  bottom: clamp(6rem, 12vw, 8rem);
+  left: 25%;
+  width: clamp(0.4rem, 1vw, 0.6rem);
+  height: clamp(0.4rem, 1vw, 0.6rem);
+  background: rgba(255, 255, 255, 0.25);
+  animation: pulse 2.5s infinite;
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 3vw, 2rem);
+  padding-right: clamp(1rem, 3vw, 2rem);
+  max-width: none;
+  position: relative;
+  z-index: 10;
+}
+
+.hero-section {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(2rem, 5vw, 3rem);
+  align-items: center;
+  margin-bottom: clamp(3rem, 6vw, 4rem);
+}
+
+.hero-text {
+  transition: all 1s ease-out;
+}
+
+.hero-title {
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  line-height: 1.2;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.hero-title-highlight {
+  display: block;
+  color: #FFC938;
+}
+
+.hero-description {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.hero-button {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
+  border-radius: 9999px;
+  font-size: clamp(0.8rem, 1.8vw, 1rem);
+  font-weight: 600;
+  background-color: #FFC938;
+  color: #0F766E;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.hero-button-icon {
+  width: clamp(1rem, 2.5vw, 1.25rem);
+  height: clamp(1rem, 2.5vw, 1.25rem);
+}
+
+.hero-button:hover .hero-button-icon.arrow {
+  transform: translateX(4px);
+}
+
+.hero-button-shine {
+  position: absolute;
+  inset: 0;
+  transform: skewX(-12deg);
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+}
+
+.hero-button:hover .hero-button-shine {
+  transform: translateX(100%);
+}
+
+.hero-impact {
+  transition: all 1s ease-out 0.3s;
+}
+
+.hero-impact-container {
+  position: relative;
+}
+
+.hero-impact-bg {
+  position: absolute;
+  inset: 0;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  backdrop-filter: blur(4px);
+}
+
+.hero-impact-content {
+  position: relative;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border-radius: 1.5rem;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.hero-impact-icon {
+  width: clamp(2rem, 5vw, 3rem);
+  height: clamp(2rem, 5vw, 3rem);
+  color: #FFC938;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.hero-impact-title {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.hero-impact-description {
+  font-size: clamp(0.8rem, 1.8vw, 1rem);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+}
+
+.tabs {
+  margin-bottom: clamp(2rem, 4vw, 3rem);
+}
+
+.tab-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.tab-buttons {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 9999px;
+  padding: clamp(0.25rem, 0.5vw, 0.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(4px);
+}
+
+.tab-button {
+  padding: clamp(0.5rem, 1.2vw, 0.75rem) clamp(1rem, 2.5vw, 1.5rem);
+  border-radius: 9999px;
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+
+.tab-button.active {
+  background: #FFFFFF;
+  color: #374050;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.tab-button.inactive {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.tab-button.inactive:hover {
+  color: #FFFFFF;
+}
+
+.stats-title {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+  text-align: center;
+}
+
+.stats-description {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.stat-card {
+  position: relative;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  transition: all 0.5s ease;
+}
+
+.stat-card:hover {
+  background: rgba(255, 255, 255, 0.1);
+  transform: scale(1.05);
+}
+
+.stat-icon-container {
+  display: inline-flex;
+  padding: clamp(0.5rem, 1.2vw, 0.75rem);
+  border-radius: 9999px;
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+  background: rgba(20, 184, 166, 0.25);
+}
+
+.stat-icon {
+  width: clamp(1.5rem, 3.5vw, 2rem);
+  height: clamp(1.5rem, 3.5vw, 2rem);
+  color: #FFFFFF;
+}
+
+.stat-value {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+}
+
+.stat-label {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  font-weight: 600;
+  color: #FFC938;
+  margin-bottom: clamp(0.5rem, 1vw, 0.75rem);
+}
+
+.stat-description {
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.stat-shine {
+  position: absolute;
+  inset: 0;
+  border-radius: 1rem;
+  background: linear-gradient(to right, rgba(255, 255, 255, 0.05), transparent);
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.stat-card:hover .stat-shine {
+  opacity: 1;
+}
+
+.programs-title {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+  text-align: center;
+}
+
+.programs-description {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.programs-container {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1.5rem, 3vw, 2rem);
+}
+
+.program-card {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+  transition: all 0.5s ease;
+}
+
+.program-card:hover {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.program-content {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(1.5rem, 3vw, 2rem);
+  align-items: center;
+}
+
+.program-header {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.program-icon-container {
+  padding: clamp(0.5rem, 1.2vw, 0.75rem);
+  border-radius: 0.75rem;
+  background: #FFC938;
+}
+
+.program-icon {
+  width: clamp(1rem, 2.5vw, 1.5rem);
+  height: clamp(1rem, 2.5vw, 1.5rem);
+  color: #0F766E;
+}
+
+.program-title {
+  font-size: clamp(1.25rem, 2.5vw, 1.5rem);
+  font-weight: 700;
+  color: #FFFFFF;
+}
+
+.program-description {
+  font-size: clamp(0.8rem, 1.8vw, 1rem);
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.6;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.program-features {
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1rem;
+  padding: clamp(1rem, 2.5vw, 1.5rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.program-features-title {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  font-weight: 600;
+  color: #FFFFFF;
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.program-features-list {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+}
+
+.program-feature {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.program-feature-icon {
+  width: clamp(0.8rem, 2vw, 1rem);
+  height: clamp(0.8rem, 2vw, 1rem);
+  color: #FFC938;
+}
+
+.cta {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 1.5rem;
+  padding: clamp(1.5rem, 3vw, 2rem);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(4px);
+}
+
+.cta-icon {
+  width: clamp(3rem, 6vw, 4rem);
+  height: clamp(3rem, 6vw, 4rem);
+  color: #FFC938;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: clamp(1rem, 2vw, 1.5rem);
+}
+
+.cta-title {
+  font-size: clamp(1.5rem, 3.5vw, 2rem);
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: clamp(0.75rem, 1.5vw, 1rem);
+}
+
+.cta-description {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  color: rgba(255, 255, 255, 0.8);
+  max-width: 32rem;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: clamp(1.5rem, 3vw, 2rem);
+}
+
+.cta-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: clamp(0.75rem, 1.5vw, 1rem);
+  justify-content: center;
+}
+
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: clamp(0.5rem, 1vw, 0.75rem);
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1.5rem, 3vw, 2rem);
+  border-radius: 9999px;
+  font-size: clamp(0.8rem, 1.8vw, 1rem);
+  font-weight: 600;
+  background: #FFC938;
+  color: #0F766E;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+}
+
+.cta-button:hover {
+  transform: scale(1.05);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+}
+
+.cta-button-shine {
+  position: absolute;
+  inset: 0;
+  transform: skewX(-12deg);
+  background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
+  transform: translateX(-100%);
+}
+
+.cta-button:hover .cta-button-shine {
+  transform: translateX(100%);
+}
+
 .animate-fade-in {
   animation: fadeIn 0.6s ease-out forwards;
 }
@@ -7,9 +480,1027 @@
     opacity: 0;
     transform: translateY(20px);
   }
-
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes ping {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  75% {
+    transform: scale(2);
+    opacity: 0;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+/* Progressive media queries for large screens */
+@media (min-width: 1440px) {
+  section {
+    padding-top: clamp(4rem, 5vw, 8rem) !important;
+    padding-bottom: clamp(4rem, 5vw, 8rem) !important;
+  }
+
+  .container {
+    padding-left: clamp(2rem, 5vw, 4rem) !important;
+    padding-right: clamp(2rem, 5vw, 4rem) !important;
+  }
+
+  .floating-elements div:nth-child(1) {
+    top: clamp(5rem, 12vw, 6rem) !important;
+    left: clamp(3rem, 6vw, 4rem) !important;
+    width: clamp(0.75rem, 1.5vw, 1rem) !important;
+    height: clamp(0.75rem, 1.5vw, 1rem) !important;
+  }
+
+  .floating-elements div:nth-child(2) {
+    top: clamp(10rem, 18vw, 12rem) !important;
+    right: clamp(4rem, 8vw, 5rem) !important;
+    width: clamp(0.5rem, 1vw, 0.75rem) !important;
+    height: clamp(0.5rem, 1vw, 0.75rem) !important;
+  }
+
+  .floating-elements div:nth-child(3) {
+    bottom: clamp(8rem, 15vw, 10rem) !important;
+    width: clamp(0.6rem, 1.2vw, 0.8rem) !important;
+    height: clamp(0.6rem, 1.2vw, 0.8rem) !important;
+  }
+
+  .hero-section {
+    gap: clamp(3rem, 6vw, 4rem) !important;
+    margin-bottom: clamp(4rem, 8vw, 6rem) !important;
+  }
+
+  .hero-title {
+    font-size: clamp(3rem, 5vw, 4rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .hero-description {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .hero-button {
+    padding: clamp(1rem, 2.5vw, 1.5rem) clamp(2rem, 4vw, 3rem) !important;
+    font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
+  }
+
+  .hero-button-icon {
+    width: clamp(1.2rem, 3vw, 1.5rem) !important;
+    height: clamp(1.2rem, 3vw, 1.5rem) !important;
+  }
+
+  .hero-impact-content {
+    padding: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .hero-impact-icon {
+    width: clamp(2.5rem, 6vw, 3.5rem) !important;
+    height: clamp(2.5rem, 6vw, 3.5rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .hero-impact-title {
+    font-size: clamp(1.5rem, 3.5vw, 2rem) !important;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .hero-impact-description {
+    font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
+  }
+
+  .tabs {
+    margin-bottom: clamp(3rem, 5vw, 4rem) !important;
+  }
+
+  .tab-container {
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .tab-button {
+    padding: clamp(0.75rem, 1.5vw, 1rem) clamp(1.5rem, 3vw, 2rem) !important;
+    font-size: clamp(0.8rem, 1.8vw, 1rem) !important;
+  }
+
+  .stats-title {
+    font-size: clamp(2rem, 4vw, 3rem) !important;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .stats-description {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .stats-grid {
+    gap: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .stat-card {
+    padding: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .stat-icon-container {
+    padding: clamp(0.75rem, 1.5vw, 1rem) !important;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .stat-icon {
+    width: clamp(2rem, 4vw, 2.5rem) !important;
+    height: clamp(2rem, 4vw, 2.5rem) !important;
+  }
+
+  .stat-value {
+    font-size: clamp(2rem, 5vw, 3rem) !important;
+    margin-bottom: clamp(0.75rem, 1.5vw, 1rem) !important;
+  }
+
+  .stat-label {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+    margin-bottom: clamp(0.75rem, 1.5vw, 1rem) !important;
+  }
+
+  .stat-description {
+    font-size: clamp(0.8rem, 1.8vw, 1rem) !important;
+  }
+
+  .programs-title {
+    font-size: clamp(2rem, 4vw, 3rem) !important;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .programs-description {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .programs-container {
+    gap: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .program-card {
+    padding: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .program-content {
+    gap: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .program-header {
+    gap: clamp(1rem, 2vw, 1.5rem) !important;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .program-icon-container {
+    padding: clamp(0.75rem, 1.5vw, 1rem) !important;
+  }
+
+  .program-icon {
+    width: clamp(1.5rem, 3vw, 2rem) !important;
+    height: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .program-title {
+    font-size: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .program-description {
+    font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .program-features {
+    padding: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .program-features-title {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .program-features-list {
+    gap: clamp(0.75rem, 1.5vw, 1rem) !important;
+  }
+
+  .program-feature {
+    font-size: clamp(0.8rem, 1.8vw, 1rem) !important;
+  }
+
+  .program-feature-icon {
+    width: clamp(1rem, 2.5vw, 1.2rem) !important;
+    height: clamp(1rem, 2.5vw, 1.2rem) !important;
+  }
+
+  .cta {
+    padding: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .cta-icon {
+    width: clamp(4rem, 7vw, 5rem) !important;
+    height: clamp(4rem, 7vw, 5rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .cta-title {
+    font-size: clamp(2rem, 4vw, 3rem) !important;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .cta-description {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .cta-buttons {
+    gap: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .cta-button {
+    padding: clamp(1rem, 2.5vw, 1.5rem) clamp(2rem, 4vw, 3rem) !important;
+    font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
+  }
+}
+
+@media (min-width: 1800px) {
+  section {
+    padding-top: clamp(6rem, 6vw, 12rem) !important;
+    padding-bottom: clamp(6rem, 6vw, 12rem) !important;
+  }
+
+  .container {
+    padding-left: clamp(4rem, 8vw, 8rem) !important;
+    padding-right: clamp(4rem, 8vw, 8rem) !important;
+  }
+
+  .floating-elements div:nth-child(1) {
+    top: clamp(6rem, 15vw, 8rem) !important;
+    left: clamp(4rem, 8vw, 5rem) !important;
+    width: clamp(1rem, 2vw, 1.25rem) !important;
+    height: clamp(1rem, 2vw, 1.25rem) !important;
+  }
+
+  .floating-elements div:nth-child(2) {
+    top: clamp(12rem, 20vw, 15rem) !important;
+    right: clamp(5rem, 10vw, 6rem) !important;
+    width: clamp(0.6rem, 1.2vw, 1rem) !important;
+    height: clamp(0.6rem, 1.2vw, 1rem) !important;
+  }
+
+  .floating-elements div:nth-child(3) {
+    bottom: clamp(10rem, 18vw, 12rem) !important;
+    width: clamp(0.8rem, 1.5vw, 1rem) !important;
+    height: clamp(0.8rem, 1.5vw, 1rem) !important;
+  }
+
+  .hero-section {
+    gap: clamp(4rem, 8vw, 5rem) !important;
+    margin-bottom: clamp(5rem, 10vw, 8rem) !important;
+  }
+
+  .hero-title {
+    font-size: clamp(4rem, 6vw, 5rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .hero-description {
+    font-size: clamp(1.2rem, 3vw, 1.8rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .hero-button {
+    padding: clamp(1.2rem, 3vw, 2rem) clamp(2.5rem, 5vw, 4rem) !important;
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+  }
+
+  .hero-button-icon {
+    width: clamp(1.5rem, 3.5vw, 2rem) !important;
+    height: clamp(1.5rem, 3.5vw, 2rem) !important;
+  }
+
+  .hero-impact-content {
+    padding: clamp(3rem, 5vw, 4rem) !important;
+  }
+
+  .hero-impact-icon {
+    width: clamp(3rem, 7vw, 4rem) !important;
+    height: clamp(3rem, 7vw, 4rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .hero-impact-title {
+    font-size: clamp(2rem, 4vw, 2.5rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .hero-impact-description {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+  }
+
+  .tabs {
+    margin-bottom: clamp(4rem, 6vw, 5rem) !important;
+  }
+
+  .tab-container {
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .tab-button {
+    padding: clamp(1rem, 2vw, 1.5rem) clamp(2rem, 4vw, 3rem) !important;
+    font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
+  }
+
+  .stats-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .stats-description {
+    font-size: clamp(1.2rem, 3vw, 1.8rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .stats-grid {
+    gap: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .stat-card {
+    padding: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .stat-icon-container {
+    padding: clamp(1rem, 2vw, 1.5rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .stat-icon {
+    width: clamp(2.5rem, 5vw, 3rem) !important;
+    height: clamp(2.5rem, 5vw, 3rem) !important;
+  }
+
+  .stat-value {
+    font-size: clamp(2.5rem, 6vw, 4rem) !important;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .stat-label {
+    font-size: clamp(1.2rem, 3vw, 1.8rem) !important;
+    margin-bottom: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .stat-description {
+    font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
+  }
+
+  .programs-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .programs-description {
+    font-size: clamp(1.2rem, 3vw, 1.8rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .programs-container {
+    gap: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .program-card {
+    padding: clamp(3rem, 5vw, 4rem) !important;
+  }
+
+  .program-content {
+    gap: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .program-header {
+    gap: clamp(1.5rem, 3vw, 2rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .program-icon-container {
+    padding: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .program-icon {
+    width: clamp(2rem, 4vw, 2.5rem) !important;
+    height: clamp(2rem, 4vw, 2.5rem) !important;
+  }
+
+  .program-title {
+    font-size: clamp(2rem, 4vw, 2.5rem) !important;
+  }
+
+  .program-description {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .program-features {
+    padding: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .program-features-title {
+    font-size: clamp(1.2rem, 3vw, 1.8rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .program-features-list {
+    gap: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .program-feature {
+    font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
+  }
+
+  .program-feature-icon {
+    width: clamp(1.2rem, 3vw, 1.5rem) !important;
+    height: clamp(1.2rem, 3vw, 1.5rem) !important;
+  }
+
+  .cta {
+    padding: clamp(3rem, 5vw, 4rem) !important;
+  }
+
+  .cta-icon {
+    width: clamp(5rem, 8vw, 6rem) !important;
+    height: clamp(5rem, 8vw, 6rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .cta-title {
+    font-size: clamp(2.5rem, 5vw, 3.5rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .cta-description {
+    font-size: clamp(1.2rem, 3vw, 1.8rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .cta-buttons {
+    gap: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .cta-button {
+    padding: clamp(1.2rem, 3vw, 2rem) clamp(2.5rem, 5vw, 4rem) !important;
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+  }
+}
+
+@media (min-width: 2200px) {
+  section {
+    padding-top: clamp(8rem, 7vw, 16rem) !important;
+    padding-bottom: clamp(8rem, 7vw, 16rem) !important;
+  }
+
+  .container {
+    padding-left: clamp(6rem, 10vw, 12rem) !important;
+    padding-right: clamp(6rem, 10vw, 12rem) !important;
+  }
+
+  .floating-elements div:nth-child(1) {
+    top: clamp(8rem, 18vw, 10rem) !important;
+    left: clamp(5rem, 10vw, 6rem) !important;
+    width: clamp(1.25rem, 2.5vw, 1.5rem) !important;
+    height: clamp(1.25rem, 2.5vw, 1.5rem) !important;
+  }
+
+  .floating-elements div:nth-child(2) {
+    top: clamp(15rem, 22vw, 18rem) !important;
+    right: clamp(6rem, 12vw, 8rem) !important;
+    width: clamp(0.8rem, 1.5vw, 1.2rem) !important;
+    height: clamp(0.8rem, 1.5vw, 1.2rem) !important;
+  }
+
+  .floating-elements div:nth-child(3) {
+    bottom: clamp(12rem, 20vw, 15rem) !important;
+    width: clamp(1rem, 2vw, 1.2rem) !important;
+    height: clamp(1rem, 2vw, 1.2rem) !important;
+  }
+
+  .hero-section {
+    gap: clamp(5rem, 10vw, 6rem) !important;
+    margin-bottom: clamp(6rem, 12vw, 10rem) !important;
+  }
+
+  .hero-title {
+    font-size: clamp(5rem, 7vw, 6rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .hero-description {
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+    margin-bottom: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .hero-button {
+    padding: clamp(1.5rem, 4vw, 2.5rem) clamp(3rem, 6vw, 5rem) !important;
+    font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+  }
+
+  .hero-button-icon {
+    width: clamp(2rem, 4vw, 2.5rem) !important;
+    height: clamp(2rem, 4vw, 2.5rem) !important;
+  }
+
+  .hero-impact-content {
+    padding: clamp(4rem, 6vw, 5rem) !important;
+  }
+
+  .hero-impact-icon {
+    width: clamp(4rem, 8vw, 5rem) !important;
+    height: clamp(4rem, 8vw, 5rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .hero-impact-title {
+    font-size: clamp(2.5rem, 5vw, 3rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .hero-impact-description {
+    font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+  }
+
+  .tabs {
+    margin-bottom: clamp(5rem, 8vw, 6rem) !important;
+  }
+
+  .tab-container {
+    margin-bottom: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .tab-button {
+    padding: clamp(1.2rem, 2.5vw, 2rem) clamp(2.5rem, 5vw, 4rem) !important;
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+  }
+
+  .stats-title {
+    font-size: clamp(3rem, 6vw, 4rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .stats-description {
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+    margin-bottom: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .stats-grid {
+    gap: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .stat-card {
+    padding: clamp(3rem, 5vw, 4rem) !important;
+  }
+
+  .stat-icon-container {
+    padding: clamp(1.2rem, 2.5vw, 2rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .stat-icon {
+    width: clamp(3rem, 6vw, 4rem) !important;
+    height: clamp(3rem, 6vw, 4rem) !important;
+  }
+
+  .stat-value {
+    font-size: clamp(3rem, 7vw, 5rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .stat-label {
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+    margin-bottom: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .stat-description {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+  }
+
+  .programs-title {
+    font-size: clamp(3rem, 6vw, 4rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .programs-description {
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+    margin-bottom: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .programs-container {
+    gap: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .program-card {
+    padding: clamp(4rem, 6vw, 5rem) !important;
+  }
+
+  .program-content {
+    gap: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .program-header {
+    gap: clamp(2rem, 4vw, 3rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .program-icon-container {
+    padding: clamp(1.2rem, 2.5vw, 2rem) !important;
+  }
+
+  .program-icon {
+    width: clamp(2.5rem, 5vw, 3rem) !important;
+    height: clamp(2.5rem, 5vw, 3rem) !important;
+  }
+
+  .program-title {
+    font-size: clamp(2.5rem, 5vw, 3rem) !important;
+  }
+
+  .program-description {
+    font-size: clamp(1.2rem, 3vw, 1.8rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .program-features {
+    padding: clamp(3rem, 5vw, 4rem) !important;
+  }
+
+  .program-features-title {
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .program-features-list {
+    gap: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .program-feature {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+  }
+
+  .program-feature-icon {
+    width: clamp(1.5rem, 3.5vw, 2rem) !important;
+    height: clamp(1.5rem, 3.5vw, 2rem) !important;
+  }
+
+  .cta {
+    padding: clamp(4rem, 6vw, 5rem) !important;
+  }
+
+  .cta-icon {
+    width: clamp(6rem, 9vw, 7rem) !important;
+    height: clamp(6rem, 9vw, 7rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .cta-title {
+    font-size: clamp(3rem, 6vw, 4rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .cta-description {
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+    margin-bottom: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .cta-buttons {
+    gap: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .cta-button {
+    padding: clamp(1.5rem, 4vw, 2.5rem) clamp(3rem, 6vw, 5rem) !important;
+    font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+  }
+}
+
+@media (min-width: 2800px) {
+  section {
+    padding-top: clamp(10rem, 8vw, 20rem) !important;
+    padding-bottom: clamp(10rem, 8vw, 20rem) !important;
+  }
+
+  .container {
+    padding-left: clamp(8rem, 15vw, 25rem) !important;
+    padding-right: clamp(8rem, 15vw, 25rem) !important;
+  }
+
+  .floating-elements div:nth-child(1) {
+    top: clamp(10rem, 20vw, 12rem) !important;
+    left: clamp(6rem, 12vw, 8rem) !important;
+    width: clamp(1.5rem, 3vw, 2rem) !important;
+    height: clamp(1.5rem, 3vw, 2rem) !important;
+  }
+
+  .floating-elements div:nth-child(2) {
+    top: clamp(18rem, 25vw, 20rem) !important;
+    right: clamp(8rem, 15vw, 10rem) !important;
+    width: clamp(1rem, 2vw, 1.5rem) !important;
+    height: clamp(1rem, 2vw, 1.5rem) !important;
+  }
+
+  .floating-elements div:nth-child(3) {
+    bottom: clamp(15rem, 22vw, 18rem) !important;
+    width: clamp(1.2rem, 2.5vw, 1.5rem) !important;
+    height: clamp(1.2rem, 2.5vw, 1.5rem) !important;
+  }
+
+  .hero-section {
+    gap: clamp(6rem, 12vw, 8rem) !important;
+    margin-bottom: clamp(8rem, 15vw, 12rem) !important;
+  }
+
+  .hero-title {
+    font-size: clamp(6rem, 8vw, 7rem) !important;
+    margin-bottom: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .hero-description {
+    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+    margin-bottom: clamp(4rem, 8vw, 6rem) !important;
+  }
+
+  .hero-button {
+    padding: clamp(2rem, 5vw, 3rem) clamp(4rem, 7vw, 6rem) !important;
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+  }
+
+  .hero-button-icon {
+    width: clamp(2.5rem, 5vw, 3rem) !important;
+    height: clamp(2.5rem, 5vw, 3rem) !important;
+  }
+
+  .hero-impact-content {
+    padding: clamp(5rem, 7vw, 6rem) !important;
+  }
+
+  .hero-impact-icon {
+    width: clamp(5rem, 9vw, 6rem) !important;
+    height: clamp(5rem, 9vw, 6rem) !important;
+    margin-bottom: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .hero-impact-title {
+    font-size: clamp(3rem, 6vw, 4rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .hero-impact-description {
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+  }
+
+  .tabs {
+    margin-bottom: clamp(6rem, 10vw, 8rem) !important;
+  }
+
+  .tab-container {
+    margin-bottom: clamp(4rem, 8vw, 6rem) !important;
+  }
+
+  .tab-button {
+    padding: clamp(1.5rem, 3vw, 2.5rem) clamp(3rem, 6vw, 5rem) !important;
+    font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+  }
+
+  .stats-title {
+    font-size: clamp(4rem, 7vw, 5rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .stats-description {
+    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+    margin-bottom: clamp(4rem, 8vw, 6rem) !important;
+  }
+
+  .stats-grid {
+    gap: clamp(4rem, 8vw, 6rem) !important;
+  }
+
+  .stat-card {
+    padding: clamp(4rem, 6vw, 5rem) !important;
+  }
+
+  .stat-icon-container {
+    padding: clamp(1.5rem, 3vw, 2.5rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .stat-icon {
+    width: clamp(4rem, 7vw, 5rem) !important;
+    height: clamp(4rem, 7vw, 5rem) !important;
+  }
+
+  .stat-value {
+    font-size: clamp(4rem, 8vw, 6rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .stat-label {
+    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .stat-description {
+    font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+  }
+
+  .programs-title {
+    font-size: clamp(4rem, 7vw, 5rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .programs-description {
+    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+    margin-bottom: clamp(4rem, 8vw, 6rem) !important;
+  }
+
+  .programs-container {
+    gap: clamp(4rem, 8vw, 6rem) !important;
+  }
+
+  .program-card {
+    padding: clamp(5rem, 7vw, 6rem) !important;
+  }
+
+  .program-content {
+    gap: clamp(4rem, 8vw, 6rem) !important;
+  }
+
+  .program-header {
+    gap: clamp(2.5rem, 5vw, 4rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .program-icon-container {
+    padding: clamp(1.5rem, 3vw, 2.5rem) !important;
+  }
+
+  .program-icon {
+    width: clamp(3rem, 6vw, 4rem) !important;
+    height: clamp(3rem, 6vw, 4rem) !important;
+  }
+
+  .program-title {
+    font-size: clamp(3rem, 6vw, 4rem) !important;
+  }
+
+  .program-description {
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+    margin-bottom: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .program-features {
+    padding: clamp(4rem, 6vw, 5rem) !important;
+  }
+
+  .program-features-title {
+    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .program-features-list {
+    gap: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .program-feature {
+    font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+  }
+
+  .program-feature-icon {
+    width: clamp(2rem, 4vw, 2.5rem) !important;
+    height: clamp(2rem, 4vw, 2.5rem) !important;
+  }
+
+  .cta {
+    padding: clamp(5rem, 7vw, 6rem) !important;
+  }
+
+  .cta-icon {
+    width: clamp(7rem, 10vw, 8rem) !important;
+    height: clamp(7rem, 10vw, 8rem) !important;
+    margin-bottom: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .cta-title {
+    font-size: clamp(4rem, 7vw, 5rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .cta-description {
+    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+    margin-bottom: clamp(4rem, 8vw, 6rem) !important;
+  }
+
+  .cta-buttons {
+    gap: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .cta-button {
+    padding: clamp(2rem, 5vw, 3rem) clamp(4rem, 7vw, 6rem) !important;
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+  }
+}
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 1024px) {
+  .hero-section {
+    grid-template-columns: 1fr;
+    gap: clamp(1.5rem, 3vw, 2rem);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .program-content {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  section {
+    padding-top: clamp(1.5rem, 3vw, 3rem);
+    padding-bottom: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .container {
+    padding-left: clamp(0.75rem, 2vw, 1.5rem);
+    padding-right: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  .hero-title {
+    font-size: clamp(1.5rem, 3.5vw, 2.5rem);
+  }
+
+  .hero-description {
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+  }
+
+  .stats-title,
+  .programs-title,
+  .cta-title {
+    font-size: clamp(1.25rem, 3vw, 1.75rem);
+  }
+
+  .stats-description,
+  .programs-description,
+  .cta-description {
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
+  }
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding-left: clamp(0.5rem, 1.5vw, 1rem);
+    padding-right: clamp(0.5rem, 1.5vw, 1rem);
+  }
+
+  .hero-title {
+    font-size: clamp(1.25rem, 3vw, 2rem);
+  }
+
+  .hero-description {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
+  }
+
+  .hero-button {
+    padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(1rem, 2.5vw, 1.5rem);
+    font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  }
+
+  .stats-title,
+  .programs-title,
+  .cta-title {
+    font-size: clamp(1rem, 2.5vw, 1.5rem);
+  }
+
+  .stats-description,
+  .programs-description,
+  .cta-description {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
   }
 }

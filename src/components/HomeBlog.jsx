@@ -1,5 +1,5 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { ChevronLeft, ChevronRight, Heart, Quote, Star, Sparkles, ArrowRight, Users } from 'lucide-react';
+import React, { useState, useEffect } from 'react';
+import { ChevronLeft, ChevronRight, Heart, Quote, Star, Sparkles, ArrowRight, Users, PlayCircle } from 'lucide-react';
 import ReactMarkdown from 'react-markdown';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
@@ -20,26 +20,35 @@ const colors = {
 
 const HomeBlog = () => {
   const [posts, setPosts] = useState([]);
+  const [podcasts, setPodcasts] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imageErrors, setImageErrors] = useState({});
   const [selectedPost, setSelectedPost] = useState(null);
+  const [selectedPodcast, setSelectedPodcast] = useState(null);
 
   useEffect(() => {
-    const fetchBlogs = async (retries = 3, delay = 1000) => {
+    const fetchContent = async () => {
       setIsLoading(true);
       setError(null);
-      for (let attempt = 1; attempt <= retries; attempt++) {
+
+      // Fetch Blogs
+      for (let attempt = 1; attempt <= 3; attempt++) {
         try {
           const response = await axios.get(`${API_URL}/blogs?status=published`, {
             headers: { 'Content-Type': 'application/json' },
             timeout: 10000,
           });
+          if (!Array.isArray(response.data)) {
+            console.error('Blog API did not return an array:', response.data);
+            setError('Invalid blog data format received from server.');
+            setPosts([]);
+            break;
+          }
           setPosts(response.data);
-          setIsLoading(false);
-          return;
+          break;
         } catch (err) {
-          console.error(`Attempt ${attempt} failed:`, err);
+          console.error(`Blog attempt ${attempt} failed:`, err);
           if (err.response?.status === 401) {
             localStorage.removeItem('token');
             try {
@@ -47,23 +56,75 @@ const HomeBlog = () => {
                 headers: { 'Content-Type': 'application/json' },
                 timeout: 10000,
               });
+              if (!Array.isArray(retryResponse.data)) {
+                console.error('Blog retry API did not return an array:', retryResponse.data);
+                setError('Invalid blog data format received from server on retry.');
+                setPosts([]);
+                break;
+              }
               setPosts(retryResponse.data);
-              setIsLoading(false);
-              return;
+              break;
             } catch (retryErr) {
-              console.error('Retry error:', retryErr);
+              console.error('Blog retry error:', retryErr);
             }
           }
-          if (attempt < retries) {
-            await new Promise(resolve => setTimeout(resolve, delay * attempt));
+          if (attempt < 3) {
+            await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
             continue;
           }
           setError('Unable to load blogs right now. Please try again later.');
+          setPosts([]);
         }
       }
+
+      // Fetch Podcasts
+      for (let attempt = 1; attempt <= 3; attempt++) {
+        try {
+          const response = await axios.get(`${API_URL}/podcast?status=published`, {
+            headers: { 'Content-Type': 'application/json' },
+            timeout: 10000,
+          });
+          if (!Array.isArray(response.data)) {
+            console.error('Podcast API did not return an array:', response.data);
+            setError(prev => prev || 'Invalid podcast data format received from server.');
+            setPodcasts([]);
+            break;
+          }
+          setPodcasts(response.data);
+          break;
+        } catch (err) {
+          console.error(`Podcast attempt ${attempt} failed:`, err);
+          if (err.response?.status === 401) {
+            localStorage.removeItem('token');
+            try {
+              const retryResponse = await axios.get(`${API_URL}/podcast?status=published`, {
+                headers: { 'Content-Type': 'application/json' },
+                timeout: 10000,
+              });
+              if (!Array.isArray(retryResponse.data)) {
+                console.error('Podcast retry API did not return an array:', retryResponse.data);
+                setError(prev => prev || 'Invalid podcast data format received from server on retry.');
+                setPodcasts([]);
+                break;
+              }
+              setPodcasts(retryResponse.data);
+              break;
+            } catch (retryErr) {
+              console.error('Podcast retry error:', retryErr);
+            }
+          }
+          if (attempt < 3) {
+            await new Promise(resolve => setTimeout(resolve, 1000 * attempt));
+            continue;
+          }
+          setError(prev => prev || 'Unable to load podcasts right now. Please try again later.');
+          setPodcasts([]);
+        }
+      }
+
       setIsLoading(false);
     };
-    fetchBlogs();
+    fetchContent();
   }, []);
 
   const getImageUrl = image => image?.startsWith('http')
@@ -71,21 +132,72 @@ const HomeBlog = () => {
     : image ? `${STATIC_BASE_URL.replace(/\/+$/, '')}/${image.replace(/^\/+/, '')}`
       : '/assets/placeholder.jpg';
 
-  const Modal = ({ post, onClose }) => {
-    if (!post) return null;
+  const getAudioUrl = audio => audio?.startsWith('http')
+    ? audio.replace(/^h+ttps?:\/\//, 'https://')
+    : audio ? `${STATIC_BASE_URL.replace(/\/+$/, '')}/${audio.replace(/^\/+/, '')}`
+      : '';
 
-    const markdownContent = `
-  # ${post.title}
+  const Modal = ({ post, podcast, onClose }) => {
+    if (!post && !podcast) return null;
+
+    const item = post || podcast;
+    const isPodcast = !!podcast;
+
+    const markdownContent = isPodcast
+      ? `
+  # ${item.title}
   
-  ${post.excerpt ? `> ${post.excerpt}\n` : ''}
+  ${item.excerpt ? `> ${item.excerpt}\n` : ''}
+  
+  ## About This Episode
+  
+  This episode explores ${item.category || 'key insights'} related to child protection and community empowerment. Hosted by ${item.author?.name || 'an expert contributor'}, it offers perspectives to inspire action and awareness.
+  
+  ## Key Details
+  
+  - **Duration**: ${item.duration || 'Unknown'}
+  - **Category**: ${item.category || 'General'}
+  - **Tags**: ${item.tags?.join(', ') || 'None'}
+  
+  ## Listen Now
+  
+  <audio controls className="w-full mt-4">
+    <source src="${getAudioUrl(item.audioUrl)}" type="audio/mp3" />
+    Your browser does not support the audio element.
+  </audio>
+  
+  ## Episode Summary
+  
+  ${item.description
+        .split('\n')
+        .filter(para => para.trim())
+        .map(para => `- ${para}`)
+        .join('\n')}
+  
+  ## Take Action
+  
+  - **Reflect**: Consider how this episode applies to your community or organization.
+  - **Share**: Spread awareness by sharing this episode with others.
+  - **Get Involved**: Visit our [Get Involved](/contact) page to support our mission.
+  
+  *Published on ${new Date(item.createdAt).toLocaleDateString('en-US', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+        })}*
+      `
+      : `
+  # ${item.title}
+  
+  ${item.excerpt ? `> ${item.excerpt}\n` : ''}
   
   ## About This Story
   
-  This story explores ${post.category || 'key insights'} related to child protection and community empowerment. Written by ${post.author?.name || 'an expert contributor'}, it offers perspectives to inspire action and awareness.
+  This story explores ${item.category || 'key insights'} related to child protection and community empowerment. Written by ${item.author?.name || 'an expert contributor'}, it offers perspectives to inspire action and awareness.
   
   ## Key Insights
   
-  ${post.content
+  ${item.content
         .split('\n')
         .filter(para => para.trim())
         .map(para => `- ${para}`)
@@ -97,11 +209,11 @@ const HomeBlog = () => {
   - **Share**: Spread awareness by sharing this story with others.
   - **Get Involved**: Visit our [Get Involved](/contact) page to support our mission.
   
-  *Published on ${new Date(post.createdAt).toLocaleDateString('en-US', {
+  *Published on ${new Date(item.createdAt).toLocaleDateString('en-US', {
           year: 'numeric',
           month: 'long',
           day: 'numeric',
-        })} | Tags: ${post.tags?.join(', ') || 'None'}*
+        })} | Tags: ${item.tags?.join(', ') || 'None'}*
       `;
 
     return (
@@ -119,16 +231,16 @@ const HomeBlog = () => {
           <div className="relative">
             <div className="relative h-64 sm:h-80 overflow-hidden rounded-t-2xl">
               <img
-                src={getImageUrl(post.image)}
-                srcSet={`${getImageUrl(post.image)}?w=320 320w, ${getImageUrl(post.image)}?w=640 640w`}
+                src={getImageUrl(item.image)}
+                srcSet={`${getImageUrl(item.image)}?w=320 320w, ${getImageUrl(item.image)}?w=640 640w`}
                 sizes="(max-width: 640px) 100vw, 640px"
-                alt={post.title}
+                alt={item.title}
                 className="w-full h-full object-cover transform transition-transform duration-300 hover:scale-105"
                 loading="lazy"
                 onError={e => {
-                  if (!imageErrors[post._id]) {
+                  if (!imageErrors[item._id]) {
                     e.target.src = '/assets/placeholder.jpg';
-                    setImageErrors(prev => ({ ...prev, [post._id]: post.image || '/assets/placeholder.jpg' }));
+                    setImageErrors(prev => ({ ...prev, [item._id]: item.image || '/assets/placeholder.jpg' }));
                   }
                 }}
               />
@@ -139,25 +251,31 @@ const HomeBlog = () => {
                 className="inline-block px-3 py-1 text-sm font-medium rounded-full mb-4 text-white"
                 style={{ backgroundColor: colors.accent }}
               >
-                {post.category || 'Featured'}
+                {item.category || (isPodcast ? 'Podcast' : 'Featured')}
               </span>
               <h2 className="text-2xl sm:text-3xl font-bold mb-4 leading-tight" style={{ color: colors.text }}>
-                {post.title}
+                {item.title}
               </h2>
               <div className="flex flex-wrap items-center gap-4 text-sm text-slate-500 mb-6">
                 <span>
-                  {new Date(post.createdAt).toLocaleDateString('en-US', {
+                  {new Date(item.createdAt).toLocaleDateString('en-US', {
                     year: 'numeric',
                     month: 'long',
                     day: 'numeric',
                   })}
                 </span>
                 <span className="w-1 h-1 bg-slate-400 rounded-full"></span>
-                <span>By {post.author?.name || 'Unknown'}</span>
-                {post.tags?.length > 0 && (
+                <span>By {item.author?.name || 'Unknown'}</span>
+                {item.tags?.length > 0 && (
                   <>
                     <span className="w-1 h-1 bg-slate-400 rounded-full"></span>
-                    <span>{post.tags.join(', ')}</span>
+                    <span>{item.tags.join(', ')}</span>
+                  </>
+                )}
+                {isPodcast && (
+                  <>
+                    <span className="w-1 h-1 bg-slate-400 rounded-full"></span>
+                    <span>Duration: {item.duration || 'Unknown'}</span>
                   </>
                 )}
               </div>
@@ -212,8 +330,8 @@ const HomeBlog = () => {
           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
         </svg>
       </div>
-      <p className="text-lg text-slate-600 font-medium">No blog posts available yet.</p>
-      <p className="text-slate-500 mt-2">Check back soon for inspiring content.</p>
+      <p className="text-lg text-slate-600 font-medium">No content available yet.</p>
+      <p className="text-slate-500 mt-2">Check back soon for inspiring blogs and podcasts.</p>
     </div>
   );
 
@@ -225,94 +343,187 @@ const HomeBlog = () => {
             <LoadingSpinner />
           ) : error ? (
             <ErrorDisplay />
-          ) : posts.length === 0 ? (
+          ) : posts.length === 0 && podcasts.length === 0 ? (
             <EmptyState />
           ) : (
             <>
-              <section>
-                <div className="flex items-center justify-between mb-12">
-                  <h2 className="text-3xl sm:text-4xl font-bold" style={{ color: colors.text }}>
-                    Latest Blog
-                  </h2>
-                  <div className="hidden sm:flex items-center space-x-2 text-slate-500">
-                    <span className="text-sm font-medium">{posts.length - 1} Stories</span>
-                    <div className="w-1 h-1 bg-slate-400 rounded-full"></div>
-                    <span className="text-sm">Updated regularly</span>
+              {/* Blog Section */}
+              {posts.length > 0 && (
+                <section className='p-4 rounded-3xl'>
+                  <div className="flex items-center justify-between mb-7 mt-5">
+                    <h2 className="text-3xl font-bold" style={{ color: colors.text }}>
+                      Latest Blogs
+                    </h2>
+                    <div className="hidden sm:flex items-center space-x-2 text-slate-500">
+                      <span className="text-sm font-medium">{posts.length} Stories</span>
+                      <div className="w-1 h-1 bg-slate-400 rounded-full"></div>
+                      <span className="text-sm">Updated regularly</span>
+                    </div>
                   </div>
-                </div>
-                <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
-                  {posts.slice(1).map((post, index) => (
-                    <article
-                      key={post._id}
-                      className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2"
-                    >
-                      <div className="relative h-48 sm:h-56 w-full max-w-full overflow-hidden">
-                        {post.image ? (
-                          <img
-                            src={getImageUrl(post.image)}
-                            srcSet={`${getImageUrl(post.image)}?w=320 320w, ${getImageUrl(post.image)}?w=640 640w`}
-                            sizes="(max-width: 640px) 100vw, 640px"
-                            alt={post.title}
-                            className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
-                            loading="lazy"
-                            onError={(e) => {
-                              if (!imageErrors[post._id]) {
-                                e.target.src = '/assets/placeholder.jpg';
-                                setImageErrors((prev) => ({ ...prev, [post._id]: post.image }));
-                              }
-                            }}
-                          />
-                        ) : (
-                          <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
-                            <blockquote className="text-center px-6 max-w-md">
-                              <p className="text-sm italic text-slate-600 line-clamp-3">"{post.excerpt}"</p>
-                            </blockquote>
+                  <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    {posts.map((post, index) => (
+                      <article
+                        key={post._id}
+                        className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2"
+                      >
+                        <div className="relative h-48 sm:h-56 w-full max-w-full overflow-hidden">
+                          {post.image ? (
+                            <img
+                              src={getImageUrl(post.image)}
+                              srcSet={`${getImageUrl(post.image)}?w=320 320w, ${getImageUrl(post.image)}?w=640 640w`}
+                              sizes="(max-width: 640px) 100vw, 640px"
+                              alt={post.title}
+                              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                              onError={(e) => {
+                                if (!imageErrors[post._id]) {
+                                  e.target.src = '/assets/placeholder.jpg';
+                                  setImageErrors((prev) => ({ ...prev, [post._id]: post.image }));
+                                }
+                              }}
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                              <blockquote className="text-center px-6 max-w-md">
+                                <p className="text-sm italic text-slate-600 line-clamp-3">"{post.excerpt}"</p>
+                              </blockquote>
+                            </div>
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <div className="absolute top-4 left-4">
+                            <span className="inline-block px-3 py-1 text-xs font-bold text-white bg-black/20 backdrop-blur-sm rounded-full border border-white/20">
+                              {post.category || `Story ${index + 1}`}
+                            </span>
                           </div>
-                        )}
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-                        <div className="absolute top-4 left-4">
-                          <span className="inline-block px-3 py-1 text-xs font-bold text-white bg-black/20 backdrop-blur-sm rounded-full border border-white/20">
-                            {post.category || `Story ${index + 2}`}
-                          </span>
                         </div>
-                      </div>
-                      <div className="p-6 flex flex-col min-h-[250px]">
-                        <div className="mb-3">
-                          <span className="text-slate-500 text-sm font-medium">
-                            {new Date(post.createdAt).toLocaleDateString('en-US', {
-                              year: 'numeric',
-                              month: 'short',
-                              day: 'numeric'
-                            })}
-                          </span>
+                        <div className="p-6 flex flex-col min-h-[250px]">
+                          <div className="mb-3">
+                            <span className="text-slate-500 text-sm font-medium">
+                              {new Date(post.createdAt).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric'
+                              })}
+                            </span>
+                          </div>
+                          <h3 className="text-xl font-bold mb-3 leading-tight line-clamp-2 group-hover:text-slate-800 transition-colors" style={{ color: colors.text }}>
+                            {post.title}
+                          </h3>
+                          <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2 flex-grow">
+                            {post.excerpt}
+                          </p>
+                          <button
+                            onClick={() => setSelectedPost(post)}
+                            className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-fit group/btn mt-auto"
+                            style={{ backgroundColor: colors.accent }}
+                            aria-label={`Read more about ${post.title}`}
+                          >
+                            Read More
+                            <svg className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                            </svg>
+                          </button>
                         </div>
-                        <h3 className="text-xl font-bold mb-3 leading-tight line-clamp-2 group-hover:text-slate-800 transition-colors" style={{ color: colors.text }}>
-                          {post.title}
-                        </h3>
-                        <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2 flex-grow">
-                          {post.excerpt}
-                        </p>
-                        <button
-                          onClick={() => setSelectedPost(post)}
-                          className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-fit group/btn mt-auto"
-                          style={{ backgroundColor: colors.accent }}
-                          aria-label={`Read more about ${post.title}`}
-                        >
-                          Read More
-                          <svg className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 8l4 4m0 0l-4 4m4-4H3" />
-                          </svg>
-                        </button>
-                      </div>
-                    </article>
-                  ))}
-                </div>
-              </section>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              )}
+
+              {/* Podcast Section */}
+              {/* {podcasts.length > 0 && (
+                <section className="mt-16">
+                  <div className="flex items-center justify-between mb-12">
+                    <h2 className="text-3xl sm:text-4xl font-bold" style={{ color: colors.text }}>
+                      Latest Podcasts
+                    </h2>
+                    <div className="hidden sm:flex items-center space-x-2 text-slate-500">
+                      <span className="text-sm font-medium">{podcasts.length} Episodes</span>
+                      <div className="w-1 h-1 bg-slate-400 rounded-full"></div>
+                      <span className="text-sm">Updated regularly</span>
+                    </div>
+                  </div>
+                  <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+                    {podcasts.map((podcast, index) => (
+                      <article
+                        key={podcast._id}
+                        className="group relative bg-white rounded-2xl shadow-lg hover:shadow-2xl transition-all duration-300 overflow-hidden transform hover:-translate-y-2"
+                      >
+                        <div className="relative h-48 sm:h-56 w-full max-w-full overflow-hidden">
+                          {podcast.image ? (
+                            <img
+                              src={getImageUrl(podcast.image)}
+                              srcSet={`${getImageUrl(podcast.image)}?w=320 320w, ${getImageUrl(podcast.image)}?w=640 640w`}
+                              sizes="(max-width: 640px) 100vw, 640px"
+                              alt={podcast.title}
+                              className="w-full h-full object-cover transform group-hover:scale-105 transition-transform duration-300"
+                              loading="lazy"
+                              onError={(e) => {
+                                if (!imageErrors[podcast._id]) {
+                                  e.target.src = '/assets/placeholder.jpg';
+                                  setImageErrors((prev) => ({ ...prev, [podcast._id]: podcast.image }));
+                                }
+                              }}
+                            />
+                          ) : (
+                            <div className="w-full h-full bg-gradient-to-br from-slate-100 to-slate-200 flex items-center justify-center">
+                              <blockquote className="text-center px-6 max-w-md">
+                                <p className="text-sm italic text-slate-600 line-clamp-3">"{podcast.excerpt}"</p>
+                              </blockquote>
+                            </div>
+                          )}
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+                          <div className="absolute top-4 left-4">
+                            <span className="inline-block px-3 py-1 text-xs font-bold text-white bg-black/20 backdrop-blur-sm rounded-full border border-white/20">
+                              {podcast.category || `Episode ${index + 1}`}
+                            </span>
+                          </div>
+                        </div>
+                        <div className="p-6 flex flex-col min-h-[250px]">
+                          <div className="mb-3">
+                            <span className="text-slate-500 text-sm font-medium">
+                              {new Date(podcast.createdAt).toLocaleDateString('en-US', {
+                                year: 'numeric',
+                                month: 'short',
+                                day: 'numeric'
+                              })}
+                            </span>
+                          </div>
+                          <h3 className="text-xl font-bold mb-3 leading-tight line-clamp-2 group-hover:text-slate-800 transition-colors" style={{ color: colors.text }}>
+                            {podcast.title}
+                          </h3>
+                          <p className="text-slate-600 text-sm leading-relaxed mb-4 line-clamp-2 flex-grow">
+                            {podcast.excerpt}
+                          </p>
+                          <button
+                            onClick={() => setSelectedPodcast(podcast)}
+                            className="inline-flex items-center px-5 py-2.5 text-sm font-semibold text-white rounded-lg hover:shadow-lg transition-all duration-300 transform hover:-translate-y-0.5 w-fit group/btn mt-auto"
+                            style={{ backgroundColor: colors.accent }}
+                            aria-label={`Listen to ${podcast.title}`}
+                          >
+                            Listen Now
+                            <PlayCircle className="ml-2 w-4 h-4 transform group-hover/btn:translate-x-1 transition-transform" />
+                          </button>
+                        </div>
+                      </article>
+                    ))}
+                  </div>
+                </section>
+              )} */}
             </>
           )}
         </main>
 
-        {selectedPost && <Modal post={selectedPost} onClose={() => setSelectedPost(null)} />}
+        {(selectedPost || selectedPodcast) && (
+          <Modal 
+            post={selectedPost} 
+            podcast={selectedPodcast} 
+            onClose={() => {
+              setSelectedPost(null);
+              setSelectedPodcast(null);
+            }} 
+          />
+        )}
       </div>
     </>
   );

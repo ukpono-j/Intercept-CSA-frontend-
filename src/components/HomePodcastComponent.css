@@ -1,54 +1,638 @@
-/* Custom styles for HomePodcastComponent (beyond Tailwind) */
-@media (max-width: 768px) {
+/* Base styles for HomePodcastComponent */
+section {
+  padding-top: clamp(2rem, 4vw, 4rem);
+  padding-bottom: clamp(2rem, 4vw, 4rem);
+  background: linear-gradient(135deg, #f9fafb 0%, #ffffff 100%);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.container {
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: clamp(1rem, 3vw, 2rem);
+  padding-right: clamp(1rem, 3vw, 2rem);
+  max-width: none; /* Remove max-width constraint */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  margin-bottom: clamp(1.5rem, 3vw, 2.5rem);
+}
+
+.header-dot {
+  width: clamp(0.4rem, 1vw, 0.6rem);
+  height: clamp(0.4rem, 1vw, 0.6rem);
+  background-color: #FF5245;
+  border-radius: 50%;
+  animation: pulse 1.5s infinite;
+}
+
+.header-text {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: clamp(0.05rem, 0.5vw, 0.1rem);
+  color: #374050;
+}
+
+.main-content {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: clamp(1.5rem, 4vw, 3rem);
+}
+
+.thumbnail-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.thumbnail {
+  width: clamp(12rem, 20vw, 16rem);
+  height: clamp(12rem, 20vw, 16rem);
+  object-fit: cover;
+  border-top-left-radius: 1rem;
+  border-bottom-left-radius: 1rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  transition: transform 0.3s ease;
+}
+
+.thumbnail-container:hover .thumbnail {
+  transform: scale(1.05);
+}
+
+.play-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(46, 60, 75, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity 0.3s ease;
+}
+
+.play-button {
+  width: clamp(2.5rem, 5vw, 4rem);
+  height: clamp(2.5rem, 5vw, 4rem);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #2A8E9D;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.play-button:hover {
+  transform: scale(1.1);
+}
+
+.play-icon {
+  width: clamp(1rem, 2.5vw, 1.5rem);
+  height: clamp(1rem, 2.5vw, 1.5rem);
+  color: #FFFFFF;
+  margin-left: 2px;
+}
+
+.badge {
+  position: absolute;
+  top: clamp(-0.5rem, -1vw, -0.3rem);
+  right: clamp(-0.5rem, -1vw, -0.3rem);
+  padding: clamp(0.3rem, 0.8vw, 0.5rem) clamp(0.5rem, 1.2vw, 0.8rem);
+  border-radius: 9999px;
+  font-size: clamp(0.6rem, 1.5vw, 0.8rem);
+  font-weight: 600;
+  background-color: #FFC938;
+  color: #374050;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+}
+
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: clamp(1rem, 2.5vw, 2rem);
+}
+
+.title {
+  font-size: clamp(1.5rem, 4vw, 3rem);
+  font-weight: 700;
+  color: #374050;
+  line-height: 1.2;
+  margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: clamp(1rem, 2.5vw, 2rem);
+  font-size: clamp(0.75rem, 1.8vw, 1rem);
+  color: #374050;
+  margin-bottom: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.meta-icon {
+  width: clamp(0.8rem, 2vw, 1rem);
+  height: clamp(0.8rem, 2vw, 1rem);
+  color: #2A8E9D;
+}
+
+.description {
+  font-size: clamp(0.9rem, 2vw, 1.2rem);
+  line-height: 1.6;
+  color: #374050;
+}
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.75rem, 2vw, 1.5rem);
+  padding-top: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: clamp(0.3rem, 1vw, 0.5rem);
+  padding: clamp(0.75rem, 2vw, 1rem) clamp(1rem, 3vw, 2rem);
+  border-radius: 0.5rem;
+  font-size: clamp(0.8rem, 1.8vw, 1rem);
+  font-weight: 600;
+  transition: all 0.2s ease;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+.button-listen {
+  background-color: #2A8E9D;
+  color: #FFFFFF;
+}
+
+.button-listen:hover {
+  background-color: #277d8a;
+}
+
+.button-transcript {
+  background-color: #FFC938;
+  color: #FFFFFF;
+}
+
+.button-transcript:hover {
+  background-color: #e6b032;
+}
+
+.button-icon {
+  width: clamp(0.8rem, 2vw, 1rem);
+  height: clamp(0.8rem, 2vw, 1rem);
+}
+
+.button:hover .button-icon.arrow {
+  transform: translateX(4px);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(0.5rem, 1.5vw, 1rem);
+  padding-top: clamp(0.5rem, 1.5vw, 1rem);
+}
+
+.tag {
+  padding: clamp(0.3rem, 0.8vw, 0.5rem) clamp(0.5rem, 1.5vw, 1rem);
+  border-radius: 9999px;
+  font-size: clamp(0.7rem, 1.5vw, 0.9rem);
+  font-weight: 500;
+}
+
+.tag-child-safety {
+  background-color: #E6F0FA;
+  color: #2A8E9D;
+}
+
+.tag-parenting {
+  background-color: #FFF7ED;
+  color: #FFC938;
+}
+
+.tag-education {
+  background-color: #FFE4E1;
+  color: #FF5245;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.5);
+    opacity: 0.7;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* Progressive media queries for large screens */
+@media (min-width: 1440px) {
+  section {
+    padding-top: clamp(4rem, 5vw, 8rem) !important;
+    padding-bottom: clamp(4rem, 5vw, 8rem) !important;
+  }
+
   .container {
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
+    padding-left: clamp(2rem, 5vw, 4rem) !important;
+    padding-right: clamp(2rem, 5vw, 4rem) !important;
   }
 
-  .text-4xl {
-    font-size: 2.5rem;
+  .header {
+    gap: clamp(1rem, 2.5vw, 2rem) !important;
+    margin-bottom: clamp(2rem, 4vw, 3rem) !important;
   }
 
-  .text-3xl {
-    font-size: 2rem;
+  .header-dot {
+    width: clamp(0.5rem, 1.2vw, 0.8rem) !important;
+    height: clamp(0.5rem, 1.2vw, 0.8rem) !important;
   }
 
-  .text-lg {
-    font-size: 1rem;
+  .header-text {
+    font-size: clamp(1rem, 2.5vw, 1.5rem) !important;
   }
 
-  .w-80 {
-    width: 16rem; /* 256px */
+  .main-content {
+    gap: clamp(2rem, 5vw, 4rem) !important;
   }
 
-  .h-80 {
-    height: 16rem; /* 256px */
+  .thumbnail {
+    width: clamp(16rem, 22vw, 20rem) !important;
+    height: clamp(16rem, 22vw, 20rem) !important;
+  }
+
+  .play-button {
+    width: clamp(3rem, 6vw, 5rem) !important;
+    height: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .play-icon {
+    width: clamp(1.2rem, 3vw, 1.8rem) !important;
+    height: clamp(1.2rem, 3vw, 1.8rem) !important;
+  }
+
+  .badge {
+    font-size: clamp(0.7rem, 1.8vw, 1rem) !important;
+    padding: clamp(0.4rem, 1vw, 0.6rem) clamp(0.6rem, 1.5vw, 1rem) !important;
+  }
+
+  .title {
+    font-size: clamp(2rem, 5vw, 4rem) !important;
+  }
+
+  .meta {
+    font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
+    gap: clamp(1.5rem, 3vw, 2.5rem) !important;
+  }
+
+  .meta-icon {
+    width: clamp(1rem, 2.5vw, 1.2rem) !important;
+    height: clamp(1rem, 2.5vw, 1.2rem) !important;
+  }
+
+  .description {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+  }
+
+  .button {
+    padding: clamp(1rem, 2.5vw, 1.5rem) clamp(1.5rem, 4vw, 2.5rem) !important;
+    font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
+  }
+
+  .button-icon {
+    width: clamp(1rem, 2.5vw, 1.2rem) !important;
+    height: clamp(1rem, 2.5vw, 1.2rem) !important;
+  }
+
+  .tags {
+    gap: clamp(0.75rem, 2vw, 1.5rem) !important;
+  }
+
+  .tag {
+    font-size: clamp(0.8rem, 1.8vw, 1rem) !important;
+  }
+}
+
+@media (min-width: 1800px) {
+  section {
+    padding-top: clamp(6rem, 6vw, 12rem) !important;
+    padding-bottom: clamp(6rem, 6vw, 12rem) !important;
+  }
+
+  .container {
+    padding-left: clamp(4rem, 8vw, 8rem) !important;
+    padding-right: clamp(4rem, 8vw, 8rem) !important;
+  }
+
+  .header {
+    gap: clamp(1.5rem, 3vw, 3rem) !important;
+    margin-bottom: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .header-dot {
+    width: clamp(0.6rem, 1.5vw, 1rem) !important;
+    height: clamp(0.6rem, 1.5vw, 1rem) !important;
+  }
+
+  .header-text {
+    font-size: clamp(1.2rem, 3vw, 1.8rem) !important;
+  }
+
+  .main-content {
+    gap: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .thumbnail {
+    width: clamp(20rem, 25vw, 24rem) !important;
+    height: clamp(20rem, 25vw, 24rem) !important;
+  }
+
+  .play-button {
+    width: clamp(4rem, 7vw, 6rem) !important;
+    height: clamp(4rem, 7vw, 6rem) !important;
+  }
+
+  .play-icon {
+    width: clamp(1.5rem, 3.5vw, 2rem) !important;
+    height: clamp(1.5rem, 3.5vw, 2rem) !important;
+  }
+
+  .badge {
+    font-size: clamp(0.8rem, 2vw, 1.2rem) !important;
+    padding: clamp(0.5rem, 1.2vw, 0.8rem) clamp(0.8rem, 2vw, 1.2rem) !important;
+  }
+
+  .title {
+    font-size: clamp(2.5rem, 6vw, 5rem) !important;
+  }
+
+  .meta {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+    gap: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .meta-icon {
+    width: clamp(1.2rem, 3vw, 1.5rem) !important;
+    height: clamp(1.2rem, 3vw, 1.5rem) !important;
+  }
+
+  .description {
+    font-size: clamp(1.2rem, 3vw, 1.8rem) !important;
+  }
+
+  .button {
+    padding: clamp(1.2rem, 3vw, 2rem) clamp(2rem, 5vw, 3rem) !important;
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+  }
+
+  .button-icon {
+    width: clamp(1.2rem, 3vw, 1.5rem) !important;
+    height: clamp(1.2rem, 3vw, 1.5rem) !important;
+  }
+
+  .tags {
+    gap: clamp(1rem, 2.5vw, 2rem) !important;
+  }
+
+  .tag {
+    font-size: clamp(0.9rem, 2vw, 1.2rem) !important;
+  }
+}
+
+@media (min-width: 2200px) {
+  section {
+    padding-top: clamp(8rem, 7vw, 16rem) !important;
+    padding-bottom: clamp(8rem, 7vw, 16rem) !important;
+  }
+
+  .container {
+    padding-left: clamp(6rem, 10vw, 12rem) !important;
+    padding-right: clamp(6rem, 10vw, 12rem) !important;
+  }
+
+  .header {
+    gap: clamp(2rem, 4vw, 4rem) !important;
+    margin-bottom: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .header-dot {
+    width: clamp(0.8rem, 2vw, 1.2rem) !important;
+    height: clamp(0.8rem, 2vw, 1.2rem) !important;
+  }
+
+  .header-text {
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+  }
+
+  .main-content {
+    gap: clamp(4rem, 8vw, 6rem) !important;
+  }
+
+  .thumbnail {
+    width: clamp(24rem, 28vw, 28rem) !important;
+    height: clamp(24rem, 28vw, 28rem) !important;
+  }
+
+  .play-button {
+    width: clamp(5rem, 8vw, 7rem) !important;
+    height: clamp(5rem, 8vw, 7rem) !important;
+  }
+
+  .play-icon {
+    width: clamp(1.8rem, 4vw, 2.5rem) !important;
+    height: clamp(1.8rem, 4vw, 2.5rem) !important;
+  }
+
+  .badge {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+    padding: clamp(0.6rem, 1.5vw, 1rem) clamp(1rem, 2.5vw, 1.5rem) !important;
+  }
+
+  .title {
+    font-size: clamp(3rem, 7vw, 6rem) !important;
+  }
+
+  .meta {
+    font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+    gap: clamp(2.5rem, 5vw, 4rem) !important;
+  }
+
+  .meta-icon {
+    width: clamp(1.5rem, 3.5vw, 2rem) !important;
+    height: clamp(1.5rem, 3.5vw, 2rem) !important;
+  }
+
+  .description {
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+  }
+
+  .button {
+    padding: clamp(1.5rem, 4vw, 2.5rem) clamp(2.5rem, 6vw, 4rem) !important;
+    font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+  }
+
+  .button-icon {
+    width: clamp(1.5rem, 3.5vw, 2rem) !important;
+    height: clamp(1.5rem, 3.5vw, 2rem) !important;
+  }
+
+  .tags {
+    gap: clamp(1.5rem, 3vw, 2.5rem) !important;
+  }
+
+  .tag {
+    font-size: clamp(1rem, 2.5vw, 1.4rem) !important;
+  }
+}
+
+@media (min-width: 2800px) {
+  section {
+    padding-top: clamp(10rem, 8vw, 20rem) !important;
+    padding-bottom: clamp(10rem, 8vw, 20rem) !important;
+  }
+
+  .container {
+    padding-left: clamp(8rem, 15vw, 25rem) !important;
+    padding-right: clamp(8rem, 15vw, 25rem) !important;
+  }
+
+  .header {
+    gap: clamp(2.5rem, 5vw, 5rem) !important;
+    margin-bottom: clamp(4rem, 7vw, 6rem) !important;
+  }
+
+  .header-dot {
+    width: clamp(1rem, 2.5vw, 1.5rem) !important;
+    height: clamp(1rem, 2.5vw, 1.5rem) !important;
+  }
+
+  .header-text {
+    font-size: clamp(1.6rem, 4vw, 2.5rem) !important;
+  }
+
+  .main-content {
+    gap: clamp(5rem, 10vw, 8rem) !important;
+  }
+
+  .thumbnail {
+    width: clamp(28rem, 30vw, 32rem) !important;
+    height: clamp(28rem, 30vw, 32rem) !important;
+  }
+
+  .play-button {
+    width: clamp(6rem, 9vw, 8rem) !important;
+    height: clamp(6rem, 9vw, 8rem) !important;
+  }
+
+  .play-icon {
+    width: clamp(2rem, 4.5vw, 3rem) !important;
+    height: clamp(2rem, 4.5vw, 3rem) !important;
+  }
+
+  .badge {
+    font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+    padding: clamp(0.8rem, 2vw, 1.2rem) clamp(1.2rem, 3vw, 2rem) !important;
+  }
+
+  .title {
+    font-size: clamp(4rem, 8vw, 7rem) !important;
+  }
+
+  .meta {
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+    gap: clamp(3rem, 6vw, 5rem) !important;
+  }
+
+  .meta-icon {
+    width: clamp(2rem, 4vw, 2.5rem) !important;
+    height: clamp(2rem, 4vw, 2.5rem) !important;
+  }
+
+  .description {
+    font-size: clamp(1.8rem, 4vw, 2.5rem) !important;
+  }
+
+  .button {
+    padding: clamp(2rem, 5vw, 3rem) clamp(3rem, 7vw, 5rem) !important;
+    font-size: clamp(1.4rem, 3.5vw, 2rem) !important;
+  }
+
+  .button-icon {
+    width: clamp(2rem, 4vw, 2.5rem) !important;
+    height: clamp(2rem, 4vw, 2.5rem) !important;
+  }
+
+  .tags {
+    gap: clamp(2rem, 4vw, 3rem) !important;
+  }
+
+  .tag {
+    font-size: clamp(1.2rem, 3vw, 1.6rem) !important;
+  }
+}
+
+/* Existing smaller screen media queries */
+@media (max-width: 768px) {
+  section {
+    padding-top: clamp(1.5rem, 3vw, 3rem);
+    padding-bottom: clamp(1.5rem, 3vw, 3rem);
+  }
+
+  .container {
+    padding-left: clamp(0.75rem, 2vw, 1.5rem);
+    padding-right: clamp(0.75rem, 2vw, 1.5rem);
+  }
+
+  .main-content {
+    flex-direction: column;
+    gap: clamp(1rem, 3vw, 2rem);
+  }
+
+  .thumbnail {
+    width: clamp(10rem, 18vw, 14rem);
+    height: clamp(10rem, 18vw, 14rem);
+  }
+
+  .title {
+    font-size: clamp(1.25rem, 3.5vw, 2rem);
+  }
+
+  .description {
+    font-size: clamp(0.8rem, 1.8vw, 1rem);
   }
 }
 
 @media (max-width: 640px) {
   .container {
-    padding-left: 1rem;
-    padding-right: 1rem;
+    padding-left: clamp(0.5rem, 1.5vw, 1rem);
+    padding-right: clamp(0.5rem, 1.5vw, 1rem);
   }
 
-  .text-4xl {
-    font-size: 2rem;
+  .title {
+    font-size: clamp(1rem, 3vw, 1.75rem);
   }
 
-  .text-3xl {
-    font-size: 1.75rem;
+  .description {
+    font-size: clamp(0.75rem, 1.5vw, 0.875rem);
   }
 
-  .text-lg {
-    font-size: 0.875rem;
-  }
-
-  .w-80 {
-    width: 12rem; /* 192px */
-  }
-
-  .h-80 {
-    height: 12rem; /* 192px */
+  .thumbnail {
+    width: clamp(8rem, 15vw, 12rem);
+    height: clamp(8rem, 15vw, 12rem);
   }
 }
