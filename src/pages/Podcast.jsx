@@ -778,7 +778,7 @@ function Podcast() {
           <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-4 sm:gap-6 pt-6 sm:pt-8 border-t border-white/10">
             <div className="text-white/70 text-xs sm:text-sm font-semibold">Available on:</div>
             <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-              {['Spotify', 'Apple', 'Google', 'YouTube'].map((platform) => (
+              {['Spotify', 'Apple', 'Audiomack', 'YouTube'].map((platform) => (
                 <div key={platform} className="px-3 sm:px-4 py-1.5 sm:py-2 bg-white/10 backdrop-blur-sm rounded-lg border border-white/20 hover:bg-white/20 transition-all cursor-pointer">
                   <span className="text-white text-xs sm:text-sm font-semibold">{platform}</span>
                 </div>

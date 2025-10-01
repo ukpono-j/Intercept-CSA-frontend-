@@ -49,8 +49,8 @@ function Footer() {
   ];
 
   const socialLinks = [
-    { href: 'https://instagram.com/interceptcsa', label: 'Instagram', icon: Instagram },
-    { href: 'https://facebook.com/Intercept-Child-Sexual-Abuse-Foundation', label: 'Facebook', icon: Facebook },
+    { href: 'https://www.instagram.com/interceptcsa?igsh=MTAxOTN3bTdkdjU5Mw%3D%3D&utm_source=qr', label: 'Instagram', icon: Instagram },
+    { href: 'https://www.facebook.com/share/1PDukbzU5g/?mibextid=wwXIfr', label: 'Facebook', icon: Facebook },
   ];
 
   return (
