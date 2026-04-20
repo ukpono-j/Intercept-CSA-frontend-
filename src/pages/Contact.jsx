@@ -155,9 +155,9 @@ function Contact() {
     {
       icon: MapPin,
       title: 'Visit Us',
-      content: 'Lagos, Nigeria',
+      content: 'Akwa Ibom state, Nigeria',
       href: '#map',
-      description: 'Our base in the heart of Lagos',
+      description: 'Our base in the heart of Akwa Ibom state',
     },
     {
       icon: Clock,
@@ -213,7 +213,7 @@ function Contact() {
               </div>
               <div className="hidden sm:block">
                 <h1 className="text-xl font-extrabold text-[#1F2937] group-hover:text-[#2A8E9D] transition-colors duration-300">
-                  Intercept CSA
+                  InterceptCSA
                 </h1>
                 <p className="text-xs text-[#6B7280]">Protecting Children</p>
               </div>
@@ -367,12 +367,12 @@ function Contact() {
                     </div>
                     
                     {/* Stats overlay */}
-                    <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-xl">
+                    {/* <div className="absolute -bottom-6 -left-6 bg-white rounded-xl p-4 shadow-xl">
                       <div className="text-center">
                         <div className="text-2xl font-bold text-[#F97316]">24/7</div>
                         <div className="text-xs text-[#6B7280]">Support Available</div>
                       </div>
-                    </div>
+                    </div> */}
                   </div>
                 </div>
               </div>
@@ -589,9 +589,9 @@ function Contact() {
                         <div className="absolute inset-0 flex items-center justify-center">
                           <div className="bg-white rounded-lg p-6 text-center shadow-lg">
                             <MapPin className="w-8 h-8 text-[#F97316] mx-auto mb-3" />
-                            <p className="text-[#1F2937] font-bold mb-2">Lagos, Nigeria</p>
+                            <p className="text-[#1F2937] font-bold mb-2">Akwa Ibom state, Nigeria</p>
                             <a
-                              href="https://maps.google.com/?q=Lagos,Nigeria"
+                              href="https://www.google.com/maps/place/Akwa+Ibom/@4.9944759,7.2412195,9z/data=!3m1!4b1!4m6!3m5!1s0x106813aaebe9c395:0xa912ee4d5df08a81!8m2!3d4.9057371!4d7.8536675!16zL20vMDJjd180?entry=ttu&g_ep=EgoyMDI2MDIwMS4wIKXMDSoKLDEwMDc5MjA3M0gBUAM%3D"
                               target="_blank"
                               rel="noopener noreferrer"
                               className="inline-block px-4 py-2 bg-[#2A8E9D] text-white rounded-lg text-sm hover:bg-[#F97316] transition-colors duration-300"
@@ -610,13 +610,13 @@ function Contact() {
                             <p className="text-xs text-[#6B7280]">Monday - Friday, 9AM - 5PM WAT</p>
                           </div>
                         </div>
-                        <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
+                        {/* <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                           <Globe className="w-5 h-5 text-[#F97316]" />
                           <div>
                             <p className="text-sm font-semibold text-[#1F2937]">Serving All Nigeria</p>
                             <p className="text-xs text-[#6B7280]">Remote support available nationwide</p>
                           </div>
-                        </div>
+                        </div> */}
                         <div className="flex items-center gap-3 p-3 bg-gray-50 rounded-lg">
                           <MessageCircle className="w-5 h-5 text-[#2A8E9D]" />
                           <div>

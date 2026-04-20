@@ -441,7 +441,7 @@ function Podcast() {
               </div>
 
               <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-black text-white leading-tight">
-                Intercept CSA
+                InterceptCSA
                 <span className="block text-transparent bg-clip-text bg-gradient-to-r from-orange-400 via-amber-400 to-orange-300 mt-2">
                   Podcast
                 </span>

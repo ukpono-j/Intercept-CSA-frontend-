@@ -1,5 +1,5 @@
 /**
- * Centralized color scheme for the Intercept CSA website.
+ * Centralized color scheme for the InterceptCSA website.
  * Update these values to change colors site-wide.
  * Color Palette 181
  */

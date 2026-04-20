@@ -102,7 +102,7 @@ function GetInvolved() {
             Get <span className="block text-teal-300 mt-2">Involved</span>
           </h1>
           <p className="text-lg mb-12 text-gray-200 leading-relaxed max-w-4xl mx-auto">
-            Join Intercept CSA to prevent child sexual abuse, empower survivors, and build safer Nigerian communities.
+            Join InterceptCSA to prevent child sexual abuse, empower survivors, and build safer Nigerian communities.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">
             <button

@@ -221,7 +221,7 @@ function Footer() {
           {/* Top Section - Mission Statement */}
           <div className="mb-16 text-left">
             <h2 className="footer-text-xl font-bold mb-4" style={{ color: colors.accent }}>
-              Intercept CSA Foundation
+              InterceptCSA Foundation
             </h2>
             <p className="footer-text-base text-white/90 max-w-2xl leading-relaxed">
               Preventing, confronting, and healing child sexual abuse through education, advocacy, and survivor support.
@@ -305,7 +305,7 @@ function Footer() {
           <div className="pt-8 border-t border-white/20">
             <div className="flex flex-col md:flex-row justify-between items-center gap-4">
               <p className="footer-text-sm text-white/70">
-                © {new Date().getFullYear()} Intercept CSA. All rights reserved.
+                © {new Date().getFullYear()} InterceptCSA. All rights reserved.
               </p>
               <div className="flex gap-6">
                 <a href="/privacy" className="footer-text-sm text-white/70 hover:text-white transition-colors">

@@ -111,19 +111,6 @@ const ImpactfulPrograms = () => {
               </button>
             </Link>
           </div>
-
-          <div className={`transition-all duration-1000 delay-300 ${isVisible ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-10'}`}>
-            <div className="relative">
-              <div className="absolute inset-0 bg-white/5 rounded-3xl backdrop-blur-sm"></div>
-              <div className="relative p-8 rounded-3xl border border-white/10">
-                <CheckCircle className="w-12 h-12 mb-6" style={{ color: colors.yellow }} />
-                <h3 className="text-2xl font-bold text-white mb-4">Making a Difference</h3>
-                <p className="text-white/80 leading-relaxed">
-                  Through evidence-based prevention programs, community education, and comprehensive support, we're creating protective environments where children can thrive safely.
-                </p>
-              </div>
-            </div>
-          </div>
         </div>
 
         {/* Interactive Tabs */}

@@ -55,36 +55,36 @@ function About() {
 
   const pillars = [
     {
-      title: 'Safe Visibility',
-      desc: 'Creating environments where children are seen, heard, and protected as the unique individuals they are.',
+      title: 'Intervention and Prevention',
+      desc: ' Train communities, schools, and caregivers to recognise and prevent child sexual abuse while providing immediate support for survivors',
       icon: '👁️',
       color: 'bg-blue-50',
       iconBg: 'bg-blue-100'
     },
     {
-      title: 'Everyday Interceptions',
-      desc: 'Building protection systems in the places where children live, learn, and play every day.',
+      title: 'Survivor Support',
+      desc: 'Ensure survivors have access to trauma-informed counselling, legalaid, medical care, and long-term rehabilitation',
       icon: '🛡️',
       color: 'bg-green-50',
       iconBg: 'bg-green-100'
     },
     {
-      title: 'Voice Culture',
-      desc: 'Fostering shame-free environments where stories can be shared and healing voices can be heard.',
+      title: 'Safe Environments',
+      desc: 'Create spaces, physically and emotionally, that foster healing andsecurity.',
       icon: '🗣️',
       color: 'bg-purple-50',
       iconBg: 'bg-purple-100'
     },
     {
-      title: 'Faith & Culture Reframing',
-      desc: 'Transforming harmful beliefs and practices into powerful tools for protection and healing.',
+      title: 'Promote Child Safety Through Allyship',
+      desc: 'Empower caregivers, men, boys, andcommunity leaders to champion protection',
       icon: '🙏',
       color: 'bg-orange-50',
       iconBg: 'bg-orange-100'
     },
     {
-      title: 'Accountability Loops',
-      desc: 'Empowering communities to create their own systems of reporting, support, and healing.',
+      title: 'Holistic Systemic Support',
+      desc: ' Address root causes such as poverty, unsafe family environments, and lack of education with targeted programs.',
       icon: '🔄',
       color: 'bg-teal-50',
       iconBg: 'bg-teal-100'
@@ -124,7 +124,7 @@ function About() {
       {/* Hero Section */}
       <section
         className="about-section relative min-h-[calc(100vh-4rem)] flex items-center justify-center text-white about-section-opacity"
-        ref={(el) => (sectionsRef.current[0] = el)} 
+        ref={(el) => (sectionsRef.current[0] = el)}
       >
         <div className="absolute inset-0 bg-gradient-to-br from-black/70 to-black/50 z-10"></div>
         <img
@@ -160,6 +160,9 @@ function About() {
           <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             {/* Mission */}
             <div className="text-white">
+              <h1 className='mb-4  text-3xl font-bold'>
+                Our <span className='text-teal-200'>Mission</span>
+              </h1>
               <h2 className="about-section-title mb-6">
                 Preventing Abuse, <span className="text-teal-200">Empowering Lives</span>
               </h2>
@@ -186,6 +189,9 @@ function About() {
 
             {/* Vision */}
             <div className="about-professional-card rounded-xl p-8 bg-white/95">
+              <h1 className='mb-4  text-3xl font-bold'>
+                Our <span>Story</span>
+              </h1>
               <h3 className="about-text-xl font-bold text-gray-800 mb-6">
                 A Safe World for Every Child
               </h3>
@@ -216,7 +222,14 @@ function About() {
               Our <span className="about-text-gradient">Story</span>
             </h2>
             <p className="about-text-base text-gray-600 max-w-4xl mx-auto leading-relaxed mb-8">
-              InterceptCSA began with a single spark: a vision to break the silence that protects abusers and to create a world where every child is safe. Founded by Inimfon Sampson, our journey started in response to the urgent need for education, advocacy, and healing in Nigerian communities. From our first community workshop to now impacting thousands, we've grown into a movement dedicated to prevention, survivor support, and cultural change.
+              The first betrayal a child experiences in a supposedly safe world is often not the lack of justice
+              or mental health support. It is the absence of everyday people who truly understand the
+              meaning, the weight and the impact of child sexual abuse, whether before, during or after it
+              occurs.
+              We started InterceptCSA because we saw that real people could make a difference for children
+              if they knew better about abuse and its consequences.
+              Our work is rooted in the hope that we can re-educate society, break the cycles of silence and
+              harmful culture and build a community that consistently supports survivors.
             </p>
             {/* <div className="flex justify-center">
               <button
@@ -339,9 +352,11 @@ function About() {
               </div>
             </div>
             <div className="about-professional-card rounded-xl p-8 bg-white">
-              <h3 className="about-text-xl font-bold text-gray-800 mb-4">Get Involved</h3>
+              <h3 className="about-text-xl font-bold text-gray-800 mb-4">Join Us</h3>
               <p className="text-gray-600 mb-6">
-                Whether you're an individual, organization, or community leader, there are many ways to join our mission.
+                InterceptCSA is a movement of truth, courage, and compassion. Together with volunteers,
+                partners, and communities, we can create a world where every child’s safety is certain and
+                every survivor’s voice is heard.
               </p>
               <div className="space-y-3">
                 <div>

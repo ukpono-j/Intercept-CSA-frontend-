@@ -7,11 +7,11 @@ import portraitImmigrants from '../assets/For-hero.png';
 function Hero() {
   const navigate = useNavigate();
   const heroContent = {
-    headline: 'Protecting Children. Restoring Safety. Reclaiming Voices.',
-    subheadline: 'We work tirelessly to create safe environments for vulnerable children and families, providing comprehensive support, advocacy, and resources to build stronger, more resilient communities.',
+    headline: 'Changing how we see children changes how we protect them.',
+    subheadline: 'Empowering communities. Protecting childhood. Restoring survivors.',
     buttons: [
-      { label: 'Listen Now', to: '/podcast', primary: false, variant: 'secondary' },
-      { label: 'Read the blog', to: '/blog', primary: true, variant: 'primary' },
+      { label: 'Listen to Our Podcast Now', to: '/podcast', primary: false, variant: 'secondary' },
+      { label: ' Read Our Blog', to: '/blog', primary: true, variant: 'primary' },
     ],
   };
 
